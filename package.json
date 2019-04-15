@@ -1,0 +1,32 @@
+{
+  "name": "create-react-app",
+  "version": "3.2.2",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "i18n-js": "^3.1.0",
+    "firebase": "^5.7.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "lint": "eslint src",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "deploy": "yarn build && rm ./build/static/js/*.map && firebase deploy",
+    "deployWindows": "yarn build && del build\\static\\js\\*.map && firebase deploy"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "prettier": "1.15.3"
+  }
+}
