@@ -1,0 +1,143 @@
+/* body {
+  position: fixed;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+} */
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+#TeamAppBar {
+  text-align: center;
+}
+#menuPaper {
+  background-color: #61dafb;
+}
+#spanlabel {
+  float: right;
+}
+#Gridtitlewidth {
+  box-sizing: border-box;
+  padding: 2px;
+  width: 100%;
+  height: 104px;
+}
+body {
+  margin: 0%;
+  margin-top: 0%;
+  margin-bottom: 50px;
+}
+* {
+  font-family: adelle-sans-ultra-thin, sans-serif;
+  position: fixed;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+* {
+  font-family: "Times New Roman", Times, serif;
+}
+#divstyle {
+  height: 100;
+  padding: 9%;
+}
+#divStylediv {
+  margin-top: 80px;
+}
+#tableQuestionsList {
+  margin: 2%;
+  position: fixed;
+}
+
+.Appselect {
+  padding-left: 15%;
+}
+#divstylediv {
+  margin-top: 80px;
+}
+
+.multicolor-bar {
+  margin: 20px 20%;
+}
+
+.multicolor-bar .values .value {
+  float: left;
+  text-align: center;
+}
+
+.multicolor-bar .scale .graduation {
+  float: left;
+  text-align: center;
+}
+
+.multicolor-bar .bars .bar {
+  float: left;
+  height: 10px;
+}
+
+.multicolor-bar .bars div.bar:first-of-type {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.multicolor-bar .bars div.bar:last-of-type {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.multicolor-bar .legends {
+  text-align: center;
+}
+
+.multicolor-bar .legends .legend {
+  display: inline-block;
+  margin: 0 5px;
+  text-align: center;
+}
+
+.multicolor-bar .legends .legend .dot {
+  font-size: 25px;
+  vertical-align: middle;
+}
+
+.multicolor-bar .legends .legend .label {
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+#contantButton {
+  top: "auto";
+  bottom: 20;
+  left: "auto";
+  right: 20;
+  position: "fixed";
+  margin: 0;
+}
