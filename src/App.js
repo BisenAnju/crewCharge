@@ -18,6 +18,9 @@ import LeaveEmployeeDetailsContainer from "./containers/LeaveEmployeeDetails";
 import ProjectsContainer from "./containers/Projects";
 import WidgetsContainer from "./containers/Widgets";
 import WidgetsContainer1 from "./containers/Widgets1";
+import TeamAllocationDashboardContainer from "./containers/TeamAllocationDashboard";
+import TeamAllocationProjectContainer from "./containers/TeamAllocationProject";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -48,6 +51,18 @@ class App extends Component {
           <div>
             <Router>
               <Switch>
+                <Route
+                  path={"/teamallocation"}
+                  render={props => (
+                    <TeamAllocationDashboardContainer {...props} />
+                  )}
+                />
+                <Route
+                  path={"/teamallocation/project"}
+                  render={props => (
+                    <TeamAllocationProjectContainer {...props} />
+                  )}
+                />
                 <Route
                   path={"/complaintview/:id"}
                   render={props => (

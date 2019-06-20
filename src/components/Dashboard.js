@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-// import ROUTES from "../constants/routes";
 import Layout from "../layouts/Layout";
 import Paper from "material-ui/Paper";
 import { grey500, blueGrey300 } from "material-ui/styles/colors";
@@ -84,6 +83,24 @@ class Dashboard extends Component {
               }}
             >
               <h4> Client Communication</h4>
+            </Paper>
+          </div>
+          <div
+            style={flexItem}
+            onClick={e => {
+              e.preventDefault();
+              this.props.history.push("/teamallocation");
+            }}
+          >
+            <Paper
+              zDepth={2}
+              style={{
+                padding: "30px",
+                borderRadius: "10px",
+                backgroundColor: green200
+              }}
+            >
+              <h4>Team Allocation</h4>
             </Paper>
           </div>
         </div>
