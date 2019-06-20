@@ -16,8 +16,8 @@ import LeaveDashboardContainer from "./containers/LeaveDashboard";
 import LeaveAdminApprovalRejectionContainer from "./containers/LeaveAdminApprovalRejection";
 import LeaveEmployeeDetailsContainer from "./containers/LeaveEmployeeDetails";
 import ProjectsContainer from "./containers/Projects";
-import WidgetsContainer from "./containers/Widgets";
-import WidgetsContainer1 from "./containers/Widgets1";
+// import WidgetsContainer from "./containers/Widgets";
+// import WidgetsContainer1 from "./containers/Widgets1";
 import TeamAllocationDashboardContainer from "./containers/TeamAllocationDashboard";
 import TeamAllocationProjectContainer from "./containers/TeamAllocationProject";
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../layouts/Layout";
 import Paper from "material-ui/Paper";
-import { grey500, blueGrey300 } from "material-ui/styles/colors";
+import { grey500, green200, blueGrey300 } from "material-ui/styles/colors";
 import { lightBlue300 } from "material-ui/styles/colors";
 
 const flexContainer = {
