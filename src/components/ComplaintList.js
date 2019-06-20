@@ -10,8 +10,7 @@ import {
   // DatePicker,
   Snackbar,
   List,
-  ListItem,
-  Chip
+  ListItem
 } from "material-ui";
 import Archived from "material-ui/svg-icons/content/archive";
 import ContentAdd from "material-ui/svg-icons/content/add";
@@ -62,20 +61,6 @@ class ComplaintList extends React.Component {
       style: { background: "aliceblue", fontWeight: "bold" }
     };
   }
-  return_chip(doc) {
-    return (
-      <div style={{ display: "flex" }}>
-        <Chip style={{ height: "min-content" }}>{doc.complaintType}</Chip>
-        <Chip style={{ height: "min-content" }}>
-          {moment(new Date(doc.addedOn.seconds * 1000)).format("DD MMM")}
-        </Chip>
-        {/* <Chip style={{ height: "min-content" }}>
-          {doc.isAnonymous === false ? doc.username : "Anonymous"}
-        </Chip> */}
-      </div>
-    );
-  }
-
   handleChange = slideIndex => this.setState({ slideIndex });
   render() {
     return (
@@ -307,7 +292,6 @@ class ComplaintList extends React.Component {
             </List>
           </div>
         </SwipeableViews>
-        {console.log(this.props.snackOpen)}
         <Snackbar
           open={this.props.snackOpen}
           onRequestClose={this.props.snackbarHandleRequestClose}
