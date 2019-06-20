@@ -239,9 +239,10 @@ class LeaveEmployeeDetails extends Component {
                         overflow: "auto"
                       }}
                     >
-                      {this.state.userComment.map(comment =>
+                      {this.state.userComment.map((comment, index) =>
                         this.props.user.uid === comment.userId ? (
                           <div
+                            key={index}
                             style={{
                               display: "flex",
                               justifyContent: "flex-end"

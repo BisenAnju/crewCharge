@@ -18,7 +18,6 @@ import {
 } from "material-ui/svg-icons";
 import Home from "material-ui/svg-icons/action/home";
 import Menu from "material-ui/svg-icons/navigation/menu";
-// import ROUTES from "../constants/routes";
 import { lightGreen400 } from "material-ui/styles/colors";
 class NavigationBar extends React.Component {
   constructor(props) {
@@ -96,9 +95,9 @@ class NavigationBar extends React.Component {
               leftIcon={<ActionDashboard />}
             />
 
-            {this.props.userData.map(user =>
+            {this.props.userData.map((user, index) =>
               user.uid === this.props.user.uid && user.userType === "Admin" ? (
-                <div>
+                <div key={index}>
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
