@@ -49,7 +49,7 @@ const startApp = () => {
       </FirebaseContext.Provider>,
       document.getElementById("root")
     );
-    serviceWorker.register();
+    serviceWorker.unregister();
   }
 };
 

@@ -89,7 +89,7 @@ class ComplaintListContainer extends React.Component {
         <Router>
           <Route
             exact
-            path="/complaintList"
+            path="/complaintlist"
             render={props => (
               <ComplaintList
                 {...props}
