@@ -13,6 +13,7 @@ import * as moment from "moment";
 import ReactWeeklyDayPicker from "./WeeklyDayPicker";
 import { grey300 } from "material-ui/styles/colors";
 import { classNames } from "../constants/weeklydaypicker";
+
 class TeamAllocationPeopleList extends React.Component {
   constructor(props) {
     super(props);
@@ -47,7 +48,7 @@ class TeamAllocationPeopleList extends React.Component {
   }
   handleTypeChange = (event, index, value) => {
     if (value === 2) {
-      window.location = "/teamallocation/projectList";
+      window.location = "/teamallocation/projectlist";
     }
   };
   componentWillMount() {

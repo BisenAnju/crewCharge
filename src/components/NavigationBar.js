@@ -122,6 +122,38 @@ class NavigationBar extends React.Component {
                     primaryText="Add Complaint Type"
                     leftIcon={<ActionDashboard />}
                   />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation");
+                    }}
+                    primaryText="Peoples List"
+                    leftIcon={<ActionDashboard />}
+                  />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation/mission");
+                    }}
+                    primaryText="Add Missions"
+                    leftIcon={<ActionDashboard />}
+                  />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation/project");
+                    }}
+                    primaryText="Add Projects"
+                    leftIcon={<ActionDashboard />}
+                  />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation/projectlist");
+                    }}
+                    primaryText="Projects List"
+                    leftIcon={<ActionDashboard />}
+                  />
                 </div>
               ) : null
             )}

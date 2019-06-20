@@ -35,17 +35,36 @@ class TeamAllocationProjectList extends React.Component {
       leavesList: nextProps.leavesList,
       missionsList: nextProps.missionsList,
       projectsList: nextProps.projectsList,
-      usersList: nextProps.usersList,
+      usersList: nextProps.usersList
     });
   }
   handleTypeChange = (event, index, value) => {
     if (value === 1) {
-      window.location = "/teamallocation/peoplesList";
+      window.location = "/teamallocation";
     }
+  };
+  functionSelectedDate = async selectedDate => {
+    await this.filterDateWise(selectedDate);
+  };
+  filterDateWise = selectedDate => {
+    let selctedDate1 = new Date(selectedDate);
+    let leavesList = this.props.leavesList.filter(
+      data =>
+        moment(data.from.seconds * 1000).format("L") >= selectedDate ||
+        moment(data.to.seconds * 1000).format("L") <= selectedDate
+    );
+    let missionsList = this.props.missionsList.filter(
+      missionData =>
+        moment(missionData.deadline.startDate.seconds * 1000).format("L") >=
+          selectedDate ||
+        moment(missionData.deadline.endDate.seconds * 1000).format("L") <=
+          selectedDate
+    );
+    this.setState({ leavesList, missionsList, selectedDate: selctedDate1 });
   };
   render() {
     return (
-      <Layout navigationTitle="Project List">
+      <Layout navigationTitle="Project List" showBackNavigation={true}>
         <div>
           <div style={{ paddingLeft: 50 }}>
             <SelectField
@@ -60,43 +79,33 @@ class TeamAllocationProjectList extends React.Component {
           <Divider />
           <div>
             <ReactWeeklyDayPicker
-              daysCount={6}  //How many days will be shown
-              classNames={classNames}  //Overrides classnames for custom classes (below example)
-              startDay={new Date()} // First day as Date Object or 22 June 2016
-              selectedDays={['22 June 2017', new Date()]} // Selected days list
-              multipleDaySelect={true} //enables multiple day selection
-              selectDay={function (day) { }}
-              unselectDay={function (day) { }}
-              onPrevClick={function (startDay, selectedDays) { }} // called with the new startDay
-              onNextClick={function (startDay, selectedDays) { }} // called with the new startDay
-              unselectable={false} // if true allows to unselect a date once it has been selected. Only works when multipleDaySelect={false}
-              format={'YYYY-MM-DD'} //format of dates that handled in selectDay and unselectDay functions
-              firstLineFormat={'ddd'} // format for the first line of the day button
-              secondLineFormat={'D'} // format for the second line of the day button
-              firstLineMobileFormat={'ddd'} // format for the first line of the day button mobile
-              secondLineMobileFormat={'D'} // format for the second line of the day button mobile
-              unavailables={{
-                dates: moment.weekdaysShort(),  //unavailable dates list
-                relative: [0, 1],  //unavailable dates list relative to today (0:today, 1:tomorrow, -1:yesterday)
-                weekly: [0] //unavailable dates list for each week (0:Sunday, 1:Monday ...)
-              }}
-              mobilView={window.innerWidth < 1024}  // enables mobil view
-              beforeToday={false}   // all dates before today set as unavailable (default:true)
-              hiddens={{  // makes dates invisible
-                //dates: ['22 July 2017'], //absolute dates list
-                //relative: [2], // relative to today (0:today, 1:tomorrow, -1:yesterday)
-                weekly: [0]  //each week (0:Sunday, 1:Monday ...)
-              }}
+              daysCount={7}
+              classNames={classNames}
+              startDay={this.state.startDay}
+              selectedDays={[this.state.selectedDate]}
+              multipleDaySelect={false}
+              selectDay={this.functionSelectedDate}
+              unselectDay={function(day) {}}
+              onPrevClick={function(startDay, selectedDays) {}}
+              onNextClick={function(startDay, selectedDays) {}}
+              unselectable={false}
+              format={"MM/DD/YYYY"}
+              selected={this.state.selected}
+              firstLineFormat={"ddd"}
+              secondLineFormat={"D"}
+              firstLineMobileFormat={"ddd"}
+              secondLineMobileFormat={"D"}
+              mobilView={window.innerWidth < 1024}
+              beforeToday={true}
             />
           </div>
           <Divider />
-          {this.state.projectsList.map(
-            (row, id) => (
-              <div key={id}><div key={id}>
+          {this.state.projectsList.map((row, id) => (
+            <div key={id}>
+              <div key={id}>
                 <List key={id}>
                   {this.state.missionsList.map((missionRow, index) => {
                     return (
-
                       <ListItem
                         key={id}
                         leftAvatar={<Avatar src={row.logoURL} />}
@@ -137,14 +146,14 @@ class TeamAllocationProjectList extends React.Component {
                                       Start=
                                       {moment(
                                         missionRow.deadline.startDate.seconds *
-                                        1000
+                                          1000
                                       ).format("ll")}
                                     </span>
                                     <span style={{ color: "black" }}>
                                       , End Date=
                                       {moment(
                                         missionRow.deadline.endDate.seconds *
-                                        1000
+                                          1000
                                       ).format("ll")}
                                     </span>
                                     <br />
@@ -164,10 +173,11 @@ class TeamAllocationProjectList extends React.Component {
                   })}
                 </List>
               </div>
-                <div><Divider></Divider></div>
+              <div>
+                <Divider />
               </div>
-            )
-          )}
+            </div>
+          ))}
         </div>
       </Layout>
     );

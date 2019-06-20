@@ -1,13 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import {
-  TextField,
-  RaisedButton,
-  Snackbar
-} from "material-ui";
+import { TextField, RaisedButton, Snackbar } from "material-ui";
 import Layout from "../layouts/Layout";
-import { orange500, blue500 } from 'material-ui/styles/colors';
-import Dropzone from 'react-dropzone';
+import { orange500, blue500 } from "material-ui/styles/colors";
+import Dropzone from "react-dropzone";
 import withFirebase from "../hoc/withFirebase";
 import firebase from "firebase";
 import ImageCompressor from "image-compressor.js";
@@ -17,14 +13,14 @@ const styles = {
     padding: 10
   },
   underlineStyle: {
-    borderColor: orange500,
+    borderColor: orange500
   },
   floatingLabelStyle: {
-    color: orange500,
+    color: orange500
   },
   floatingLabelFocusStyle: {
-    color: blue500,
-  },
+    color: blue500
+  }
 };
 class TeamAllocationProject extends React.Component {
   constructor(props) {
@@ -36,7 +32,7 @@ class TeamAllocationProject extends React.Component {
       completed1: false,
       isLoadingSingleUser: true,
       isLoadingUploadImage: 1,
-      temporaryImageURL: null,
+      temporaryImageURL: null
     };
   }
   handleTextChange = (event, index, projectName) => {
@@ -46,22 +42,8 @@ class TeamAllocationProject extends React.Component {
     });
   };
   handleClose = () => {
-    this.setState({ projectName: null, files: [] })
-  }
-  // handleDropZoneChange =(event, index, value) =>{
-  //   let metadata = {
-  //     contentType: 'image/*',
-  //   };
-  //   let storageRef =this.props.firebase.app.firebase_.storage().ref();
-  //   let uploadTask = storageRef.child('images').put(value);
-  //   console.log(uploadTask)
-  //   this.setState({
-  //     files: event.target.value
-  //   });
-  // }
-  // handleDrop([{ preview }]) {
-  //   this.setState({ preview })
-  // }
+    this.setState({ projectName: null, files: [] });
+  };
   editProfile = (acceptedFiles, rejectedFiles) => {
     const file = acceptedFiles[0];
     if (file == null) {
@@ -70,7 +52,6 @@ class TeamAllocationProject extends React.Component {
       this.setState({ completed1: true, isLoadingUploadImage: 2 });
     }
     new ImageCompressor(file, {
-      //  eslint-disable-line
       quality: 0.55,
       maxWidth: 1500,
       success: result => {
@@ -101,7 +82,7 @@ class TeamAllocationProject extends React.Component {
   render() {
     const maxSize = 10468;
     return (
-      <Layout navigationTitle="Project">
+      <Layout navigationTitle="Project" showBackNavigation={true}>
         <div style={{ padding: 10 }}>
           <TextField
             floatingLabelText="Enter Project Name"
@@ -113,22 +94,30 @@ class TeamAllocationProject extends React.Component {
             onChange={this.handleTextChange}
           />
           <div style={{ height: 100, marginTop: 20 }}>
-            {this.state.temporaryImageURL === null ? "" :
-              <div style={{ float: "right", marginRight: 20 }}><img src={this.state.temporaryImageURL} style={{ width: 80, height: 80 }}></img></div>
-            }
+            {this.state.temporaryImageURL === null ? (
+              ""
+            ) : (
+              <div style={{ float: "right", marginRight: 20 }}>
+                <img
+                  src={this.state.temporaryImageURL}
+                  style={{ width: 80, height: 80 }}
+                />
+              </div>
+            )}
             <div>
               <Dropzone onDrop={this.editProfile} accept="image/*">
-                {({ getRootProps, getInputProps, isDragActive }) => {
+                {({ getRootProps, getInputProps }) => {
                   return (
-                    <div
-                      {...getRootProps()}
-                    >
+                    <div {...getRootProps()}>
                       <input {...getInputProps()} />
-                      <u ><RaisedButton label="Upload..." primary={true}></RaisedButton></u>
+                      <u>
+                        <RaisedButton label="Upload..." primary={true} />
+                      </u>
                     </div>
                   );
                 }}
-              </Dropzone></div>
+              </Dropzone>
+            </div>
           </div>
           <div style={{ padding: 10, alignItems: "center" }}>
             <RaisedButton
@@ -144,16 +133,18 @@ class TeamAllocationProject extends React.Component {
                 e.preventDefault();
                 this.props.handleAddProject(
                   this.state.projectName,
-                  this.state.temporaryImageURL,
+                  this.state.temporaryImageURL
                 );
               }}
             />
           </div>
-          <div><Snackbar
-            open={this.props.openSnackbar}
-            message={this.props.message}
-            autoHideDuration={4000}
-          /></div>
+          <div>
+            <Snackbar
+              open={this.props.openSnackbar}
+              message={this.props.message}
+              autoHideDuration={4000}
+            />
+          </div>
         </div>
       </Layout>
     );

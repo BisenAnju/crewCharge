@@ -17,20 +17,41 @@ class TeamAllocationMissionContainer extends Component {
       message: ""
     };
   }
-  handleAddMission = (missionName, values, startDate, endDate, remarks, projectId) => {
-    if (missionName === null || values.length < 0 || startDate === null || endDate === null || projectId === null) {
+  handleAddMission = (
+    missionName,
+    values,
+    startDate,
+    endDate,
+    remarks,
+    projectId
+  ) => {
+    if (
+      missionName === null ||
+      values.length < 0 ||
+      startDate === null ||
+      endDate === null ||
+      projectId === null
+    ) {
       this.setState({ openSnackbar: true, message: "Fill all Required field" });
     } else {
-      this.props.db.collection("missions").add({
-        name: missionName,
-        projectId: projectId,
-        assignTo: values,
-        createdOn: Date(),
-        createdBy: this.props.user.uid,
-        deadline: { "startDate": startDate, "endDate": endDate, "remarks": remarks }
-      }).then(this.setState({ openSnackbar: true, message: "Mission Add Success fully" }));
+      this.props.db
+        .collection("missions")
+        .add({
+          name: missionName,
+          projectId: projectId,
+          assignTo: values,
+          createdOn: Date(),
+          createdBy: this.props.user.uid,
+          deadline: { startDate: startDate, endDate: endDate, remarks: remarks }
+        })
+        .then(
+          this.setState({
+            openSnackbar: true,
+            message: "Mission Add Success fully"
+          })
+        );
     }
-  }
+  };
   render() {
     return (
       <div>
@@ -38,11 +59,14 @@ class TeamAllocationMissionContainer extends Component {
           <Switch>
             <Route
               exact
-              path={"/teamallocation"}
-              render={props => <TeamAllocationMission {...this.props}
-                {...this.state}
-                handleAddMission={this.handleAddMission}
-              />}
+              path={"/teamallocation/mission"}
+              render={props => (
+                <TeamAllocationMission
+                  {...this.props}
+                  {...this.state}
+                  handleAddMission={this.handleAddMission}
+                />
+              )}
             />
             <Route
               exact
@@ -56,4 +80,6 @@ class TeamAllocationMissionContainer extends Component {
   }
 }
 
-export default withRouter(withFirebase(withUser(TeamAllocationMissionContainer)));
+export default withRouter(
+  withFirebase(withUser(TeamAllocationMissionContainer))
+);

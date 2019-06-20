@@ -4,25 +4,26 @@ import {
   TextField,
   SelectField,
   RaisedButton,
-  MenuItem, Snackbar
+  MenuItem,
+  Snackbar
 } from "material-ui";
-import DatePicker from 'material-ui/DatePicker';
+import DatePicker from "material-ui/DatePicker";
 import Layout from "../layouts/Layout";
-import { orange500, blue500 } from 'material-ui/styles/colors';
+import { orange500, blue500 } from "material-ui/styles/colors";
 const styles = {
   errorStyle: {
     color: orange500,
     padding: 10
   },
   underlineStyle: {
-    borderColor: orange500,
+    borderColor: orange500
   },
   floatingLabelStyle: {
-    color: orange500,
+    color: orange500
   },
   floatingLabelFocusStyle: {
-    color: blue500,
-  },
+    color: blue500
+  }
 };
 class TeamAllocationMission extends React.Component {
   constructor(props) {
@@ -33,7 +34,10 @@ class TeamAllocationMission extends React.Component {
       missionName: null,
       values: [],
       projectId: null,
-      questionsId: null, startDate: null, endDate: null, remarks: null,
+      questionsId: null,
+      startDate: null,
+      endDate: null,
+      remarks: null,
       openSnackbar: null,
       message: null
     };
@@ -52,33 +56,33 @@ class TeamAllocationMission extends React.Component {
   }
   handleMissionChange = (event, index, textName) => {
     this.setState({
-      missionName: event.target.value,
+      missionName: event.target.value
     });
   };
   handleStartDateChange = (event, date) => {
     this.setState({
-      startDate: date,
+      startDate: date
     });
-  }
+  };
   handleEndDateChange = (event, date) => {
     this.setState({
-      endDate: date,
+      endDate: date
     });
-  }
+  };
   handleRmarkChange = (event, index, values) => {
     this.setState({
-      remarks: event.target.value,
+      remarks: event.target.value
     });
-  }
+  };
   handleProjectChange = (event, index, value) => {
     this.setState({
-      projectId: value,
+      projectId: value
     });
-  }
+  };
   render() {
     const { values } = this.state;
     return (
-      <Layout navigationTitle="Mission">
+      <Layout navigationTitle="Mission" showBackNavigation={true}>
         <div style={{ padding: 10 }}>
           <TextField
             floatingLabelText="Enter Mission"
@@ -100,12 +104,12 @@ class TeamAllocationMission extends React.Component {
             {this.props.projectsList === undefined
               ? null
               : this.props.projectsList.map((row, index) => (
-                <MenuItem
-                  key={index}
-                  value={row.projectId}
-                  primaryText={row.name}
-                />
-              ))}
+                  <MenuItem
+                    key={index}
+                    value={row.projectId}
+                    primaryText={row.name}
+                  />
+                ))}
           </SelectField>
           <SelectField
             multiple={true}
@@ -164,11 +168,13 @@ class TeamAllocationMission extends React.Component {
               }}
             />
           </div>
-          <div><Snackbar
-            open={this.props.openSnackbar}
-            message={this.props.message}
-            autoHideDuration={4000}
-          /></div>
+          <div>
+            <Snackbar
+              open={this.props.openSnackbar}
+              message={this.props.message}
+              autoHideDuration={4000}
+            />
+          </div>
         </div>
       </Layout>
     );

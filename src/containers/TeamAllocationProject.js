@@ -21,14 +21,22 @@ class TeamAllocationMissionContainer extends Component {
     if (projectName === null || logo === null) {
       this.setState({ openSnackbar: true, message: "Fill all Required field" });
     } else {
-      this.props.db.collection("projects").add({
-        name: projectName,
-        logoURL: logo,
-        createdOn: Date(),
-        createBy: this.props.user.uid,
-      }).then(this.setState({ openSnackbar: true, message: "Mission Add Success fully" }));
+      this.props.db
+        .collection("projects")
+        .add({
+          name: projectName,
+          logoURL: logo,
+          createdOn: Date(),
+          createBy: this.props.user.uid
+        })
+        .then(
+          this.setState({
+            openSnackbar: true,
+            message: "Mission Add Success fully"
+          })
+        );
     }
-  }
+  };
   render() {
     return (
       <div>
@@ -42,9 +50,13 @@ class TeamAllocationMissionContainer extends Component {
             <Route
               exact
               path={"/teamallocation/project"}
-              render={props => <TeamAllocationProject {...props}
-                {...this.state}
-                handleAddProject={this.handleAddProject} />}
+              render={props => (
+                <TeamAllocationProject
+                  {...props}
+                  {...this.state}
+                  handleAddProject={this.handleAddProject}
+                />
+              )}
             />
           </Switch>
         </Router>
@@ -53,4 +65,6 @@ class TeamAllocationMissionContainer extends Component {
   }
 }
 
-export default withRouter(withFirebase(withUser(TeamAllocationMissionContainer)));
+export default withRouter(
+  withFirebase(withUser(TeamAllocationMissionContainer))
+);
