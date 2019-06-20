@@ -1,132 +1,115 @@
-import React from "react";
+import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import {TextField,Snackbar,RaisedButton,Card,CardText,CircularProgress} from "material-ui";
 import Layout from "../layouts/Layout";
-import {PriorityRadioButton,SelectfieldClass,AnonymousRadioButton} from "./ComplaintAddRadioButton";
-
-const styles = {
-  block: {marginTop: "2%"},
-  button: {margin: "5%"},
-};
-
-class NewComplaint extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      complaintType: null,
-      loading: false,
-      snackOpen: false,
-      isAnonymous: false,
-      description: "",
-      title: "",
-      priority: "low",
-      autoHideDuration: 4000,
-      message: "All fields are required"
-    };
-    this.validateAll = this.validateAll.bind(this);
+import { RaisedButton, TextField, Snackbar } from "material-ui";
+import { lightGreen800 } from "material-ui/styles/colors";
+import Dropzone from "react-dropzone";
+import ImageCompressor from "image-compressor.js";
+import firebase from "firebase";
+class ComplaintType extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { complainttype: null, snackOpen: false };
   }
 
-  // get value of selected option of selectfield
-  selectChange = (event, index, complaintType) =>{
-    this.setState({ complaintType });
-  }
-
-  validateInput = e => {
-    this.setState({ [e.target.id]: e.target.value });
-  };
-
-  snackbarHandleRequestClose = () => {
-    this.setState({
-      snackOpen: false
+  getIcon = (acceptedFiles, rejectedFiles) => {
+    const file = acceptedFiles[0];
+    if (file == null) {
+      alert("Invalid File Type!");
+    } else {
+      this.setState({ completed1: true, isLoadingUploadImage: 2 });
+    }
+    new ImageCompressor(file, {
+      quality: 0.55,
+      maxWidth: 1500,
+      success: result => {
+        const image = firebase
+          .storage()
+          .ref()
+          .child("images");
+        const ref = image.child(new Date().toString());
+        ref.put(file).then(() => {
+          ref.getDownloadURL().then(url => {
+            console.log(url);
+            const updatedImageURL = url;
+            console.log(updatedImageURL);
+            const pictures = this.state.pictures;
+            pictures.push(url);
+            this.setState({
+              completed: true,
+              pictures,
+              temporaryImageURL: updatedImageURL,
+              isLoadingUploadImage: 3
+            });
+            console.log(updatedImageURL);
+          });
+        });
+      }
     });
   };
-
-  validateAll(e) {
+  textChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+  handleComplaint = e => {
     e.preventDefault();
-    let ths = this;
-    // validate isAnonymous,priority,complaint type,complaint detail
-    if (
-      this.state.isAnonymous === null ||
-      this.state.priority === null ||
-      this.state.complaintType === null ||
-      this.state.description === ""||
-      this.state.title === ""
-    ) {
+    if (this.state.complainttype === null) {
       this.setState({ snackOpen: true });
       return false;
     }
-
-    // validate is internet connected
-    if (navigator.onLine === false) {
-      this.setState({ loading: false,message: "No internet access",snackOpen: true});
-      return false;
-    }
-    ths.setState({ loading: true });
-    if(this.props.AddComplaint(this.state)){
-      ths.setState({ message: "Submitted Successfully",snackOpen: true});
-    }
-  }
+    this.props.addComplaint(this.state.complainttype);
+  };
+  handleRequestClose = () => {
+    this.setState({ snackOpen: false });
+  };
   render() {
     return (
-      <Layout navigationTitle="New Complaint" showBackNavigation={true}>
-        <Card style={{margin:"2.5%"}}>
-          <form onSubmit={this.validateAll}>
-            <CardText>
-              <h3>Complaint Type</h3>
-              <SelectfieldClass selectChange={this.selectChange} complaintTypeValue={this.state.complaintType}/>
-              <h3>Priority</h3>
-              <PriorityRadioButton validatePriority={this.validateInput}/>
-              <h3>Anonymous</h3>
-              <AnonymousRadioButton validateRadio={this.validateInput}/>
-              <h3>Complaint Title</h3>
-              <TextField
-                id="title"
-                onChange={this.validateInput}
-                style={{ width: "100%" }}
-                hintText="Write title"
-              />
-              <h3>Describe your complaint</h3>
-              <TextField
-                id="description"
-                onChange={this.validateInput}
-                style={{ width: "100%" }}
-                hintText="Write complaint"
-                multiLine={true}
-              />
-            </CardText>
-            <center>
-            <RaisedButton
-              type="submit"
-              label="Submit"
-              disabled={this.state.loading}
-              primary={true}
-              style={styles.button}
-            >
-              {this.state.loading && (
-                <CircularProgress
-                  style={{
-                    width: "80%",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    position: "absolute"
-                  }}
-                  size={30}
-                  thickness={3}
-                />
-              )}
-            </RaisedButton>
-            {/* <RaisedButton onClick={()=>this.props.history.push("/complaintlist")} label="Cancel" style={styles.button} /> */}
+      <Layout navigationTitle="Complaint Type" showBackNavigation={true}>
+        <div>
+          <br />
+          <center>
+            <TextField
+              floatingLabelText="Complaint type"
+              onChange={this.textChange}
+              value={this.state.complainttype}
+              name="complainttype"
+            />
           </center>
-          </form>
-        </Card>
-        <Snackbar
-          open={this.state.snackOpen}
-          onRequestClose={this.snackbarHandleRequestClose}
-          message={this.state.message}
-          autoHideDuration={this.state.autoHideDuration}
-        />
+          <br />
+          <Dropzone onDrop={this.getIcon} accept="image/*">
+            {({ getRootProps, getInputProps, isDragActive }) => {
+              return (
+                <div {...getRootProps}>
+                  <input {...getInputProps} />
+                  <u>
+                    <RaisedButton
+                      label="Upload Icon"
+                      primary={true}
+                      style={{ marginLeft: "15%" }}
+                    />
+                  </u>
+                </div>
+              );
+            }}
+          </Dropzone>
+          <br />
+          <br />
+          <center>
+            <RaisedButton
+              label="ADD"
+              backgroundColor={lightGreen800}
+              labelColor="white"
+              onClick={this.handleComplaint}
+            />
+          </center>
+          <Snackbar
+            open={this.state.snackOpen}
+            message="Add complaint type..."
+            autoHideDuration={4000}
+            onRequestClose={this.handleRequestClose}
+          />
+        </div>
       </Layout>
     );
   }
 }
-export default withRouter(NewComplaint);
+export default withRouter(ComplaintType);

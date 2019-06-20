@@ -78,8 +78,8 @@ class LeavePurpose extends Component {
           <Dropzone onDrop={this.getIcon} accept="image/*">
             {({ getRootProps, getInputProps, isDragActive }) => {
               return (
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
+                <div {...getRootProps}>
+                  <input {...getInputProps} />
                   <u>
                     <RaisedButton
                       label="Upload Icon"

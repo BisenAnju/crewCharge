@@ -28,7 +28,7 @@ import Favoritism from "../images/favoritism.png";
 import IssuesWithCoWorkers from "../images/co-workers.png";
 import SwipeableViews from "react-swipeable-views";
 
-const loader = () => (
+const loader = (
   <center>
     <RefreshIndicator
       size={40}
@@ -123,7 +123,9 @@ class ComplaintList extends React.Component {
                           onClick={() =>
                             this.props.history.push(`/complaintview/${doc.id}`)
                           }
-                          leftAvatar={<Avatar src={doc.userImageURL} />}
+                          leftAvatar={
+                            <Avatar size={48} src={doc.userImageURL} />
+                          }
                           secondaryTextLines={2}
                           primaryText={doc.username}
                           secondaryText={
@@ -300,7 +302,7 @@ class ComplaintList extends React.Component {
         />
         <FloatingActionButton
           onClick={() => this.props.history.push("/complaint")}
-          backgroundColor="rgb(156, 204, 101)"
+          backgroundColor="#659e25"
           style={{
             position: "absolute",
             zIndex: "1",

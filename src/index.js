@@ -52,5 +52,4 @@ const startApp = () => {
     serviceWorker.unregister();
   }
 };
-
 startApp();

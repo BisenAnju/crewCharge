@@ -27,8 +27,7 @@ class LoginContainer extends Component {
           if (querySnapshot.exists) {
             console.log("You are already registered");
             if (
-              (querySnapshot.data().userNotificationPlayerId === undefined ||
-                querySnapshot.data().userNotificationPlayerId === null) &&
+              querySnapshot.data().userNotificationPlayerId === null &&
               window.cordova
             ) {
               this.props.db

@@ -95,22 +95,23 @@ class ComplaintView extends React.Component {
                   backgroundColor="white"
                   color="black"
                   // src={this.props.data.userImageURL}
-                  src={
-                    this.props.data.complaintType === "Harassment" &&
-                    icn[
-                      this.props.data.complaintType
-                        .replace(" ", "")
-                        .replace("/", "")
-                    ]
-                  }
-                  icon={
-                    this.props.data.complaintType !== "Harassment" &&
-                    icn[
-                      this.props.data.complaintType
-                        .replace(" ", "")
-                        .replace("/", "")
-                    ]
-                  }
+                  {...(this.props.data.complaintType === "Harassment"
+                    ? {
+                        src:
+                          icn[
+                            this.props.data.complaintType
+                              .replace(" ", "")
+                              .replace("/", "")
+                          ]
+                      }
+                    : {
+                        icon:
+                          icn[
+                            this.props.data.complaintType
+                              .replace(" ", "")
+                              .replace("/", "")
+                          ]
+                      })}
                   size={130}
                 />
               </center>
@@ -152,51 +153,52 @@ class ComplaintView extends React.Component {
               >
                 {this.props.data.description}
               </CardText>
-              <CardText>
-                <h4>Do Action</h4>
-                <SelectField
-                  name="statusByAdmin"
-                  style={{ width: "100%" }}
-                  value={
-                    this.props.data.statusByAdmin !== undefined
-                      ? this.props.data.statusByAdmin
-                      : this.state.statusByAdmin
-                  }
-                  onChange={this.handleChange}
-                  floatingLabelText="Select Complaint Status"
-                >
-                  <MenuItem value="pending" primaryText="Pending" />
-                  <MenuItem value="resolve" primaryText="Resolved" />
-                  <MenuItem value="other" primaryText="Other" />
-                </SelectField>
-                <TextField
-                  value={
-                    this.props.data.adminReply !== undefined
-                      ? this.props.data.adminReply
-                      : this.state.adminReply
-                  }
-                  name="adminReply"
-                  onChange={this.inputValidation}
-                  style={{ width: "100%" }}
-                  floatingLabelText="Write About Action"
-                  multiLine={true}
-                  rowsMax={6}
-                />
-              </CardText>
               {this.props.isAdmin === true && (
-                <CardActions
-                  style={{
-                    width: "100%",
-                    backgroundColor: "#47adda"
-                  }}
-                >
-                  <FlatButton
-                    style={{ color: "white" }}
-                    label="Submit"
-                    fullWidth={true}
-                    onClick={this.formSubmit}
-                  />
-                </CardActions>
+                <div>
+                  <CardText>
+                    <h4>Do Action</h4>
+                    <SelectField
+                      name="statusByAdmin"
+                      style={{ width: "100%" }}
+                      value={
+                        this.props.data.statusByAdmin !== undefined
+                          ? this.props.data.statusByAdmin
+                          : this.state.statusByAdmin
+                      }
+                      onChange={this.handleChange}
+                      floatingLabelText="Select Complaint Status"
+                    >
+                      <MenuItem value="pending" primaryText="Pending" />
+                      <MenuItem value="resolve" primaryText="Resolved" />
+                      <MenuItem value="other" primaryText="Other" />
+                    </SelectField>
+                    <TextField
+                      value={
+                        this.props.data.adminReply !== undefined
+                          ? this.props.data.adminReply
+                          : this.state.adminReply
+                      }
+                      name="adminReply"
+                      onChange={this.inputValidation}
+                      style={{ width: "100%" }}
+                      floatingLabelText="Write About Action"
+                      multiLine={true}
+                      rowsMax={6}
+                    />
+                  </CardText>
+                  <CardActions
+                    style={{
+                      width: "100%"
+                    }}
+                  >
+                    <FlatButton
+                      style={{ color: "white", backgroundColor: "#659e25" }}
+                      label="Submit"
+                      fullWidth={true}
+                      onClick={this.formSubmit}
+                    />
+                  </CardActions>
+                </div>
               )}
             </Card>
           )}
