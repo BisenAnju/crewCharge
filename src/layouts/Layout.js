@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import NavigationBarContainers from "../containers/NavigationBar";
 import "../styles/style.css";
+import BG from "../images/bg.jpg";
 
 class Layout extends React.Component {
   constructor(props) {
@@ -17,7 +18,14 @@ class Layout extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <div>
+      <div
+        style={{
+          backgroundImage: ' url("' + BG + '")',
+          height: "-webkit-fill-available",
+          backgroundPosition: "unset",
+          backgroundSize: "cover"
+        }}
+      >
         <NavigationBarContainers
           navigationTitle={this.props.navigationTitle}
           showBackNavigation={this.props.showBackNavigation}

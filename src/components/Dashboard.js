@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../layouts/Layout";
 import BG from "../images/bg.jpg";
-import Leave from "../images/leave.jpg";
+// import Leave from "../images/leave.jpg";
 import { grey500, green200, blueGrey300 } from "material-ui/styles/colors";
 import { lightBlue300 } from "material-ui/styles/colors";
 import { ActionHome } from "material-ui/svg-icons";
@@ -27,12 +27,12 @@ class Dashboard extends Component {
     return (
       <Layout navigationTitle="Dashboard">
         <div
-          style={{
-            backgroundImage: ' url("' + BG + '")',
-            height: "-webkit-fill-available",
-            backgroundPosition: "unset",
-            backgroundSize: "cover"
-          }}
+        // style={{
+        //   backgroundImage: ' url("' + BG + '")',
+        //   height: "-webkit-fill-available",
+        //   backgroundPosition: "unset",
+        //   backgroundSize: "cover"
+        // }}
         >
           <div
             style={{ margin: "0% 2%", borderRadius: "10px" }}
