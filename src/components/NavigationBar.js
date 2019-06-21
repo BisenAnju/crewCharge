@@ -16,8 +16,7 @@ import {
   SocialPerson,
   ActionDashboard
 } from "material-ui/svg-icons";
-import Home from "material-ui/svg-icons/action/home";
-import Menu from "material-ui/svg-icons/navigation/menu";
+import { NavigationMenu, ActionHome } from "material-ui/svg-icons";
 import { lightGreen400 } from "material-ui/styles/colors";
 class NavigationBar extends React.Component {
   constructor(props) {
@@ -34,12 +33,12 @@ class NavigationBar extends React.Component {
       <div>
         <AppBar
           titleStyle={{
-            fontSize: "18px",
-            textAlign: "center"
+            textAlign: "center",
+            color: "black"
           }}
           title={this.props.navigationTitle}
           style={{
-            backgroundColor: lightGreen400
+            backgroundColor: "rgba(156, 204, 101, 0)"
           }}
           onRightIconButtonClick={() =>
             this.props.navigationTitle !== "Dashboard" &&
@@ -53,15 +52,15 @@ class NavigationBar extends React.Component {
           iconElementLeft={
             <IconButton>
               {this.props.showBackNavigation ? (
-                <NavigationArrowBack />
+                <NavigationArrowBack color="black" />
               ) : (
-                <Menu />
+                <NavigationMenu color="black" />
               )}
             </IconButton>
           }
           iconElementRight={
             <IconButton>
-              <Home />
+              <ActionHome color="black" />
             </IconButton>
           }
         />
