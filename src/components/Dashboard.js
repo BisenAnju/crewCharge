@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../layouts/Layout";
-import BG from "../images/bg.jpg";
+import blur from "../images/blur.png";
 // import Leave from "../images/leave.jpg";
-import { grey500, green200, blueGrey300 } from "material-ui/styles/colors";
-import { lightBlue300 } from "material-ui/styles/colors";
-import { ActionHome } from "material-ui/svg-icons";
+import leave from "../images/leave1.png";
+import meeting from "../images/meeting1.png";
+import complaint from "../images/complaint1.png";
+import project from "../images/project1.png";
 const flexContainer = {
   display: "flex",
   textAlign: "center",
@@ -27,144 +28,154 @@ class Dashboard extends Component {
     return (
       <Layout navigationTitle="Dashboard">
         <div
-        // style={{
-        //   backgroundImage: ' url("' + BG + '")',
-        //   height: "-webkit-fill-available",
-        //   backgroundPosition: "unset",
-        //   backgroundSize: "cover"
-        // }}
+          style={{
+            backgroundColor: "#f2f3f2",
+            height: "-webkit-fill-available"
+          }}
         >
-          <div
-            style={{ margin: "0% 2%", borderRadius: "10px" }}
-            onClick={e => {
-              e.preventDefault();
-              this.props.history.push("/leavedashboard");
-            }}
-          >
+          <div style={{ height: "70px" }} />
+          <div style={{ display: "flex" }}>
             <div
               style={{
-                padding: "7%",
-                backgroundColor: "rgba(136, 37, 37, 0.45)",
-                color: "white"
+                boxShadow: "rgb(253, 145, 77) 0px 0px 10px -3px",
+                backgroundImage: ' url("' + blur + '")',
+                width: "50%",
+                margin: "0% 2%",
+                borderRadius: "10px",
+                overflow: "hidden"
+              }}
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push("/leavedashboard");
               }}
             >
-              <center>
-                {/* <img src={Leave}> */}
-                <ActionHome
-                  color="white"
-                  style={{ width: "16%", height: "0%" }}
-                />
-              </center>
+              <div
+                style={{
+                  padding: "7%",
+                  backgroundColor: "transparent"
+                }}
+              >
+                <img src={leave} />
+                {/* <leave
+                color="rgb(253, 145, 77)"
+                style={{ width: "16%", height: "0%" }}
+              /> */}
+              </div>
+              <div
+                style={{
+                  padding: "10px",
+                  backgroundColor: "transparent",
+                  color: "#ccc2bb"
+                }}
+              >
+                <center>
+                  <h3>Leave Dashboard</h3>
+                </center>
+              </div>
             </div>
             <div
               style={{
-                padding: "10px",
-                backgroundColor: "rgba(136, 37, 37)",
-                color: "white"
+                boxShadow: "rgb(253, 145, 77) 0px 0px 10px -3px",
+                backgroundImage: ' url("' + blur + '")',
+                width: "50%",
+                margin: "0% 2%",
+                borderRadius: "10px",
+                overflow: "hidden"
+              }}
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push("/teamallocation");
               }}
             >
-              <center>
-                <h3>Leave Dashboard</h3>
-              </center>
-            </div>
-          </div>
-          <div
-            style={{ margin: "0% 2%", borderRadius: "10px" }}
-            onClick={e => {
-              e.preventDefault();
-              this.props.history.push("/complaintlist");
-            }}
-          >
-            <div
-              style={{
-                padding: "7%",
-                backgroundColor: "rgba(158, 158, 158, 0.7)",
-                color: "white"
-              }}
-            >
-              <center>
-                <ActionHome
-                  color="white"
-                  style={{ width: "16%", height: "0%" }}
-                />
-              </center>
-            </div>
-            <div
-              style={{
-                padding: "10px",
-                backgroundColor: "rgba(158, 158, 158, 0.85)",
-                color: "white"
-              }}
-            >
-              <center>
-                <h3>Complaint & Feedback</h3>
-              </center>
-            </div>
-          </div>
-          <div
-            style={{ margin: "0% 2%", borderRadius: "10px" }}
-            onClick={e => {
-              e.preventDefault();
-              this.props.history.push("/teamallocation");
-            }}
-          >
-            <div
-              style={{
-                padding: "7%",
-                backgroundColor: "rgba(158, 158, 158, 0.7)",
-                color: "white"
-              }}
-            >
-              <center>
-                <ActionHome
-                  color="white"
-                  style={{ width: "16%", height: "0%" }}
-                />
-              </center>
-            </div>
-            <div
-              style={{
-                padding: "10px",
-                backgroundColor: "rgba(158, 158, 158, 0.85)",
-                color: "white"
-              }}
-            >
-              <center>
-                <h3>Team Allocation</h3>
-              </center>
+              <div
+                style={{
+                  padding: "7%",
+                  backgroundColor: "transparent"
+                }}
+              >
+                <img src={meeting} />
+              </div>
+              <div
+                style={{
+                  padding: "10px",
+                  backgroundColor: "transparent",
+                  color: "#ccc2bb"
+                }}
+              >
+                <center>
+                  <h3>Team Allocation</h3>
+                </center>
+              </div>
             </div>
           </div>
-          <div
-            style={{ margin: "0% 2%", borderRadius: "10px" }}
-            onClick={e => {
-              e.preventDefault();
-              this.props.history.push("/projects");
-            }}
-          >
+          <div style={{ display: "flex", marginTop: "3%" }}>
             <div
               style={{
-                padding: "7%",
-                backgroundColor: "rgba(158, 158, 158, 0.7)",
-                color: "white"
+                boxShadow: "rgb(253, 145, 77) 0px 0px 10px -3px",
+                backgroundImage: ' url("' + blur + '")',
+                width: "50%",
+                margin: "0% 2%",
+                borderRadius: "10px",
+                overflow: "hidden"
+              }}
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push("/complaintlist");
               }}
             >
-              <center>
-                <ActionHome
-                  color="white"
-                  style={{ width: "16%", height: "0%" }}
-                />
-              </center>
+              <div
+                style={{
+                  padding: "7%",
+                  backgroundColor: "transparent"
+                }}
+              >
+                <img src={complaint} />
+              </div>
+              <div
+                style={{
+                  padding: "10px",
+                  backgroundColor: "transparent",
+                  color: "#ccc2bb"
+                }}
+              >
+                <center>
+                  <h3>Complaint & Feedback</h3>
+                </center>
+              </div>
             </div>
             <div
               style={{
-                padding: "10px",
-                backgroundColor: "rgba(158, 158, 158, 0.85)",
-                color: "white"
+                boxShadow: "rgb(253, 145, 77) 0px 0px 10px -3px",
+                backgroundImage: ' url("' + blur + '")',
+                width: "50%",
+                margin: "0% 2%",
+                borderRadius: "10px",
+                overflow: "hidden"
+              }}
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push("/projects");
               }}
             >
-              <center>
-                <h3>Client Communication</h3>
-              </center>
+              <div
+                style={{
+                  padding: "7%",
+                  backgroundColor: "transparent"
+                }}
+              >
+                <img src={project} />
+              </div>
+              <div
+                style={{
+                  padding: "10px",
+                  backgroundColor: "transparent",
+                  color: "#ccc2bb"
+                }}
+              >
+                <center>
+                  <h3>Client Communication</h3>
+                </center>
+              </div>
             </div>
           </div>
         </div>

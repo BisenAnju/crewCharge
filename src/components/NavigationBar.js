@@ -34,11 +34,12 @@ class NavigationBar extends React.Component {
         <AppBar
           titleStyle={{
             textAlign: "center",
-            color: "black"
+            color: "white"
           }}
           title={this.props.navigationTitle}
           style={{
-            backgroundColor: "rgba(156, 204, 101, 0)"
+            backgroundColor: "#fd914d",
+            position: "fixed"
           }}
           onRightIconButtonClick={() =>
             this.props.navigationTitle !== "Dashboard" &&
@@ -52,15 +53,15 @@ class NavigationBar extends React.Component {
           iconElementLeft={
             <IconButton>
               {this.props.showBackNavigation ? (
-                <NavigationArrowBack color="black" />
+                <NavigationArrowBack color="white" />
               ) : (
-                <NavigationMenu color="black" />
+                <NavigationMenu color="white" />
               )}
             </IconButton>
           }
           iconElementRight={
             <IconButton>
-              <ActionHome color="black" />
+              <ActionHome color="white" />
             </IconButton>
           }
         />
