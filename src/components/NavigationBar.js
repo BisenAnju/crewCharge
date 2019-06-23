@@ -34,11 +34,12 @@ class NavigationBar extends React.Component {
         <AppBar
           titleStyle={{
             textAlign: "center",
-            color: "white"
+            color: "#fd914d"
           }}
           title={this.props.navigationTitle}
           style={{
-            backgroundColor: "#fd914d",
+            boxShadow: "0px",
+            backgroundColor: "transparent",
             position: "fixed"
           }}
           onRightIconButtonClick={() =>
@@ -53,15 +54,15 @@ class NavigationBar extends React.Component {
           iconElementLeft={
             <IconButton>
               {this.props.showBackNavigation ? (
-                <NavigationArrowBack color="white" />
+                <NavigationArrowBack color="#fd914d" />
               ) : (
-                <NavigationMenu color="white" />
+                <NavigationMenu color="#fd914d" />
               )}
             </IconButton>
           }
           iconElementRight={
             <IconButton>
-              <ActionHome color="white" />
+              <ActionHome color="#fd914d" />
             </IconButton>
           }
         />
@@ -71,21 +72,35 @@ class NavigationBar extends React.Component {
           open={this.state.open}
           onRequestChange={open => this.setState({ open })}
         >
-          <div>
-            <Avatar style={{ margin: 18 }} size={30}>
-              <SocialPerson />
-            </Avatar>
-            <span style={{ fontWeight: "bold" }}>
-              {this.props.userData.findIndex(
-                user => user.displayName === this.props.user.displayName
-              ) >= 0 &&
+          <List>
+            <ListItem
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push("/leavedashboard/admin");
+              }}
+              primaryText={
+                this.props.userData.findIndex(
+                  user => user.displayName === this.props.user.displayName
+                ) >= 0 &&
                 this.props.userData.find(
                   user => user.displayName === this.props.user.displayName
-                ).displayName}
-            </span>
-          </div>
-          <Divider />
-          <List>
+                ).displayName
+              }
+              leftAvatar={
+                <Avatar
+                  size={50}
+                  src={
+                    this.props.userData.findIndex(
+                      user => user.photoURL === this.props.user.photoURL
+                    ) >= 0 &&
+                    this.props.userData.find(
+                      user => user.photoURL === this.props.user.photoURL
+                    ).photoURL
+                  }
+                />
+              }
+            />
+            <Divider />
             <ListItem
               onClick={e => {
                 e.preventDefault();

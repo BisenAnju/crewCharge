@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../layouts/Layout";
-import blur from "../images/blur.png";
+import blur from "../images/blur1.png";
 // import Leave from "../images/leave.jpg";
 import leave from "../images/leave1.png";
+import icon from "../images/icon1.png";
 import meeting from "../images/meeting1.png";
 import complaint from "../images/complaint1.png";
 import project from "../images/project1.png";
@@ -29,15 +30,22 @@ class Dashboard extends Component {
       <Layout navigationTitle="Dashboard">
         <div
           style={{
+            width: "100%",
+            position: "fixed",
             backgroundColor: "#f2f3f2",
-            height: "-webkit-fill-available"
+            minHeight: "100vh"
           }}
         >
           <div style={{ height: "70px" }} />
+          <div>
+            <center>
+              <img src={icon} />
+            </center>
+          </div>
           <div style={{ display: "flex" }}>
             <div
               style={{
-                boxShadow: "rgb(253, 145, 77) 0px 0px 10px -3px",
+                boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
                 backgroundImage: ' url("' + blur + '")',
                 width: "50%",
                 margin: "0% 2%",
@@ -55,7 +63,9 @@ class Dashboard extends Component {
                   backgroundColor: "transparent"
                 }}
               >
-                <img src={leave} />
+                <center>
+                  <img src={leave} />
+                </center>
                 {/* <leave
                 color="rgb(253, 145, 77)"
                 style={{ width: "16%", height: "0%" }}
@@ -75,7 +85,7 @@ class Dashboard extends Component {
             </div>
             <div
               style={{
-                boxShadow: "rgb(253, 145, 77) 0px 0px 10px -3px",
+                boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
                 backgroundImage: ' url("' + blur + '")',
                 width: "50%",
                 margin: "0% 2%",
@@ -93,7 +103,9 @@ class Dashboard extends Component {
                   backgroundColor: "transparent"
                 }}
               >
-                <img src={meeting} />
+                <center>
+                  <img src={meeting} />
+                </center>
               </div>
               <div
                 style={{
@@ -111,7 +123,7 @@ class Dashboard extends Component {
           <div style={{ display: "flex", marginTop: "3%" }}>
             <div
               style={{
-                boxShadow: "rgb(253, 145, 77) 0px 0px 10px -3px",
+                boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
                 backgroundImage: ' url("' + blur + '")',
                 width: "50%",
                 margin: "0% 2%",
@@ -129,7 +141,9 @@ class Dashboard extends Component {
                   backgroundColor: "transparent"
                 }}
               >
-                <img src={complaint} />
+                <center>
+                  <img src={complaint} />
+                </center>
               </div>
               <div
                 style={{
@@ -145,7 +159,7 @@ class Dashboard extends Component {
             </div>
             <div
               style={{
-                boxShadow: "rgb(253, 145, 77) 0px 0px 10px -3px",
+                boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
                 backgroundImage: ' url("' + blur + '")',
                 width: "50%",
                 margin: "0% 2%",
@@ -163,7 +177,9 @@ class Dashboard extends Component {
                   backgroundColor: "transparent"
                 }}
               >
-                <img src={project} />
+                <center>
+                  <img src={project} />
+                </center>
               </div>
               <div
                 style={{
@@ -173,7 +189,7 @@ class Dashboard extends Component {
                 }}
               >
                 <center>
-                  <h3>Client Communication</h3>
+                  <h3>Projects</h3>
                 </center>
               </div>
             </div>
