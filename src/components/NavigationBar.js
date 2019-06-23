@@ -17,7 +17,7 @@ import {
   ActionDashboard
 } from "material-ui/svg-icons";
 import { NavigationMenu, ActionHome } from "material-ui/svg-icons";
-import { lightGreen400 } from "material-ui/styles/colors";
+
 class NavigationBar extends React.Component {
   constructor(props) {
     super(props);

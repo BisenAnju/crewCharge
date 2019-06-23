@@ -2,7 +2,6 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import NavigationBarContainers from "../containers/NavigationBar";
 import "../styles/style.css";
-import BG from "../images/bg.jpg";
 
 class Layout extends React.Component {
   constructor(props) {

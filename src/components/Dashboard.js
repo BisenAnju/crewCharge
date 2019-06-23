@@ -8,17 +8,7 @@ import icon from "../images/icon1.png";
 import meeting from "../images/meeting1.png";
 import complaint from "../images/complaint1.png";
 import project from "../images/project1.png";
-const flexContainer = {
-  display: "flex",
-  textAlign: "center",
-  alignContent: "baseline"
-};
 
-const flexItem = {
-  alignItems: "center",
-  padding: "7px",
-  justifyContent: "space-around"
-};
 class Dashboard extends Component {
   constructor(props) {
     super(props);

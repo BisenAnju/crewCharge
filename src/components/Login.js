@@ -30,7 +30,7 @@ class Login extends Component {
       <div>
         <div style={{ height: "10vh" }} />
         <center>
-          <img src={icon} />
+          <img alt="icon" src={icon} />
         </center>
         {/* {this.state.isLoading ? (
             <CircularProgress />
