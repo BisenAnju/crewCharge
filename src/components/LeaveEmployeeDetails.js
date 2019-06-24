@@ -20,7 +20,7 @@ import {
   CommunicationComment,
   ActionFlightTakeoff,
   MapsLocalHospital,
-  ActionFace,
+  SocialSentimentVerySatisfied,
   HardwareKeyboardArrowRight,
   ImageEdit
 } from "material-ui/svg-icons";
@@ -124,7 +124,7 @@ class LeaveEmployeeDetails extends Component {
                   this.props.singleData.purpose === "vacation" ? (
                     <ActionFlightTakeoff style={{ fill: "#303F9F" }} />
                   ) : this.props.singleData.purpose === "general" ? (
-                    <ActionFace style={{ fill: "#C2185B" }} />
+                    <SocialSentimentVerySatisfied style={{ fill: "#C2185B" }} />
                   ) : (
                     <MapsLocalHospital style={{ fill: "#EF5350" }} />
                   )

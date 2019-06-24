@@ -50,7 +50,7 @@ class TeamAllocationProjectList extends React.Component {
   }
   handleTypeChange = (event, index, value) => {
     if (value === 1) {
-      window.location = "/teamallocation/peoplesList";
+      window.location = "/teamallocation";
     }
   };
   componentWillMount() {

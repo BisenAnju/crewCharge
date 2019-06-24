@@ -9,7 +9,7 @@ import {
   CommunicationComment,
   ActionFlightTakeoff,
   MapsLocalHospital,
-  ActionFace,
+  SocialSentimentVerySatisfied,
   HardwareKeyboardArrowRight,
   ImageEdit
 } from "material-ui/svg-icons";
@@ -135,7 +135,7 @@ class LeaveAdminApprovalRejection extends Component {
                 this.props.singleData.purpose === "vacation" ? (
                   <ActionFlightTakeoff style={{ fill: "#303F9F" }} />
                 ) : this.props.singleData.purpose === "general" ? (
-                  <ActionFace style={{ fill: "#C2185B" }} />
+                  <SocialSentimentVerySatisfied style={{ fill: "#C2185B" }} />
                 ) : (
                   <MapsLocalHospital style={{ fill: "#EF5350" }} />
                 )
@@ -148,9 +148,7 @@ class LeaveAdminApprovalRejection extends Component {
                   style={{ margin: "0px 25px 0px 0px" }}
                   onClick={e => {
                     e.preventDefault();
-                    this.props.history.push(
-                      `/leavedashboard/leaveapply`
-                    );
+                    this.props.history.push(`/leavedashboard/leaveapply`);
                   }}
                 >
                   <ImageEdit />

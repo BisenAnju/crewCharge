@@ -64,7 +64,7 @@ class TeamAllocationMissionContainer extends Component {
           <Switch>
             <Route
               exact
-              path={"/teamallocation"}
+              path={"/teamallocation/mission"}
               render={props => (
                 <TeamAllocationMission
                   {...this.props}

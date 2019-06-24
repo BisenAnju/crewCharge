@@ -16,9 +16,8 @@ import {
   SocialPerson,
   ActionDashboard
 } from "material-ui/svg-icons";
-import Home from "material-ui/svg-icons/action/home";
-import Menu from "material-ui/svg-icons/navigation/menu";
-import { lightGreen400 } from "material-ui/styles/colors";
+import { NavigationMenu, ActionHome } from "material-ui/svg-icons";
+
 class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
@@ -34,12 +33,14 @@ class NavigationBar extends React.Component {
       <div>
         <AppBar
           titleStyle={{
-            fontSize: "18px",
-            textAlign: "center"
+            textAlign: "center",
+            color: "#fd914d"
           }}
           title={this.props.navigationTitle}
           style={{
-            backgroundColor: lightGreen400
+            boxShadow: "0px",
+            backgroundColor: "transparent",
+            position: "fixed"
           }}
           onRightIconButtonClick={() =>
             this.props.navigationTitle !== "Dashboard" &&
@@ -53,15 +54,15 @@ class NavigationBar extends React.Component {
           iconElementLeft={
             <IconButton>
               {this.props.showBackNavigation ? (
-                <NavigationArrowBack />
+                <NavigationArrowBack color="#fd914d" />
               ) : (
-                <Menu />
+                <NavigationMenu color="#fd914d" />
               )}
             </IconButton>
           }
           iconElementRight={
             <IconButton>
-              <Home />
+              <ActionHome color="#fd914d" />
             </IconButton>
           }
         />
@@ -71,21 +72,35 @@ class NavigationBar extends React.Component {
           open={this.state.open}
           onRequestChange={open => this.setState({ open })}
         >
-          <div>
-            <Avatar style={{ margin: 18 }} size={30}>
-              <SocialPerson />
-            </Avatar>
-            <span style={{ fontWeight: "bold" }}>
-              {this.props.userData.findIndex(
-                user => user.displayName === this.props.user.displayName
-              ) >= 0 &&
+          <List>
+            <ListItem
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push("/leavedashboard/admin");
+              }}
+              primaryText={
+                this.props.userData.findIndex(
+                  user => user.displayName === this.props.user.displayName
+                ) >= 0 &&
                 this.props.userData.find(
                   user => user.displayName === this.props.user.displayName
-                ).displayName}
-            </span>
-          </div>
-          <Divider />
-          <List>
+                ).displayName
+              }
+              leftAvatar={
+                <Avatar
+                  size={50}
+                  src={
+                    this.props.userData.findIndex(
+                      user => user.photoURL === this.props.user.photoURL
+                    ) >= 0 &&
+                    this.props.userData.find(
+                      user => user.photoURL === this.props.user.photoURL
+                    ).photoURL
+                  }
+                />
+              }
+            />
+            <Divider />
             <ListItem
               onClick={e => {
                 e.preventDefault();
@@ -120,6 +135,38 @@ class NavigationBar extends React.Component {
                       this.props.history.push("/complainttype");
                     }}
                     primaryText="Add Complaint Type"
+                    leftIcon={<ActionDashboard />}
+                  />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation");
+                    }}
+                    primaryText="Peoples List"
+                    leftIcon={<ActionDashboard />}
+                  />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation/mission");
+                    }}
+                    primaryText="Add Missions"
+                    leftIcon={<ActionDashboard />}
+                  />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation/project");
+                    }}
+                    primaryText="Add Projects"
+                    leftIcon={<ActionDashboard />}
+                  />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation/projectlist");
+                    }}
+                    primaryText="Projects List"
                     leftIcon={<ActionDashboard />}
                   />
                 </div>

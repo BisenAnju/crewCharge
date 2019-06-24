@@ -7,9 +7,10 @@ import {
 } from "react-router-dom";
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
-import TeamAllocationProjectContainer from "./TeamAllocationProject";
-import TeamAllocationPeopleList from "../components/TeamAllocationPeoplesList";
 import TeamAllocationProjectListContainer from "./TeamAllocationProjectList";
+import TeamAllocationPeopleList from "../components/TeamAllocationPeoplesList";
+import TeamAllocationMissionContainer from "./TeamAllocationMission";
+import TeamAllocationProjectContainer from "./TeamAllocationProject";
 class TeamAllocationPeoplesListContainer extends Component {
   constructor(props) {
     super(props);
@@ -97,29 +98,33 @@ class TeamAllocationPeoplesListContainer extends Component {
           <Switch>
             <Route
               exact
-              path={"/teamallocation/peoplesList"}
+              path={"/teamallocation"}
               render={props => (
                 <TeamAllocationPeopleList {...this.props} {...this.state} />
               )}
             />
             <Route
               exact
-              path={"/teamallocation/projectList"}
+              path={"/teamallocation/projectlist"}
               render={props => (
                 <TeamAllocationProjectListContainer
-                  {...this.props}
+                  {...props}
                   {...this.state}
                 />
               )}
             />
             <Route
               exact
+              path={"/teamallocation/mission"}
+              render={props => (
+                <TeamAllocationMissionContainer {...props} {...this.state} />
+              )}
+            />
+            <Route
+              exact
               path={"/teamallocation/project"}
               render={props => (
-                <TeamAllocationProjectContainer
-                  {...this.props}
-                  {...this.state}
-                />
+                <TeamAllocationProjectContainer {...props} {...this.state} />
               )}
             />
           </Switch>

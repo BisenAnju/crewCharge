@@ -6,7 +6,7 @@ import { List, ListItem, CircularProgress, Avatar, Divider } from "material-ui";
 import {
   ActionFlightTakeoff,
   MapsLocalHospital,
-  ActionFace
+  SocialSentimentVerySatisfied
 } from "material-ui/svg-icons";
 const tabStyles = {
   headline: {
@@ -72,7 +72,7 @@ class AdminPendingTab extends React.Component {
                           style={{ marginTop: 28, fill: "#EF5350" }}
                         />
                       ) : (
-                        <ActionFace
+                        <SocialSentimentVerySatisfied
                           style={{ marginTop: 28, fill: "#C2185B" }}
                         />
                       )

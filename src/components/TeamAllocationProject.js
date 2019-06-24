@@ -88,7 +88,7 @@ class TeamAllocationProject extends React.Component {
             )}
             <div>
               <Dropzone onDrop={this.editProfile} accept="image/*">
-                {({ getRootProps, getInputProps, isDragActive }) => {
+                {({ getRootProps, getInputProps }) => {
                   return (
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />

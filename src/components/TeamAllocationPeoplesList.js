@@ -55,7 +55,7 @@ class TeamAllocationPeopleList extends React.Component {
   }
   handleTypeChange = (event, index, value) => {
     if (value === 2) {
-      window.location = "/teamallocation/projectList";
+      window.location = "/teamallocation/projectlist";
     }
   };
   componentWillMount() {

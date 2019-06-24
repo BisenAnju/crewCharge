@@ -54,7 +54,7 @@ class TeamAllocationMissionContainer extends Component {
               path={"/teamallocation/project"}
               render={props => (
                 <TeamAllocationProject
-                  {...this.props}
+                  {...props}
                   {...this.state}
                   handleAddProject={this.handleAddProject}
                 />

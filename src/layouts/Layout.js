@@ -17,7 +17,16 @@ class Layout extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <div>
+      <div
+        style={
+          {
+            // backgroundImage: ' url("' + BG + '")',
+            // height: "-webkit-fill-available",
+            // backgroundPosition: "unset",
+            // backgroundSize: "cover"
+          }
+        }
+      >
         <NavigationBarContainers
           navigationTitle={this.props.navigationTitle}
           showBackNavigation={this.props.showBackNavigation}
