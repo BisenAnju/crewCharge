@@ -5,11 +5,14 @@ import {
   SelectField,
   RaisedButton,
   MenuItem,
-  Snackbar
+  Snackbar,
+  Avatar
 } from "material-ui";
 import DatePicker from "material-ui/DatePicker";
 import Layout from "../layouts/Layout";
-import { white, lightGreen400 } from "material-ui/styles/colors";
+import { orange500, white } from "material-ui/styles/colors";
+import { ActionHome, CommunicationMessage } from "material-ui/svg-icons";
+import TextFieldIcon from "material-ui-textfield-icon";
 class TeamAllocationMission extends React.Component {
   constructor(props) {
     super(props);
@@ -79,17 +82,22 @@ class TeamAllocationMission extends React.Component {
     const { values } = this.state;
     return (
       <Layout navigationTitle="Mission" showBackNavigation={true}>
-        <div style={{ padding: 10 }}>
-          <TextField
+        <div style={{ padding: 10, paddingTop: 50 }}>
+          <TextFieldIcon
             floatingLabelText="Enter Mission"
             defaultValue={this.state.missionName}
             fullWidth={true}
+            floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
+            floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
+            underlineFocusStyle={{ borderColor: "rgb(253, 145, 77)" }}
             onChange={this.handleMissionChange}
           />
           <SelectField
             value={this.state.projectId}
             onChange={this.handleProjectChange}
             floatingLabelText="Select Project Name"
+            floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
+            floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
             fullWidth={true}
             maxHeight={200}
           >
@@ -108,6 +116,8 @@ class TeamAllocationMission extends React.Component {
             value={this.state.values}
             onChange={this.handleUsersChange}
             floatingLabelText="Select Users Name"
+            floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
+            floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
             fullWidth={true}
             maxHeight={200}
           >
@@ -115,32 +125,39 @@ class TeamAllocationMission extends React.Component {
           </SelectField>
           <DatePicker
             floatingLabelText="Start Date"
+            floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
+            floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
             fullWidth={true}
             onChange={this.handleStartDateChange}
           />
           <DatePicker
             floatingLabelText="End Date"
+            floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
+            floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
             fullWidth={true}
             onChange={this.handleEndDateChange}
           />
-          <TextField
+          <TextFieldIcon
             floatingLabelText="Remarks"
+            floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
+            floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
             fullWidth={true}
             multiLine={true}
+            underlineFocusStyle={{ borderColor: "rgb(253, 145, 77)" }}
             onChange={this.handleRmarkChange}
           />
-          <div style={{ padding: 10, float: "right" }}>
-            <RaisedButton
+          <div style={{ padding: 10, float: "right", marginRight: "40%" }}>
+            {/* <RaisedButton
               label="Cancel"
               onClick={this.handleClose}
-              backgroundColor={lightGreen400}
+              backgroundColor={orange500}
               labelColor={white}
               style={{ marginRight: 10 }}
-            />
+            /> */}
             <RaisedButton
               label="Save"
               labelColor={white}
-              backgroundColor={lightGreen400}
+              backgroundColor={"rgb(253, 145, 77)"}
               onClick={e => {
                 e.preventDefault();
                 this.props.handleAddMission(

@@ -16,12 +16,11 @@ import LeaveDashboardContainer from "./containers/LeaveDashboard";
 import LeaveAdminApprovalRejectionContainer from "./containers/LeaveAdminApprovalRejection";
 import LeaveEmployeeDetailsContainer from "./containers/LeaveEmployeeDetails";
 import ProjectsContainer from "./containers/Projects";
-// import WidgetsContainer from "./containers/Widgets";
-// import WidgetsContainer1 from "./containers/Widgets1";
 import TeamAllocationMissionContainer from "./containers/TeamAllocationMission";
 import TeamAllocationProjectListContainer from "./containers/TeamAllocationProjectList";
 import TeamAllocationProjectContainer from "./containers/TeamAllocationProject";
 import TeamAllocationPeoplesListContainer from "./containers/TeamAllocationPeoplesList";
+import TeamAllocationMissionListContainer from "./containers/TeamAllocationMissionList";
 
 class App extends Component {
   constructor(props) {
@@ -75,6 +74,12 @@ class App extends Component {
                   path={"/teamallocation/projectlist"}
                   render={props => (
                     <TeamAllocationProjectListContainer {...props} />
+                  )}
+                />
+                <Route
+                  path={"/teamallocation/missionlist"}
+                  render={props => (
+                    <TeamAllocationMissionListContainer {...props} />
                   )}
                 />
                 <Route
