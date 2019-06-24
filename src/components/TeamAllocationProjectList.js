@@ -1,17 +1,21 @@
 import React from "react";
 import {
-  List,
-  ListItem,
+  Card,
+  CardHeader,
   MenuItem,
   SelectField,
-  Avatar,
+  Paper,
+  CardText,
   Divider
 } from "material-ui";
 import Layout from "../layouts/Layout";
 import { withRouter } from "react-router-dom";
 import * as moment from "moment";
 import ReactWeeklyDayPicker from "./WeeklyDayPicker";
+import { grey300, lightGreen400 } from "material-ui/styles/colors";
 import { classNames } from "../constants/weeklydaypicker";
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import ContentAdd from "material-ui/svg-icons/content/add";
 class TeamAllocationProjectList extends React.Component {
   constructor(props) {
     super(props);
@@ -22,9 +26,14 @@ class TeamAllocationProjectList extends React.Component {
       selectedValue: 2,
       projectsList: [],
       missionsList: [],
-      leavesList: []
+      leavesList: [],
+      nowDate: null,
+      backcolor: null,
+      startDay: null,
+      selectedDate: new Date()
     };
   }
+
   handleToggle = () => {
     this.setState({
       open: !this.state.open
@@ -36,6 +45,7 @@ class TeamAllocationProjectList extends React.Component {
       missionsList: nextProps.missionsList,
       projectsList: nextProps.projectsList,
       usersList: nextProps.usersList,
+      nowDate: moment(Date()).format("LL")
     });
   }
   handleTypeChange = (event, index, value) => {
@@ -43,9 +53,46 @@ class TeamAllocationProjectList extends React.Component {
       window.location = "/teamallocation/peoplesList";
     }
   };
+  componentWillMount() {
+    let nowDate = new Date();
+    let nowDay = new Date().getDay();
+    let finalDate = nowDate.setDate(new Date().getDate() - nowDay + 1);
+    let startDay = new Date(finalDate);
+    this.setState({ startDay });
+  }
+  functionSelectedDate = async selectedDate => {
+    await this.filterDateWise(selectedDate);
+  };
+  handleAddProject = () => {
+    window.location = "/teamallocation/project";
+  };
+  filterDateWise = selectedDate => {
+    let selctedDate1 = new Date(selectedDate);
+    let leavesList = this.props.leavesList.filter(
+      data =>
+        moment(data.from.seconds * 1000).format("L") >= selectedDate ||
+        moment(data.to.seconds * 1000).format("L") <= selectedDate
+    );
+    let missionsList = this.props.missionsList.filter(
+      missionData =>
+        moment(missionData.deadline.startDate.seconds * 1000).format("L") >=
+          selectedDate ||
+        moment(missionData.deadline.endDate.seconds * 1000).format("L") <=
+          selectedDate
+    );
+    this.setState({ leavesList, missionsList, selectedDate: selctedDate1 });
+  };
+  contentButton = {
+    top: "auto",
+    bottom: 20,
+    left: "auto",
+    right: 20,
+    position: "fixed",
+    margin: 0
+  };
   render() {
     return (
-      <Layout navigationTitle="Project List">
+      <Layout navigationTitle="Projects List" showBackNavigation={true}>
         <div>
           <div style={{ paddingLeft: 50 }}>
             <SelectField
@@ -60,114 +107,107 @@ class TeamAllocationProjectList extends React.Component {
           <Divider />
           <div>
             <ReactWeeklyDayPicker
-              daysCount={6}  //How many days will be shown
-              classNames={classNames}  //Overrides classnames for custom classes (below example)
-              startDay={new Date()} // First day as Date Object or 22 June 2016
-              selectedDays={['22 June 2017', new Date()]} // Selected days list
-              multipleDaySelect={true} //enables multiple day selection
-              selectDay={function (day) { }}
-              unselectDay={function (day) { }}
-              onPrevClick={function (startDay, selectedDays) { }} // called with the new startDay
-              onNextClick={function (startDay, selectedDays) { }} // called with the new startDay
-              unselectable={false} // if true allows to unselect a date once it has been selected. Only works when multipleDaySelect={false}
-              format={'YYYY-MM-DD'} //format of dates that handled in selectDay and unselectDay functions
-              firstLineFormat={'ddd'} // format for the first line of the day button
-              secondLineFormat={'D'} // format for the second line of the day button
-              firstLineMobileFormat={'ddd'} // format for the first line of the day button mobile
-              secondLineMobileFormat={'D'} // format for the second line of the day button mobile
-              unavailables={{
-                dates: moment.weekdaysShort(),  //unavailable dates list
-                relative: [0, 1],  //unavailable dates list relative to today (0:today, 1:tomorrow, -1:yesterday)
-                weekly: [0] //unavailable dates list for each week (0:Sunday, 1:Monday ...)
-              }}
-              mobilView={window.innerWidth < 1024}  // enables mobil view
-              beforeToday={false}   // all dates before today set as unavailable (default:true)
-              hiddens={{  // makes dates invisible
-                //dates: ['22 July 2017'], //absolute dates list
-                //relative: [2], // relative to today (0:today, 1:tomorrow, -1:yesterday)
-                weekly: [0]  //each week (0:Sunday, 1:Monday ...)
-              }}
+              daysCount={7}
+              classNames={classNames}
+              startDay={this.state.startDay}
+              selectedDays={[this.state.selectedDate]}
+              multipleDaySelect={false}
+              selectDay={this.functionSelectedDate}
+              unselectDay={function(day) {}}
+              onPrevClick={function(startDay, selectedDays) {}}
+              onNextClick={function(startDay, selectedDays) {}}
+              unselectable={false}
+              format={"MM/DD/YYYY"}
+              selected={this.state.selected}
+              firstLineFormat={"ddd"}
+              secondLineFormat={"D"}
+              firstLineMobileFormat={"ddd"}
+              secondLineMobileFormat={"D"}
+              mobilView={window.innerWidth < 1024}
+              beforeToday={true}
             />
           </div>
           <Divider />
-          {this.state.projectsList.map(
-            (row, id) => (
-              <div key={id}><div key={id}>
-                <List key={id}>
-                  {this.state.missionsList.map((missionRow, index) => {
-                    return (
+          {this.state.projectsList.map((row, id) => (
+            <Card key={id}>
+              <CardHeader
+                title={row.name}
+                avatar={row.logoURL}
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
 
-                      <ListItem
-                        key={id}
-                        leftAvatar={<Avatar src={row.logoURL} />}
-                        disabled={true}
-                        nestedItems={[
-                          missionRow.projectId === row.projectId ? (
-                            <ListItem key={index}>
-                              {this.state.usersList.map((user, i) => {
-                                if (
-                                  missionRow.assignTo.find(
-                                    udata => udata === user.uid
-                                  )
-                                )
-                                  return (
-                                    <div key={i}>
-                                      <img
-                                        style={{
-                                          width: 40,
-                                          height: 40,
-                                          borderRadius: 50,
-                                          float: "left"
-                                        }}
-                                        src={user.photoURL}
-                                      />
-                                    </div>
-                                  );
-                              })}
-                              <br />
-                              <br />
-                              <br />
-                              <div style={{ marginBottom: 10 }}>
-                                <h4>{missionRow.name}</h4>
+              {this.state.missionsList.map((missionRow, index) =>
+                missionRow.projectId === row.projectId ? (
+                  <CardText
+                    key={index}
+                    expandable={true}
+                    style={{
+                      padding: 5
+                    }}
+                  >
+                    <Paper
+                      className={"paperDiv"}
+                      style={{
+                        padding: 10,
+                        boxShadow: -1,
+                        MozBoxShadow: -1
+                      }}
+                    >
+                      <div>
+                        {this.state.usersList.map((user, i) => {
+                          if (
+                            missionRow.assignTo.find(
+                              udata => udata === user.uid
+                            )
+                          )
+                            return (
+                              <div key={i}>
+                                <img
+                                  style={{
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: 5,
+                                    padding: 2,
+                                    float: "left"
+                                  }}
+                                  src={user.photoURL}
+                                />
                               </div>
-                              <div>
-                                {
-                                  <p>
-                                    <span style={{ color: "black" }}>
-                                      Start=
-                                      {moment(
-                                        missionRow.deadline.startDate.seconds *
-                                        1000
-                                      ).format("ll")}
-                                    </span>
-                                    <span style={{ color: "black" }}>
-                                      , End Date=
-                                      {moment(
-                                        missionRow.deadline.endDate.seconds *
-                                        1000
-                                      ).format("ll")}
-                                    </span>
-                                    <br />
-                                    <span style={{ color: "black" }}>
-                                      Remarks:{missionRow.deadline.remarks}
-                                    </span>
-                                  </p>
-                                }
-                              </div>
-                            </ListItem>
-                          ) : null
-                        ]}
-                      >
-                        <div>{row.name}</div>
-                      </ListItem>
-                    );
-                  })}
-                </List>
-              </div>
-                <div><Divider></Divider></div>
-              </div>
-            )
-          )}
+                            );
+                        })}
+                      </div>
+                      <br />
+                      <br />
+                      <br />
+                      <div>
+                        <h3>{missionRow.name}</h3>
+                        <h4>Project Dead Line</h4>
+                        <h5 style={{ float: "left", marginRight: 10 }}>
+                          {moment(
+                            missionRow.deadline.startDate.seconds * 1000
+                          ).format("ll")}
+                        </h5>
+                        <h5 style={{ float: "left", marginRight: 10 }}>-</h5>
+                        <h5>
+                          {moment(
+                            missionRow.deadline.endDate.seconds * 1000
+                          ).format("ll")}
+                        </h5>
+                        <h5>Massege: {missionRow.deadline.remarks}</h5>
+                      </div>
+                    </Paper>
+                  </CardText>
+                ) : null
+              )}
+            </Card>
+          ))}
+          <FloatingActionButton
+            backgroundColor={lightGreen400}
+            style={this.contentButton}
+          >
+            <ContentAdd onClick={this.handleAddProject} />
+          </FloatingActionButton>
         </div>
       </Layout>
     );
