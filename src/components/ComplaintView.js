@@ -12,7 +12,6 @@ import {
   CardText,
   Avatar,
   CardActions,
-  Subheader,
   Snackbar
 } from "material-ui";
 import Layout from "../layouts/Layout";
@@ -59,7 +58,7 @@ class ComplaintView extends React.Component {
   inputValidation = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  formSubmit(e) {
+  formSubmit() {
     if (this.state.adminReply === "" || this.state.statusByAdmin === null) {
       this.setState({ snackOpen: true });
       return false;
@@ -77,7 +76,7 @@ class ComplaintView extends React.Component {
   render() {
     return (
       <Layout navigationTitle="Complaint Details" showBackNavigation={true}>
-        <div style={{ height: "-webkit-fill-available", overflowY: "scroll" }}>
+        <div style={{ height: "90vh", overflowY: "scroll" }}>
           {this.props.loading ? (
             <center>
               <RefreshIndicator
@@ -85,16 +84,18 @@ class ComplaintView extends React.Component {
                 left={10}
                 top={0}
                 status="loading"
+                loadingColor="rgb(240, 143, 76)"
                 style={{ display: "inline-block", position: "relative" }}
               />
             </center>
           ) : (
-            <Card style={{ boxShadow: "0px" }}>
+            <Card
+              style={{ boxShadow: "0px", backgroundColor: "rgba(0, 0, 0, 0)" }}
+            >
               <center>
                 <Avatar
-                  backgroundColor="white"
+                  backgroundColor="rgba(0, 0, 0, 0)"
                   color="black"
-                  // src={this.props.data.userImageURL}
                   {...(this.props.data.complaintType === "Harassment"
                     ? {
                         src:
@@ -116,48 +117,47 @@ class ComplaintView extends React.Component {
                 />
               </center>
               <List style={{ marginTop: "5%" }}>
-                <Subheader style={{ width: "fit-content", lineHeight: "0%" }}>
-                  {this.props.data.userName}
-                </Subheader>
-                <Subheader
-                  style={{
-                    width: "fit-content",
-                    lineHeight: "0%",
-                    float: "right",
-                    marginRight: "3%"
-                  }}
-                >
-                  {moment(
+                <ListItem
+                  style={{ width: "50%", float: "left" }}
+                  disabled
+                  secondaryText={"Name"}
+                  primaryText={this.props.data.userName}
+                  secondaryTextLines={1}
+                />
+                <ListItem
+                  style={{ width: "50%", float: "right", textAlignLast: "end" }}
+                  secondaryTextLines={1}
+                  disabled
+                  secondaryText={"Date & Time"}
+                  primaryText={moment(
                     new Date(this.props.data.addedOn.seconds * 1000)
                   ).format("DD MMM YYYY h:m A")}
-                </Subheader>
-                <ListItem
-                  disabled
-                  style={{ fontSize: "20px" }}
-                  primaryText="Title"
-                  secondaryText={this.props.data.title}
                 />
                 <ListItem
                   disabled
-                  style={{ fontSize: "20px" }}
-                  primaryText="Description"
+                  secondaryText="Title"
+                  primaryText={this.props.data.title}
                 />
+                <CardText
+                  style={{
+                    // marginTop: "-8%",
+                    overflowWrap: "break-word",
+                    paddingBottom: "13%",
+                    fontSize: "16px"
+                  }}
+                >
+                  {this.props.data.description}
+                </CardText>
               </List>
-              <CardText
-                style={{
-                  marginTop: "-8%",
-                  overflowWrap: "break-word",
-                  paddingBottom: "13%",
-                  fontSize: "16px"
-                }}
-              >
-                {this.props.data.description}
-              </CardText>
               {this.props.isAdmin === true && (
                 <div>
                   <CardText>
                     <h4>Do Action</h4>
                     <SelectField
+                      underlineFocusStyle={{
+                        borderBottom: "2px solid rgb(240, 143, 76)"
+                      }}
+                      floatingLabelStyle={{ color: "rgb(240, 143, 76)" }}
                       name="statusByAdmin"
                       style={{ width: "100%" }}
                       value={
@@ -173,6 +173,10 @@ class ComplaintView extends React.Component {
                       <MenuItem value="other" primaryText="Other" />
                     </SelectField>
                     <TextField
+                      underlineFocusStyle={{
+                        borderBottom: "2px solid rgb(240, 143, 76)"
+                      }}
+                      floatingLabelStyle={{ color: "rgb(240, 143, 76)" }}
                       value={
                         this.props.data.adminReply !== undefined
                           ? this.props.data.adminReply
@@ -192,7 +196,10 @@ class ComplaintView extends React.Component {
                     }}
                   >
                     <FlatButton
-                      style={{ color: "white", backgroundColor: "#659e25" }}
+                      style={{
+                        color: "white",
+                        backgroundColor: "rgb(240, 143, 76)"
+                      }}
                       label="Submit"
                       fullWidth={true}
                       onClick={this.formSubmit}

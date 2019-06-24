@@ -74,6 +74,7 @@ class NavigationBar extends React.Component {
         >
           <List>
             <ListItem
+              disabled
               onClick={e => {
                 e.preventDefault();
                 this.props.history.push("/leavedashboard/admin");

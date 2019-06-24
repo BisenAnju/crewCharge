@@ -35,6 +35,7 @@ const startApp = () => {
       },
       true
     );
+    document.addEventListener("contextmenu", event => event.preventDefault());
     ReactDOM.render(
       <FirebaseContext.Provider value={new Firebase()}>
         <App />

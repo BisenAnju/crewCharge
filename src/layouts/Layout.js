@@ -31,7 +31,17 @@ class Layout extends React.Component {
           navigationTitle={this.props.navigationTitle}
           showBackNavigation={this.props.showBackNavigation}
         />
-        {children}
+        <div
+          style={{
+            width: "100%",
+            position: "fixed",
+            backgroundColor: "rgba(242, 243, 242, 0.5)",
+            minHeight: "100vh"
+          }}
+        >
+          <div style={{ height: "70px" }} />
+          {children}
+        </div>
       </div>
     );
   }
