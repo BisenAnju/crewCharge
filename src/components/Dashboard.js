@@ -17,7 +17,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <Layout navigationTitle="Dashboard">
+      <Layout navigationTitle="Project S">
         <div
           style={{
             width: "100%",

@@ -67,17 +67,17 @@ class ComplaintList extends React.Component {
       <Layout showBackNavigation={true} navigationTitle="Complaint list">
         <Tabs onChange={this.handleChange} value={this.state.slideIndex}>
           <Tab
-            style={{ background: "rgb(156, 204, 101)" }}
+            style={{ background: "rgba(0, 0, 0, 0)" }}
             label="Pending"
             value={0}
           />
           <Tab
-            style={{ background: "rgb(156, 204, 101)" }}
+            style={{ background: "rgba(0, 0, 0, 0)" }}
             label="Resolved"
             value={1}
           />
           <Tab
-            style={{ background: "rgb(156, 204, 101)" }}
+            style={{ background: "rgba(0, 0, 0, 0)" }}
             label="Archived"
             value={2}
           />

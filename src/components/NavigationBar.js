@@ -92,10 +92,11 @@ class NavigationBar extends React.Component {
                   src={
                     this.props.userData.findIndex(
                       user => user.photoURL === this.props.user.photoURL
-                    ) >= 0 &&
-                    this.props.userData.find(
-                      user => user.photoURL === this.props.user.photoURL
-                    ).photoURL
+                    ) >= 0
+                      ? this.props.userData.find(
+                          user => user.photoURL === this.props.user.photoURL
+                        ).photoURL
+                      : "null"
                   }
                 />
               }
