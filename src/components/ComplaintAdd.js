@@ -83,63 +83,71 @@ class NewComplaint extends React.Component {
   render() {
     return (
       <Layout navigationTitle="New Complaint" showBackNavigation={true}>
-        <form onSubmit={this.validateAll}>
-          <CardText>
-            <span>Anonymous</span>
-            <AnonymousRadioButton validateRadio={this.validateInput} />
-            <span>Priority</span>
-            <PriorityRadioButton validatePriority={this.validateInput} />
-            {/* <h3>Complaint Type</h3> */}
-            <SelectfieldClass
-              selectChange={this.selectChange}
-              complaintTypeValue={this.state.complaintType}
-            />
-            {/* <h3>Complaint Title</h3> */}
-            <TextField
-              floatingLabelText="Complaint Title"
-              id="title"
-              onChange={this.validateInput}
-              style={{ width: "100%" }}
-            />
-            {/* <h3>Describe your complaint</h3> */}
-            <TextField
-              floatingLabelText="Complaint Description"
-              id="description"
-              onChange={this.validateInput}
-              style={{ width: "100%" }}
-              multiLine={true}
-            />
-          </CardText>
-          <center>
-            <RaisedButton
-              labelColor="white"
-              backgroundColor="#669e25"
-              type="submit"
-              label="Submit"
-              disabled={this.state.loading}
-              style={styles.button}
-            >
-              {this.state.loading && (
-                <CircularProgress
-                  style={{
-                    width: "80%",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    position: "absolute"
-                  }}
-                  size={30}
-                  thickness={3}
-                />
-              )}
-            </RaisedButton>
-          </center>
-        </form>
-        <Snackbar
-          open={this.state.snackOpen}
-          onRequestClose={this.snackbarHandleRequestClose}
-          message={this.state.message}
-          autoHideDuration={this.state.autoHideDuration}
-        />
+        <div style={{ height: "90vh" }}>
+          <form onSubmit={this.validateAll}>
+            <CardText>
+              <span>Anonymous</span>
+              <AnonymousRadioButton validateRadio={this.validateInput} />
+              <span>Priority</span>
+              <PriorityRadioButton validatePriority={this.validateInput} />
+              <SelectfieldClass
+                selectChange={this.selectChange}
+                complaintTypeValue={this.state.complaintType}
+              />
+              <TextField
+                underlineFocusStyle={{
+                  borderBottom: "2px solid rgb(240, 143, 76)"
+                }}
+                floatingLabelStyle={{ color: "rgb(240, 143, 76)" }}
+                floatingLabelText="Enter complaint title"
+                id="title"
+                onChange={this.validateInput}
+                style={{ width: "100%" }}
+              />
+              <TextField
+                underlineFocusStyle={{
+                  borderBottom: "2px solid rgb(240, 143, 76)"
+                }}
+                floatingLabelStyle={{ color: "rgb(240, 143, 76)" }}
+                floatingLabelText="Enter complaint description"
+                id="description"
+                onChange={this.validateInput}
+                style={{ width: "100%" }}
+                multiLine={true}
+              />
+            </CardText>
+            <center>
+              <RaisedButton
+                labelColor="white"
+                backgroundColor="rgb(240, 143, 76)"
+                type="submit"
+                label="Submit"
+                disabled={this.state.loading}
+                style={styles.button}
+              >
+                {this.state.loading && (
+                  <CircularProgress
+                    color={"rgb(240, 143, 76)"}
+                    style={{
+                      width: "80%",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      position: "absolute"
+                    }}
+                    size={30}
+                    thickness={3}
+                  />
+                )}
+              </RaisedButton>
+            </center>
+          </form>
+          <Snackbar
+            open={this.state.snackOpen}
+            onRequestClose={this.snackbarHandleRequestClose}
+            message={this.state.message}
+            autoHideDuration={this.state.autoHideDuration}
+          />
+        </div>
       </Layout>
     );
   }

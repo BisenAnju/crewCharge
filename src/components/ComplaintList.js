@@ -35,6 +35,7 @@ const loader = (
       left={10}
       top={0}
       status="loading"
+      loadingColor="rgb(240, 143, 76)"
       style={{
         display: "inline-block",
         position: "relative"
@@ -65,19 +66,30 @@ class ComplaintList extends React.Component {
   render() {
     return (
       <Layout showBackNavigation={true} navigationTitle="Complaint list">
-        <Tabs onChange={this.handleChange} value={this.state.slideIndex}>
+        <Tabs
+          tabItemContainerStyle={{ backgroundColor: "transparent" }}
+          onChange={this.handleChange}
+          inkBarStyle={{ backgroundColor: "#f08f4c" }}
+          value={this.state.slideIndex}
+        >
           <Tab
-            style={{ background: "rgba(0, 0, 0, 0)" }}
+            style={{
+              color: "#f08f4c"
+            }}
             label="Pending"
             value={0}
           />
           <Tab
-            style={{ background: "rgba(0, 0, 0, 0)" }}
+            style={{
+              color: "#f08f4c"
+            }}
             label="Resolved"
             value={1}
           />
           <Tab
-            style={{ background: "rgba(0, 0, 0, 0)" }}
+            style={{
+              color: "#f08f4c"
+            }}
             label="Archived"
             value={2}
           />
@@ -90,7 +102,7 @@ class ComplaintList extends React.Component {
             <List
               style={{
                 paddingBottom: "16%",
-                height: "-webkit-fill-available",
+                height: "90vh",
                 width: "100%",
                 overflowY: "scroll",
                 overflowX: "hidden"
@@ -149,7 +161,7 @@ class ComplaintList extends React.Component {
           <div>
             <List
               style={{
-                height: "-webkit-fill-available",
+                height: "90vh",
                 width: "100%",
                 overflowY: "scroll",
                 overflowX: "hidden"
@@ -217,7 +229,7 @@ class ComplaintList extends React.Component {
           <div>
             <List
               style={{
-                height: "-webkit-fill-available",
+                height: "90vh",
                 width: "100%",
                 overflowY: "scroll",
                 overflowX: "hidden"
@@ -302,12 +314,12 @@ class ComplaintList extends React.Component {
         />
         <FloatingActionButton
           onClick={() => this.props.history.push("/complaint")}
-          backgroundColor="#659e25"
+          backgroundColor="rgb(253, 145, 77)"
           style={{
             position: "absolute",
             zIndex: "1",
             right: "10%",
-            bottom: "5%"
+            bottom: "13%"
           }}
         >
           <ContentAdd />

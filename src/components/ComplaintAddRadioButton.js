@@ -15,7 +15,8 @@ export class PriorityRadioButton extends React.Component {
         defaultSelected="low"
       >
         <RadioButton
-          iconStyle={{ fill: "rgb(102, 158, 37)" }}
+          rippleStyle={{ color: "rgb(253, 145, 77)" }}
+          iconStyle={{ fill: "rgb(240, 143, 76)" }}
           labelStyle={{ marginLeft: "-18%" }}
           value="low"
           label="Low"
@@ -28,7 +29,8 @@ export class PriorityRadioButton extends React.Component {
           onClick={this.props.validatePriority}
         />
         <RadioButton
-          iconStyle={{ fill: "rgb(102, 158, 37)" }}
+          rippleStyle={{ color: "rgb(253, 145, 77)" }}
+          iconStyle={{ fill: "rgb(240, 143, 76)" }}
           labelStyle={{ marginLeft: "-15%" }}
           value="medium"
           label="Medium"
@@ -41,7 +43,8 @@ export class PriorityRadioButton extends React.Component {
           onClick={this.props.validatePriority}
         />
         <RadioButton
-          iconStyle={{ fill: "rgb(102, 158, 37)" }}
+          rippleStyle={{ color: "rgb(253, 145, 77)" }}
+          iconStyle={{ fill: "rgb(240, 143, 76)" }}
           labelStyle={{ marginLeft: "-18%" }}
           value="high"
           label="High"
@@ -69,6 +72,7 @@ export class LeaveApplyRadioButton extends React.Component {
         defaultSelected="Hour"
       >
         <RadioButton
+          rippleStyle={{ color: "rgb(253, 145, 77)" }}
           labelStyle={{ marginLeft: "-18%" }}
           value="Hour"
           label="Hour"
@@ -85,6 +89,7 @@ export class LeaveApplyRadioButton extends React.Component {
           onClick={this.props.validateLeave}
         />
         <RadioButton
+          rippleStyle={{ color: "rgb(253, 145, 77)" }}
           labelStyle={{ marginLeft: "-15%" }}
           value="Full"
           label="Full"
@@ -112,7 +117,8 @@ export class AnonymousRadioButton extends React.Component {
         defaultSelected={false}
       >
         <RadioButton
-          iconStyle={{ fill: "rgb(102, 158, 37)" }}
+          rippleStyle={{ color: "rgb(253, 145, 77)" }}
+          iconStyle={{ fill: "rgb(240, 143, 76)" }}
           value={true}
           label="Yes"
           labelStyle={{ marginLeft: "-20%" }}
@@ -125,7 +131,8 @@ export class AnonymousRadioButton extends React.Component {
           onClick={this.props.validateRadio}
         />
         <RadioButton
-          iconStyle={{ fill: "rgb(102, 158, 37)" }}
+          rippleStyle={{ color: "rgb(253, 145, 77)" }}
+          iconStyle={{ fill: "rgb(240, 143, 76)" }}
           value={false}
           labelStyle={{ marginLeft: "-20%" }}
           label="No"
@@ -145,7 +152,8 @@ export class SelectfieldClass extends React.Component {
   render() {
     return (
       <SelectField
-        floatingLabelText="Complaint Type"
+        floatingLabelStyle={{ color: "rgb(240, 143, 76)" }}
+        floatingLabelText="Select complaint type"
         id="complaintType"
         style={{ width: "100%" }}
         value={this.props.complaintTypeValue}

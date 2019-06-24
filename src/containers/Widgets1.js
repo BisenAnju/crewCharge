@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import Widgets from "../components/Widgets";
 import axios from "axios";
-import { headers, teamListData, projectListData } from "./Projects";
+import {
+  headers,
+  teamListData
+  // projectListData
+} from "./Projects";
 import { withRouter } from "react-router-dom";
 import { CircularProgress } from "material-ui";
 class WidgetsContainer1 extends Component {

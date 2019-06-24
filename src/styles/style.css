@@ -1,5 +1,6 @@
 * {
   font-family: adelle-sans-ultra-thin, sans-serif;
+  user-select: none;
 }
 
 .rmdb-searchbar {
