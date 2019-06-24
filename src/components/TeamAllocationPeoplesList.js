@@ -11,7 +11,6 @@ import {
   IconMenu,
   Avatar
 } from "material-ui";
-import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import Layout from "../layouts/Layout";
 import { withRouter } from "react-router-dom";
 import * as moment from "moment";
