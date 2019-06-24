@@ -1,19 +1,26 @@
 import React from "react";
 import {
-  List,
-  ListItem,
+  Card,
+  CardHeader,
   MenuItem,
   SelectField,
-  Avatar,
-  Divider
+  Paper,
+  CardText,
+  Divider,
+  IconButton,
+  IconMenu,
+  Avatar
 } from "material-ui";
 import Layout from "../layouts/Layout";
 import { withRouter } from "react-router-dom";
 import * as moment from "moment";
 import ReactWeeklyDayPicker from "./WeeklyDayPicker";
-import { grey300 } from "material-ui/styles/colors";
+import { lightGreen400, red400 } from "material-ui/styles/colors";
 import { classNames } from "../constants/weeklydaypicker";
-
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import ContentAdd from "material-ui/svg-icons/content/add";
+import "../styles/style.css";
+import CircleRipple from "material-ui/internal/CircleRipple";
 class TeamAllocationPeopleList extends React.Component {
   constructor(props) {
     super(props);
@@ -55,15 +62,23 @@ class TeamAllocationPeopleList extends React.Component {
     let nowDate = new Date();
     let nowDay = new Date().getDay();
     let finalDate = nowDate.setDate(new Date().getDate() - nowDay + 1);
-    console.log(new Date().getDate());
     let startDay = new Date(finalDate);
     this.setState({ startDay });
   }
   functionSelectedDate = async selectedDate => {
     await this.filterDateWise(selectedDate);
   };
+  handleaddMission = () => {
+    window.location = "/teamallocation";
+  };
   filterDateWise = selectedDate => {
+    let selctedCurrentDate = new Date(selectedDate);
     let selctedDate1 = new Date(selectedDate);
+    let nowDay = new Date(selectedDate).getDay();
+    let finalDate = selctedDate1.setDate(
+      new Date(selectedDate).getDate() - nowDay + 1
+    );
+    let startDay = new Date(finalDate);
     let leavesList = this.props.leavesList.filter(
       data =>
         moment(data.from.seconds * 1000).format("L") >= selectedDate ||
@@ -76,13 +91,30 @@ class TeamAllocationPeopleList extends React.Component {
         moment(missionData.deadline.endDate.seconds * 1000).format("L") <=
           selectedDate
     );
-    this.setState({ leavesList, missionsList, selectedDate: selctedDate1 });
+    this.setState({
+      leavesList,
+      missionsList,
+      selectedDate: selctedCurrentDate,
+      startDay
+    });
+  };
+  contentButton = {
+    top: "auto",
+    bottom: 20,
+    left: "auto",
+    right: 20,
+    position: "fixed",
+    margin: 0
   };
   render() {
     return (
       <Layout navigationTitle="Peoples List">
         <div>
-          <div style={{ paddingLeft: 50 }}>
+          <div
+            style={{
+              paddingLeft: 50
+            }}
+          >
             <SelectField
               value={this.state.selectedValue}
               onChange={this.handleTypeChange}
@@ -116,141 +148,108 @@ class TeamAllocationPeopleList extends React.Component {
             />
           </div>
           <Divider />
-          {this.state.usersList.map((row, id) => (
-            <div key={id}>
-              <div>
-                <List>
-                  {this.state.missionsList.map((missionRow, index) => {
-                    let backcolor = null;
-                    const projectId = this.state.projectsList.filter(
-                      data => data.projectId === missionRow.projectId
+          {this.state.usersList.map((row, id) => {
+            let projectId = [];
+            this.state.missionsList.map(missionRow => {
+              if (missionRow.assignTo.find(data => data === row.uid))
+                projectId = this.state.projectsList.filter(
+                  data => data.projectId === missionRow.projectId
+                );
+            });
+            let backcolor = null;
+            {
+              this.props.leavesList.find(
+                leaveDate =>
+                  moment(leaveDate.from.seconds * 1000).format("LL") <=
+                    moment(this.state.selectedDate).format("LL") &&
+                  (moment(leaveDate.to.seconds * 1000).format("LL") >=
+                    moment(this.state.selectedDate).format("LL") &&
+                    leaveDate.userId === row.uid)
+              )
+                ? (backcolor = "#C73DAC")
+                : (backcolor = null);
+            }
+            return (
+              <Card key={id}>
+                <CardHeader
+                  title={row.displayName}
+                  avatar={
+                    <Avatar
+                      style={{
+                        border: 5,
+                        border: "solid",
+                        borderColor: backcolor,
+                        width: 50,
+                        height: 50
+                      }}
+                      src={row.photoURL}
+                    />
+                  }
+                  actAsExpander={true}
+                  style={{ padding: 5 }}
+                  titleStyle={{
+                    paddingTop: 10,
+                    paddingRight: 5,
+                    fontWeight: "bold"
+                  }}
+                  children={projectId.map((projectRow, index) => (
+                    <img
+                      key={index}
+                      style={{
+                        width: 35,
+                        height: 35,
+                        borderRadius: 5,
+                        float: "right"
+                      }}
+                      src={projectRow.logoURL}
+                    />
+                  ))}
+                />
+                {this.state.missionsList.map((missionRow, index) => {
+                  if (missionRow.assignTo.find(data => data === row.uid))
+                    return (
+                      <CardText
+                        key={index}
+                        expandable={true}
+                        style={{
+                          padding: 5
+                        }}
+                      >
+                        <Paper
+                          className={"paperDiv"}
+                          style={{
+                            padding: 10,
+                            boxShadow: -1,
+                            MozBoxShadow: -1
+                          }}
+                        >
+                          <h3>{missionRow.name}</h3>
+                          <h4>Project Dead Line</h4>
+                          <h5 style={{ float: "left", marginRight: 10 }}>
+                            {moment(
+                              missionRow.deadline.startDate.seconds * 1000
+                            ).format("ll")}
+                          </h5>
+                          <h5 style={{ float: "left", marginRight: 10 }}>-</h5>
+                          <h5>
+                            {moment(
+                              missionRow.deadline.endDate.seconds * 1000
+                            ).format("ll")}
+                          </h5>
+                          <h5>Massege: {missionRow.deadline.remarks}</h5>
+                        </Paper>
+                      </CardText>
                     );
-                    if (
-                      this.props.leavesList.find(
-                        leaveDate =>
-                          moment(leaveDate.from.seconds * 1000).format("LL") >=
-                            moment(Date()).format("LL") &&
-                          leaveDate.userId === row.uid
-                      )
-                    ) {
-                      backcolor = grey300;
-                    } else {
-                      backcolor = null;
-                    }
-                    if (missionRow.assignTo.find(data => data === row.uid)) {
-                      let endDate = moment(
-                        missionRow.deadline.endDate.seconds * 1000
-                      ).format("LL");
-                      let startDays = moment(this.state.nowDate).diff(
-                        moment(
-                          missionRow.deadline.startDate.seconds * 1000
-                        ).format("LL"),
-                        "days"
-                      );
-                      let endDays = moment(endDate).diff(
-                        this.state.nowDate,
-                        "days"
-                      );
-                      return (
-                        <ListItem
-                          disableKeyboardFocus={true}
-                          style={{ backgroundColor: backcolor }}
-                          key={id}
-                          leftAvatar={<Avatar src={row.photoURL} />}
-                          nestedItems={[
-                            <ListItem
-                              key={index}
-                              secondaryTextLines={2}
-                              primaryText={missionRow.name}
-                              secondaryText={
-                                <p>
-                                  <span style={{ color: "black" }}>
-                                    {moment(
-                                      missionRow.deadline.startDate.seconds *
-                                        1000
-                                    ).format("ll")}
-                                  </span>
-                                  <span style={{ color: "black" }}>
-                                    To
-                                    {moment(
-                                      missionRow.deadline.endDate.seconds * 1000
-                                    ).format("ll")}
-                                  </span>
-                                  <br />
-                                  <span style={{ color: "black" }}>
-                                    Remarks:{missionRow.deadline.remarks}
-                                  </span>
-                                </p>
-                              }
-                            />
-                          ]}
-                        >
-                          {projectId.map((projectRow, index) => (
-                            <div key={index}>
-                              <div
-                                style={{
-                                  height: 10,
-                                  width: 20,
-                                  marginRight: 20,
-                                  float: "right"
-                                }}
-                              >
-                                <img
-                                  style={{ height: 20, width: 20 }}
-                                  src={projectRow.logoURL}
-                                />
-                              </div>
-                              <br />
-                              <div
-                                style={{
-                                  height: 10,
-                                  width: 40,
-                                  float: "right",
-                                  marginTop: 10
-                                }}
-                              >
-                                {startDays + " - " + endDays}
-                              </div>
-                            </div>
-                          ))}
-                          <div style={{ marginTop: -10 }}>
-                            {row.displayName}
-                          </div>
-                        </ListItem>
-                      );
-                    } else {
-                      if (
-                        this.props.leavesList.find(
-                          leaveDate =>
-                            moment(leaveDate.from.seconds * 1000).format(
-                              "LL"
-                            ) >= moment(Date()).format("LL") &&
-                            leaveDate.userId === row.uid
-                        )
-                      ) {
-                        backcolor = grey300;
-                      } else {
-                        backcolor = null;
-                      }
-                      return (
-                        <ListItem
-                          key={id}
-                          leftAvatar={<Avatar src={row.photoURL} />}
-                          style={{ backgroundColor: backcolor }}
-                          nestedItems={[<ListItem key={index} />]}
-                        >
-                          <div>{row.displayName}</div>
-                        </ListItem>
-                      );
-                    }
-                  })}
-                </List>
-              </div>
-              <div>
-                <Divider />
-              </div>
-            </div>
-          ))}
+                })}
+              </Card>
+            );
+          })}
+          <FloatingActionButton
+            backgroundColor={lightGreen400}
+            style={this.contentButton}
+          >
+            <ContentAdd onClick={this.handleaddMission} />
+          </FloatingActionButton>
         </div>
       </Layout>
     );

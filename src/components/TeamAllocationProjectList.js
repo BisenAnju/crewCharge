@@ -1,17 +1,21 @@
 import React from "react";
 import {
-  List,
-  ListItem,
+  Card,
+  CardHeader,
   MenuItem,
   SelectField,
-  Avatar,
+  Paper,
+  CardText,
   Divider
 } from "material-ui";
 import Layout from "../layouts/Layout";
 import { withRouter } from "react-router-dom";
 import * as moment from "moment";
 import ReactWeeklyDayPicker from "./WeeklyDayPicker";
+import { grey300, lightGreen400 } from "material-ui/styles/colors";
 import { classNames } from "../constants/weeklydaypicker";
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import ContentAdd from "material-ui/svg-icons/content/add";
 class TeamAllocationProjectList extends React.Component {
   constructor(props) {
     super(props);
@@ -22,9 +26,14 @@ class TeamAllocationProjectList extends React.Component {
       selectedValue: 2,
       projectsList: [],
       missionsList: [],
-      leavesList: []
+      leavesList: [],
+      nowDate: null,
+      backcolor: null,
+      startDay: null,
+      selectedDate: new Date()
     };
   }
+
   handleToggle = () => {
     this.setState({
       open: !this.state.open
@@ -35,7 +44,8 @@ class TeamAllocationProjectList extends React.Component {
       leavesList: nextProps.leavesList,
       missionsList: nextProps.missionsList,
       projectsList: nextProps.projectsList,
-      usersList: nextProps.usersList
+      usersList: nextProps.usersList,
+      nowDate: moment(Date()).format("LL")
     });
   }
   handleTypeChange = (event, index, value) => {
@@ -43,8 +53,18 @@ class TeamAllocationProjectList extends React.Component {
       window.location = "/teamallocation";
     }
   };
+  componentWillMount() {
+    let nowDate = new Date();
+    let nowDay = new Date().getDay();
+    let finalDate = nowDate.setDate(new Date().getDate() - nowDay + 1);
+    let startDay = new Date(finalDate);
+    this.setState({ startDay });
+  }
   functionSelectedDate = async selectedDate => {
     await this.filterDateWise(selectedDate);
+  };
+  handleAddProject = () => {
+    window.location = "/teamallocation/project";
   };
   filterDateWise = selectedDate => {
     let selctedDate1 = new Date(selectedDate);
@@ -62,9 +82,17 @@ class TeamAllocationProjectList extends React.Component {
     );
     this.setState({ leavesList, missionsList, selectedDate: selctedDate1 });
   };
+  contentButton = {
+    top: "auto",
+    bottom: 20,
+    left: "auto",
+    right: 20,
+    position: "fixed",
+    margin: 0
+  };
   render() {
     return (
-      <Layout navigationTitle="Project List" showBackNavigation={true}>
+      <Layout navigationTitle="Projects List" showBackNavigation={true}>
         <div>
           <div style={{ paddingLeft: 50 }}>
             <SelectField
@@ -101,83 +129,85 @@ class TeamAllocationProjectList extends React.Component {
           </div>
           <Divider />
           {this.state.projectsList.map((row, id) => (
-            <div key={id}>
-              <div key={id}>
-                <List key={id}>
-                  {this.state.missionsList.map((missionRow, index) => {
-                    return (
-                      <ListItem
-                        key={id}
-                        leftAvatar={<Avatar src={row.logoURL} />}
-                        disabled={true}
-                        nestedItems={[
-                          missionRow.projectId === row.projectId ? (
-                            <ListItem key={index}>
-                              {this.state.usersList.map((user, i) => {
-                                if (
-                                  missionRow.assignTo.find(
-                                    udata => udata === user.uid
-                                  )
-                                )
-                                  return (
-                                    <div key={i}>
-                                      <img
-                                        style={{
-                                          width: 40,
-                                          height: 40,
-                                          borderRadius: 50,
-                                          float: "left"
-                                        }}
-                                        src={user.photoURL}
-                                      />
-                                    </div>
-                                  );
-                              })}
-                              <br />
-                              <br />
-                              <br />
-                              <div style={{ marginBottom: 10 }}>
-                                <h4>{missionRow.name}</h4>
+            <Card key={id}>
+              <CardHeader
+                title={row.name}
+                avatar={row.logoURL}
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+
+              {this.state.missionsList.map((missionRow, index) =>
+                missionRow.projectId === row.projectId ? (
+                  <CardText
+                    key={index}
+                    expandable={true}
+                    style={{
+                      padding: 5
+                    }}
+                  >
+                    <Paper
+                      className={"paperDiv"}
+                      style={{
+                        padding: 10,
+                        boxShadow: -1,
+                        MozBoxShadow: -1
+                      }}
+                    >
+                      <div>
+                        {this.state.usersList.map((user, i) => {
+                          if (
+                            missionRow.assignTo.find(
+                              udata => udata === user.uid
+                            )
+                          )
+                            return (
+                              <div key={i}>
+                                <img
+                                  style={{
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: 5,
+                                    padding: 2,
+                                    float: "left"
+                                  }}
+                                  src={user.photoURL}
+                                />
                               </div>
-                              <div>
-                                {
-                                  <p>
-                                    <span style={{ color: "black" }}>
-                                      Start=
-                                      {moment(
-                                        missionRow.deadline.startDate.seconds *
-                                          1000
-                                      ).format("ll")}
-                                    </span>
-                                    <span style={{ color: "black" }}>
-                                      , End Date=
-                                      {moment(
-                                        missionRow.deadline.endDate.seconds *
-                                          1000
-                                      ).format("ll")}
-                                    </span>
-                                    <br />
-                                    <span style={{ color: "black" }}>
-                                      Remarks:{missionRow.deadline.remarks}
-                                    </span>
-                                  </p>
-                                }
-                              </div>
-                            </ListItem>
-                          ) : null
-                        ]}
-                      >
-                        <div>{row.name}</div>
-                      </ListItem>
-                    );
-                  })}
-                </List>
-              </div>
-              <div>
-                <Divider />
-              </div>
-            </div>
+                            );
+                        })}
+                      </div>
+                      <br />
+                      <br />
+                      <br />
+                      <div>
+                        <h3>{missionRow.name}</h3>
+                        <h4>Project Dead Line</h4>
+                        <h5 style={{ float: "left", marginRight: 10 }}>
+                          {moment(
+                            missionRow.deadline.startDate.seconds * 1000
+                          ).format("ll")}
+                        </h5>
+                        <h5 style={{ float: "left", marginRight: 10 }}>-</h5>
+                        <h5>
+                          {moment(
+                            missionRow.deadline.endDate.seconds * 1000
+                          ).format("ll")}
+                        </h5>
+                        <h5>Massege: {missionRow.deadline.remarks}</h5>
+                      </div>
+                    </Paper>
+                  </CardText>
+                ) : null
+              )}
+            </Card>
           ))}
+          <FloatingActionButton
+            backgroundColor={lightGreen400}
+            style={this.contentButton}
+          >
+            <ContentAdd onClick={this.handleAddProject} />
+          </FloatingActionButton>
         </div>
       </Layout>
     );

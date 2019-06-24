@@ -42,7 +42,12 @@ class TeamAllocationMissionContainer extends Component {
           assignTo: values,
           createdOn: Date(),
           createdBy: this.props.user.uid,
-          deadline: { startDate: startDate, endDate: endDate, remarks: remarks }
+          deadline: {
+            startDate: startDate,
+            endDate: endDate,
+            remarks: remarks
+          },
+          status: "Active"
         })
         .then(
           this.setState({

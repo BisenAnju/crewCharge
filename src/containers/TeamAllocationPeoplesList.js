@@ -27,42 +27,53 @@ class TeamAllocationPeoplesListContainer extends Component {
     let projectsList = [];
     let leavesList = [];
     let missionsList = [];
-    this.props.db.collection("users").onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(doc => {
-        if (doc.doc.exists) {
-          const usersDetails = doc.doc.data();
-          usersDetails.userId = doc.doc.id;
-          usersList.push(usersDetails);
-        } else {
-          alert("No Data Found");
-        }
+    let projectldata = [];
+    this.props.db
+      .collection("users")
+      .orderBy("displayName")
+      .onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(doc => {
+          if (doc.doc.exists) {
+            const usersDetails = doc.doc.data();
+            usersDetails.userId = doc.doc.id;
+            usersList.push(usersDetails);
+          } else {
+            alert("No Data Found");
+          }
+        });
+        this.setState({ isLoading: false, usersList });
       });
-      this.setState({ isLoading: false, usersList });
-    });
-    this.props.db.collection("projects").onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(doc => {
-        if (doc.doc.exists) {
-          const projectDetails = doc.doc.data();
-          projectDetails.projectId = doc.doc.id;
-          projectsList.push(projectDetails);
-        } else {
-          alert("No Data Found");
-        }
+    this.props.db
+      .collection("projects")
+      .orderBy("name")
+      .onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(doc => {
+          if (doc.doc.exists) {
+            const projectDetails = doc.doc.data();
+            projectDetails.projectId = doc.doc.id;
+            projectsList.push(projectDetails);
+          } else {
+            alert("No Data Found");
+          }
+        });
+        this.setState({ isLoading: false, projectsList });
       });
-      this.setState({ isLoading: false, projectsList });
-    });
-    this.props.db.collection("missions").onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(doc => {
-        if (doc.doc.exists) {
-          const missionsDetails = doc.doc.data();
-          missionsDetails.missionsId = doc.doc.id;
-          missionsList.push(missionsDetails);
-        } else {
-          alert("No Data Found");
-        }
+    this.props.db
+      .collection("missions")
+      .where("status", "==", "Active")
+      .orderBy("name")
+      .onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(doc => {
+          if (doc.doc.exists) {
+            const missionsDetails = doc.doc.data();
+            missionsDetails.missionsId = doc.doc.id;
+            missionsList.push(missionsDetails);
+          } else {
+            alert("No Data Found");
+          }
+        });
+        this.setState({ isLoading: false, missionsList });
       });
-      this.setState({ isLoading: false, missionsList });
-    });
     this.props.db
       .collection("leaves")
       .where("leaveStatus", "==", "Approved")
@@ -78,6 +89,7 @@ class TeamAllocationPeoplesListContainer extends Component {
         });
         this.setState({ isLoading: false, leavesList });
       });
+    console.log(usersList);
   }
   render() {
     return (

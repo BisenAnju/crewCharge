@@ -7,42 +7,26 @@ import {
 } from "react-router-dom";
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
+import * as moment from "moment";
 import TeamAllocationProjectList from "../components/TeamAllocationProjectList";
+import TeamAllocationPeoplesListContainer from "./TeamAllocationPeoplesList";
 class TeamAllocationProjectListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
       usersList: [],
-      projectsList: []
+      projectsList: [],
+      missionsList: []
     };
   }
-  componentWillMount() {
-    let usersList = [];
-    let projectsList = [];
-    this.props.db.collection("users").onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(doc => {
-        if (doc.doc.exists) {
-          const usersDetails = doc.doc.data();
-          usersDetails.userId = doc.doc.id;
-          usersList.push(usersDetails);
-        } else {
-          alert("No Data Found");
-        }
-      });
-      this.setState({ isLoading: false, usersList });
-    });
-    this.props.db.collection("projects").onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(doc => {
-        if (doc.doc.exists) {
-          const projectDetails = doc.doc.data();
-          projectDetails.projectId = doc.doc.id;
-          projectsList.push(projectDetails);
-        } else {
-          alert("No Data Found");
-        }
-      });
-      this.setState({ isLoading: false, projectsList });
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      leavesList: nextProps.leavesList,
+      missionsList: nextProps.missionsList,
+      projectsList: nextProps.projectsList,
+      usersList: nextProps.usersList,
+      nowDate: moment(Date()).format("LL")
     });
   }
   render() {
@@ -57,13 +41,22 @@ class TeamAllocationProjectListContainer extends Component {
                 <TeamAllocationProjectList {...this.props} {...this.state} />
               )}
             />
+            <Route
+              exact
+              path={"/teamallocation/peoplesList"}
+              render={props => (
+                <TeamAllocationPeoplesListContainer
+                  {...this.props}
+                  {...this.state}
+                />
+              )}
+            />
           </Switch>
         </Router>
       </div>
     );
   }
 }
-
 export default withRouter(
   withFirebase(withUser(TeamAllocationProjectListContainer))
 );

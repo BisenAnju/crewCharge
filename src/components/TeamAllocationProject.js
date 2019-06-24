@@ -2,26 +2,11 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { TextField, RaisedButton, Snackbar } from "material-ui";
 import Layout from "../layouts/Layout";
-import { orange500, blue500 } from "material-ui/styles/colors";
+import { white, lightGreen400 } from "material-ui/styles/colors";
 import Dropzone from "react-dropzone";
 import withFirebase from "../hoc/withFirebase";
 import firebase from "firebase";
 import ImageCompressor from "image-compressor.js";
-const styles = {
-  errorStyle: {
-    color: orange500,
-    padding: 10
-  },
-  underlineStyle: {
-    borderColor: orange500
-  },
-  floatingLabelStyle: {
-    color: orange500
-  },
-  floatingLabelFocusStyle: {
-    color: blue500
-  }
-};
 class TeamAllocationProject extends React.Component {
   constructor(props) {
     super(props);
@@ -86,10 +71,7 @@ class TeamAllocationProject extends React.Component {
         <div style={{ padding: 10 }}>
           <TextField
             floatingLabelText="Enter Project Name"
-            floatingLabelStyle={styles.floatingLabelStyle}
-            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             defaultValue={this.state.projectName}
-            hintStyle={styles.errorStyle}
             fullWidth={true}
             onChange={this.handleTextChange}
           />
@@ -111,7 +93,11 @@ class TeamAllocationProject extends React.Component {
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
                       <u>
-                        <RaisedButton label="Upload..." primary={true} />
+                        <RaisedButton
+                          label="Upload..."
+                          labelColor={white}
+                          backgroundColor={lightGreen400}
+                        />
                       </u>
                     </div>
                   );
@@ -122,13 +108,15 @@ class TeamAllocationProject extends React.Component {
           <div style={{ padding: 10, alignItems: "center" }}>
             <RaisedButton
               label="Cancel"
-              primary={true}
+              labelColor={white}
+              backgroundColor={lightGreen400}
               onClick={this.handleClose}
               style={{ marginRight: 10 }}
             />
             <RaisedButton
               label="Save"
-              primary={true}
+              labelColor={white}
+              backgroundColor={lightGreen400}
               onClick={e => {
                 e.preventDefault();
                 this.props.handleAddProject(
