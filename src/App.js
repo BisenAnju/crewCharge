@@ -21,7 +21,7 @@ import TeamAllocationProjectListContainer from "./containers/TeamAllocationProje
 import TeamAllocationProjectContainer from "./containers/TeamAllocationProject";
 import TeamAllocationPeoplesListContainer from "./containers/TeamAllocationPeoplesList";
 import TeamAllocationMissionListContainer from "./containers/TeamAllocationMissionList";
-
+import TeamAllocationDashboardContainer from "./components/TeamAllocationDashboard";
 class App extends Component {
   constructor(props) {
     super(props);

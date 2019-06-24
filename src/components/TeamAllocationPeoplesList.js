@@ -17,7 +17,10 @@ import { lightGreen400, red400 } from "material-ui/styles/colors";
 import { classNames } from "../constants/weeklydaypicker";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
+import { Tabs, Tab } from "material-ui/Tabs";
 import "../styles/style.css";
+import TeamAllocationProjectList from "./TeamAllocationProjectList";
+import TeamAllocationMissionList from "./TeamAllocationMissionList";
 class TeamAllocationPeopleList extends React.Component {
   constructor(props) {
     super(props);
@@ -107,6 +110,13 @@ class TeamAllocationPeopleList extends React.Component {
     return (
       <Layout navigationTitle="Peoples List">
         <div>
+          {" "}
+          {/* <Tabs
+            value={this.state.value}
+            onChange={this.handleTabChange}
+            tabItemContainerStyle={{ backgroundColor: "transparent" }}
+          >
+            <Tab label="People List" style={{ color: "#f08f4c" }} value={0}> */}
           <div style={{ position: "fixed" }}>
             <div
               style={{
@@ -124,6 +134,7 @@ class TeamAllocationPeopleList extends React.Component {
               </SelectField>
             </div>
             <Divider />
+
             <div>
               <ReactWeeklyDayPicker
                 daysCount={7}
@@ -148,7 +159,7 @@ class TeamAllocationPeopleList extends React.Component {
             </div>
           </div>
           <Divider />
-          <div style={{ paddingTop: 200 }}>
+          <div style={{ paddingTop: 200, overflow: "auto" }}>
             {this.state.usersList.map((row, id) => {
               let projectId = [];
               this.state.missionsList.map(missionRow => {
@@ -253,7 +264,15 @@ class TeamAllocationPeopleList extends React.Component {
             style={this.contentButton}
           >
             <ContentAdd onClick={this.handleaddMission} />
-          </FloatingActionButton>
+          </FloatingActionButton>{" "}
+          {/* </Tab>
+            <Tab label="Projects List" style={{ color: "#f08f4c" }} value={0}>
+              <TeamAllocationProjectList {...this.props} {...this.state} />
+            </Tab>
+            <Tab label="Management" style={{ color: "#f08f4c" }} value={0}>
+              <TeamAllocationMissionList {...this.props} {...this.state} />
+            </Tab>
+          </Tabs> */}
         </div>
       </Layout>
     );
