@@ -77,13 +77,11 @@ export class LeaveApplyRadioButton extends React.Component {
           value="Hour"
           label="Hour"
           id="leaveType"
-          checkedIcon={
-            <ImageTimer style={{ color: "#558B2F", fill: "#558B2F" }} />
-          }
+          checkedIcon={<ImageTimer style={{ fill: "#f08f4c" }} />}
           uncheckedIcon={<ImageTimer />}
           style={{
             marginRight: "18%",
-            marginLeft: "18%",
+            marginLeft: "13%",
             width: "min-content"
           }}
           onClick={this.props.validateLeave}
@@ -94,9 +92,7 @@ export class LeaveApplyRadioButton extends React.Component {
           value="Full"
           label="Full"
           id="leaveType"
-          checkedIcon={
-            <ActionDateRange style={{ color: "#558B2F", fill: "#558B2F" }} />
-          }
+          checkedIcon={<ActionDateRange style={{ fill: "#f08f4c" }} />}
           uncheckedIcon={<ActionDateRange />}
           style={{
             width: "min-content"

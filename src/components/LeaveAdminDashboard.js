@@ -27,22 +27,15 @@ class LeaveAdminDashboard extends Component {
     return (
       <Layout navigationTitle="Admin Dashboard" showBackNavigation={true}>
         <div>
-          <Tabs onChange={this.handleChange} value={this.state.slideIndex}>
-            <Tab
-              label="PENDING"
-              value={0}
-              style={{ backgroundColor: lightGreen400 }}
-            />
-            <Tab
-              label="APPROVED"
-              value={1}
-              style={{ backgroundColor: lightGreen400 }}
-            />
-            <Tab
-              label="REJECTED"
-              value={2}
-              style={{ backgroundColor: lightGreen400 }}
-            />
+          <Tabs
+            onChange={this.handleChange}
+            value={this.state.slideIndex}
+            tabItemContainerStyle={{ backgroundColor: "transparent" }}
+            inkBarStyle={{ backgroundColor: "#f08f4c" }}
+          >
+            <Tab label="PENDING" value={0} style={{ color: "#f08f4c" }} />
+            <Tab label="APPROVED" value={1} style={{ color: "#f08f4c" }} />
+            <Tab label="REJECTED" value={2} style={{ color: "#f08f4c" }} />
           </Tabs>
           <SwipeableViews
             index={this.state.slideIndex}
