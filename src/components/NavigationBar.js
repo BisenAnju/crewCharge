@@ -16,9 +16,13 @@ import {
   NavigationArrowBack,
   ActionHome,
   ActionPowerSettingsNew,
-  ActionDashboard
+  ActionList,
+  ActionInput
 } from "material-ui/svg-icons";
-
+import leave from "../images/leave1.png";
+import meeting from "../images/meeting1.png";
+import complaint from "../images/complaint1.png";
+import project from "../images/project1.png";
 class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
@@ -113,21 +117,26 @@ class NavigationBar extends React.Component {
               }
             />
             <Divider />
-            <ListItem
+            {/* <ListItem
               onClick={e => {
                 e.preventDefault();
                 this.props.history.push("/leavedashboard");
               }}
               primaryText="Leave dashboard"
               leftIcon={<ActionDashboard />}
-            />
+            /> */}
             <ListItem
               onClick={e => {
                 e.preventDefault();
                 this.props.history.push("/complaintlist");
               }}
               primaryText="Complaint List"
-              leftIcon={<ActionDashboard />}
+              leftIcon={
+                <img
+                  src={complaint}
+                  style={{ height: "35px", width: "35px" }}
+                />
+              }
             />
 
             {this.props.userData.map((user, index) =>
@@ -138,17 +147,83 @@ class NavigationBar extends React.Component {
                       e.preventDefault();
                       this.props.history.push("/leavedashboard/admin");
                     }}
-                    primaryText="Admin Dashboard"
-                    leftIcon={<ActionDashboard />}
+                    primaryText="Leave List"
+                    leftIcon={
+                      <img
+                        src={leave}
+                        style={{ height: "35px", width: "35px" }}
+                      />
+                    }
                   />
                   <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation");
+                    }}
+                    primaryText="Peoples List"
+                    leftIcon={
+                      <img
+                        src={meeting}
+                        style={{ height: "35px", width: "35px" }}
+                      />
+                    }
+                  />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation/projectlist");
+                    }}
+                    primaryText="Projects List"
+                    leftIcon={
+                      <img
+                        src={project}
+                        style={{ height: "35px", width: "35px" }}
+                      />
+                    }
+                  />
+
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation/mission");
+                    }}
+                    primaryText="Add Missions"
+                    leftIcon={
+                      <ActionInput
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation/project");
+                    }}
+                    primaryText="Add Projects"
+                    leftIcon={
+                      <ActionInput
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  />
+                  {/* <ListItem
                     onClick={e => {
                       e.preventDefault();
                       this.props.history.push("/leavepurpose");
                     }}
                     primaryText="Add Leave Purpose"
                     leftIcon={<ActionDashboard />}
-                  />
+                  /> */}
                   {/* <ListItem
                     onClick={e => {
                       e.preventDefault();
@@ -157,38 +232,6 @@ class NavigationBar extends React.Component {
                     primaryText="Add Complaint Type"
                     leftIcon={<ActionDashboard />}
                   /> */}
-                  <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/teamallocation");
-                    }}
-                    primaryText="Peoples List"
-                    leftIcon={<ActionDashboard />}
-                  />
-                  <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/teamallocation/mission");
-                    }}
-                    primaryText="Add Missions"
-                    leftIcon={<ActionDashboard />}
-                  />
-                  <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/teamallocation/project");
-                    }}
-                    primaryText="Add Projects"
-                    leftIcon={<ActionDashboard />}
-                  />
-                  <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/teamallocation/projectlist");
-                    }}
-                    primaryText="Projects List"
-                    leftIcon={<ActionDashboard />}
-                  />
                 </div>
               ) : null
             )}
@@ -198,7 +241,16 @@ class NavigationBar extends React.Component {
                 this.props.logOut();
               }}
               primaryText="LogOut"
-              leftIcon={<ActionPowerSettingsNew />}
+              leftIcon={
+                <ActionPowerSettingsNew
+                  style={{
+                    fill: "#fd914d",
+                    heigth: "22px",
+                    width: "22px",
+                    left: "12px"
+                  }}
+                />
+              }
             />
           </List>
         </Drawer>

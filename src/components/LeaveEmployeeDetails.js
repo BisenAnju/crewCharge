@@ -69,55 +69,61 @@ class LeaveEmployeeDetails extends Component {
         showBackNavigation={true}
       >
         <div>
-          <div>
-            <List>
-              <ListItem
-                leftAvatar={
-                  <Avatar
-                    src={this.props.user.photoURL}
-                    size={50}
-                    style={{ marginTop: 10 }}
+          <List>
+            <ListItem
+              leftAvatar={
+                <Avatar
+                  src={this.props.user.photoURL}
+                  size={50}
+                  style={{ marginTop: 10 }}
+                />
+              }
+              rightAvatar={
+                this.props.singleData.leaveStatus === "Pending" ? (
+                  <ActionHelp
+                    style={{
+                      height: 35,
+                      width: 35,
+                      color: yellow500,
+                      marginTop: 16
+                    }}
                   />
-                }
-                rightAvatar={
-                  this.props.singleData.leaveStatus === "Pending" ? (
-                    <ActionHelp
-                      style={{
-                        height: 35,
-                        width: 35,
-                        color: yellow500,
-                        marginTop: 16
-                      }}
-                    />
-                  ) : this.props.singleData.leaveStatus === "Approved" ? (
-                    <ActionCheckCircle
-                      style={{
-                        height: 35,
-                        width: 35,
-                        color: green500,
-                        marginTop: 16
-                      }}
-                    />
-                  ) : (
-                    <NavigationCancel
-                      style={{
-                        height: 35,
-                        width: 35,
-                        color: red400,
-                        marginTop: 16
-                      }}
-                    />
-                  )
-                }
-                primaryText={
-                  <p style={{ marginTop: 10, fontWeight: "bold" }}>
-                    {this.props.user.displayName}
-                  </p>
-                }
-                secondaryText={this.props.singleData.leaveStatus}
-              />
-            </List>
-            <Divider />
+                ) : this.props.singleData.leaveStatus === "Approved" ? (
+                  <ActionCheckCircle
+                    style={{
+                      height: 35,
+                      width: 35,
+                      color: green500,
+                      marginTop: 16
+                    }}
+                  />
+                ) : (
+                  <NavigationCancel
+                    style={{
+                      height: 35,
+                      width: 35,
+                      color: red400,
+                      marginTop: 16
+                    }}
+                  />
+                )
+              }
+              primaryText={
+                <p style={{ marginTop: 10, fontWeight: "bold" }}>
+                  {this.props.user.displayName}
+                </p>
+              }
+              secondaryText={this.props.singleData.leaveStatus}
+            />
+          </List>
+          <Divider />
+          <div
+            style={{
+              height: "70vh",
+              overflow: "auto",
+              display: "self"
+            }}
+          >
             <List>
               <ListItem
                 leftIcon={

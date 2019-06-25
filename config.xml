@@ -11,7 +11,7 @@
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <preference name="AndroidLaunchMode" value="singleTask" />
     <universal-links>
-        <host name="smilebots.page.link" scheme="https" />
+        <host name="projects41fe0.page.link" scheme="https" />
         <host name="project-s-41fe0.firebaseapp.com" scheme="https">
             <path url="/__/auth/callback" />
         </host>
@@ -30,6 +30,7 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <plugin name="cordova-universal-links-plugin" spec="git+https://github.com/walteram/cordova-universal-links-plugin.git" />
     <engine name="browser" spec="^6.0.0" />
-    <engine name="android" spec="^8.0.0" />
+    <engine name="android" spec="^7.1.4" />
 </widget>
