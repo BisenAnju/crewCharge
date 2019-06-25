@@ -25,7 +25,14 @@ class Projects extends Component {
     return (
       <React.Fragment>
         <Layout navigationTitle="Projects" showBackNavigation={true}>
-          <div id="listOfProjects">
+          <div
+            style={{
+              height: "90vh",
+              overflow: "auto",
+              display: "self"
+            }}
+            id="listOfProjects"
+          >
             <h3>Projects: {this.props.projectList.count}</h3>
             {this.props.projectList.count > 0 &&
               this.props.projectList.value.map((project, index) => {

@@ -21,6 +21,7 @@ class Widgets extends Component {
     this.state = {
       widgetList: [],
       workItemsList: [],
+      columns: [],
       isLoading: true
     };
   }
@@ -47,7 +48,9 @@ class Widgets extends Component {
     if (nextProps.widgetList !== this.props.widgetList)
       this.setState({
         isLoading: nextProps.isLoading,
-        widgetList: nextProps.widgetList
+        widgetList: nextProps.widgetList,
+        workItemsList: nextProps.workItemsList,
+        columns: nextProps.columns
       });
   }
 
@@ -57,59 +60,65 @@ class Widgets extends Component {
 
     return (
       <Layout navigationTitle="Widgets" showBackNavigation={true}>
-        this.state.isLoading ? (
-        <center>
-          <CircularProgress />
-        </center>
+        {this.state.isLoading ? (
+          <center>
+            <CircularProgress />
+          </center>
         ) : (
-        <div id="listOfWidgets">
-          <h3>
-            Widgets:
-            {this.props.widgetList ? (
-              this.props.widgetList.length
-            ) : (
-              <div>No widgets found</div>
-            )}
-          </h3>
-          {this.props.widgetList.map(widget =>
-            widget.map((item, widgetIndex) => (
-              <div id="widget" key={widgetIndex}>
-                <Card style={cardStyle}>
-                  <CardHeader title={item.name} />
-                  <CardText
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      margin: "0 20px"
-                    }}
-                  >
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHeaderColumn>ID</TableHeaderColumn>
-                          <TableHeaderColumn>Name</TableHeaderColumn>
-                          <TableHeaderColumn>Status</TableHeaderColumn>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {this.props.workItemsList.map((w, workItemIndex) => {
-                          return widgetIndex === workItemIndex ? (
-                            <TableRow>
-                              {w.map(item => (
-                                <TableRowColumn>data</TableRowColumn>
-                              ))}
-                            </TableRow>
-                          ) : null;
-                        })}
-                      </TableBody>
-                    </Table>
-                  </CardText>
-                </Card>
-              </div>
-            ))
-          )}
-        </div>
-        );
+          <div
+            style={{
+              height: "90vh",
+              overflow: "auto",
+              display: "self"
+            }}
+            id="listOfWidgets"
+          >
+            <h3>
+              Widgets:
+              {this.state.widgetList.length > 0 ? (
+                this.state.widgetList[0].length
+              ) : (
+                <div>No widgets found</div>
+              )}
+            </h3>
+            {this.state.widgetList.map((widgets, widgetListIndex) => {
+              return widgets.map((widget, widgetIndex) => {
+                if (widget.settings.length > 127) {
+                  //counter++;
+                  return (
+                    <div id="widget" key={widgetIndex}>
+                      <Card style={cardStyle}>
+                        <CardHeader title={widget.name} />
+                        <CardText
+                          style={{
+                            display: "flex",
+                            margin: "0 20px"
+                          }}
+                        >
+                          {this.state.columns.map((column, columnIndex) => {
+                            console.log(widgetIndex);
+                            console.log(columnIndex);
+                            if (widgetIndex === columnIndex) {
+                              return column.map(col => {
+                                return (
+                                  <div style={{ margin: "0 10px" }}>
+                                    {col.name}
+                                  </div>
+                                );
+                              });
+                            } else {
+                              console.log("index not matched");
+                            }
+                          })}
+                        </CardText>
+                      </Card>
+                    </div>
+                  );
+                }
+              });
+            })}
+          </div>
+        )}
       </Layout>
     );
   }
