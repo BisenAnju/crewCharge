@@ -10,94 +10,107 @@ import {
   TableRow,
   TableRowColumn,
   TableHeader,
-  TableHeaderColumn
+  TableHeaderColumn,
+  CircularProgress
 } from "material-ui";
+import Layout from "../layouts/Layout";
 
 class Widgets extends Component {
   constructor(props) {
     super(props);
     this.state = {
       widgetList: [],
-      wiqlWorkItemsList: [],
-      wiqlList: [],
-      teamList: [],
-      wiqlWorkItem: [],
+      workItemsList: [],
       isLoading: true
     };
   }
 
+  componentWillMount() {
+    setTimeout(() => {
+      this.setState({
+        isLoading: false
+      });
+    }, 3000);
+  }
+
+  // componentDidMount() {
+  //   console.log("will mount");
+  //   if (this.props.widgetList.length > 0) {
+  //     this.setState({
+  //       isLoading: false
+  //     });
+  //   }
+  // }
+
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      widgetList: nextProps.widgetList,
-      wiqlWorkItemsList: nextProps.wiqlWorkItemsList,
-      wiqlList: nextProps.wiqlList,
-      teamList: nextProps.teamList,
-      isLoading: nextProps.isLoading,
-      wiqlWorkItem: nextProps.wiqlWorkItem
-    });
+    console.log("will receive");
+    if (nextProps.widgetList !== this.props.widgetList)
+      this.setState({
+        isLoading: nextProps.isLoading,
+        widgetList: nextProps.widgetList
+      });
   }
 
   render() {
     console.log("widgets component props");
     console.log(this.props);
-    console.log("widgets component state");
-    console.log(this.state);
 
-    return this.state.isLoading ? (
-      <h2>loading...</h2>
-    ) : (
-      <div id="listOfWidgets">
-        <h3>
-          Widgets:
-          {this.state.widgetList.length > 0 ? (
-            this.state.widgetList[0].length
-          ) : (
-            <div>No widgets found</div>
-          )}
-        </h3>
-        {this.state.widgetList.map(widget =>
-          widget.map((item, index) => (
-            <div id="widget" key={index}>
-              <Card style={cardStyle}>
-                <CardHeader title={item.name} />
-                <CardText
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    margin: "0 20px"
-                  }}
-                >
-                  {this.state.wiqlWorkItemsList.map((workItem, index) => (
-                    <Table selectable={false} key={index}>
+    return (
+      <Layout navigationTitle="Widgets" showBackNavigation={true}>
+        this.state.isLoading ? (
+        <center>
+          <CircularProgress />
+        </center>
+        ) : (
+        <div id="listOfWidgets">
+          <h3>
+            Widgets:
+            {this.props.widgetList ? (
+              this.props.widgetList.length
+            ) : (
+              <div>No widgets found</div>
+            )}
+          </h3>
+          {this.props.widgetList.map(widget =>
+            widget.map((item, widgetIndex) => (
+              <div id="widget" key={widgetIndex}>
+                <Card style={cardStyle}>
+                  <CardHeader title={item.name} />
+                  <CardText
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      margin: "0 20px"
+                    }}
+                  >
+                    <Table>
                       <TableHeader>
                         <TableRow>
-                          {index === 0
-                            ? workItem.columns.map(column => (
-                                <TableHeaderColumn key={index}>
-                                  {column.name}
-                                </TableHeaderColumn>
-                              ))
-                            : null}
+                          <TableHeaderColumn>ID</TableHeaderColumn>
+                          <TableHeaderColumn>Name</TableHeaderColumn>
+                          <TableHeaderColumn>Status</TableHeaderColumn>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        <TableRow>
-                          <TableRowColumn />
-                          <TableRowColumn>data</TableRowColumn>
-                          <TableRowColumn>
-                            {this.state.wiqlWorkItem.length}
-                          </TableRowColumn>
-                          <TableRowColumn>data</TableRowColumn>
-                        </TableRow>
+                        {this.props.workItemsList.map((w, workItemIndex) => {
+                          return widgetIndex === workItemIndex ? (
+                            <TableRow>
+                              {w.map(item => (
+                                <TableRowColumn>data</TableRowColumn>
+                              ))}
+                            </TableRow>
+                          ) : null;
+                        })}
                       </TableBody>
                     </Table>
-                  ))}
-                </CardText>
-              </Card>
-            </div>
-          ))
-        )}
-      </div>
+                  </CardText>
+                </Card>
+              </div>
+            ))
+          )}
+        </div>
+        );
+      </Layout>
     );
   }
 }

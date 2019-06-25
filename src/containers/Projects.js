@@ -3,7 +3,6 @@ import axios from "axios";
 import Projects from "../components/Projects";
 import { CircularProgress } from "material-ui";
 import WidgetsContainer from "./Widgets";
-import WidgetsContainer1 from "./Widgets1";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const PAT = `Basic OjNzaGd2NzVwYWNqd3l4Y3o1NmJ3cG9nY3phMjczaHFqaXNmcWMyYXFlbzRpMmhlNzR4YnE=`;
@@ -78,11 +77,6 @@ class ProjectsContainer extends Component {
             exact
             path="/projects/:projectId/widgets"
             render={props => <WidgetsContainer {...props} {...this.state} />}
-          />
-          <Route
-            exact
-            path="/projects/:projectId/widgets1"
-            render={props => <WidgetsContainer1 {...props} {...this.state} />}
           />
         </Switch>
       </Router>
