@@ -188,7 +188,16 @@ class NavigationBar extends React.Component {
                       this.props.history.push("/teamallocation/mission");
                     }}
                     primaryText="Add Missions"
-                    leftIcon={<ActionInput style={{ fill: "#fd914d" }} />}
+                    leftIcon={
+                      <ActionInput
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
                   />
                   <ListItem
                     onClick={e => {
@@ -196,7 +205,16 @@ class NavigationBar extends React.Component {
                       this.props.history.push("/teamallocation/project");
                     }}
                     primaryText="Add Projects"
-                    leftIcon={<ActionInput style={{ fill: "#fd914d" }} />}
+                    leftIcon={
+                      <ActionInput
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
                   />
                   {/* <ListItem
                     onClick={e => {
@@ -223,7 +241,16 @@ class NavigationBar extends React.Component {
                 this.props.logOut();
               }}
               primaryText="LogOut"
-              leftIcon={<ActionPowerSettingsNew style={{ fill: "#fd914d" }} />}
+              leftIcon={
+                <ActionPowerSettingsNew
+                  style={{
+                    fill: "#fd914d",
+                    heigth: "22px",
+                    width: "22px",
+                    left: "12px"
+                  }}
+                />
+              }
             />
           </List>
         </Drawer>
