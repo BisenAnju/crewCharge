@@ -11,6 +11,7 @@ import TeamAllocationMissionContainer from "./TeamAllocationMission";
 import TeamAllocationProjectContainer from "./TeamAllocationProject";
 import TeamAllocationPeoplesListContainer from "./TeamAllocationPeoplesList";
 import TeamAllocationProjectListContainer from "./TeamAllocationProjectList";
+import TeamAllocationDashboard from "../components/TeamAllocationDashboard";
 class TeamAllocationDashboardContainer extends Component {
   constructor(props) {
     super(props);
@@ -80,6 +81,7 @@ class TeamAllocationDashboardContainer extends Component {
       });
   }
   render() {
+    console.log(this.state.leavesList);
     return (
       <div>
         <Router>
@@ -88,7 +90,7 @@ class TeamAllocationDashboardContainer extends Component {
               exact
               path={"/teamallocation"}
               render={props => (
-                <TeamAllocationMissionContainer {...props} {...this.state} />
+                <TeamAllocationDashboard {...this.props} {...this.state} />
               )}
             />
             <Route

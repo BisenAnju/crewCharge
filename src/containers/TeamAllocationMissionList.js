@@ -50,6 +50,8 @@ class TeamAllocationMissionListContainer extends React.Component {
         this.setState({ isLoading: false, missionsList });
       });
   }
+  handleEditChange = () => {};
+  handleArchiveChange = () => {};
   render() {
     return (
       <div>
@@ -59,7 +61,12 @@ class TeamAllocationMissionListContainer extends React.Component {
               exact
               path={"/teamallocation/missionlist"}
               render={props => (
-                <TeamAllocationMissionList {...this.props} {...this.state} />
+                <TeamAllocationMissionList
+                  {...this.props}
+                  {...this.state}
+                  handleEditChange={this.handleEditChange}
+                  handleArchiveChange={this.handleArchiveChange}
+                />
               )}
             />
           </Switch>

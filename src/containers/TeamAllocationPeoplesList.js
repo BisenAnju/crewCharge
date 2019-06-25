@@ -12,6 +12,7 @@ import TeamAllocationPeopleList from "../components/TeamAllocationPeoplesList";
 import TeamAllocationMissionContainer from "./TeamAllocationMission";
 import TeamAllocationProjectContainer from "./TeamAllocationProject";
 import TeamAllocationMissionListContainer from "./TeamAllocationMissionList";
+import TeamAllocationDashboardContainer from "./TeamAllocationDashboard";
 class TeamAllocationPeoplesListContainer extends Component {
   constructor(props) {
     super(props);
