@@ -86,21 +86,20 @@ class TeamAllocationProject extends React.Component {
               </div>
             )}
             <div>
-              <Dropzone onDrop={this.editProfile} accept="image/*">
-                {({ getRootProps, getInputProps }) => {
-                  return (
-                    <div {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      <u>
-                        <RaisedButton
-                          label="Upload..."
-                          labelColor={white}
-                          backgroundColor={lightGreen400}
-                        />
-                      </u>
-                    </div>
-                  );
-                }}
+              <Dropzone
+                onDrop={this.editProfile}
+                accept="image/*"
+                style={{ height: 100 }}
+              >
+                <div>
+                  <u>
+                    <RaisedButton
+                      label="Upload..."
+                      labelColor={white}
+                      backgroundColor={lightGreen400}
+                    />
+                  </u>
+                </div>
               </Dropzone>
             </div>
           </div>

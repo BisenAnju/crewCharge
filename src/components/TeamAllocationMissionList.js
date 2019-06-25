@@ -41,6 +41,11 @@ class TeamAllocationMissionList extends React.Component {
   handleArchiveProjectChange(projectId) {
     console.log(projectId);
   }
+  contentButton = {
+    bottom: 20,
+    right: 20,
+    position: "absolute"
+  };
   render() {
     console.log(this.props);
     return (
@@ -64,9 +69,21 @@ class TeamAllocationMissionList extends React.Component {
               </Tab>
               <Tab label="Manage" style={{ color: "#f08f4c" }} value={2}>
                 <div>
-                  <div>
+                  <div
+                    style={{
+                      position: "relative",
+                      height: "40vh",
+                      overflow: "auto"
+                    }}
+                  >
                     <Divider style={{ backgroundColor: orange100 }} />
-                    <p style={{ color: grey500, padding: 20 }}>
+                    <p
+                      style={{
+                        color: grey500,
+                        padding: 20,
+                        position: "relative"
+                      }}
+                    >
                       <span style={{ padding: 10 }}>Missions List</span>
                     </p>
                     <Divider style={{ backgroundColor: orange100 }} />
@@ -128,7 +145,13 @@ class TeamAllocationMissionList extends React.Component {
                     </List>
                   </div>
                   <Divider style={{ backgroundColor: orange100 }} />
-                  <div>
+                  <div
+                    style={{
+                      position: "relative",
+                      height: "40vh",
+                      overflow: "auto"
+                    }}
+                  >
                     <p style={{ color: grey500, padding: 20 }}>
                       <span style={{ padding: 10 }}>Project List</span>
                     </p>
@@ -177,40 +200,40 @@ class TeamAllocationMissionList extends React.Component {
                         </div>
                       ))}
                     </List>
-                    <div>
-                      <FloatingActionButton
-                        backgroundColor={"rgb(253, 145, 77)"}
-                        style={{ float: "right", marginRight: 10 }}
+                  </div>
+                  <div style={this.contentButton}>
+                    <FloatingActionButton
+                      backgroundColor={"rgb(253, 145, 77)"}
+                      style={{ float: "right", marginRight: 10 }}
+                    >
+                      <IconMenu
+                        iconButtonElement={
+                          <IconButton style={{ marginTop: 4 }}>
+                            <ContentAdd color={"white"} />
+                          </IconButton>
+                        }
+                        menuStyle={{
+                          backgroundColor: "rgba(242, 243, 242, 0.5)",
+                          padding: 0
+                        }}
+                        anchorOrigin={{
+                          horizontal: "right",
+                          vertical: "bottom"
+                        }}
+                        targetOrigin={{
+                          horizontal: "right",
+                          vertical: "bottom"
+                        }}
                       >
-                        <IconMenu
-                          iconButtonElement={
-                            <IconButton style={{ marginTop: 4 }}>
-                              <ContentAdd color={"white"} />
-                            </IconButton>
-                          }
-                          menuStyle={{
-                            backgroundColor: "rgba(242, 243, 242, 0.5)",
-                            padding: 0
-                          }}
-                          anchorOrigin={{
-                            horizontal: "right",
-                            vertical: "bottom"
-                          }}
-                          targetOrigin={{
-                            horizontal: "right",
-                            vertical: "bottom"
-                          }}
-                        >
-                          <MenuItem onClick={this.props.handleAddMission}>
-                            Add Mission
-                          </MenuItem>
-                          <Divider />
-                          <MenuItem onClick={this.props.handleAddproject}>
-                            Add Project
-                          </MenuItem>
-                        </IconMenu>
-                      </FloatingActionButton>
-                    </div>
+                        <MenuItem onClick={this.props.handleAddMission}>
+                          Add Mission
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={this.props.handleAddproject}>
+                          Add Project
+                        </MenuItem>
+                      </IconMenu>
+                    </FloatingActionButton>
                   </div>
                 </div>
               </Tab>
