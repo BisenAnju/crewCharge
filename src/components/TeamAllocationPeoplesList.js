@@ -135,7 +135,7 @@ class TeamAllocationPeopleList extends React.Component {
         <Divider />
         <div
           style={{
-            height: "40%",
+            height: "70vh",
             overflow: "auto",
             display: "self"
           }}

@@ -65,7 +65,6 @@ class TeamAllocationProject extends React.Component {
     });
   };
   render() {
-    const maxSize = 10468;
     return (
       <Layout navigationTitle="Project" showBackNavigation={true}>
         <div style={{ padding: 10 }}>

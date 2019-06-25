@@ -7,7 +7,6 @@ import AdminRejectedTab from "./AdminRejectedTab";
 import { Tabs, Tab } from "material-ui";
 import Layout from "../layouts/Layout";
 import withUser from "../hoc/withUser";
-import { lightGreen400 } from "material-ui/styles/colors";
 class LeaveAdminDashboard extends Component {
   constructor(props) {
     super(props);

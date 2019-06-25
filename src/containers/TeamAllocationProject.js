@@ -60,6 +60,17 @@ class TeamAllocationMissionContainer extends Component {
                 />
               )}
             />
+            <Route
+              exact
+              path={"/teamallocation/project/:projectId"}
+              render={props => (
+                <TeamAllocationProject
+                  {...props}
+                  {...this.state}
+                  handleAddProject={this.handleAddProject}
+                />
+              )}
+            />
           </Switch>
         </Router>
       </div>

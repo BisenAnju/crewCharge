@@ -75,6 +75,21 @@ class TeamAllocationMissionContainer extends Component {
             />
             <Route
               exact
+              path={"/teamallocation/mission/:missionId"}
+              render={props => (
+                <TeamAllocationMission
+                  {...this.props}
+                  missionList={this.props.missionsList.filter(
+                    misiionData =>
+                      misiionData.missionsId ===
+                      this.props.match.params.missionId
+                  )}
+                  handleAddMission={this.handleAddMission}
+                />
+              )}
+            />
+            <Route
+              exact
               path={"/teamallocation/project"}
               render={props => <TeanAllocationProjectContainer {...props} />}
             />

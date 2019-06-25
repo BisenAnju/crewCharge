@@ -30,6 +30,9 @@ class TeamAllocationMission extends React.Component {
       message: null
     };
   }
+  componentWillMount() {
+    console.log(this.props.missionList);
+  }
   handleUsersChange = (event, index, values) => this.setState({ values });
   menuItems(values) {
     return this.props.usersList.map((row, index) => (
@@ -82,7 +85,7 @@ class TeamAllocationMission extends React.Component {
     const { values } = this.state;
     return (
       <Layout navigationTitle="Mission" showBackNavigation={true}>
-        <div style={{ padding: 10, paddingTop: 50 }}>
+        <div style={{ padding: 10 }}>
           <TextFieldIcon
             floatingLabelText="Enter Mission"
             defaultValue={this.state.missionName}
