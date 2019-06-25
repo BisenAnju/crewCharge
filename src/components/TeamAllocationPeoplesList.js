@@ -35,14 +35,15 @@ class TeamAllocationPeopleList extends React.Component {
     });
   };
   componentWillReceiveProps(nextProps) {
-    let nowDate = moment().format("LL");
+    let nowDate = moment().format("l");
     let missionsList = nextProps.missionsList.filter(
       missionData =>
-        moment(missionData.deadline.startDate.seconds * 1000).format("L") <=
+        moment(missionData.deadline.startDate.seconds * 1000).format("l") <=
           nowDate &&
-        moment(missionData.deadline.endDate.seconds * 1000).format("L") >=
+        moment(missionData.deadline.endDate.seconds * 1000).format("l") >=
           nowDate
     );
+    console.log(missionsList);
     this.setState({
       leavesList: nextProps.leavesList,
       missionsList,
