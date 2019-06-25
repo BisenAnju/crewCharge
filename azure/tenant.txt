@@ -1,0 +1,8 @@
+https://login.microsoftonline.com/:tenant_id/oauth2/token
+
+tenant_id: dba8f870-4ae5-4079-af4f-e3a139920a94
+
+grant-type: client_credentials
+client_id: 28b2bf0d-dc55-46bd-a1d8-f15eb5630de2
+client_secret: k?U7z47Oi]flvfHRb?G6FshPZiMdT:OS
+resource: https://management.azure.com

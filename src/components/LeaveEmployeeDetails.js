@@ -139,7 +139,7 @@ class LeaveEmployeeDetails extends Component {
                     onClick={e => {
                       e.preventDefault();
                       this.props.history.push(
-                        `/leavedashboard/leaveapply/` +
+                        `${ROUTES.LEAVEDASHBOARD}/leaveapply/` +
                           this.props.singleData.leaveId
                       );
                     }}

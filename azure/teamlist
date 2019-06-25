@@ -1,0 +1,41 @@
+{
+    "value": [
+        {
+            "id": "2e5a85d0-5b65-472d-96ef-15f573951d5e",
+            "name": "Project S Team",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/a54486bc-eb07-444f-ab8b-f16202416e5f/teams/2e5a85d0-5b65-472d-96ef-15f573951d5e",
+            "description": "The default project team.",
+            "identityUrl": "https://spsprodsin1.vssps.visualstudio.com/A45af113a-d4c0-4c99-b6b7-7e16dfcdd9f8/_apis/Identities/2e5a85d0-5b65-472d-96ef-15f573951d5e",
+            "projectName": "Project S",
+            "projectId": "a54486bc-eb07-444f-ab8b-f16202416e5f"
+        },
+        {
+            "id": "ec1e73f7-b788-4804-a463-c702336b6bcb",
+            "name": "Client Communication",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/a54486bc-eb07-444f-ab8b-f16202416e5f/teams/ec1e73f7-b788-4804-a463-c702336b6bcb",
+            "description": "",
+            "identityUrl": "https://spsprodsin1.vssps.visualstudio.com/A45af113a-d4c0-4c99-b6b7-7e16dfcdd9f8/_apis/Identities/ec1e73f7-b788-4804-a463-c702336b6bcb",
+            "projectName": "Project S",
+            "projectId": "a54486bc-eb07-444f-ab8b-f16202416e5f"
+        },
+        {
+            "id": "747e1498-6bef-4518-b479-0fec0838620f",
+            "name": "Leave Management",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/a54486bc-eb07-444f-ab8b-f16202416e5f/teams/747e1498-6bef-4518-b479-0fec0838620f",
+            "description": "",
+            "identityUrl": "https://spsprodsin1.vssps.visualstudio.com/A45af113a-d4c0-4c99-b6b7-7e16dfcdd9f8/_apis/Identities/747e1498-6bef-4518-b479-0fec0838620f",
+            "projectName": "Project S",
+            "projectId": "a54486bc-eb07-444f-ab8b-f16202416e5f"
+        },
+        {
+            "id": "bb24d6cd-a07b-4c37-bbe5-a1319863bd05",
+            "name": "Complaint and Feedback",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/a54486bc-eb07-444f-ab8b-f16202416e5f/teams/bb24d6cd-a07b-4c37-bbe5-a1319863bd05",
+            "description": "",
+            "identityUrl": "https://spsprodsin1.vssps.visualstudio.com/A45af113a-d4c0-4c99-b6b7-7e16dfcdd9f8/_apis/Identities/bb24d6cd-a07b-4c37-bbe5-a1319863bd05",
+            "projectName": "Project S",
+            "projectId": "a54486bc-eb07-444f-ab8b-f16202416e5f"
+        }
+    ],
+    "count": 4
+}

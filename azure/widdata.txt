@@ -1,0 +1,15 @@
+{referenceName: "System.Id", , url: "https://dev.azure.com/smilebots/_apis/wit/fields/System.Id"}
+1: {referenceName: "System.WorkItemType", , url: "https://dev.azure.com/smilebots/_apis/wit/fields/System.WorkItemType"}
+2: {referenceName: "System.Title", , url: "https://dev.azure.com/smilebots/_apis/wit/fields/System.Title"}
+3: {referenceName: "System.AssignedTo", name: "Assigned To", url: "https://dev.azure.com/smilebots/_apis/wit/fields/System.AssignedTo"}
+4: {referenceName: "System.State", name: "State", url: "https://dev.azure.com/smilebots/_apis/wit/fields/System.State"}
+5: {referenceName: "System.Tags", name: "Tags",
+
+name: "ID"
+name: "Work Item Type"
+name: "Title"
+
+
+ Object.keys(temp1.fields).map(field => { temp2.map(column => { if(column.referenceName === field){ console.log(column.referenceName+'=' + temp1)} ;}) });
+
+this.setState(() => ({widgetList: [...response.data.widgets]}));

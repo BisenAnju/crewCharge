@@ -1,0 +1,57 @@
+import React, { Component } from "react";
+import Dashboard from "../components/Dashboard";
+import axios from "axios";
+
+const PAT = `Basic OjNzaGd2NzVwYWNqd3l4Y3o1NmJ3cG9nY3phMjczaHFqaXNmcWMyYXFlbzRpMmhlNzR4YnE=`;
+const headers = {
+  headers: {
+    Authorization: PAT
+  }
+};
+class DashBoardContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      teamListData: [],
+      projectListData: [],
+      isLoading: true
+    };
+  }
+  async componentDidMount() {
+    const [teamList, projectList] = await Promise.all([
+      axios.get(
+        `https://dev.azure.com/smilebots/_apis/teams?api-version=5.0-preview`,
+        headers
+      ),
+      axios.get(
+        "https://dev.azure.com/smilebots/_apis/projects?api-version=5.1-preview.2",
+        headers
+      )
+    ]);
+    console.log(teamList.data);
+    console.log(projectList.data);
+    teamListData=
+      projectListData
+    this.setState({
+      isLoading: false,
+      teamListData,
+      projectListData
+    });
+  }
+
+  handleWidgets = () => {
+    console.log("Widgets clicked");
+  };
+
+  render() {
+    return this.state.isLoading ? (
+      <h2>loading...</h2>
+    ) : (
+      <div>
+        <Dashboard {...this.state} handleWidgets={this.handleWidgets} />
+      </div>
+    );
+  }
+}
+export { headers };
+export default DashBoardContainer;

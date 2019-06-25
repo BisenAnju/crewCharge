@@ -12,12 +12,15 @@ const withAuthentication = Component => {
         authUser: null
       };
     }
-
+    // Check if a user has already loggedIn ifnot then save the user details and proceed
     componentDidMount() {
+      // let userData;
       this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
-        authUser
-          ? this.setState({ authUser })
-          : this.setState({ authUser: null });
+        if (authUser) {
+          this.setState({ authUser });
+        } else {
+          this.setState({ authUser: null });
+        }
       });
     }
 

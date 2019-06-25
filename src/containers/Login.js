@@ -13,16 +13,16 @@ class LoginContainer extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.user !== null) {
       const user = {
-        userName: this.props.firebase.auth.currentUser.displayName,
-        userId: this.props.firebase.auth.currentUser.uid,
-        userImage: this.props.firebase.auth.currentUser.photoURL,
-        userEmailId: this.props.firebase.auth.currentUser.email
+        displayName: this.props.firebase.auth.currentUser.displayName,
+        uid: this.props.firebase.auth.currentUser.uid,
+        photoURL: this.props.firebase.auth.currentUser.photoURL,
+        email: this.props.firebase.auth.currentUser.email
       };
 
       //ADD USER
       this.props.db
         .collection("users")
-        .doc(user.userId)
+        .doc(user.uid)
         .onSnapshot(querySnapshot => {
           if (querySnapshot.exists) {
             console.log("You are already registered");
@@ -47,19 +47,19 @@ class LoginContainer extends Component {
             }
             this.props.db
               .collection("users")
-              .doc(user.userId)
+              .doc(user.uid)
               .set({
-                uid: user.userId,
-                displayName: user.userName,
-                email: user.userEmailId,
-                photoURL: user.userImage,
+                userId: user.userId,
+                userName: user.userName,
+                userEmailId: user.userEmailId,
+                userImageURL: user.userImage,
                 userType: "Employee",
-                userNotificationPlayerId: playerId
+                userNotificationPlayerId: JSON.parse(localStorage.getItem("playerId")).id
               })
-              .then(function() {
+              .then(function () {
                 console.log("You have been successfully registered");
               })
-              .catch(function(error) {
+              .catch(function (error) {
                 console.error("Something went wrong ", error);
               });
           }

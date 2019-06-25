@@ -9,7 +9,15 @@ class NavigationBarContainers extends Component {
       userData: []
     };
   }
-
+  style = {
+    container: {
+      position: "relative"
+    },
+    refresh: {
+      display: "inline-block",
+      position: "relative"
+    }
+  };
   componentWillMount() {
     // User Data
     this.props.db.collection("users").onSnapshot(
@@ -30,7 +38,6 @@ class NavigationBarContainers extends Component {
       }
     );
   }
-
   render() {
     return (
       <div>

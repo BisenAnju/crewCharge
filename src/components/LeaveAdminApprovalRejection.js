@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
-// import ROUTES from "../constants/routes";
+import ROUTES from "../constants/routes";
 import {
   ActionDateRange,
   ImageTimer,
@@ -149,7 +149,7 @@ class LeaveAdminApprovalRejection extends Component {
                   onClick={e => {
                     e.preventDefault();
                     this.props.history.push(
-                      `/leavedashboard/leaveapply`
+                      `${ROUTES.LEAVEDASHBOARD}/leaveapply`
                     );
                   }}
                 >

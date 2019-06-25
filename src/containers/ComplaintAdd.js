@@ -43,9 +43,9 @@ class NewComplaintContainer extends React.Component {
       })
       .then(ref => {
         if (ref.id !== "undefined") {
-          setTimeout(function() {
+          setTimeout(function () {
             ths.props.history.push("/complaintlist");
-            var sendNotification = function(data) {
+            var sendNotification = function (data) {
               var headers = {
                 "Content-Type": "application/json; charset=utf-8",
                 Authorization:
@@ -61,14 +61,14 @@ class NewComplaintContainer extends React.Component {
               };
 
               var https = require("https");
-              var req = https.request(options, function(res) {
-                res.on("data", function(data) {
+              var req = https.request(options, function (res) {
+                res.on("data", function (data) {
                   console.log("Response:");
                   console.log(JSON.parse(data));
                 });
               });
 
-              req.on("error", function(e) {
+              req.on("error", function (e) {
                 console.log("ERROR:");
                 console.log(e);
               });

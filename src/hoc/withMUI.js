@@ -1,8 +1,7 @@
 import React from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
-import { orange800 } from "material-ui/styles/colors";
-import { orange300 } from "material-ui/styles/colors";
+import { orange800, orange300 } from "material-ui/styles/colors";
 
 // A theme with custom primary and secondary color.
 // It's optional.

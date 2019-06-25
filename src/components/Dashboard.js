@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-// import ROUTES from "../constants/routes";
+import ROUTES from "../constants/routes";
 import Layout from "../layouts/Layout";
 import Paper from "material-ui/Paper";
 import { grey500, blueGrey300 } from "material-ui/styles/colors";
@@ -32,7 +32,7 @@ class Dashboard extends Component {
             style={flexItem}
             onClick={e => {
               e.preventDefault();
-              this.props.history.push("/leavedashboard");
+              this.props.history.push(ROUTES.LEAVEDASHBOARD);
             }}
           >
             <br />
@@ -52,7 +52,7 @@ class Dashboard extends Component {
             style={flexItem}
             onClick={e => {
               e.preventDefault();
-              this.props.history.push("/complaintlist");
+              this.props.history.push("/teamallocation");
             }}
           >
             <Paper
@@ -64,7 +64,7 @@ class Dashboard extends Component {
                 color: "white"
               }}
             >
-              <h4>Complaint & Feedback</h4>
+              <h4>Team Allocation</h4>
             </Paper>
           </div>
           <div

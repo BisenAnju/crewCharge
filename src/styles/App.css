@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 /* body {
   position: fixed;
   width: -webkit-fill-available;
   height: -webkit-fill-available;
 } */
+=======
+body {
+  position: fixed;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+>>>>>>> 9f7803812c31637f5e8037b7302d861524811994
 .App {
   text-align: center;
 }

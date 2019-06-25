@@ -11,13 +11,12 @@ import ComplaintView from "./containers/ComplaintView";
 import ComplaintType from "./containers/ComplaintType";
 import LeavePurposeContainer from "./containers/LeavePurpose";
 import LoginContainer from "./containers/Login";
-// import "./styles/App.css";
+import TeamAllocationDashboardContainer from "./containers/TeamAllocationDashboard";
+import TeamAllocationProjectContainer from "./containers/TeamAllocationProject";
 import LeaveDashboardContainer from "./containers/LeaveDashboard";
 import LeaveAdminApprovalRejectionContainer from "./containers/LeaveAdminApprovalRejection";
 import LeaveEmployeeDetailsContainer from "./containers/LeaveEmployeeDetails";
 import ProjectsContainer from "./containers/Projects";
-import WidgetsContainer from "./containers/Widgets";
-import WidgetsContainer1 from "./containers/Widgets1";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -141,6 +140,20 @@ class App extends Component {
                   path={"/"}
                   render={props => <DashboardContainer {...props} />}
                 />
+                {/*Team Allocation start */}
+                <Route
+                  path={"/teamallocation"}
+                  render={props => (
+                    <TeamAllocationDashboardContainer {...props} />
+                  )}
+                />
+                <Route
+                  path={"/teamallocation/project"}
+                  render={props => (
+                    <TeamAllocationProjectContainer {...props} />
+                  )}
+                />
+                {/*Team Allocation End */}
               </Switch>
             </Router>
           </div>

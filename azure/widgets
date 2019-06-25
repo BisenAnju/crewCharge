@@ -1,0 +1,195 @@
+{
+    "count": 7,
+    "value": [
+        {
+            "id": "0bda8bd2-ec7c-43ef-855d-1301798e1e02",
+            "name": "Sprint Overview",
+            "position": {
+                "row": 7,
+                "column": 1
+            },
+            "size": {
+                "rowSpan": 1,
+                "columnSpan": 2
+            },
+            "settings": "{\"units\":\"Count of Work Items\",\"team\":{\"id\":\"92ed7b0d-cdae-4f6c-a597-6891beb6cd77\",\"name\":\"Admin Team\"},\"includeDaysOff\":false}",
+            "settingsVersion": {
+                "major": 1,
+                "minor": 0,
+                "patch": 0
+            },
+            "artifactId": "",
+            "isEnabled": true,
+            "contentUri": null,
+            "contributionId": "ms.vss-dashboards-web.Microsoft.VisualStudioOnline.Dashboards.SprintOverviewWidget",
+            "typeId": "Microsoft.VisualStudioOnline.Dashboards.SprintOverviewWidget",
+            "configurationContributionId": "ms.vss-dashboards-web.Microsoft.VisualStudioOnline.Dashboards.SprintOverviewWidget.Configuration",
+            "configurationContributionRelativeId": "Microsoft.VisualStudioOnline.Dashboards.SprintOverviewWidget.Configuration",
+            "isNameConfigurable": false,
+            "loadingImageUrl": "https://dev.azure.com/smilebots/_static/Widgets/SprintOverviewLoading.png"
+        },
+        {
+            "id": "bb7f5cda-ccea-4c1d-86de-291d0df57382",
+            "name": "Priority Items",
+            "position": {
+                "row": 1,
+                "column": 1
+            },
+            "size": {
+                "rowSpan": 2,
+                "columnSpan": 4
+            },
+            "settings": "{\"query\":{\"queryId\":\"ab29bb76-3cdd-48ca-a1de-b7006e361ac8\",\"queryName\":\"Lokus App - Priority\"},\"selectedColumns\":[{\"name\":\"Title\",\"referenceName\":\"System.Title\"},{\"name\":\"Board Column\",\"referenceName\":\"System.BoardColumn\"},{\"name\":\"Area Path\",\"referenceName\":\"System.AreaPath\"},{\"name\":\"Assigned To\",\"referenceName\":\"System.AssignedTo\"}],\"lastArtifactName\":\"Lokus App - Priority\"}",
+            "settingsVersion": {
+                "major": 1,
+                "minor": 0,
+                "patch": 0
+            },
+            "artifactId": "",
+            "isEnabled": true,
+            "contentUri": null,
+            "contributionId": "ms.vss-mywork-web.Microsoft.VisualStudioOnline.MyWork.WitViewWidget",
+            "typeId": "Microsoft.VisualStudioOnline.MyWork.WitViewWidget",
+            "configurationContributionId": "ms.vss-mywork-web.Microsoft.VisualStudioOnline.MyWork.WitViewWidget.Configuration",
+            "configurationContributionRelativeId": "Microsoft.VisualStudioOnline.MyWork.WitViewWidget.Configuration",
+            "isNameConfigurable": true,
+            "loadingImageUrl": "https://dev.azure.com/smilebots/_static/MyWork/queryResultsLoading.png"
+        },
+        {
+            "id": "7693fe5d-224c-499b-9c3d-769f2f12b32d",
+            "name": "Lokus Admin- New Workitems",
+            "position": {
+                "row": 5,
+                "column": 1
+            },
+            "size": {
+                "rowSpan": 2,
+                "columnSpan": 3
+            },
+            "settings": "{\"query\":{\"queryId\":\"9fd6ab4a-6ace-4c52-9dc8-79e792c71271\",\"queryName\":\"Lokus Admin- New Workitems\"},\"selectedColumns\":[{\"name\":\"Work Item Type\",\"referenceName\":\"System.WorkItemType\"},{\"name\":\"Title\",\"referenceName\":\"System.Title\"},{\"name\":\"Assigned To\",\"referenceName\":\"System.AssignedTo\"}],\"lastArtifactName\":\"Lokus Admin- New Workitems\"}",
+            "settingsVersion": {
+                "major": 1,
+                "minor": 0,
+                "patch": 0
+            },
+            "artifactId": "",
+            "isEnabled": true,
+            "contentUri": null,
+            "contributionId": "ms.vss-mywork-web.Microsoft.VisualStudioOnline.MyWork.WitViewWidget",
+            "typeId": "Microsoft.VisualStudioOnline.MyWork.WitViewWidget",
+            "configurationContributionId": "ms.vss-mywork-web.Microsoft.VisualStudioOnline.MyWork.WitViewWidget.Configuration",
+            "configurationContributionRelativeId": "Microsoft.VisualStudioOnline.MyWork.WitViewWidget.Configuration",
+            "isNameConfigurable": true,
+            "loadingImageUrl": "https://dev.azure.com/smilebots/_static/MyWork/queryResultsLoading.png"
+        },
+        {
+            "id": "942ebbfd-fd89-4a76-8ff4-a99c68dfafa2",
+            "name": "Lokus App - New Workitems",
+            "position": {
+                "row": 3,
+                "column": 1
+            },
+            "size": {
+                "rowSpan": 2,
+                "columnSpan": 3
+            },
+            "settings": "{\"query\":{\"queryId\":\"40f992fa-cd80-4bcd-8ad2-921d6e4736be\",\"queryName\":\"Lokus App - New Workitems\"},\"selectedColumns\":[{\"name\":\"Work Item Type\",\"referenceName\":\"System.WorkItemType\"},{\"name\":\"Title\",\"referenceName\":\"System.Title\"},{\"name\":\"Assigned To\",\"referenceName\":\"System.AssignedTo\"}],\"lastArtifactName\":\"Lokus App - New Workitems\"}",
+            "settingsVersion": {
+                "major": 1,
+                "minor": 0,
+                "patch": 0
+            },
+            "artifactId": "",
+            "isEnabled": true,
+            "contentUri": null,
+            "contributionId": "ms.vss-mywork-web.Microsoft.VisualStudioOnline.MyWork.WitViewWidget",
+            "typeId": "Microsoft.VisualStudioOnline.MyWork.WitViewWidget",
+            "configurationContributionId": "ms.vss-mywork-web.Microsoft.VisualStudioOnline.MyWork.WitViewWidget.Configuration",
+            "configurationContributionRelativeId": "Microsoft.VisualStudioOnline.MyWork.WitViewWidget.Configuration",
+            "isNameConfigurable": true,
+            "loadingImageUrl": "https://dev.azure.com/smilebots/_static/MyWork/queryResultsLoading.png"
+        },
+        {
+            "id": "76374cfc-64d0-427c-a341-b0538d48cd14",
+            "eTag": "1",
+            "name": "Lokus Admin - Ongoing Work Items",
+            "position": {
+                "row": 5,
+                "column": 4
+            },
+            "size": {
+                "rowSpan": 2,
+                "columnSpan": 4
+            },
+            "settings": "{\"query\":{\"queryId\":\"f7c81d80-0190-4b35-b9e3-73f26d89b4f7\",\"queryName\":\"Lokus Admin - Ongoing Work Items\"},\"selectedColumns\":[{\"name\":\"Title\",\"referenceName\":\"System.Title\"},{\"name\":\"Board Column\",\"referenceName\":\"System.BoardColumn\"},{\"name\":\"Work Item Type\",\"referenceName\":\"System.WorkItemType\"},{\"name\":\"Assigned To\",\"referenceName\":\"System.AssignedTo\"},{\"name\":\"Board Column Done\",\"referenceName\":\"System.BoardColumnDone\"}],\"lastArtifactName\":\"Lokus Admin - Ongoing Work Items\"}",
+            "settingsVersion": {
+                "major": 1,
+                "minor": 0,
+                "patch": 0
+            },
+            "artifactId": "",
+            "isEnabled": true,
+            "contentUri": null,
+            "contributionId": "ms.vss-mywork-web.Microsoft.VisualStudioOnline.MyWork.WitViewWidget",
+            "typeId": "Microsoft.VisualStudioOnline.MyWork.WitViewWidget",
+            "configurationContributionId": "ms.vss-mywork-web.Microsoft.VisualStudioOnline.MyWork.WitViewWidget.Configuration",
+            "configurationContributionRelativeId": "Microsoft.VisualStudioOnline.MyWork.WitViewWidget.Configuration",
+            "isNameConfigurable": true,
+            "loadingImageUrl": "https://dev.azure.com/smilebots/_static/MyWork/queryResultsLoading.png"
+        },
+        {
+            "id": "6d1b5751-9dde-45f6-bb3a-d86dc4cdee89",
+            "name": "Lokus App - Ongoing Work Items",
+            "position": {
+                "row": 3,
+                "column": 4
+            },
+            "size": {
+                "rowSpan": 2,
+                "columnSpan": 4
+            },
+            "settings": "{\"query\":{\"queryId\":\"71769db8-2719-475e-9b4c-7e0466d9f156\",\"queryName\":\"Lokus App - Ongoing Work Items\"},\"selectedColumns\":[{\"name\":\"Title\",\"referenceName\":\"System.Title\"},{\"name\":\"Board Column\",\"referenceName\":\"System.BoardColumn\"},{\"name\":\"Work Item Type\",\"referenceName\":\"System.WorkItemType\"},{\"name\":\"Assigned To\",\"referenceName\":\"System.AssignedTo\"},{\"name\":\"Board Column Done\",\"referenceName\":\"System.BoardColumnDone\"}],\"lastArtifactName\":\"Lokus App - Ongoing Work Items\"}",
+            "settingsVersion": {
+                "major": 1,
+                "minor": 0,
+                "patch": 0
+            },
+            "artifactId": "",
+            "isEnabled": true,
+            "contentUri": null,
+            "contributionId": "ms.vss-mywork-web.Microsoft.VisualStudioOnline.MyWork.WitViewWidget",
+            "typeId": "Microsoft.VisualStudioOnline.MyWork.WitViewWidget",
+            "configurationContributionId": "ms.vss-mywork-web.Microsoft.VisualStudioOnline.MyWork.WitViewWidget.Configuration",
+            "configurationContributionRelativeId": "Microsoft.VisualStudioOnline.MyWork.WitViewWidget.Configuration",
+            "isNameConfigurable": true,
+            "loadingImageUrl": "https://dev.azure.com/smilebots/_static/MyWork/queryResultsLoading.png"
+        },
+        {
+            "id": "d35d2219-dd94-4ee1-a454-f09c9c6a583c",
+            "name": "New Work Item",
+            "position": {
+                "row": 1,
+                "column": 5
+            },
+            "size": {
+                "rowSpan": 1,
+                "columnSpan": 2
+            },
+            "settings": "{\"defaultWorkItemType\":\"Task\"}",
+            "settingsVersion": {
+                "major": 1,
+                "minor": 0,
+                "patch": 0
+            },
+            "artifactId": "",
+            "isEnabled": true,
+            "contentUri": null,
+            "contributionId": "ms.vss-dashboards-web.Microsoft.VisualStudioOnline.Dashboards.NewWorkItemWidget",
+            "typeId": "Microsoft.VisualStudioOnline.Dashboards.NewWorkItemWidget",
+            "configurationContributionId": "ms.vss-dashboards-web.Microsoft.VisualStudioOnline.Dashboards.NewWorkItemWidget.Configuration",
+            "configurationContributionRelativeId": "Microsoft.VisualStudioOnline.Dashboards.NewWorkItemWidget.Configuration",
+            "isNameConfigurable": false,
+            "loadingImageUrl": "https://dev.azure.com/smilebots/_static/Widgets/newWorkItem-workLinksLoading.png"
+        }
+    ]
+}

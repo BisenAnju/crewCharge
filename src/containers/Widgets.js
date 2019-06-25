@@ -3,6 +3,8 @@ import Widgets from "../components/Widgets";
 import axios from "axios";
 import { headers } from "./Projects";
 import { withRouter } from "react-router-dom";
+import { CircularProgress } from "material-ui";
+import { promises } from "fs";
 class WidgetsContainer extends Component {
   // Dashboard List GET https://dev.azure.com/{organization}/{project}/{team}/_apis/dashboard/dashboards?api-version=5.0-preview.2
   //Dashboard GET https://dev.azure.com/smilebots/LokusNews/{team}/_apis/dashboard/dashboards/{dashboardId}?api-version=5.0-preview.2
@@ -14,142 +16,131 @@ class WidgetsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wiqlWorkItemsList: [],
-      wiqlWorkItem: [],
-      wiqlList: [],
-      teamList: [],
-      widgetList: [],
+      workItemsList: null,
+      widgetList: null,
       isLoading: true
     };
   }
-  componentDidMount() {
-    const getWidgets = () => {
-      axios
-        .get(
-          `https://dev.azure.com/smilebots/_apis/teams?api-version=5.0-preview`,
-          headers
-        )
-        .then(response => {
-          // console.log("response gives teamList");
-          // console.log(response.data.value);
-          this.setState({
-            teamList: response.data.value
-          });
+  async componentDidMount() {
+    let workItemArray = [];
+    let widgetsArray = [];
+    const getWidgets = async () => {
+      // difficult_tasks = tasks.filter(task => task.duration >= 120);
 
-          // console.log("teamList from state");
-          // console.log(this.state.teamList);
-          this.state.teamList.map(team => {
-            if (team.projectId === this.props.match.params.projectId) {
-              let dashboardsListAPI = `https://dev.azure.com/smilebots/${
-                this.props.match.params.projectId
-              }/${
-                team.id
-              }/_apis/dashboard/dashboards?api-version=5.0-preview.2`;
-              //  console.log(dashboardsListAPI);
-              axios.get(dashboardsListAPI, headers).then(response => {
-                // console.log("Dashboard List");
-                // console.log(response.data.dashboardEntries);
+      const filteredTeam = this.props.teamList.value.filter(team => {
+        return this.props.match.params.projectId === team.projectId;
+      });
+      console.log("filtered team");
+      console.log(filteredTeam);
+      const dashboardsPromise = filteredTeam.map(async fteam => {
+        let dashboardsListAPI = `https://dev.azure.com/smilebots/${
+          this.props.match.params.projectId
+        }/${fteam.id}/_apis/dashboard/dashboards?api-version=5.0-preview.2`;
+        //console.log(dashboardsListAPI);
+        const response = await axios.get(dashboardsListAPI, headers);
+        return response.data;
+      });
 
-                if (response.data.dashboardEntries.length > 0) {
-                  const widgetListArray = [];
-                  response.data.dashboardEntries.map(dashboard => {
-                    axios.get(dashboard.url, headers).then(response => {
-                      if (response.data.widgets.length > 0) {
-                        // console.log("widgets list");
-                        // console.log(response.data.widgets.length);
-                        const widgets = response.data.widgets;
-                        widgetListArray.push(widgets);
-                      }
-                    });
-                  });
-                  // console.log("final array after all push");
-                  // console.log(widgetListArray);
+      const dashboardsPromises = Promise.all(dashboardsPromise);
 
-                  this.setState({ widgetList: widgetListArray });
-                  // console.log("widget list from state");
-                  // console.log(this.state.widgetList);
-                }
-              });
-
-              // https://dev.azure.com/smilebots/Project%20S/_apis/wit/queries?$depth=2&api-version=5.0
-
-              let queriesListAPI = `https://dev.azure.com/smilebots/${
-                this.props.match.params.projectId
-              }/_apis/wit/queries?$depth=2&api-version=5.0`;
-              //console.log(queriesListAPI);
-              axios.get(queriesListAPI, headers).then(response => {
-                // console.log(response.data);
-                // console.log(
-                //   response.data.value[1].children[0]._links.wiql.href
-                // );
-                const wiqlArray = [];
-                response.data.value.map(query => {
-                  if (query.children.length > 0)
-                    query.children.map(child => {
-                      //console.log(child._links.wiql.href);
-                      wiqlArray.push(child._links.wiql.href);
-                    });
-                });
-                this.setState({
-                  wiqlList: wiqlArray
-                });
-                const wiqlWorkItemsListArray = [];
-                this.state.wiqlList.map(wiql => {
-                  axios.get(wiql, headers).then(response => {
-                    // console.log("response from wiql");
-                    // console.log(response.data);
-                    wiqlWorkItemsListArray.push(response.data);
-                  });
-                });
-                this.setState({ wiqlWorkItemsList: wiqlWorkItemsListArray });
-                //console.log("work items list from state");
-                //console.log(this.state.wiqlWorkItemsList);
-                setTimeout(() => {
-                  if (
-                    this.state.wiqlWorkItemsList.length > 0 &&
-                    this.state.wiqlWorkItemsList[0]
-                  ) {
-                    const workItemArray = [];
-                    this.state.wiqlWorkItemsList.map(workItem => {
-                      workItem.workItems.map(workItemUrl => {
-                        let workItemAPI = workItemUrl.url;
-                        // console.log("workItemAPI");
-                        // console.log(workItemAPI);
-                        axios.get(workItemAPI, headers).then(response => {
-                          // console.log("workItem details");
-                          // console.log(response.data);
-                          workItemArray.push(response.data);
-                        });
-                      });
-                    });
-                    this.setState({
-                      wiqlWorkItem: workItemArray
-                    });
-                    // console.log("work item from state");
-                    // console.log(this.state.wiqlWorkItem);
-                  }
-                }, 1000);
-              });
-            }
-          });
-        })
-        .catch(error => {
-          this.setState({ error, isLoading: true });
-          console.log("something went wrong");
-        });
+      dashboardsPromises.then(dashboardsPromisesResponse => {
+        console.log("dashboard list data");
+        console.log(dashboardsPromisesResponse);
+        return dashboardsPromisesResponse.map(
+          dashboardsPromisesResponseItem => {
+            console.log("dashboardEntries");
+            console.log(dashboardsPromisesResponseItem.dashboardEntries);
+            const dashboardEntriesPromise = dashboardsPromisesResponseItem.dashboardEntries.map(
+              async element => {
+                console.log("dashboard entries url");
+                console.log(element.url);
+                const response = await axios.get(element.url, headers);
+                return response.data;
+              }
+            );
+            const dashboardEntriesPromises = Promise.all(
+              dashboardEntriesPromise
+            );
+            console.log("dashboardEntriesPromises");
+            dashboardEntriesPromises.then(dashboardEntriesPromisesResponse => {
+              console.log(dashboardEntriesPromisesResponse);
+              widgetsArray.push(dashboardEntriesPromisesResponse);
+            });
+          }
+        );
+      });
     };
-    axios.all([getWidgets()]).then(
-      this.setState({ isLoading: false })
-      //console.log(this.state.isLoading)
-    );
+
+    const getWorkItems = async () => {
+      const queryListApi = `https://dev.azure.com/smilebots/${
+        this.props.match.params.projectId
+      }/_apis/wit/queries?$depth=2&api-version=5.0`;
+      //console.log(queryListApi);
+      const queryListResponse = await axios.get(queryListApi, headers);
+      //console.log(queryListResponse.data.value);
+      queryListResponse.data.value.map(async query => {
+        if (query.children.length > 0) {
+          const queryListResponsePromise = query.children.map(async child => {
+            const response = await axios.get(child.url, headers);
+            return response.data;
+          });
+          const queryListResponsePromises = await Promise.all(
+            queryListResponsePromise
+          );
+          //console.log(queryListResponsePromises);
+          const wiqlListPromise = queryListResponsePromises.map(async item => {
+            //console.log(item._links.wiql.href);
+            const wiqlListResponse = await axios.get(
+              item._links.wiql.href,
+              headers
+            );
+            return wiqlListResponse.data;
+          });
+          const wiqlListPromises = Promise.all(wiqlListPromise);
+          wiqlListPromises.then(results => {
+            //console.log(results);
+            results.map(result => {
+              if (result.workItems.length > 0) {
+                const workItemListPromise = result.workItems.map(async item => {
+                  const workItemListResponse = await axios.get(
+                    item.url,
+                    headers
+                  );
+                  return workItemListResponse.data;
+                });
+                const workItemListPromises = Promise.all(workItemListPromise);
+                //console.log(workItemListPromises);
+                workItemListPromises.then(workItemList => {
+                  workItemArray.push(workItemList);
+                });
+              }
+            });
+          });
+        }
+      });
+    };
+
+    // console.log(workItemArray);
+    // console.log(widgetsArray);
+
+    await Promise.all([getWidgets(), getWorkItems()])
+      .then(() => {
+        this.setState({
+          isLoading: false,
+          widgetList: ["a", "b", "c"],
+          workItemsList: workItemArray
+        });
+        //console.log(this.state);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
     // console.log("widgets containers props");
     // console.log(this.props);
-    return this.state.isLoading ? (
-      <h2>loading...</h2>
-    ) : (
+    return (
       <div>
         <Widgets {...this.state} />
       </div>

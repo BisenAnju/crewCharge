@@ -1,0 +1,28 @@
+// console.log("workItemAPI");
+                        // console.log(workItemAPI);
+                        axios
+                          .get(workItemAPI, headers)
+                          .then(response => {
+                            // console.log("workItem details");
+                            // console.log(response.data);
+                            workItemArray.push(response.data);
+                          })
+                          .catch(error =>
+                            console.log(error + " couldn't fetch workitem API")
+                          );
+
+
+
+                          digital ocean 
+                          from terminal:
+                          basic terminal commands
+                          basic vi 
+                          ssh
+                          ftp
+                          scp copy through ssh
+                          firewall  using ufw
+
+                          nodejs pm2
+                          create a rest api in node js which return the reverse of a string 
+
+                          promises and chaining 

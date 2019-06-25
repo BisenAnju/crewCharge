@@ -9,7 +9,7 @@ import {
   IconButton,
   Divider,
   List,
-  ListItem
+  ListItem, Card, CardHeader, CardText, MenuItem
 } from "material-ui";
 import {
   NavigationArrowBack,
@@ -18,8 +18,7 @@ import {
 } from "material-ui/svg-icons";
 import Home from "material-ui/svg-icons/action/home";
 import Menu from "material-ui/svg-icons/navigation/menu";
-// import ROUTES from "../constants/routes";
-import { lightGreen400 } from "material-ui/styles/colors";
+import ROUTES from "../constants/routes";
 class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
@@ -39,25 +38,17 @@ class NavigationBar extends React.Component {
             textAlign: "center"
           }}
           title={this.props.navigationTitle}
-          style={{
-            backgroundColor: lightGreen400
-          }}
           onRightIconButtonClick={() =>
-            this.props.navigationTitle !== "Dashboard" &&
-            this.props.history.goBack("/dashboard")
-          }
+            this.props.navigationTitle !== "Dashboard" && this.props.history.goBack(ROUTES.DASHBOARD)}
           onLeftIconButtonClick={() =>
-            this.props.showBackNavigation
-              ? this.props.history.goBack()
-              : this.handleToggle()
-          }
+            this.props.showBackNavigation ? this.props.history.goBack() : this.handleToggle()}
           iconElementLeft={
             <IconButton>
               {this.props.showBackNavigation ? (
                 <NavigationArrowBack />
               ) : (
-                <Menu />
-              )}
+                  <Menu />
+                )}
             </IconButton>
           }
           iconElementRight={
@@ -135,6 +126,169 @@ class NavigationBar extends React.Component {
               leftIcon={<SocialPerson />}
             />
           </List>
+
+          {/* Routes of Complaint Management */}
+          <Card>
+            <CardHeader
+              title="Complaint Management"
+              actAsExpander={true}
+              showExpandableButton={true}
+            />
+
+            <CardText expandable={true}>
+              <MenuItem
+                onClick={e => {
+                  e.preventDefault();
+                  this.props.history.push("/complaint");
+                }}
+              >
+                New Complaint
+              </MenuItem>
+              <MenuItem
+                onClick={e => {
+                  e.preventDefault();
+                  this.props.history.push("/complaintlist");
+                }}
+              >
+                Complaint List
+              </MenuItem>
+            </CardText>
+          </Card>
+          {/*Team Allocation start */}
+          <Card style={{ boxShadow: "0px" }}>
+            <CardHeader
+              title="Team Allocation"
+              actAsExpander={true}
+              showExpandableButton={true}
+            />
+            <CardText expandable={true}>
+              <MenuItem
+                onClick={e => {
+                  e.preventDefault();
+                  this.props.history.push(
+                    "/teamallocation"
+                  );
+                }}
+              >
+                Missions
+                  </MenuItem>
+              <MenuItem
+                onClick={e => {
+                  e.preventDefault();
+                  this.props.history.push(
+                    "/teamallocation/project"
+                  );
+                }}
+              >
+                Project
+                  </MenuItem>
+            </CardText>
+          </Card>
+          {/*Team Allocation End */}
+          {/* Team Intelligence MenuItem  Start*/}
+          {/* <Card>
+            <CardHeader
+              title="Team Intelligence"
+              actAsExpander={true}
+              showExpandableButton={true}
+            />
+
+            <CardText
+              expandable={true}
+              style={{
+                padding: 0
+              }}
+            >
+              <Card style={{ boxShadow: "0px" }}>
+                <CardHeader
+                  title="Admin"
+                  actAsExpander={true}
+                  showExpandableButton={true}
+                />
+                <CardText expandable={true}>
+                  <MenuItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push(
+                        "/teamintelligencedashboard/admin"
+                      );
+                    }}
+                  >
+                    Question Management
+                  </MenuItem>
+                  <MenuItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push(
+                        "/teamintelligencedashboard/admin/teamemployeedetaillist"
+                      );
+                    }}
+                  >
+                    Employee Got Talent
+                  </MenuItem>
+                  <MenuItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push(
+                        "/teamintelligencedashboard/admin/teamcategorylist"
+                      );
+                    }}
+                  >
+                    Category List
+                  </MenuItem>
+                  <MenuItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push(
+                        "/teamintelligencedashboard/admin/teamarchiveddata"
+                      );
+                    }}
+                  >
+                    Archived List
+                  </MenuItem>
+                </CardText>
+              </Card> */}
+          {/* <Card style={{ boxShadow: "0px" }}>
+                <CardHeader
+                  title="Employee"
+                  actAsExpander={true}
+                  showExpandableButton={true}
+                />
+                <CardText expandable={true}>
+                  <MenuItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push(
+                        "/teamintelligencedashboard/employee"
+                      );
+                    }}
+                  >
+                    Question Management
+                  </MenuItem>
+                  <MenuItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push(
+                        "/teamintelligencedashboard/employee/teamemployeedetaillist"
+                      );
+                    }}
+                  >
+                    Employee Got Talent
+                  </MenuItem>
+                </CardText>
+              </Card> */}
+          {/* </CardText>
+          </Card> */}
+          {/* Team Intelligence MenuItem  End*/}
+          <Card>
+            <MenuItem
+              onClick={() => {
+                this.props.logOut();
+              }}
+            >
+              <b>SignOut</b>
+            </MenuItem>
+          </Card>
         </Drawer>
       </div>
     );

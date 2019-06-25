@@ -1,0 +1,1305 @@
+{
+	"info": {
+		"_postman_id": "b490906f-d330-a15e-4bb3-2318921a676e",
+		"name": "Azure DevOps",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://app.vssps.visualstudio.com/oauth2/token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJuYW1laWQiOiJhMDMxYjExNS1kNzBiLTQ3M2QtYjc4OS1jOTE4NTk4MWI0YTQiLCJzY3AiOiJ2c28uYWdlbnRwb29sc19tYW5hZ2UgdnNvLmJ1aWxkX2V4ZWN1dGUgdnNvLmNvZGVfZnVsbCB2c28uY29kZV9zdGF0dXMgdnNvLmNvbm5lY3RlZF9zZXJ2ZXIgdnNvLmRhc2hib2FyZHMgdnNvLmRhc2hib2FyZHNfbWFuYWdlIHZzby5leHRlbnNpb24uZGF0YV93cml0ZSB2c28uZXh0ZW5zaW9uX21hbmFnZSB2c28uZ2FsbGVyeV9hY3F1aXJlIHZzby5nYWxsZXJ5X21hbmFnZSB2c28uZ3JhcGhfbWFuYWdlIHZzby5pZGVudGl0eV9tYW5hZ2UgdnNvLmxvYWR0ZXN0X3dyaXRlIHZzby5tZW1iZXJlbnRpdGxlbWVudG1hbmFnZW1lbnRfd3JpdGUgdnNvLm5vdGlmaWNhdGlvbl9kaWFnbm9zdGljcyB2c28ubm90aWZpY2F0aW9uX21hbmFnZSB2c28ucGFja2FnaW5nX21hbmFnZSB2c28ucHJvZmlsZV93cml0ZSB2c28ucHJvamVjdF9tYW5hZ2UgdnNvLnJlbGVhc2VfbWFuYWdlIHZzby5zZWN1cmVmaWxlc19tYW5hZ2UgdnNvLnNlY3VyaXR5X21hbmFnZSB2c28uc2VydmljZWVuZHBvaW50X21hbmFnZSB2c28uc3ltYm9sc19tYW5hZ2UgdnNvLnRhc2tncm91cHNfbWFuYWdlIHZzby50ZXN0X3dyaXRlIHZzby50b2tlbmFkbWluaXN0cmF0aW9uIHZzby50b2tlbnMgdnNvLnZhcmlhYmxlZ3JvdXBzX21hbmFnZSB2c28ud2lraV93cml0ZSB2c28ud29ya19mdWxsIiwiYXVpIjoiM2Q5MWQyZGYtMDVmOC00MGFlLTk5ZjYtY2UxMzFlZThhYTdiIiwiYXBwaWQiOiJjNmU0NjE3OS1lNTM1LTQyMzQtODYzMS1kZDIzNmI5NTExMjQiLCJpc3MiOiJhcHAudnN0b2tlbi52aXN1YWxzdHVkaW8uY29tIiwiYXVkIjoiYXBwLnZzdG9rZW4udmlzdWFsc3R1ZGlvLmNvbSIsIm5iZiI6MTU1OTg5NDk3OCwiZXhwIjoxNTU5ODk4NTc4fQ.SUOPr07Hq57L5knkYwYlh_eX3efiy5nhvoUqyB3JZcF0nx_E22xnd_KqngmjF3KbAqhb1mM_cvThJJEJFkqiprKvtqU8LGNIMlf80wWG-yFHUVZNCB4z4Mo8Nykfuuk3EpE0ZOGQeHDPK5_CotczP4dQHLTVUVnQZTJxfY8GtZXP5y4Gxnpr3XcoFTzhr2j8sOQQXfZT0eWfVF1H0E1Y0gBeJ3vgtgEq-7230iD7aI7KVaXEpAsFG8vomxz5fAfmr34N9USgQPsosCMmaugLW9cz23aP2KLOg5DlEom_kxPNsWYn28dvGkeyzbV98K2Dbb9K7rCBqvxUzCuj9QBxLw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded\n",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Length",
+						"value": "Calculated string length of the request body (see below)",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJjaWQiOiJjNmU0NjE3OS1lNTM1LTQyMzQtODYzMS1kZDIzNmI5NTExMjQiLCJjc2kiOiJjN2FiZGE2Ny05M2VhLTQwNmItYjU2Yi1lMTJlZmJhNWY4NjYiLCJuYW1laWQiOiJhMDMxYjExNS1kNzBiLTQ3M2QtYjc4OS1jOTE4NTk4MWI0YTQiLCJpc3MiOiJhcHAudnN0b2tlbi52aXN1YWxzdHVkaW8uY29tIiwiYXVkIjoiYXBwLnZzdG9rZW4udmlzdWFsc3R1ZGlvLmNvbSIsIm5iZiI6MTU1OTg5MTU3MCwiZXhwIjoxNzE3NzQ0MzcwfQ.ctrac9cM3u8hKq6M9hEcSThZMm2F0pXo_1RZwxc0k1sYEJNgaM0hX-pWAJ3TtLr_X19WQ2glQ2nhG3B8LcgNeO45Edpoh9aHiu7ngqr9SzN-VS5lwVkeF6CvdllWPEzA6AjYiFuMyNEhwPHXYYLKoL62E0C6ikWesgeg6dDLySTeum1AAfFAxFKyVXNVlAFeKWdqAHdXmzQEUAgoUtD6QZYFmzywasGob1jCampWz_Xz5vafxJCJWK9mitOdgWvxq52phpjGm-QI3dJryajkzYSiOJoPlM7sp5iaDlV61iorEArbPME4ERPCIcUwWEo0vgJsULNqGBSjvDQClsJjpA&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJhdWkiOiIzZDkxZDJkZi0wNWY4LTQwYWUtOTlmNi1jZTEzMWVlOGFhN2IiLCJuYW1laWQiOiJhMDMxYjExNS1kNzBiLTQ3M2QtYjc4OS1jOTE4NTk4MWI0YTQiLCJzY3AiOiJ2c28uYWdlbnRwb29sc19tYW5hZ2UgdnNvLmJ1aWxkX2V4ZWN1dGUgdnNvLmNvZGVfZnVsbCB2c28uY29kZV9zdGF0dXMgdnNvLmNvbm5lY3RlZF9zZXJ2ZXIgdnNvLmRhc2hib2FyZHMgdnNvLmRhc2hib2FyZHNfbWFuYWdlIHZzby5leHRlbnNpb24uZGF0YV93cml0ZSB2c28uZXh0ZW5zaW9uX21hbmFnZSB2c28uZ2FsbGVyeV9hY3F1aXJlIHZzby5nYWxsZXJ5X21hbmFnZSB2c28uZ3JhcGhfbWFuYWdlIHZzby5pZGVudGl0eV9tYW5hZ2UgdnNvLmxvYWR0ZXN0X3dyaXRlIHZzby5tZW1iZXJlbnRpdGxlbWVudG1hbmFnZW1lbnRfd3JpdGUgdnNvLm5vdGlmaWNhdGlvbl9kaWFnbm9zdGljcyB2c28ubm90aWZpY2F0aW9uX21hbmFnZSB2c28ucGFja2FnaW5nX21hbmFnZSB2c28ucHJvZmlsZV93cml0ZSB2c28ucHJvamVjdF9tYW5hZ2UgdnNvLnJlbGVhc2VfbWFuYWdlIHZzby5zZWN1cmVmaWxlc19tYW5hZ2UgdnNvLnNlY3VyaXR5X21hbmFnZSB2c28uc2VydmljZWVuZHBvaW50X21hbmFnZSB2c28uc3ltYm9sc19tYW5hZ2UgdnNvLnRhc2tncm91cHNfbWFuYWdlIHZzby50ZXN0X3dyaXRlIHZzby50b2tlbmFkbWluaXN0cmF0aW9uIHZzby50b2tlbnMgdnNvLnZhcmlhYmxlZ3JvdXBzX21hbmFnZSB2c28ud2lraV93cml0ZSB2c28ud29ya19mdWxsIHZzby5hdXRob3JpemF0aW9uX2dyYW50IiwiaXNzIjoiYXBwLnZzdG9rZW4udmlzdWFsc3R1ZGlvLmNvbSIsImF1ZCI6ImFwcC52c3Rva2VuLnZpc3VhbHN0dWRpby5jb20iLCJuYmYiOjE1NTk4OTQzOTAsImV4cCI6MTU1OTg5NTI5MH0.ctUvkCe8b_Cr1Wk6fGCO2t1uRCuzuj8pGvvtZYIsJvu__x2WssjKcNie-0LbLIjybY3olxX9pG7tsp7x4LJgOH-jNJEwSF0ihiK9c68ec6_wyA7GYVWWmeLGrpqUSv70HzvxPpjs9qjGM6X6k8tE57IxwIsmyae7ErzFEMCNgM6JT1euWetVakbpcpQkOm3aXyPBvGy28GkS6EC5q1bdA3vjOADdqEdfd4COOySzzJRUdfYQar2DhLgoGJ07KJeWc55-PQaEw2htqk7tHLY1JhVPZ-6qwcC9e2Zve8PcYZoE0VQ0iOqLsg6-9BJCEiJP42Bzbzr3i6BMjEmLnITGhg&redirect_uri=https://smilebots.page.link"
+				},
+				"url": {
+					"raw": "https://app.vssps.visualstudio.com/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"app",
+						"vssps",
+						"visualstudio",
+						"com"
+					],
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://app.vssps.visualstudio.com/oauth2/token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJjaWQiOiJjNmU0NjE3OS1lNTM1LTQyMzQtODYzMS1kZDIzNmI5NTExMjQiLCJjc2kiOiJjN2FiZGE2Ny05M2VhLTQwNmItYjU2Yi1lMTJlZmJhNWY4NjYiLCJuYW1laWQiOiJhMDMxYjExNS1kNzBiLTQ3M2QtYjc4OS1jOTE4NTk4MWI0YTQiLCJpc3MiOiJhcHAudnN0b2tlbi52aXN1YWxzdHVkaW8uY29tIiwiYXVkIjoiYXBwLnZzdG9rZW4udmlzdWFsc3R1ZGlvLmNvbSIsIm5iZiI6MTU1OTg5MTU3MCwiZXhwIjoxNzE3NzQ0MzcwfQ.ctrac9cM3u8hKq6M9hEcSThZMm2F0pXo_1RZwxc0k1sYEJNgaM0hX-pWAJ3TtLr_X19WQ2glQ2nhG3B8LcgNeO45Edpoh9aHiu7ngqr9SzN-VS5lwVkeF6CvdllWPEzA6AjYiFuMyNEhwPHXYYLKoL62E0C6ikWesgeg6dDLySTeum1AAfFAxFKyVXNVlAFeKWdqAHdXmzQEUAgoUtD6QZYFmzywasGob1jCampWz_Xz5vafxJCJWK9mitOdgWvxq52phpjGm-QI3dJryajkzYSiOJoPlM7sp5iaDlV61iorEArbPME4ERPCIcUwWEo0vgJsULNqGBSjvDQClsJjpA&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJhdWkiOiI2NzI3MGZlZS02YmEwLTRiNzAtYjI2Yi1jODQ0NTNkYTI5YTkiLCJuYW1laWQiOiJhMDMxYjExNS1kNzBiLTQ3M2QtYjc4OS1jOTE4NTk4MWI0YTQiLCJzY3AiOiJ2c28uYWdlbnRwb29sc19tYW5hZ2UgdnNvLmJ1aWxkX2V4ZWN1dGUgdnNvLmNvZGVfZnVsbCB2c28uY29kZV9zdGF0dXMgdnNvLmNvbm5lY3RlZF9zZXJ2ZXIgdnNvLmRhc2hib2FyZHMgdnNvLmRhc2hib2FyZHNfbWFuYWdlIHZzby5leHRlbnNpb24uZGF0YV93cml0ZSB2c28uZXh0ZW5zaW9uX21hbmFnZSB2c28uZ2FsbGVyeV9hY3F1aXJlIHZzby5nYWxsZXJ5X21hbmFnZSB2c28uZ3JhcGhfbWFuYWdlIHZzby5pZGVudGl0eV9tYW5hZ2UgdnNvLmxvYWR0ZXN0X3dyaXRlIHZzby5tZW1iZXJlbnRpdGxlbWVudG1hbmFnZW1lbnRfd3JpdGUgdnNvLm5vdGlmaWNhdGlvbl9kaWFnbm9zdGljcyB2c28ubm90aWZpY2F0aW9uX21hbmFnZSB2c28ucGFja2FnaW5nX21hbmFnZSB2c28ucHJvZmlsZV93cml0ZSB2c28ucHJvamVjdF9tYW5hZ2UgdnNvLnJlbGVhc2VfbWFuYWdlIHZzby5zZWN1cmVmaWxlc19tYW5hZ2UgdnNvLnNlY3VyaXR5X21hbmFnZSB2c28uc2VydmljZWVuZHBvaW50X21hbmFnZSB2c28uc3ltYm9sc19tYW5hZ2UgdnNvLnRhc2tncm91cHNfbWFuYWdlIHZzby50ZXN0X3dyaXRlIHZzby50b2tlbmFkbWluaXN0cmF0aW9uIHZzby50b2tlbnMgdnNvLnZhcmlhYmxlZ3JvdXBzX21hbmFnZSB2c28ud2lraV93cml0ZSB2c28ud29ya19mdWxsIHZzby5hdXRob3JpemF0aW9uX2dyYW50IiwiaXNzIjoiYXBwLnZzdG9rZW4udmlzdWFsc3R1ZGlvLmNvbSIsImF1ZCI6ImFwcC52c3Rva2VuLnZpc3VhbHN0dWRpby5jb20iLCJuYmYiOjE1NTk5MzMwMDEsImV4cCI6MTU1OTkzMzkwMX0.iWmlNemDDCF5HVsxR3TB5L_uGCpg84fti2VnadLe9zqQBHnb5yHJ__QXADOY5EE8RHd4LS6Y8yCvQnyJc7JATEBJL5Bhi_1g2Vhiq1zvIgdQQHycpk4qCQrkWW6ka_e7vhwbszAAQIUsHeLP4vIwz3rmOFVmwWw7BhkY2_qia6YBxaiYf2blGXRkyWZQD-g86xE1Ofb0aBrcGvyq0mVYOc0jX-8AKZc3Dd02Ph2hmS9NpBTis0ff6tcsq7jzQODbQhwBI4OH5A371O4kMW6dQ0XLic7vB7vEQNaW7sESB7WY6GXxhhBKZ5WQtKlPsG3fvgtj-kA7uD1QbOXCCfI1Ig&redirect_uri=https://smilebots.page.link"
+				},
+				"url": {
+					"raw": "https://app.vssps.visualstudio.com/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"app",
+						"vssps",
+						"visualstudio",
+						"com"
+					],
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TeamList",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/_apis/teams?api-version=5.0-preview",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"_apis",
+						"teams"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "5.0-preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProjectList",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+						"key": "Authorization",
+						"value": "Basic OjNzaGd2NzVwYWNqd3l4Y3o1NmJ3cG9nY3phMjczaHFqaXNmcWMyYXFlbzRpMmhlNzR4YnE=",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/_apis/projects?api-version=5.1-preview.2",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"_apis",
+						"projects"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "M3NoZ3Y3NXBhY2p3eXhjejU2Yndwb2djemEyNzNocWppc2ZxYzJhcWVvNGkyaGU3NHhicQ==",
+							"disabled": true
+						},
+						{
+							"key": "api-version",
+							"value": "5.1-preview.2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DashboardList",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/a54486bc-eb07-444f-ab8b-f16202416e5f/2e5a85d0-5b65-472d-96ef-15f573951d5e/_apis/dashboard/dashboards?api-version=5.0-preview.2\n",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"a54486bc-eb07-444f-ab8b-f16202416e5f",
+						"2e5a85d0-5b65-472d-96ef-15f573951d5e",
+						"_apis",
+						"dashboard",
+						"dashboards"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "5.0-preview.2\n"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "DashboardList",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "GET https://dev.azure.com/{organization}/{project}/{team}/_apis/dashboard/dashboards?api-version=5.0-preview.2",
+							"protocol": "GET https",
+							"host": [
+								"dev",
+								"azure",
+								"com"
+							],
+							"path": [
+								"{organization}",
+								"{project}",
+								"{team}",
+								"_apis",
+								"dashboard",
+								"dashboards"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "5.0-preview.2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Length",
+							"value": "360"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8; api-version=5.0-preview.2"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "P3P",
+							"value": "CP=\"CAO DSP COR ADMa DEV CONo TELo CUR PSA PSD TAI IVDo OUR SAMi BUS DEM NAV STA UNI COM INT PHY ONL FIN PUR LOC CNT\""
+						},
+						{
+							"key": "X-TFS-ProcessId",
+							"value": "e0d2ab60-0bbf-4563-8e3f-666db72220b0"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubDomains"
+						},
+						{
+							"key": "ActivityId",
+							"value": "504a747c-9e67-48d8-a893-d1847c6595e2"
+						},
+						{
+							"key": "X-TFS-Session",
+							"value": "504a747c-9e67-48d8-a893-d1847c6595e2"
+						},
+						{
+							"key": "X-VSS-E2EID",
+							"value": "504a747c-9e67-48d8-a893-d1847c6595e2"
+						},
+						{
+							"key": "X-VSS-UserData",
+							"value": "3333acdf-db1f-6bb4-a0dc-9ff4d16b7c44:neeraj@smilebots.com"
+						},
+						{
+							"key": "X-FRAME-OPTIONS",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Request-Context",
+							"value": "appId=cid-v1:a892bfef-0287-4640-9f5e-cffc90fbcf94"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "Request-Context"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-MSEdge-Ref",
+							"value": "Ref A: 54F16A544EBC46ADB672BE759DD8159E Ref B: MAA01EDGE0216 Ref C: 2019-06-10T06:35:44Z"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 10 Jun 2019 06:35:43 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"dashboardEntries\": [\n        {\n            \"id\": \"e7902475-7ba0-4f8a-b316-c9b05efc0bc7\",\n            \"name\": \"Overview\",\n            \"refreshInterval\": 0,\n            \"position\": 1,\n            \"url\": \"https://dev.azure.com/smilebots/_apis/Dashboard/Dashboards/e7902475-7ba0-4f8a-b316-c9b05efc0bc7\"\n        }\n    ],\n    \"permission\": \"none\",\n    \"teamDashboardPermission\": \"read, create, edit, delete\",\n    \"url\": \"https://dev.azure.com/smilebots/_apis/Dashboard/Dashboards\",\n    \"_links\": {\n        \"self\": {\n            \"href\": \"https://dev.azure.com/smilebots/_apis/Dashboard/Dashboards\"\n        },\n        \"dashboard\": {\n            \"href\": \"https://dev.azure.com/smilebots/_apis/Dashboard/Dashboards/e7902475-7ba0-4f8a-b316-c9b05efc0bc7\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/a54486bc-eb07-444f-ab8b-f16202416e5f/2e5a85d0-5b65-472d-96ef-15f573951d5e/_apis/dashboard/dashboards/3da155db-0f6e-4bef-83a3-b95d76e7a385?api-version=5.0-preview.2\n",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"a54486bc-eb07-444f-ab8b-f16202416e5f",
+						"2e5a85d0-5b65-472d-96ef-15f573951d5e",
+						"_apis",
+						"dashboard",
+						"dashboards",
+						"3da155db-0f6e-4bef-83a3-b95d76e7a385"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "5.0-preview.2\n"
+						}
+					]
+				},
+				"description": "GET https://dev.azure.com/{organization}/{project}/{team}/_apis/dashboard/dashboards/{dashboardId}?api-version=5.0-preview.2"
+			},
+			"response": [
+				{
+					"name": "Dashboard",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "GET https://dev.azure.com/smilebots/LokusNews/{team}/_apis/dashboard/dashboards/{dashboardId}?api-version=5.0-preview.2\n",
+							"protocol": "GET https",
+							"host": [
+								"dev",
+								"azure",
+								"com"
+							],
+							"path": [
+								"smilebots",
+								"LokusNews",
+								"{team}",
+								"_apis",
+								"dashboard",
+								"dashboards",
+								"{dashboardId}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "5.0-preview.2\n"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/_apis/projects/LokusNews?api-version=5.0\n",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"_apis",
+						"projects",
+						"LokusNews"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "5.0\n"
+						}
+					]
+				},
+				"description": "GET https://dev.azure.com/{organization}/_apis/projects/{projectId}?api-version=5.0\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "QueriesList",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/LokusNews/_apis/wit/queries?api-version=5.0",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"LokusNews",
+						"_apis",
+						"wit",
+						"queries"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "5.0"
+						}
+					]
+				},
+				"description": "GET https://dev.azure.com/{organization}/{project}/_apis/wit/queries?api-version=5.0"
+			},
+			"response": []
+		},
+		{
+			"name": "Query",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/a54486bc-eb07-444f-ab8b-f16202416e5f/_apis/wit/queries/38769b93-2d68-44ef-9f59-aa1caf0095cc?api-version=5.0",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"a54486bc-eb07-444f-ab8b-f16202416e5f",
+						"_apis",
+						"wit",
+						"queries",
+						"38769b93-2d68-44ef-9f59-aa1caf0095cc"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "5.0"
+						}
+					]
+				},
+				"description": "GET https://dev.azure.com/{organization}/{project}/_apis/wit/queries/{query}?api-version=5.0"
+			},
+			"response": []
+		},
+		{
+			"name": "Avatar",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/_apis/GraphProfile/MemberAvatars/ec1e73f7-b788-4804-a463-c702336b6bcb",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"_apis",
+						"GraphProfile",
+						"MemberAvatars",
+						"ec1e73f7-b788-4804-a463-c702336b6bcb"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Avatar",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dev.azure.com/smilebots/_apis/GraphProfile/MemberAvatars/{teamId}",
+							"protocol": "https",
+							"host": [
+								"dev",
+								"azure",
+								"com"
+							],
+							"path": [
+								"smilebots",
+								"_apis",
+								"GraphProfile",
+								"MemberAvatars",
+								"{teamId}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Widgets",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "eTag",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/a0d9a7e7-2def-4157-bfed-9f5cb643fe9d/beed249d-6e47-418c-b4f5-f8ce61d5ae61/_apis/dashboard/dashboards/e7902475-7ba0-4f8a-b316-c9b05efc0bc7/widgets?api-version=5.0-preview.2",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"a0d9a7e7-2def-4157-bfed-9f5cb643fe9d",
+						"beed249d-6e47-418c-b4f5-f8ce61d5ae61",
+						"_apis",
+						"dashboard",
+						"dashboards",
+						"e7902475-7ba0-4f8a-b316-c9b05efc0bc7",
+						"widgets"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "5.0-preview.2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Widgets",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "GET https://dev.azure.com/{organization}/{project}/{team}/_apis/dashboard/dashboards/{dashboardId}/widgets?api-version=5.0-preview.2",
+							"protocol": "GET https",
+							"host": [
+								"dev",
+								"azure",
+								"com"
+							],
+							"path": [
+								"{organization}",
+								"{project}",
+								"{team}",
+								"_apis",
+								"dashboard",
+								"dashboards",
+								"{dashboardId}",
+								"widgets"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "5.0-preview.2"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Wiql",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/a54486bc-eb07-444f-ab8b-f16202416e5f/2e5a85d0-5b65-472d-96ef-15f573951d5e/_apis/wit/wiql/94e929f3-a2f7-437d-99dc-438ca76a2ba6?api-version=5.0",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"a54486bc-eb07-444f-ab8b-f16202416e5f",
+						"2e5a85d0-5b65-472d-96ef-15f573951d5e",
+						"_apis",
+						"wit",
+						"wiql",
+						"94e929f3-a2f7-437d-99dc-438ca76a2ba6"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "5.0"
+						}
+					]
+				},
+				"description": "POST https://dev.azure.com/{organization}/{project}/{team}/_apis/wit/wiql?api-version=5.0"
+			},
+			"response": [
+				{
+					"name": "Wiql",
+					"originalRequest": {
+						"method": "HEAD",
+						"header": [],
+						"url": {
+							"raw": "HEAD https://dev.azure.com/{organization}/{project}/{team}/_apis/wit/wiql/{id}?api-version=5.0",
+							"protocol": "HEAD https",
+							"host": [
+								"dev",
+								"azure",
+								"com"
+							],
+							"path": [
+								"{organization}",
+								"{project}",
+								"{team}",
+								"_apis",
+								"wit",
+								"wiql",
+								"{id}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "5.0"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8; api-version=5.0"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "P3P",
+							"value": "CP=\"CAO DSP COR ADMa DEV CONo TELo CUR PSA PSD TAI IVDo OUR SAMi BUS DEM NAV STA UNI COM INT PHY ONL FIN PUR LOC CNT\""
+						},
+						{
+							"key": "WWW-Authenticate",
+							"value": "Bearer authorization_uri=https://login.microsoftonline.com/dba8f870-4ae5-4079-af4f-e3a139920a94"
+						},
+						{
+							"key": "X-TFS-ProcessId",
+							"value": "ef5bf93c-68d7-42ab-82cf-3b1ac8ef4629"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubDomains"
+						},
+						{
+							"key": "ActivityId",
+							"value": "7a43db7d-5d3e-4a1c-b917-411b98a6372a"
+						},
+						{
+							"key": "X-TFS-Session",
+							"value": "7a43db7d-5d3e-4a1c-b917-411b98a6372a"
+						},
+						{
+							"key": "X-VSS-E2EID",
+							"value": "7a43db7d-5d3e-4a1c-b917-411b98a6372a"
+						},
+						{
+							"key": "X-VSS-UserData",
+							"value": "3333acdf-db1f-6bb4-a0dc-9ff4d16b7c44:neeraj@smilebots.com"
+						},
+						{
+							"key": "X-TFS-FedAuthRealm",
+							"value": "https://tfsprodsin1.app.visualstudio.com/"
+						},
+						{
+							"key": "X-TFS-FedAuthIssuer",
+							"value": "https://dev.azure.com/smilebots/"
+						},
+						{
+							"key": "X-VSS-AuthorizationEndpoint",
+							"value": "https://vssps.dev.azure.com/smilebots/"
+						},
+						{
+							"key": "X-VSS-ResourceTenant",
+							"value": "dba8f870-4ae5-4079-af4f-e3a139920a94"
+						},
+						{
+							"key": "X-FRAME-OPTIONS",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "1"
+						},
+						{
+							"key": "Request-Context",
+							"value": "appId=cid-v1:a892bfef-0287-4640-9f5e-cffc90fbcf94"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "Request-Context"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-MSEdge-Ref",
+							"value": "Ref A: AB2C86641582405D8BFC70BDF440BA98 Ref B: MAA01EDGE0209 Ref C: 2019-06-11T06:20:42Z"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 11 Jun 2019 06:20:41 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Work Items List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/Project%20S/_apis/wit/workitems?ids={ids}&api-version=5.0",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"Project%20S",
+						"_apis",
+						"wit",
+						"workitems"
+					],
+					"query": [
+						{
+							"key": "ids",
+							"value": "{ids}"
+						},
+						{
+							"key": "api-version",
+							"value": "5.0"
+						}
+					]
+				},
+				"description": "GET https://dev.azure.com/{organization}/{project}/_apis/wit/workitems?ids={ids}&api-version=5.0"
+			},
+			"response": []
+		},
+		{
+			"name": "Board List",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/a54486bc-eb07-444f-ab8b-f16202416e5f/ec1e73f7-b788-4804-a463-c702336b6bcb/_apis/work/boards?api-version=5.0",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"a54486bc-eb07-444f-ab8b-f16202416e5f",
+						"ec1e73f7-b788-4804-a463-c702336b6bcb",
+						"_apis",
+						"work",
+						"boards"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "5.0"
+						}
+					]
+				},
+				"description": "GET https://dev.azure.com/{organization}/{project}/{team}/_apis/work/boards?api-version=5.0"
+			},
+			"response": []
+		},
+		{
+			"name": "Board",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/a54486bc-eb07-444f-ab8b-f16202416e5f/ec1e73f7-b788-4804-a463-c702336b6bcb/_apis/work/boards/4fde74d0-afd2-433a-8a68-79366aab84f6?api-version=5.0",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"a54486bc-eb07-444f-ab8b-f16202416e5f",
+						"ec1e73f7-b788-4804-a463-c702336b6bcb",
+						"_apis",
+						"work",
+						"boards",
+						"4fde74d0-afd2-433a-8a68-79366aab84f6"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "5.0"
+						}
+					]
+				},
+				"description": "GET https://dev.azure.com/{organization}/{project}/{team}/_apis/work/boards/{id}?api-version=5.0"
+			},
+			"response": []
+		},
+		{
+			"name": "Widget",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/a54486bc-eb07-444f-ab8b-f16202416e5f/ec1e73f7-b788-4804-a463-c702336b6bcb/_apis/Dashboard/dashboards/1baf6ad2-0520-41ea-9ee0-0b5c4f2129c1/Widgets/fead4485-96c0-4879-8823-5444d7ec615c",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"a54486bc-eb07-444f-ab8b-f16202416e5f",
+						"ec1e73f7-b788-4804-a463-c702336b6bcb",
+						"_apis",
+						"Dashboard",
+						"dashboards",
+						"1baf6ad2-0520-41ea-9ee0-0b5c4f2129c1",
+						"Widgets",
+						"fead4485-96c0-4879-8823-5444d7ec615c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wiql fecth by Wiql",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": \"Select [System.Id], [System.Title], [System.State] From WorkItems Where [System.WorkItemType] = 'Task' AND [State] <> 'Closed' AND [State] <> 'Removed' order by [Microsoft.VSTS.Common.Priority] asc, [System.CreatedDate] desc\"\r\n}"
+				},
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/a54486bc-eb07-444f-ab8b-f16202416e5f/ec1e73f7-b788-4804-a463-c702336b6bcb/_apis/wit/wiql?api-version=5.0",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"a54486bc-eb07-444f-ab8b-f16202416e5f",
+						"ec1e73f7-b788-4804-a463-c702336b6bcb",
+						"_apis",
+						"wit",
+						"wiql"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "5.0"
+						}
+					]
+				},
+				"description": "POST https://dev.azure.com/{organization}/{project}/{team}/_apis/wit/wiql?api-version=5.0"
+			},
+			"response": []
+		},
+		{
+			"name": "Test",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/a54486bc-eb07-444f-ab8b-f16202416e5f/2e5a85d0-5b65-472d-96ef-15f573951d5e/_apis/Dashboard/dashboards/3da155db-0f6e-4bef-83a3-b95d76e7a385/Widgets/246ef93a-7cf9-4c71-a29b-bef87c98a70b",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"a54486bc-eb07-444f-ab8b-f16202416e5f",
+						"2e5a85d0-5b65-472d-96ef-15f573951d5e",
+						"_apis",
+						"Dashboard",
+						"dashboards",
+						"3da155db-0f6e-4bef-83a3-b95d76e7a385",
+						"Widgets",
+						"246ef93a-7cf9-4c71-a29b-bef87c98a70b"
+					]
+				},
+				"description": "https://dev.azure.com/smilebots/a54486bc-eb07-444f-ab8b-f16202416e5f/_apis/wit/workItems/1381"
+			},
+			"response": []
+		},
+		{
+			"name": "Team",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/name/_apis/projects/a54486bc-eb07-444f-ab8b-f16202416e5f/teams/2e5a85d0-5b65-472d-96ef-15f573951d5e?api-version=5.0",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"name",
+						"_apis",
+						"projects",
+						"a54486bc-eb07-444f-ab8b-f16202416e5f",
+						"teams",
+						"2e5a85d0-5b65-472d-96ef-15f573951d5e"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "5.0"
+						}
+					]
+				},
+				"description": "GET https://dev.azure.com/{organization}/_apis/projects/{projectId}/teams/{teamId}?api-version=5.0"
+			},
+			"response": []
+		},
+		{
+			"name": "Test2",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "3shgv75pacjwyxcz56bwpogcza273hqjisfqc2aqeo4i2he74xbq",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.azure.com/smilebots/a54486bc-eb07-444f-ab8b-f16202416e5f/2e5a85d0-5b65-472d-96ef-15f573951d5e/_apis/Dashboard/Dashboards/3da155db-0f6e-4bef-83a3-b95d76e7a385",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"azure",
+						"com"
+					],
+					"path": [
+						"smilebots",
+						"a54486bc-eb07-444f-ab8b-f16202416e5f",
+						"2e5a85d0-5b65-472d-96ef-15f573951d5e",
+						"_apis",
+						"Dashboard",
+						"Dashboards",
+						"3da155db-0f6e-4bef-83a3-b95d76e7a385"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

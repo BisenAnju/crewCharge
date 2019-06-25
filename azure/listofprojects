@@ -1,0 +1,123 @@
+{
+    "count": 13,
+    "value": [
+        {
+            "id": "8bbaf783-cfb7-4861-8b8b-29339513cc10",
+            "name": "PipeLine Testing",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/8bbaf783-cfb7-4861-8b8b-29339513cc10",
+            "state": "wellFormed",
+            "revision": 138,
+            "visibility": "private",
+            "lastUpdateTime": "2019-05-10T10:35:23.073Z"
+        },
+        {
+            "id": "cb7e0423-952c-409f-b5f2-24e143893615",
+            "name": "FD Aggregator",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/cb7e0423-952c-409f-b5f2-24e143893615",
+            "state": "wellFormed",
+            "revision": 155,
+            "visibility": "private",
+            "lastUpdateTime": "2019-05-11T05:49:17.03Z"
+        },
+        {
+            "id": "adcbd747-20f5-4e48-b1d3-b3de65bd70bb",
+            "name": "Project P",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/adcbd747-20f5-4e48-b1d3-b3de65bd70bb",
+            "state": "wellFormed",
+            "revision": 314,
+            "visibility": "private",
+            "lastUpdateTime": "2019-06-06T10:39:05.35Z"
+        },
+        {
+            "id": "43b43950-fa96-448c-960b-db24c0b29496",
+            "name": "YourWheeler-Seller",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/43b43950-fa96-448c-960b-db24c0b29496",
+            "state": "wellFormed",
+            "revision": 278,
+            "visibility": "private",
+            "lastUpdateTime": "2019-05-31T05:39:11.487Z"
+        },
+        {
+            "id": "a54486bc-eb07-444f-ab8b-f16202416e5f",
+            "name": "Project S",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/a54486bc-eb07-444f-ab8b-f16202416e5f",
+            "state": "wellFormed",
+            "revision": 305,
+            "visibility": "private",
+            "lastUpdateTime": "2019-06-06T10:33:25.873Z"
+        },
+        {
+            "id": "894b0925-49c2-4d34-8779-0c59cfbb524b",
+            "name": "Trading App",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/894b0925-49c2-4d34-8779-0c59cfbb524b",
+            "state": "wellFormed",
+            "revision": 230,
+            "visibility": "private",
+            "lastUpdateTime": "2019-05-16T08:24:17.59Z"
+        },
+        {
+            "id": "a0d9a7e7-2def-4157-bfed-9f5cb643fe9d",
+            "name": "LokusNews",
+            "description": "ReactJS + Cordova + Firestore based web app",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/a0d9a7e7-2def-4157-bfed-9f5cb643fe9d",
+            "state": "wellFormed",
+            "revision": 291,
+            "visibility": "private",
+            "lastUpdateTime": "2019-06-04T07:04:40.683Z"
+        },
+        {
+            "id": "33475c6b-d490-48a4-8115-c020ae22ec07",
+            "name": "TestingSandBox",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/33475c6b-d490-48a4-8115-c020ae22ec07",
+            "state": "wellFormed",
+            "revision": 239,
+            "visibility": "private",
+            "lastUpdateTime": "2019-05-20T07:39:28.217Z"
+        },
+        {
+            "id": "46215271-a7eb-4704-b036-7765fe920502",
+            "name": "Project D",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/46215271-a7eb-4704-b036-7765fe920502",
+            "state": "wellFormed",
+            "revision": 323,
+            "visibility": "private",
+            "lastUpdateTime": "2019-06-06T10:40:17.13Z"
+        },
+        {
+            "id": "f08212c5-9290-4288-8cc6-45e70ed10c78",
+            "name": "Yourwheeler",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/f08212c5-9290-4288-8cc6-45e70ed10c78",
+            "state": "wellFormed",
+            "revision": 264,
+            "visibility": "private",
+            "lastUpdateTime": "2019-05-23T05:41:41.843Z"
+        },
+        {
+            "id": "fd828123-04f4-4e43-9d82-3bdae70d422f",
+            "name": "Management",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/fd828123-04f4-4e43-9d82-3bdae70d422f",
+            "state": "wellFormed",
+            "revision": 277,
+            "visibility": "private",
+            "lastUpdateTime": "2019-05-30T10:48:33.95Z"
+        },
+        {
+            "id": "3c7d7dc7-ace5-49f0-8fb4-064f9ed1223e",
+            "name": "Real Estate",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/3c7d7dc7-ace5-49f0-8fb4-064f9ed1223e",
+            "state": "wellFormed",
+            "revision": 276,
+            "visibility": "private",
+            "lastUpdateTime": "2019-05-27T10:31:06.853Z"
+        },
+        {
+            "id": "f2706502-2c6c-457d-a5c4-7b190fe735ae",
+            "name": "devops sandbox",
+            "url": "https://dev.azure.com/smilebots/_apis/projects/f2706502-2c6c-457d-a5c4-7b190fe735ae",
+            "state": "wellFormed",
+            "revision": 87,
+            "visibility": "private",
+            "lastUpdateTime": "2019-05-03T07:38:25.683Z"
+        }
+    ]
+}

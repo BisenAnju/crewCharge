@@ -1,13 +1,13 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
-/www
 /platforms
 /plugins
-/functions/node_modules
-/.pnp
-.pnp.js
+/www
+/build   
+/package-lock.json
 
 # testing
 /coverage
@@ -21,8 +21,12 @@
 .env.development.local
 .env.test.local
 .env.production.local
-package-lock.json
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.vscode/launch.json
+src/components/Splash.js
+src/components/NotFound.js
+src/images/splash.jpg
+package-lock.json

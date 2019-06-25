@@ -1,5 +1,5 @@
 import firebase from "firebase";
-import "firebase/firestore";
+import "firebase/firebase";
 import "firebase/auth";
 import config from "./config";
 
@@ -27,17 +27,29 @@ class Firebase {
   }
 
   googleSignIn = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    this.auth
-      .signInWithRedirect(provider)
-      .then(() => firebase.auth().getRedirectResult())
-      .then(result => {
-        // The signed-in user info.
-        console.log(result.user);
+    firebase
+      .auth()
+      .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+      .then(function() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        return firebase
+          .auth()
+          .signInWithRedirect(provider)
+          .then(() => firebase.auth().getRedirectResult())
+          .then(result => {
+            // The signed-in user info.
+            console.log(result.user);
+          })
+          .catch(error => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+          });
       })
-      .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+      .catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("user state is not persist");
         console.log(errorCode, errorMessage);
       });
   };

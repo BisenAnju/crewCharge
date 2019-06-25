@@ -7,7 +7,7 @@ import { FloatingActionButton, Tab, Tabs } from "material-ui";
 import SwipeableViews from "react-swipeable-views";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import Layout from "../layouts/Layout";
-// import ROUTES from "../constants/routes";
+import ROUTES from "../constants/routes";
 import { lightGreen400, lightGreen800 } from "material-ui/styles/colors";
 const buttonStyle = {
   position: "fixed",
@@ -70,7 +70,7 @@ class LeaveEmployeeDashboard extends React.Component {
             onClick={e => {
               e.preventDefault();
               this.props.history.push(
-                `/leavedashboard/leaveapply/new`
+                `${ROUTES.LEAVEDASHBOARD}/leaveapply/new`
               );
             }}
           >

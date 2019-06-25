@@ -1,0 +1,3 @@
+errors
+
+{"$id":"1","innerException":null,"message":"TF400813: The user 'dba8f870-4ae5-4079-af4f-e3a139920a94\\neeraj@smilebots.com' is not authorized to access this resource.","typeName":"Microsoft.TeamFoundation.Framework.Server.UnauthorizedRequestException, Microsoft.TeamFoundation.Framework.Server","typeKey":"UnauthorizedRequestException","errorCode":0,"eventId":3000}

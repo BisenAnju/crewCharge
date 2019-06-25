@@ -18,9 +18,10 @@ class Projects extends Component {
   }
 
   componentWillReceiveProps(nextProps) {}
+
   render() {
     console.log("dashboard component props");
-    console.log(this.props.teamListData);
+    console.log(this.props);
     return (
       <React.Fragment>
         <Layout navigationTitle="Projects" showBackNavigation={true}>
@@ -55,17 +56,6 @@ class Projects extends Component {
                               `/projects/${project.id}/widgets/`,
                               this.props.teamListData,
                               this.props.projectListData
-                            );
-                          }}
-                        />
-                        <FlatButton
-                          label="Widgets1"
-                          primary={true}
-                          onClick={e => {
-                            e.preventDefault();
-                            this.props.handleWidgets();
-                            this.props.history.push(
-                              `/projects/${project.id}/widgets1/`
                             );
                           }}
                         />

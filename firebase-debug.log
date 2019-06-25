@@ -1,0 +1,106 @@
+[debug] [2019-06-17T12:11:58.523Z] ----------------------------------------------------------------------
+[debug] [2019-06-17T12:11:58.525Z] Command:       /home/a/.nvm/versions/node/v8.11.2/bin/node /home/a/.nvm/versions/node/v8.11.2/bin/firebase serve
+[debug] [2019-06-17T12:11:58.526Z] CLI Version:   7.0.0
+[debug] [2019-06-17T12:11:58.526Z] Platform:      linux
+[debug] [2019-06-17T12:11:58.526Z] Node Version:  v8.11.2
+[debug] [2019-06-17T12:11:58.526Z] Time:          Mon Jun 17 2019 17:41:58 GMT+0530 (IST)
+[debug] [2019-06-17T12:11:58.526Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-06-17T12:11:58.534Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-06-17T12:11:58.535Z] > authorizing via signed-in user
+[debug] [2019-06-17T12:11:58.535Z] [iam] checking project project-s-41fe0 for permissions ["firebase.projects.get"]
+[debug] [2019-06-17T12:11:58.537Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/project-s-41fe0:testIamPermissions  
+
+[debug] [2019-06-17T12:12:00.662Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-17T12:12:00.664Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/project-s-41fe0  
+ 
+[debug] [2019-06-17T12:12:03.236Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/a/n/cordovas'...
+[info] 
+[info] ✔  functions: Using node@8 from host.
+[debug] [2019-06-17T12:12:03.258Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/35539039442/clients/_:getWebAppConfig  
+ 
+[debug] [2019-06-17T12:12:03.259Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/35539039442:getServerAppConfig  
+ 
+[debug] [2019-06-17T12:12:04.315Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-06-17T12:12:04.860Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "/home/a/n/cordovas/functions" for Cloud Functions...
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+[debug] [2019-06-17T12:12:04.928Z] Error: watch /home/a/n/cordovas/functions ENOSPC
+    at _errnoException (util.js:992:11)
+    at FSWatcher.start (fs.js:1382:19)
+    at Object.fs.watch (fs.js:1408:11)
+    at createFsWatchInstance (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:38:15)
+    at setFsWatchListener (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:81:15)
+    at FSWatcher.NodeFsHandler._watchWithNodeFs (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:233:14)
+    at FSWatcher.NodeFsHandler._handleDir (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:429:19)
+    at FSWatcher.<anonymous> (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:477:19)
+    at FSWatcher.<anonymous> (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:482:16)
+    at FSReqWrap.oncomplete (fs.js:153:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2019-06-17T12:12:04.944Z] Error: watch /home/a/n/cordovas/functions/etc ENOSPC
+    at _errnoException (util.js:992:11)
+    at FSWatcher.start (fs.js:1382:19)
+    at Object.fs.watch (fs.js:1408:11)
+    at createFsWatchInstance (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:38:15)
+    at setFsWatchListener (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:81:15)
+    at FSWatcher.NodeFsHandler._watchWithNodeFs (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:233:14)
+    at FSWatcher.NodeFsHandler._handleDir (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:429:19)
+    at FSWatcher.<anonymous> (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:477:19)
+    at FSWatcher.<anonymous> (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:482:16)
+    at FSReqWrap.oncomplete (fs.js:153:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2019-06-17T12:12:04.946Z] Error: watch /home/a/n/cordovas/functions/node_modules ENOSPC
+    at _errnoException (util.js:992:11)
+    at FSWatcher.start (fs.js:1382:19)
+    at Object.fs.watch (fs.js:1408:11)
+    at createFsWatchInstance (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:38:15)
+    at setFsWatchListener (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:81:15)
+    at FSWatcher.NodeFsHandler._watchWithNodeFs (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:233:14)
+    at FSWatcher.NodeFsHandler._handleDir (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:429:19)
+    at FSWatcher.<anonymous> (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:477:19)
+    at FSWatcher.<anonymous> (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:482:16)
+    at FSReqWrap.oncomplete (fs.js:153:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2019-06-17T12:12:04.947Z] Error: watch /home/a/n/cordovas/functions/index.js ENOSPC
+    at _errnoException (util.js:992:11)
+    at FSWatcher.start (fs.js:1382:19)
+    at Object.fs.watch (fs.js:1408:11)
+    at createFsWatchInstance (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:38:15)
+    at setFsWatchListener (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:81:15)
+    at FSWatcher.NodeFsHandler._watchWithNodeFs (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:233:14)
+    at FSWatcher.NodeFsHandler._handleFile (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:262:21)
+    at FSWatcher.<anonymous> (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:495:21)
+    at FSReqWrap.oncomplete (fs.js:153:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2019-06-17T12:12:04.948Z] Error: watch /home/a/n/cordovas/functions/package-lock.json ENOSPC
+    at _errnoException (util.js:992:11)
+    at FSWatcher.start (fs.js:1382:19)
+    at Object.fs.watch (fs.js:1408:11)
+    at createFsWatchInstance (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:38:15)
+    at setFsWatchListener (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:81:15)
+    at FSWatcher.NodeFsHandler._watchWithNodeFs (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:233:14)
+    at FSWatcher.NodeFsHandler._handleFile (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:262:21)
+    at FSWatcher.<anonymous> (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:495:21)
+    at FSReqWrap.oncomplete (fs.js:153:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2019-06-17T12:12:04.951Z] Error: watch /home/a/n/cordovas/functions/package.json ENOSPC
+    at _errnoException (util.js:992:11)
+    at FSWatcher.start (fs.js:1382:19)
+    at Object.fs.watch (fs.js:1408:11)
+    at createFsWatchInstance (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:38:15)
+    at setFsWatchListener (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:81:15)
+    at FSWatcher.NodeFsHandler._watchWithNodeFs (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:233:14)
+    at FSWatcher.NodeFsHandler._handleFile (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:262:21)
+    at FSWatcher.<anonymous> (/home/a/.nvm/versions/node/v8.11.2/lib/node_modules/firebase-tools/node_modules/chokidar/lib/nodefs-handler.js:495:21)
+    at FSReqWrap.oncomplete (fs.js:153:5)
+[error] 
+[error] Error: An unexpected error has occurred.

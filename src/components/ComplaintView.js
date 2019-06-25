@@ -89,117 +89,117 @@ class ComplaintView extends React.Component {
               />
             </center>
           ) : (
-            <Card style={{ boxShadow: "0px" }}>
-              <center>
-                <Avatar
-                  backgroundColor="white"
-                  color="black"
-                  // src={this.props.data.userImageURL}
-                  src={
-                    this.props.data.complaintType === "Harassment" &&
-                    icn[
+              <Card style={{ boxShadow: "0px" }}>
+                <center>
+                  <Avatar
+                    backgroundColor="white"
+                    color="black"
+                    // src={this.props.data.userImageURL}
+                    src={
+                      this.props.data.complaintType === "Harassment" &&
+                      icn[
                       this.props.data.complaintType
                         .replace(" ", "")
                         .replace("/", "")
-                    ]
-                  }
-                  icon={
-                    this.props.data.complaintType !== "Harassment" &&
-                    icn[
+                      ]
+                    }
+                    icon={
+                      this.props.data.complaintType !== "Harassment" &&
+                      icn[
                       this.props.data.complaintType
                         .replace(" ", "")
                         .replace("/", "")
-                    ]
-                  }
-                  size={130}
-                />
-              </center>
-              <List style={{ marginTop: "5%" }}>
-                <Subheader style={{ width: "fit-content", lineHeight: "0%" }}>
-                  {this.props.data.userName}
-                </Subheader>
-                <Subheader
-                  style={{
-                    width: "fit-content",
-                    lineHeight: "0%",
-                    float: "right",
-                    marginRight: "3%"
-                  }}
-                >
-                  {moment(
-                    new Date(this.props.data.addedOn.seconds * 1000)
-                  ).format("DD MMM YYYY h:m A")}
-                </Subheader>
-                <ListItem
-                  disabled
-                  style={{ fontSize: "20px" }}
-                  primaryText="Title"
-                  secondaryText={this.props.data.title}
-                />
-                <ListItem
-                  disabled
-                  style={{ fontSize: "20px" }}
-                  primaryText="Description"
-                />
-              </List>
-              <CardText
-                style={{
-                  marginTop: "-8%",
-                  overflowWrap: "break-word",
-                  paddingBottom: "13%",
-                  fontSize: "16px"
-                }}
-              >
-                {this.props.data.description}
-              </CardText>
-              <CardText>
-                <h4>Do Action</h4>
-                <SelectField
-                  name="statusByAdmin"
-                  style={{ width: "100%" }}
-                  value={
-                    this.props.data.statusByAdmin !== undefined
-                      ? this.props.data.statusByAdmin
-                      : this.state.statusByAdmin
-                  }
-                  onChange={this.handleChange}
-                  floatingLabelText="Select Complaint Status"
-                >
-                  <MenuItem value="pending" primaryText="Pending" />
-                  <MenuItem value="resolve" primaryText="Resolved" />
-                  <MenuItem value="other" primaryText="Other" />
-                </SelectField>
-                <TextField
-                  value={
-                    this.props.data.adminReply !== undefined
-                      ? this.props.data.adminReply
-                      : this.state.adminReply
-                  }
-                  name="adminReply"
-                  onChange={this.inputValidation}
-                  style={{ width: "100%" }}
-                  floatingLabelText="Write About Action"
-                  multiLine={true}
-                  rowsMax={6}
-                />
-              </CardText>
-              {this.props.isAdmin === true && (
-                <CardActions
-                  style={{
-                    width: "100%",
-                    backgroundColor: "#47adda"
-                  }}
-                >
-                  <FlatButton
-                    style={{ color: "white" }}
-                    label="Submit"
-                    fullWidth={true}
-                    onClick={this.formSubmit}
+                      ]
+                    }
+                    size={130}
                   />
-                </CardActions>
-              )}
-            </Card>
-          )}
+                </center>
+                <List style={{ marginTop: "5%" }}>
+                  <Subheader style={{ width: "fit-content", lineHeight: "0%" }}>
+                    {this.props.data.userName}
+                  </Subheader>
+                  <Subheader
+                    style={{
+                      width: "fit-content",
+                      lineHeight: "0%",
+                      float: "right",
+                      marginRight: "3%"
+                    }}
+                  >
+                    {moment(
+                      new Date(this.props.data.addedOn.seconds * 1000)
+                    ).format("DD MMM YYYY h:m A")}
+                  </Subheader>
+                  <ListItem
+                    disabled
+                    style={{ fontSize: "20px" }}
+                    primaryText="Title"
+                    secondaryText={this.props.data.title}
+                  />
+                  <ListItem
+                    disabled
+                    style={{ fontSize: "20px" }}
+                    primaryText="Description"
+                  />
+                </List>
+                <CardText
+                  style={{
+                    marginTop: "-8%",
+                    overflowWrap: "break-word",
+                    paddingBottom: "13%",
+                    fontSize: "16px"
+                  }}
+                >
+                  {this.props.data.description}
+                </CardText>
+                <CardText>
+                  <h4>Do Action</h4>
+                  <SelectField
+                    name="statusByAdmin"
+                    style={{ width: "100%" }}
+                    value={
+                      this.props.data.statusByAdmin !== undefined
+                        ? this.props.data.statusByAdmin
+                        : this.state.statusByAdmin
+                    }
+                    onChange={this.handleChange}
+                    floatingLabelText="Select Complaint Status"
+                  >
+                    <MenuItem value="pending" primaryText="Pending" />
+                    <MenuItem value="resolve" primaryText="Resolved" />
+                    <MenuItem value="other" primaryText="Other" />
+                  </SelectField>
+                  <TextField
+                    value={
+                      this.props.data.adminReply !== undefined
+                        ? this.props.data.adminReply
+                        : this.state.adminReply
+                    }
+                    name="adminReply"
+                    onChange={this.inputValidation}
+                    style={{ width: "100%" }}
+                    floatingLabelText="Write About Action"
+                    multiLine={true}
+                    rowsMax={6}
+                  />
+                </CardText>
+                {this.props.isAdmin === true && (
+                  <CardActions
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#47adda"
+                    }}
+                  >
+                    <FlatButton
+                      style={{ color: "white" }}
+                      label="Submit"
+                      fullWidth={true}
+                      onClick={this.formSubmit}
+                    />
+                  </CardActions>
+                )}
+              </Card>
+            )}
         </div>
         <Snackbar
           onActionClick={this.snackbarHandleRequestClose}
