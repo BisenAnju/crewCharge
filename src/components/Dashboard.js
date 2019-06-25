@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../layouts/Layout";
 import blur from "../images/blur1.png";
-// import Leave from "../images/leave.jpg";
 import leave from "../images/leave1.png";
 import icon from "../images/icon1.png";
 import meeting from "../images/meeting1.png";
@@ -56,10 +55,6 @@ class Dashboard extends Component {
               <center>
                 <img src={leave} alt="leave" />
               </center>
-              {/* <leave
-                color="rgb(253, 145, 77)"
-                style={{ width: "16%", height: "0%" }}
-              /> */}
             </div>
             <div
               style={{
@@ -179,7 +174,7 @@ class Dashboard extends Component {
               }}
             >
               <center>
-                <h3>Projects</h3>
+                <h3>Client Communication</h3>
               </center>
             </div>
           </div>

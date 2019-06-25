@@ -112,7 +112,7 @@ class LeaveEmployeeFulldayLeave extends Component {
             <DatePicker
               hintText="Select date (to)"
               value={this.state.to}
-              errorStyle={{ color: teal700 }}
+              errorStyle={{ color: "#f08f4c" }}
               errorText={
                 this.state.from > this.state.to &&
                 "Should be greater than from date"
@@ -134,7 +134,7 @@ class LeaveEmployeeFulldayLeave extends Component {
                 this.state.dueDate > this.state.from &&
                 "Should be smaller than from date"
               }
-              errorStyle={{ color: teal700 }}
+              errorStyle={{ color: "#f08f4c" }}
               value={this.state.dueDate}
               onChange={this.changeDueDate}
             />

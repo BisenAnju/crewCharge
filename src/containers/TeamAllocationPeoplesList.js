@@ -11,7 +11,7 @@ import TeamAllocationProjectListContainer from "./TeamAllocationProjectList";
 import TeamAllocationPeopleList from "../components/TeamAllocationPeoplesList";
 import TeamAllocationMissionContainer from "./TeamAllocationMission";
 import TeamAllocationProjectContainer from "./TeamAllocationProject";
-import TeamAllocationMissionListContainer from "./TeamAllocationMissionList";
+import TeamAllocationMissionList from "../components/TeamAllocationMissionList";
 import TeamAllocationDashboardContainer from "./TeamAllocationDashboard";
 class TeamAllocationPeoplesListContainer extends Component {
   constructor(props) {
@@ -125,10 +125,7 @@ class TeamAllocationPeoplesListContainer extends Component {
               exact
               path={"/teamallocation/missionlist"}
               render={props => (
-                <TeamAllocationMissionListContainer
-                  {...this.props}
-                  {...this.state}
-                />
+                <TeamAllocationMissionList {...this.props} {...this.state} />
               )}
             />
             <Route

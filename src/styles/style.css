@@ -234,7 +234,7 @@ ul.ChatLog {
  * stylesheet
  */
 .rwdpDayPickerContainer {
-  /*width: 100%;*/
+  width: 100%;
   display: block;
   position: relative;
   padding: 0 30px;
@@ -247,24 +247,26 @@ ul.ChatLog {
   border: none;
   background: transparent;
   cursor: pointer;
+  width: 16%;
+  margin: 1px;
 }
 .rwdpDayBoxDesktop .rwdp-DayCircle {
-  border: 2px solid rgb(136, 179, 88);
-  width: 48px;
-  height: 48px;
-  border-radius: 40px;
-  color: rgb(136, 179, 88);
+  border: 2px solid rgb(253, 145, 77);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  color: rgb(253, 145, 77);
   position: relative;
   padding-top: 8px;
   margin: 1px;
 }
 .rwdpDayBoxDesktop .rwdp-DayCircle-selected {
-  background: rgb(136, 179, 88);
-  border: 2px solid rgb(136, 179, 88);
-  width: 48px;
-  height: 48px;
+  background: rgb(253, 145, 77);
+  border: 2px solid rgb(253, 145, 77);
+  width: 100%;
+  height: 100%;
   color: #fff;
-  border-radius: 40px;
+  border-radius: 50%;
   padding-top: 8px;
   margin: 1px;
 }
@@ -290,23 +292,24 @@ ul.ChatLog {
   border: none;
   background: transparent;
   cursor: pointer;
+  width: 16%;
 }
 .rwdpDayBoxMobil .rwdp-DayCircle div {
   margin-top: 5px;
 }
 .rwdpDayBoxMobil .rwdp-DayCircle {
-  border: 1px solid rgb(136, 179, 88);
+  border: 1px solid rgb(253, 145, 77);
   border-bottom: none;
   width: 100%;
-  height: 80px;
-  color: rgb(136, 179, 88);
+  height: 80%;
+  color: rgb(253, 145, 77);
   position: relative;
 }
 .rwdpDayBoxMobil .rwdp-DayCircle-container:last-child .rwdp-DayCircle {
-  border-bottom: 1px solid rgb(136, 179, 88);
+  border-bottom: 1px solid rgb(253, 145, 77);
 }
 .rwdpDayBoxMobil .rwdp-DayCircle-selected {
-  background: rgb(136, 179, 88);
+  background: rgb(253, 145, 77);
   color: #fff;
   border-bottom: 1px solid #fff;
 }
@@ -327,7 +330,7 @@ ul.ChatLog {
   height: 0;
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
-  border-right: 20px solid rgb(136, 179, 88);
+  border-right: 20px solid rgb(253, 145, 77);
   position: absolute;
   top: calc(50% - 20px);
   left: 0px;
@@ -338,7 +341,7 @@ ul.ChatLog {
   height: 0;
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
-  border-left: 20px solid rgb(136, 179, 88);
+  border-left: 20px solid rgb(253, 145, 77);
   position: absolute;
   top: calc(50% - 20px);
   right: 0px;
