@@ -5,7 +5,8 @@ import {
   Divider,
   IconMenu,
   MenuItem,
-  IconButton
+  IconButton,
+  Avatar
 } from "material-ui";
 import { Tabs, Tab } from "material-ui/Tabs";
 import { withRouter } from "react-router-dom";
@@ -162,6 +163,7 @@ class TeamAllocationMissionList extends React.Component {
                           <div>
                             <ListItem
                               primaryText={row.name}
+                              leftAvatar={<Avatar src={row.logoURL} />}
                               rightIconButton={
                                 <IconMenu
                                   menuStyle={{
