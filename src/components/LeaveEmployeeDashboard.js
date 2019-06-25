@@ -7,8 +7,6 @@ import { FloatingActionButton, Tab, Tabs } from "material-ui";
 import SwipeableViews from "react-swipeable-views";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import Layout from "../layouts/Layout";
-// import ROUTES from "../constants/routes";
-import { lightGreen400, lightGreen800 } from "material-ui/styles/colors";
 const buttonStyle = {
   position: "fixed",
   right: 24,
@@ -29,21 +27,32 @@ class LeaveEmployeeDashboard extends React.Component {
     return (
       <Layout navigationTitle="Employee Dashboard" showBackNavigation={true}>
         <div>
-          <Tabs onChange={this.handleChange} value={this.state.slideIndex}>
+          <Tabs
+            onChange={this.handleChange}
+            value={this.state.slideIndex}
+            tabItemContainerStyle={{ backgroundColor: "transparent" }}
+            inkBarStyle={{ backgroundColor: "#f08f4c" }}
+          >
             <Tab
               label="PENDING"
               value={0}
-              style={{ backgroundColor: lightGreen400 }}
+              style={{
+                color: "#f08f4c"
+              }}
             />
             <Tab
               label="APPROVED"
               value={1}
-              style={{ backgroundColor: lightGreen400 }}
+              style={{
+                color: "#f08f4c"
+              }}
             />
             <Tab
               label="REJECTED"
               value={2}
-              style={{ backgroundColor: lightGreen400 }}
+              style={{
+                color: "#f08f4c"
+              }}
             />
           </Tabs>
 
@@ -66,12 +75,10 @@ class LeaveEmployeeDashboard extends React.Component {
           </SwipeableViews>
           <FloatingActionButton
             style={buttonStyle}
-            backgroundColor={lightGreen800}
+            backgroundColor="rgb(253, 145, 77)"
             onClick={e => {
               e.preventDefault();
-              this.props.history.push(
-                `/leavedashboard/leaveapply/new`
-              );
+              this.props.history.push(`/leavedashboard/leaveapply/new`);
             }}
           >
             <ContentAdd />

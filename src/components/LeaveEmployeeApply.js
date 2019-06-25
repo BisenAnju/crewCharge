@@ -10,7 +10,6 @@ class LeaveEmployeeApply extends Component {
     super(props);
     this.state = {
       leaveType: "Hour"
-      // leaveType: null
     };
   }
 

@@ -73,6 +73,9 @@ class LeaveEmployeeFulldayLeave extends Component {
       <div>
         <div style={flexcontainer}>
           <div>
+            <ActionList style={{ marginTop: "38px", fill: "#f08f4c" }} />
+          </div>
+          <div>
             <SelectField
               value={this.state.purpose}
               onChange={this.handleChange}
@@ -86,14 +89,12 @@ class LeaveEmployeeFulldayLeave extends Component {
               ))}
             </SelectField>
           </div>
-          <div>
-            <ActionList
-              style={{ margin: "35px  0px 0px 0px", fill: "#004D40" }}
-            />
-          </div>
         </div>
         <br />
         <div style={flexcontainer}>
+          <div>
+            <ActionDateRange style={{ marginTop: "12px", fill: "#f08f4c" }} />
+          </div>
           <div>
             <DatePicker
               hintText="Select date (from)"
@@ -101,14 +102,12 @@ class LeaveEmployeeFulldayLeave extends Component {
               onChange={this.changeFromDate}
             />
           </div>
-          <div>
-            <ActionDateRange
-              style={{ margin: "12px  0px 0px 0px", fill: "#004D40" }}
-            />
-          </div>
         </div>
         <br />
         <div style={flexcontainer}>
+          <div>
+            <ActionDateRange style={{ marginTop: "12px", fill: "#f08f4c" }} />
+          </div>
           <div>
             <DatePicker
               hintText="Select date (to)"
@@ -121,15 +120,13 @@ class LeaveEmployeeFulldayLeave extends Component {
               onChange={this.changeToDate}
             />
           </div>
-          <div>
-            <ActionDateRange
-              style={{ margin: "12px  0px 0px 0px", fill: "#004D40" }}
-            />
-          </div>
         </div>
         <br />
 
         <div style={flexcontainer}>
+          <div>
+            <ActionDateRange style={{ marginTop: "12px", fill: "#f08f4c" }} />
+          </div>
           <div>
             <DatePicker
               hintText="Select due date"
@@ -142,14 +139,14 @@ class LeaveEmployeeFulldayLeave extends Component {
               onChange={this.changeDueDate}
             />
           </div>
-          <div>
-            <ActionDateRange
-              style={{ margin: "12px  0px 0px 0px", fill: "#004D40" }}
-            />
-          </div>
         </div>
 
         <div style={flexcontainer}>
+          <div>
+            <CommunicationComment
+              style={{ marginTop: "38px", fill: "#f08f4c" }}
+            />
+          </div>
           <div>
             <TextField
               hintText="Type Reason"
@@ -161,11 +158,6 @@ class LeaveEmployeeFulldayLeave extends Component {
               onChange={this.textChange}
             />
           </div>
-          <div>
-            <CommunicationComment
-              style={{ margin: "35px  0px 0px 0px", fill: "#004D40" }}
-            />
-          </div>
         </div>
 
         <br />
@@ -174,7 +166,7 @@ class LeaveEmployeeFulldayLeave extends Component {
           <div className="flexAppItem">
             <RaisedButton
               label="SUBMIT"
-              backgroundColor={lightGreen800}
+              backgroundColor="rgb(253, 145, 77)"
               labelColor="white"
               onClick={this.validateForm}
             />

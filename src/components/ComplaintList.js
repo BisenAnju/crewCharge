@@ -7,7 +7,6 @@ import {
   FloatingActionButton,
   RefreshIndicator,
   IconButton,
-  // DatePicker,
   Snackbar,
   List,
   ListItem

@@ -13,7 +13,7 @@ import {
   CommunicationComment,
   ActionList
 } from "material-ui/svg-icons";
-import { lightGreen800, teal700 } from "material-ui/styles/colors";
+import { teal700 } from "material-ui/styles/colors";
 
 const flexcontainer = {
   display: "flex",
@@ -65,6 +65,9 @@ class LeaveEmployeeHourLeave extends Component {
       <div>
         <div style={flexcontainer}>
           <div>
+            <ActionList style={{ marginTop: "38px", fill: "#f08f4c" }} />
+          </div>
+          <div>
             <SelectField
               value={this.state.purpose}
               onChange={this.handleChange}
@@ -78,15 +81,13 @@ class LeaveEmployeeHourLeave extends Component {
               ))}
             </SelectField>
           </div>
-          <div>
-            <ActionList
-              style={{ margin: "35px  0px 0px 0px", fill: "#004D40" }}
-            />
-          </div>
         </div>
         <br />
 
         <div style={flexcontainer}>
+          <div>
+            <ImageTimer style={{ marginTop: "50%", fill: "#f08f4c" }} />
+          </div>
           <div>
             <TimePicker
               format="ampm"
@@ -95,12 +96,12 @@ class LeaveEmployeeHourLeave extends Component {
               onChange={this.handleChangeTimePicker1}
             />
           </div>
-          <div>
-            <ImageTimer style={{ fill: "#004D40" }} />
-          </div>
         </div>
         <br />
         <div style={flexcontainer}>
+          <div>
+            <ImageTimer style={{ marginTop: "50%", fill: "#f08f4c" }} />
+          </div>
           <div>
             <TimePicker
               format="ampm"
@@ -114,12 +115,14 @@ class LeaveEmployeeHourLeave extends Component {
               onChange={this.handleChangeTimePicker2}
             />
           </div>
-          <div>
-            <ImageTimer style={{ fill: "#004D40" }} />
-          </div>
         </div>
 
         <div style={flexcontainer}>
+          <div>
+            <CommunicationComment
+              style={{ marginTop: "38px", fill: "#f08f4c" }}
+            />
+          </div>
           <div>
             <TextField
               hintText="Type Reason"
@@ -131,11 +134,6 @@ class LeaveEmployeeHourLeave extends Component {
               onChange={this.textChange}
             />
           </div>
-          <div>
-            <CommunicationComment
-              style={{ margin: "35px  0px 0px 0px", fill: "#004D40" }}
-            />
-          </div>
         </div>
 
         <br />
@@ -144,11 +142,11 @@ class LeaveEmployeeHourLeave extends Component {
           <div className="flexAppItem">
             <RaisedButton
               label="SUBMIT"
-              backgroundColor={lightGreen800}
+              backgroundColor="rgb(253, 145, 77)"
               labelColor="white"
               onClick={this.validateForm}
             />
-          </div>{" "}
+          </div>
         </center>
 
         <Snackbar
