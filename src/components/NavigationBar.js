@@ -12,11 +12,12 @@ import {
   ListItem
 } from "material-ui";
 import {
+  NavigationMenu,
   NavigationArrowBack,
-  SocialPerson,
+  ActionHome,
+  ActionPowerSettingsNew,
   ActionDashboard
 } from "material-ui/svg-icons";
-import { NavigationMenu, ActionHome } from "material-ui/svg-icons";
 
 class NavigationBar extends React.Component {
   constructor(props) {
@@ -67,8 +68,9 @@ class NavigationBar extends React.Component {
           }
         />
         <Drawer
+          disableSwipeToOpen={false}
           docked={false}
-          width={210}
+          width={260}
           open={this.state.open}
           onRequestChange={open => this.setState({ open })}
         >
@@ -79,6 +81,14 @@ class NavigationBar extends React.Component {
                 e.preventDefault();
                 this.props.history.push("/leavedashboard/admin");
               }}
+              secondaryText={
+                this.props.userData.findIndex(
+                  user => user.email === this.props.user.email
+                ) >= 0 &&
+                this.props.userData.find(
+                  user => user.email === this.props.user.email
+                ).email
+              }
               primaryText={
                 this.props.userData.findIndex(
                   user => user.displayName === this.props.user.displayName
@@ -111,6 +121,14 @@ class NavigationBar extends React.Component {
               primaryText="Leave dashboard"
               leftIcon={<ActionDashboard />}
             />
+            <ListItem
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push("/complaintlist");
+              }}
+              primaryText="Complaint List"
+              leftIcon={<ActionDashboard />}
+            />
 
             {this.props.userData.map((user, index) =>
               user.uid === this.props.user.uid && user.userType === "Admin" ? (
@@ -131,14 +149,14 @@ class NavigationBar extends React.Component {
                     primaryText="Add Leave Purpose"
                     leftIcon={<ActionDashboard />}
                   />
-                  <ListItem
+                  {/* <ListItem
                     onClick={e => {
                       e.preventDefault();
                       this.props.history.push("/complainttype");
                     }}
                     primaryText="Add Complaint Type"
                     leftIcon={<ActionDashboard />}
-                  />
+                  /> */}
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
@@ -180,7 +198,7 @@ class NavigationBar extends React.Component {
                 this.props.logOut();
               }}
               primaryText="LogOut"
-              leftIcon={<SocialPerson />}
+              leftIcon={<ActionPowerSettingsNew />}
             />
           </List>
         </Drawer>
