@@ -17,15 +17,6 @@ class Dashboard extends Component {
   render() {
     return (
       <Layout navigationTitle="Project S">
-        {/* <div
-          style={{
-            width: "100%",
-            position: "fixed",
-            backgroundColor: "#f2f3f2",
-            minHeight: "100vh"
-          }}
-        > */}
-        {/* <div style={{ height: "70px" }} /> */}
         <div>
           <center>
             <img alt="icon" src={icon} />
@@ -68,6 +59,7 @@ class Dashboard extends Component {
               </center>
             </div>
           </div>
+
           <div
             style={{
               boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
@@ -179,7 +171,6 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
-        {/* </div> */}
       </Layout>
     );
   }
