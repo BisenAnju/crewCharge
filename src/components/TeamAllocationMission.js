@@ -13,6 +13,7 @@ import Layout from "../layouts/Layout";
 import { orange500, white } from "material-ui/styles/colors";
 import { ActionHome, CommunicationMessage } from "material-ui/svg-icons";
 import TextFieldIcon from "material-ui-textfield-icon";
+import { assignmentExpression } from "@babel/types";
 class TeamAllocationMission extends React.Component {
   constructor(props) {
     super(props);
@@ -22,13 +23,19 @@ class TeamAllocationMission extends React.Component {
       missionName: null,
       values: [],
       projectId: null,
-      questionsId: null,
       startDate: null,
       endDate: null,
       remarks: null,
       openSnackbar: null,
-      message: null
+      message: null,
+      mission: []
     };
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.missionList);
+    this.setState({
+      mission: nextProps.missionList
+    });
   }
   handleUsersChange = (event, index, values) => this.setState({ values });
   menuItems(values) {
@@ -71,7 +78,6 @@ class TeamAllocationMission extends React.Component {
     this.setState({
       missionName: null,
       values: [],
-      projectId: null,
       questionsId: null,
       startDate: null,
       endDate: null,
@@ -82,8 +88,8 @@ class TeamAllocationMission extends React.Component {
     const { values } = this.state;
     return (
       <Layout navigationTitle="Mission" showBackNavigation={true}>
-        <div style={{ padding: 10, paddingTop: 50 }}>
-          <TextFieldIcon
+        <div style={{ padding: 10 }}>
+          <TextField
             floatingLabelText="Enter Mission"
             defaultValue={this.state.missionName}
             fullWidth={true}
@@ -137,7 +143,7 @@ class TeamAllocationMission extends React.Component {
             fullWidth={true}
             onChange={this.handleEndDateChange}
           />
-          <TextFieldIcon
+          <TextField
             floatingLabelText="Remarks"
             floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
             floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
