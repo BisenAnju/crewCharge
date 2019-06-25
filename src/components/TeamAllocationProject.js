@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { TextField, RaisedButton, Snackbar } from "material-ui";
 import Layout from "../layouts/Layout";
-import { white, lightGreen400 } from "material-ui/styles/colors";
+import { white } from "material-ui/styles/colors";
 import Dropzone from "react-dropzone";
 import withFirebase from "../hoc/withFirebase";
 import firebase from "firebase";
