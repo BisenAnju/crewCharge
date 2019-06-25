@@ -53,7 +53,8 @@ class TeamAllocationMissionContainer extends Component {
           this.setState({
             openSnackbar: true,
             message: "Mission Add Success fully"
-          })
+          }),
+          (window.location = "/teamallocation")
         );
     }
   };

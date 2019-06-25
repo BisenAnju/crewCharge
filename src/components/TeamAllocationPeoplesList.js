@@ -43,7 +43,6 @@ class TeamAllocationPeopleList extends React.Component {
         moment(missionData.deadline.endDate.seconds * 1000).format("l") >=
           nowDate
     );
-    console.log(missionsList);
     this.setState({
       leavesList: nextProps.leavesList,
       missionsList,

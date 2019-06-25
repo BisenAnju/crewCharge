@@ -96,25 +96,25 @@ class TeamAllocationProject extends React.Component {
                     <RaisedButton
                       label="Upload..."
                       labelColor={white}
-                      backgroundColor={lightGreen400}
+                      backgroundColor={"rgb(253, 145, 77)"}
                     />
                   </u>
                 </div>
               </Dropzone>
             </div>
           </div>
-          <div style={{ padding: 10, alignItems: "center" }}>
-            <RaisedButton
+          <div style={{ padding: 10, alignItems: "center", marginLeft: "35%" }}>
+            {/* <RaisedButton
               label="Cancel"
               labelColor={white}
-              backgroundColor={lightGreen400}
+              backgroundColor={"rgb(253, 145, 77)"}
               onClick={this.handleClose}
               style={{ marginRight: 10 }}
-            />
+            /> */}
             <RaisedButton
               label="Save"
               labelColor={white}
-              backgroundColor={lightGreen400}
+              backgroundColor={"rgb(253, 145, 77)"}
               onClick={e => {
                 e.preventDefault();
                 this.props.handleAddProject(
