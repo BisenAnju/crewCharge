@@ -107,7 +107,7 @@ class LeaveEmployeeHourLeave extends Component {
               format="ampm"
               hintText="Select Time (to)"
               value={this.state.to}
-              errorStyle={{ color: teal700 }}
+              errorStyle={{ color: "#f08f4c" }}
               errorText={
                 this.state.from > this.state.to &&
                 "Should be greater than from time"
