@@ -33,7 +33,8 @@ class TeamAllocationMissionContainer extends Component {
           this.setState({
             openSnackbar: true,
             message: "Mission Add Success fully"
-          })
+          }),
+          (window.location = "/teamallocation")
         );
     }
   };
@@ -52,6 +53,17 @@ class TeamAllocationMissionContainer extends Component {
             <Route
               exact
               path={"/teamallocation/project"}
+              render={props => (
+                <TeamAllocationProject
+                  {...props}
+                  {...this.state}
+                  handleAddProject={this.handleAddProject}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={"/teamallocation/project/:projectId"}
               render={props => (
                 <TeamAllocationProject
                   {...props}

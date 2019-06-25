@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { TextField, RaisedButton, Snackbar } from "material-ui";
 import Layout from "../layouts/Layout";
-import { white, lightGreen400 } from "material-ui/styles/colors";
+import { white } from "material-ui/styles/colors";
 import Dropzone from "react-dropzone";
 import withFirebase from "../hoc/withFirebase";
 import firebase from "firebase";
@@ -65,7 +65,6 @@ class TeamAllocationProject extends React.Component {
     });
   };
   render() {
-    const maxSize = 10468;
     return (
       <Layout navigationTitle="Project" showBackNavigation={true}>
         <div style={{ padding: 10 }}>
@@ -87,36 +86,35 @@ class TeamAllocationProject extends React.Component {
               </div>
             )}
             <div>
-              <Dropzone onDrop={this.editProfile} accept="image/*">
-                {({ getRootProps, getInputProps }) => {
-                  return (
-                    <div {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      <u>
-                        <RaisedButton
-                          label="Upload..."
-                          labelColor={white}
-                          backgroundColor={lightGreen400}
-                        />
-                      </u>
-                    </div>
-                  );
-                }}
+              <Dropzone
+                onDrop={this.editProfile}
+                accept="image/*"
+                style={{ height: 100 }}
+              >
+                <div>
+                  <u>
+                    <RaisedButton
+                      label="Upload..."
+                      labelColor={white}
+                      backgroundColor={"rgb(253, 145, 77)"}
+                    />
+                  </u>
+                </div>
               </Dropzone>
             </div>
           </div>
-          <div style={{ padding: 10, alignItems: "center" }}>
-            <RaisedButton
+          <div style={{ padding: 10, alignItems: "center", marginLeft: "35%" }}>
+            {/* <RaisedButton
               label="Cancel"
               labelColor={white}
-              backgroundColor={lightGreen400}
+              backgroundColor={"rgb(253, 145, 77)"}
               onClick={this.handleClose}
               style={{ marginRight: 10 }}
-            />
+            /> */}
             <RaisedButton
               label="Save"
               labelColor={white}
-              backgroundColor={lightGreen400}
+              backgroundColor={"rgb(253, 145, 77)"}
               onClick={e => {
                 e.preventDefault();
                 this.props.handleAddProject(

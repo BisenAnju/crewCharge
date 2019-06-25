@@ -104,77 +104,87 @@ class TeamAllocationProjectList extends React.Component {
           />
         </div>
         <Divider />
-        {this.state.projectsList.map((row, id) => (
-          <Card key={id}>
-            <CardHeader
-              title={row.name}
-              avatar={row.logoURL}
-              actAsExpander={true}
-              showExpandableButton={true}
-            />
-            {this.state.missionsList.map((missionRow, index) =>
-              missionRow.projectId === row.projectId ? (
-                <CardText
-                  key={index}
-                  expandable={true}
-                  style={{
-                    padding: 5
-                  }}
-                >
-                  <Paper
-                    className={"paperDiv"}
+        <div
+          style={{
+            height: "70vh",
+            overflow: "auto",
+            display: "self"
+          }}
+        >
+          {this.state.projectsList.map((row, id) => (
+            <Card key={id}>
+              <CardHeader
+                title={row.name}
+                avatar={row.logoURL}
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+              {this.state.missionsList.map((missionRow, index) =>
+                missionRow.projectId === row.projectId ? (
+                  <CardText
+                    key={index}
+                    expandable={true}
                     style={{
-                      padding: 10,
-                      boxShadow: -1,
-                      MozBoxShadow: -1
+                      padding: 5
                     }}
                   >
-                    <div>
-                      {this.state.usersList.map((user, i) => {
-                        if (
-                          missionRow.assignTo.find(udata => udata === user.uid)
-                        )
-                          return (
-                            <div key={i}>
-                              <img
-                                style={{
-                                  width: 40,
-                                  height: 40,
-                                  borderRadius: 5,
-                                  padding: 2,
-                                  float: "left"
-                                }}
-                                src={user.photoURL}
-                              />
-                            </div>
-                          );
-                      })}
-                    </div>
-                    <br />
-                    <br />
-                    <br />
-                    <div>
-                      <h3>{missionRow.name}</h3>
-                      <h4>Project Dead Line</h4>
-                      <h5 style={{ float: "left", marginRight: 10 }}>
-                        {moment(
-                          missionRow.deadline.startDate.seconds * 1000
-                        ).format("ll")}
-                      </h5>
-                      <h5 style={{ float: "left", marginRight: 10 }}>-</h5>
-                      <h5>
-                        {moment(
-                          missionRow.deadline.endDate.seconds * 1000
-                        ).format("ll")}
-                      </h5>
-                      <h5>Massege: {missionRow.deadline.remarks}</h5>
-                    </div>
-                  </Paper>
-                </CardText>
-              ) : null
-            )}
-          </Card>
-        ))}
+                    <Paper
+                      className={"paperDiv"}
+                      style={{
+                        padding: 10,
+                        boxShadow: -1,
+                        MozBoxShadow: -1
+                      }}
+                    >
+                      <div>
+                        {this.state.usersList.map((user, i) => {
+                          if (
+                            missionRow.assignTo.find(
+                              udata => udata === user.uid
+                            )
+                          )
+                            return (
+                              <div key={i}>
+                                <img
+                                  style={{
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: 5,
+                                    padding: 2,
+                                    float: "left"
+                                  }}
+                                  src={user.photoURL}
+                                />
+                              </div>
+                            );
+                        })}
+                      </div>
+                      <br />
+                      <br />
+                      <br />
+                      <div>
+                        <h3>{missionRow.name}</h3>
+                        <h4>Project Dead Line</h4>
+                        <h5 style={{ float: "left", marginRight: 10 }}>
+                          {moment(
+                            missionRow.deadline.startDate.seconds * 1000
+                          ).format("ll")}
+                        </h5>
+                        <h5 style={{ float: "left", marginRight: 10 }}>-</h5>
+                        <h5>
+                          {moment(
+                            missionRow.deadline.endDate.seconds * 1000
+                          ).format("ll")}
+                        </h5>
+                        <h5>Massege: {missionRow.deadline.remarks}</h5>
+                      </div>
+                    </Paper>
+                  </CardText>
+                ) : null
+              )}
+            </Card>
+          ))}
+        </div>
       </div>
     );
   }

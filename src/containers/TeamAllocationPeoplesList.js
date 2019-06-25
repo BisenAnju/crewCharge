@@ -7,12 +7,9 @@ import {
 } from "react-router-dom";
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
-import TeamAllocationProjectListContainer from "./TeamAllocationProjectList";
-import TeamAllocationPeopleList from "../components/TeamAllocationPeoplesList";
 import TeamAllocationMissionContainer from "./TeamAllocationMission";
 import TeamAllocationProjectContainer from "./TeamAllocationProject";
 import TeamAllocationMissionList from "../components/TeamAllocationMissionList";
-import TeamAllocationDashboardContainer from "./TeamAllocationDashboard";
 class TeamAllocationPeoplesListContainer extends Component {
   constructor(props) {
     super(props);
@@ -92,6 +89,12 @@ class TeamAllocationPeoplesListContainer extends Component {
         this.setState({ isLoading: false, leavesList });
       });
   }
+  handleAddMission = () => {
+    window.location = "/teamallocation/mission";
+  };
+  handleAddproject = () => {
+    window.location = "/teamallocation/project";
+  };
   render() {
     return (
       <div>
@@ -101,16 +104,11 @@ class TeamAllocationPeoplesListContainer extends Component {
               exact
               path={"/teamallocation"}
               render={props => (
-                <TeamAllocationPeopleList {...this.props} {...this.state} />
-              )}
-            />
-            <Route
-              exact
-              path={"/teamallocation/projectlist"}
-              render={props => (
-                <TeamAllocationProjectListContainer
-                  {...props}
+                <TeamAllocationMissionList
+                  // {...this.props}
                   {...this.state}
+                  handleAddproject={this.handleAddproject}
+                  handleAddMission={this.handleAddMission}
                 />
               )}
             />
@@ -123,14 +121,21 @@ class TeamAllocationPeoplesListContainer extends Component {
             />
             <Route
               exact
-              path={"/teamallocation/missionlist"}
+              path={"/teamallocation/mission/:missionId"}
               render={props => (
-                <TeamAllocationMissionList {...this.props} {...this.state} />
+                <TeamAllocationMissionContainer {...props} {...this.state} />
               )}
             />
             <Route
               exact
               path={"/teamallocation/project"}
+              render={props => (
+                <TeamAllocationProjectContainer {...props} {...this.state} />
+              )}
+            />
+            <Route
+              exact
+              path={"/teamallocation/project/:projectId"}
               render={props => (
                 <TeamAllocationProjectContainer {...props} {...this.state} />
               )}
@@ -141,7 +146,6 @@ class TeamAllocationPeoplesListContainer extends Component {
     );
   }
 }
-
 export default withRouter(
   withFirebase(withUser(TeamAllocationPeoplesListContainer))
 );

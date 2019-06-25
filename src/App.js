@@ -16,11 +16,8 @@ import LeaveAdminApprovalRejectionContainer from "./containers/LeaveAdminApprova
 import LeaveEmployeeDetailsContainer from "./containers/LeaveEmployeeDetails";
 import ProjectsContainer from "./containers/Projects";
 import TeamAllocationMissionContainer from "./containers/TeamAllocationMission";
-import TeamAllocationProjectListContainer from "./containers/TeamAllocationProjectList";
 import TeamAllocationProjectContainer from "./containers/TeamAllocationProject";
 import TeamAllocationPeoplesListContainer from "./containers/TeamAllocationPeoplesList";
-import TeamAllocationMissionListContainer from "./containers/TeamAllocationMissionList";
-import TeamAllocationDashboardContainer from "./components/TeamAllocationDashboard";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -69,18 +66,7 @@ class App extends Component {
                     <TeamAllocationMissionContainer {...props} />
                   )}
                 />
-                <Route
-                  path={"/teamallocation/projectlist"}
-                  render={props => (
-                    <TeamAllocationProjectListContainer {...props} />
-                  )}
-                />
-                <Route
-                  path={"/teamallocation/missionlist"}
-                  render={props => (
-                    <TeamAllocationMissionListContainer {...props} />
-                  )}
-                />
+
                 <Route
                   path={"/complaintview/:id"}
                   render={props => (
