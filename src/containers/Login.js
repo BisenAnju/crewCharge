@@ -74,6 +74,7 @@ class LoginContainer extends Component {
     return (
       <Login
         {...this.state}
+        {...this.props}
         handleLoader={this.handleLoader}
         isLoading={this.state.isLoading}
         login={this.props.firebase.googleSignIn}

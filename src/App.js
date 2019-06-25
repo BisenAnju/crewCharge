@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import withMUI from "./hoc/withMUI";
-//import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import withUser from "./hoc/withUser";
 import { withFirebase } from "./firebase";
 import withAuthentication from "./hoc/withAuthentication";
