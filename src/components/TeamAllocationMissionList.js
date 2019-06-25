@@ -13,15 +13,8 @@ import Layout from "../layouts/Layout";
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
+import TeamAllocationProjectList from "./TeamAllocationProjectList";
 import TeamAllocationPeopleList from "./TeamAllocationPeoplesList";
-import {
-  IonContent,
-  IonFab,
-  IonFabButton,
-  IonIcon,
-  IonFabList
-} from "@ionic/react";
-
 class TeamAllocationMissionList extends React.Component {
   constructor(props) {
     super(props);
@@ -57,41 +50,22 @@ class TeamAllocationMissionList extends React.Component {
       </IconMenu>
     );
     return (
-      //   <Layout navigationTitle="Mission And Project List">
-      <div>
-        <div style={{ paddingTop: "15%" }}>
-          <Tabs
-            value={this.state.value}
-            onChange={this.handleTabChange}
-            tabItemContainerStyle={{ backgroundColor: "transparent" }}
-          >
-            <Tab label="Missions List" style={{ color: "#f08f4c" }} value={0}>
-              <div>
-                <TeamAllocationPeopleList />
-              </div>
-            </Tab>
-            <Tab label="Missions List" style={{ color: "#f08f4c" }} value={1}>
-              <List>
-                {this.props.missionsList.map((row, index) => (
-                  <div>
-                    <div>
-                      <ListItem
-                        key={index}
-                        primaryText={row.name}
-                        rightIconButton={rightIconMenu}
-                      />
-                    </div>
-                    <div>
-                      <Divider />
-                    </div>
-                  </div>
-                ))}
-              </List>
-            </Tab>
-            <Tab label="Project List" style={{ color: "#f08f4c" }} value={2}>
-              <div>
-                <List>
-                  {this.props.projectsList.map((row, index) => (
+      <Layout navigationTitle="Mission And Project List">
+        <div>
+          <div>
+            <Tabs
+              value={this.state.value}
+              onChange={this.handleTabChange}
+              tabItemContainerStyle={{ backgroundColor: "transparent" }}
+            >
+              <Tab label="Peoples List" style={{ color: "#f08f4c" }} value={0}>
+                <div>
+                  <TeamAllocationPeopleList {...this.props} />
+                </div>
+              </Tab>
+              <Tab label="Project List" style={{ color: "#f08f4c" }} value={1}>
+                {/* <List>
+                  {this.props.missionsList.map((row, index) => (
                     <div>
                       <div>
                         <ListItem
@@ -105,32 +79,40 @@ class TeamAllocationMissionList extends React.Component {
                       </div>
                     </div>
                   ))}
-                </List>
-              </div>
-            </Tab>
-          </Tabs>
-        </div>
-        {/* <FloatingActionButton
+                </List> */}
+                <div>
+                  <TeamAllocationProjectList {...this.props} />
+                </div>
+              </Tab>
+              <Tab label="Manage" style={{ color: "#f08f4c" }} value={2}>
+                <div>
+                  <List>
+                    {this.props.projectsList.map((row, index) => (
+                      <div key={index}>
+                        <div>
+                          <ListItem
+                            primaryText={row.name}
+                            rightIconButton={rightIconMenu}
+                          />
+                        </div>
+                        <div>
+                          <Divider />
+                        </div>
+                      </div>
+                    ))}
+                  </List>
+                </div>
+              </Tab>
+            </Tabs>
+          </div>
+          <FloatingActionButton
             backgroundColor={"rgb(253, 145, 77)"}
             style={this.contentButton}
           >
             <ContentAdd onClick={this.handleaddMission} />
-          </FloatingActionButton> */}
-        <IonContent>
-          <IonFab
-            vertical="top"
-            horizontal="end"
-            slot="fixed"
-            backgroundColor={"rgb(253, 145, 77)"}
-            style={this.contentButton}
-          >
-            <IonFabButton>
-              <IonIcon name="add" />
-            </IonFabButton>
-          </IonFab>
-        </IonContent>
-      </div>
-      //   </Layout>
+          </FloatingActionButton>
+        </div>
+      </Layout>
     );
   }
 }

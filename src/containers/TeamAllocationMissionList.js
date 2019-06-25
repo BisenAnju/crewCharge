@@ -62,7 +62,6 @@ class TeamAllocationMissionListContainer extends React.Component {
               path={"/teamallocation/missionlist"}
               render={props => (
                 <TeamAllocationMissionList
-                  {...this.props}
                   {...this.state}
                   handleEditChange={this.handleEditChange}
                   handleArchiveChange={this.handleArchiveChange}
