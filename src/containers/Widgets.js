@@ -84,7 +84,7 @@ class WidgetsContainer extends Component {
       const queryListApi = `https://dev.azure.com/smilebots/${
         this.props.match.params.projectId
       }/_apis/wit/queries?$depth=2&api-version=5.0`;
-      console.log(queryListApi);
+      //console.log(queryListApi);
       const queryListResponse = await axios.get(queryListApi, headers);
       //console.log(queryListResponse.data.value);
       queryListResponse.data.value.map(async query => {
@@ -98,7 +98,7 @@ class WidgetsContainer extends Component {
           );
           //console.log(queryListResponsePromises);
           const wiqlListPromise = queryListResponsePromises.map(async item => {
-            console.log(item._links.wiql.href);
+            //console.log(item._links.wiql.href);
             const wiqlListResponse = await axios.get(
               item._links.wiql.href,
               headers

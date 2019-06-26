@@ -14,6 +14,7 @@ import {
   CircularProgress
 } from "material-ui";
 import Layout from "../layouts/Layout";
+import { lang } from "../locales/i18n";
 
 class Widgets extends Component {
   constructor(props) {
@@ -96,18 +97,56 @@ class Widgets extends Component {
                           }}
                         >
                           {this.state.columns.map((column, columnIndex) => {
-                            console.log(widgetIndex);
-                            console.log(columnIndex);
+                            // console.log(widgetIndex);
+                            // console.log(columnIndex);
                             if (widgetIndex === columnIndex) {
-                              return column.map(col => {
+                              return column.map((col, colIndex) => {
                                 return (
-                                  <div style={{ margin: "0 10px" }}>
+                                  <div
+                                    key={colIndex}
+                                    style={{ margin: "0 10px" }}
+                                  >
                                     {col.name}
+
+                                    <div
+                                      key={"divTable-" + colIndex}
+                                      id="tableData"
+                                    >
+                                      <table key={"table-" + colIndex}>
+                                        {this.state.workItemsList.map(
+                                          (workItems, workItemsIndex) => {
+                                            if (
+                                              widgetIndex === workItemsIndex
+                                            ) {
+                                              return workItems.map(
+                                                (workItem, workItemIndex) => {
+                                                  
+                                                    return Object.values(
+                                                      workItem.fields
+                                                    ).map(data => {
+                                                      return (
+                                                        <tbody
+                                                          key={workItemIndex}
+                                                        >
+                                                          <tr>
+                                                            <td>{data}</td>
+                                                          </tr>
+                                                        </tbody>
+                                                      );
+                                                    });
+                                                  
+                                                }
+                                              );
+                                            }
+                                          }
+                                        )}
+                                      </table>
+                                    </div>
                                   </div>
                                 );
                               });
                             } else {
-                              console.log("index not matched");
+                              //console.log("index not matched");
                             }
                           })}
                         </CardText>
