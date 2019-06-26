@@ -106,7 +106,7 @@ class TeamAllocationProjectList extends React.Component {
         <Divider />
         <div
           style={{
-            height: "70vh",
+            height: "73vh",
             overflow: "auto",
             display: "self"
           }}

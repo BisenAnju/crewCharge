@@ -48,15 +48,15 @@ class TeamAllocationMissionList extends React.Component {
     position: "absolute"
   };
   render() {
-    console.log(this.props);
     return (
-      <Layout navigationTitle="Mission And Project List">
+      <Layout navigationTitle="Projects Allocation" showBackNavigation={true}>
         <div>
           <div>
             <Tabs
               value={this.state.value}
               onChange={this.handleTabChange}
               tabItemContainerStyle={{ backgroundColor: "transparent" }}
+              inkBarStyle={{ backgroundColor: "#f08f4c" }}
             >
               <Tab label="Peoples List" style={{ color: "#f08f4c" }} value={0}>
                 <div>
@@ -204,37 +204,36 @@ class TeamAllocationMissionList extends React.Component {
                     </List>
                   </div>
                   <div style={this.contentButton}>
-                    <FloatingActionButton
-                      backgroundColor={"rgb(253, 145, 77)"}
-                      style={{ float: "right", marginRight: 10 }}
-                    >
-                      <IconMenu
-                        iconButtonElement={
-                          <IconButton style={{ marginTop: 4 }}>
-                            <ContentAdd color={"white"} />
-                          </IconButton>
-                        }
-                        menuStyle={{
-                          backgroundColor: "rgba(242, 243, 242, 0.5)",
-                          padding: 0
-                        }}
-                        anchorOrigin={{
-                          horizontal: "right",
-                          vertical: "bottom"
-                        }}
-                        targetOrigin={{
-                          horizontal: "right",
-                          vertical: "bottom"
-                        }}
-                      >
-                        <MenuItem onClick={this.props.handleAddMission}>
-                          Add Mission
-                        </MenuItem>
-                        <Divider />
-                        <MenuItem onClick={this.props.handleAddproject}>
-                          Add Project
-                        </MenuItem>
-                      </IconMenu>
+                    <FloatingActionButton backgroundColor={"rgb(253, 145, 77)"}>
+                      <div>
+                        <IconMenu
+                          iconButtonElement={
+                            <IconButton style={{ marginTop: 4 }}>
+                              <ContentAdd color={"white"} />
+                            </IconButton>
+                          }
+                          menuStyle={{
+                            backgroundColor: "rgba(242, 243, 242, 0.5)",
+                            padding: 0
+                          }}
+                          anchorOrigin={{
+                            horizontal: "right",
+                            vertical: "bottom"
+                          }}
+                          targetOrigin={{
+                            horizontal: "right",
+                            vertical: "bottom"
+                          }}
+                        >
+                          <MenuItem onClick={this.props.handleAddMission}>
+                            Add Mission
+                          </MenuItem>
+                          <Divider />
+                          <MenuItem onClick={this.props.handleAddproject}>
+                            Add Project
+                          </MenuItem>
+                        </IconMenu>
+                      </div>
                     </FloatingActionButton>
                   </div>
                 </div>

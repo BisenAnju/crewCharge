@@ -237,9 +237,7 @@ ul.ChatLog {
   width: 100%;
   display: block;
   position: relative;
-  padding: 0 30px;
-}
-.rwdpDayBoxDesktop {
+  padding: 9px 20px;
 }
 .rwdpDayBoxDesktop .rwdp-DayCircle-container {
   margin-top: 10px;
@@ -421,4 +419,35 @@ ul.ChatLog {
 }
 .paperDiv {
   box-shadow: rgba(0, 0, 0, 0.12) -7px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+}
+
+.leavesAnimation {
+  padding: 5px;
+  animation-name: color_change;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@-webkit-keyframes color_change {
+  from {
+    background-color: green;
+  }
+  to {
+    background-color: red;
+  }
+}
+.leavesAnima {
+  padding: 0;
+  animation-name: color_change1;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@-webkit-keyframes color_change1 {
+  from {
+    background-color: white;
+  }
+  to {
+    background-color: white;
+  }
 }
