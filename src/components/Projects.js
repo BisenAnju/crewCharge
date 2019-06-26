@@ -18,13 +18,21 @@ class Projects extends Component {
   }
 
   componentWillReceiveProps(nextProps) {}
+
   render() {
     console.log("dashboard component props");
-    console.log(this.props.teamListData);
+    console.log(this.props);
     return (
       <React.Fragment>
         <Layout navigationTitle="Projects" showBackNavigation={true}>
-          <div id="listOfProjects">
+          <div
+            style={{
+              height: "90vh",
+              overflow: "auto",
+              display: "self"
+            }}
+            id="listOfProjects"
+          >
             <h3>Projects: {this.props.projectList.count}</h3>
             {this.props.projectList.count > 0 &&
               this.props.projectList.value.map((project, index) => {
@@ -55,17 +63,6 @@ class Projects extends Component {
                               `/projects/${project.id}/widgets/`,
                               this.props.teamListData,
                               this.props.projectListData
-                            );
-                          }}
-                        />
-                        <FlatButton
-                          label="Widgets1"
-                          primary={true}
-                          onClick={e => {
-                            e.preventDefault();
-                            this.props.handleWidgets();
-                            this.props.history.push(
-                              `/projects/${project.id}/widgets1/`
                             );
                           }}
                         />

@@ -130,7 +130,7 @@ class NavigationBar extends React.Component {
                 e.preventDefault();
                 this.props.history.push("/complaintlist");
               }}
-              primaryText="Complaint List"
+              primaryText="Complaints"
               leftIcon={
                 <img
                   src={complaint}
@@ -140,14 +140,15 @@ class NavigationBar extends React.Component {
             />
 
             {this.props.userData.map((user, index) =>
-              user.uid === this.props.user.uid && user.userType === "Admin" ? (
+              user.uid === this.props.user.uid &&
+              user.userType === "Employee" ? (
                 <div key={index}>
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
-                      this.props.history.push("/leavedashboard/admin");
+                      this.props.history.push("/leavedashboard");
                     }}
-                    primaryText="Leave List"
+                    primaryText="Leaves"
                     leftIcon={
                       <img
                         src={leave}
@@ -155,28 +156,42 @@ class NavigationBar extends React.Component {
                       />
                     }
                   />
+                </div>
+              ) : null
+            )}
+
+            <ListItem
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push("/teamallocation");
+              }}
+              primaryText="Peoples "
+              leftIcon={
+                <img src={meeting} style={{ height: "35px", width: "35px" }} />
+              }
+            />
+            <ListItem
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push("/teamallocation/projectlist");
+              }}
+              primaryText="Projects "
+              leftIcon={
+                <img src={project} style={{ height: "35px", width: "35px" }} />
+              }
+            />
+            {this.props.userData.map((user, index) =>
+              user.uid === this.props.user.uid && user.userType === "Admin" ? (
+                <div key={index}>
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
-                      this.props.history.push("/teamallocation");
+                      this.props.history.push("/leavedashboard/admin");
                     }}
-                    primaryText="Peoples List"
+                    primaryText="Leaves"
                     leftIcon={
                       <img
-                        src={meeting}
-                        style={{ height: "35px", width: "35px" }}
-                      />
-                    }
-                  />
-                  <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/teamallocation/projectlist");
-                    }}
-                    primaryText="Projects List"
-                    leftIcon={
-                      <img
-                        src={project}
+                        src={leave}
                         style={{ height: "35px", width: "35px" }}
                       />
                     }
@@ -235,6 +250,7 @@ class NavigationBar extends React.Component {
                 </div>
               ) : null
             )}
+
             <Divider />
             <ListItem
               onClick={() => {
