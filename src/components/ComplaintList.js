@@ -117,43 +117,49 @@ class ComplaintList extends React.Component {
                     )
                     .map((doc, index) => {
                       let userdata = this.props.userData.find(
-                        data => data.uid === doc.userId
+                        data => data.id === doc.userId
                       );
-                      doc.username = userdata.displayName;
-                      doc.userImageURL = userdata.photoURL;
-                      doc.icon =
-                        icn[
-                          doc.complaintType
-                            .replace(" ", "")
-                            .replace("/", "")
-                            .replace("-", "")
-                        ];
-                      return (
-                        <ListItem
-                          key={index}
-                          onClick={() =>
-                            this.props.history.push(`/complaintview/${doc.id}`)
-                          }
-                          leftAvatar={
-                            <Avatar size={48} src={doc.userImageURL} />
-                          }
-                          secondaryTextLines={2}
-                          primaryText={doc.username}
-                          secondaryText={
-                            <p>
-                              <span>
-                                {doc.title +
-                                  " - " +
-                                  moment(
-                                    new Date(doc.addedOn.seconds * 1000)
-                                  ).format("DD MMM YYYY")}
-                              </span>
-                              <br />
-                              {doc.complaintType}
-                            </p>
-                          }
-                        />
-                      );
+                      try {
+                        doc.username = userdata.displayName;
+                        doc.userImageURL = userdata.photoURL;
+                        doc.icon =
+                          icn[
+                            doc.complaintType
+                              .replace(" ", "")
+                              .replace("/", "")
+                              .replace("-", "")
+                          ];
+                        return (
+                          <ListItem
+                            key={index}
+                            onClick={() =>
+                              this.props.history.push(
+                                `/complaintview/${doc.id}`
+                              )
+                            }
+                            leftAvatar={
+                              <Avatar size={48} src={doc.userImageURL} />
+                            }
+                            secondaryTextLines={2}
+                            primaryText={doc.username}
+                            secondaryText={
+                              <p>
+                                <span>
+                                  {doc.title +
+                                    " - " +
+                                    moment(
+                                      new Date(doc.addedOn.seconds * 1000)
+                                    ).format("DD MMM YYYY")}
+                                </span>
+                                <br />
+                                {doc.complaintType}
+                              </p>
+                            }
+                          />
+                        );
+                      } catch (e) {
+                        console.log();
+                      }
                     })}
             </List>
           </div>
