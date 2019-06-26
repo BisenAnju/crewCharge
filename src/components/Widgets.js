@@ -120,21 +120,37 @@ class Widgets extends Component {
                                             ) {
                                               return workItems.map(
                                                 (workItem, workItemIndex) => {
-                                                  
-                                                    return Object.values(
-                                                      workItem.fields
-                                                    ).map(data => {
-                                                      return (
-                                                        <tbody
-                                                          key={workItemIndex}
-                                                        >
-                                                          <tr>
-                                                            <td>{data}</td>
-                                                          </tr>
-                                                        </tbody>
-                                                      );
-                                                    });
-                                                  
+                                                  return Object.keys(
+                                                    workItem.fields
+                                                  ).map(data => {
+                                                    if (
+                                                      col.referenceName === data
+                                                    ) {
+                                                      Object.values(
+                                                        workItem.fields
+                                                      ).map(val => {
+                                                        return (
+                                                          <tbody>
+                                                            <tr>
+                                                              {typeof val ===
+                                                                "object" &&
+                                                              val !== null ? (
+                                                                <td>
+                                                                  {
+                                                                    val[
+                                                                      "displayName"
+                                                                    ]
+                                                                  }
+                                                                </td>
+                                                              ) : (
+                                                                <td>{val}</td>
+                                                              )}
+                                                            </tr>
+                                                          </tbody>
+                                                        );
+                                                      });
+                                                    }
+                                                  });
                                                 }
                                               );
                                             }
