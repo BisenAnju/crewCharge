@@ -13,7 +13,6 @@ import {
   CommunicationComment,
   ActionList
 } from "material-ui/svg-icons";
-import { lightGreen800, teal700 } from "material-ui/styles/colors";
 
 const flexcontainer = {
   display: "flex",
