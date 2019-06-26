@@ -90,7 +90,6 @@ class ReactWeeklyDayPicker extends React.Component {
   constructor(props) {
     super(props);
     const selectedDays = this.props.selectedDays || [];
-    console.log(this.props.selectedDays);
     let convertedSelectedDays = selectedDays.map(day => {
       if (moment.isMoment(day)) {
         return day;

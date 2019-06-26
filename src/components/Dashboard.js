@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../layouts/Layout";
 import blur from "../images/blur1.png";
-import leave from "../images/leave1.png";
 import icon from "../images/icon1.png";
-import meeting from "../images/meeting1.png";
-import complaint from "../images/complaint1.png";
-import project from "../images/project1.png";
-
+import leave from "../images/leave.svg";
+import complaint from "../images/complaint.svg";
+import team from "../images/team.svg";
+import allocation from "../images/allocation.svg";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +26,7 @@ class Dashboard extends Component {
             style={{
               boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
               backgroundImage: ' url("' + blur + '")',
+              height: "30vh",
               width: "50%",
               margin: "0% 2%",
               borderRadius: "10px",
@@ -40,11 +40,16 @@ class Dashboard extends Component {
             <div
               style={{
                 padding: "7%",
-                backgroundColor: "transparent"
+                backgroundColor: "transparent",
+                height: "20vh"
               }}
             >
               <center>
-                <img src={leave} alt="leave" />
+                <img
+                  src={leave}
+                  alt="leave"
+                  style={{ height: "20vh", width: "13vh" }}
+                />
               </center>
             </div>
             <div
@@ -64,6 +69,7 @@ class Dashboard extends Component {
             style={{
               boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
               backgroundImage: ' url("' + blur + '")',
+              height: "30vh",
               width: "50%",
               margin: "0% 2%",
               borderRadius: "10px",
@@ -77,11 +83,16 @@ class Dashboard extends Component {
             <div
               style={{
                 padding: "7%",
-                backgroundColor: "transparent"
+                backgroundColor: "transparent",
+                height: "20vh"
               }}
             >
               <center>
-                <img src={meeting} alt="meeting" />
+                <img
+                  src={allocation}
+                  alt="allocation"
+                  style={{ height: "20vh", width: "13vh" }}
+                />
               </center>
             </div>
             <div
@@ -102,6 +113,7 @@ class Dashboard extends Component {
             style={{
               boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
               backgroundImage: ' url("' + blur + '")',
+              height: "30vh",
               width: "50%",
               margin: "0% 2%",
               borderRadius: "10px",
@@ -115,11 +127,16 @@ class Dashboard extends Component {
             <div
               style={{
                 padding: "7%",
-                backgroundColor: "transparent"
+                backgroundColor: "transparent",
+                height: "20vh"
               }}
             >
               <center>
-                <img src={complaint} alt="complaint" />
+                <img
+                  src={complaint}
+                  alt="complaint"
+                  style={{ height: "20vh", width: "13vh" }}
+                />
               </center>
             </div>
             <div
@@ -138,6 +155,7 @@ class Dashboard extends Component {
             style={{
               boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
               backgroundImage: ' url("' + blur + '")',
+              height: "30vh",
               width: "50%",
               margin: "0% 2%",
               borderRadius: "10px",
@@ -151,11 +169,16 @@ class Dashboard extends Component {
             <div
               style={{
                 padding: "7%",
-                backgroundColor: "transparent"
+                backgroundColor: "transparent",
+                height: "20vh"
               }}
             >
               <center>
-                <img src={project} alt="project" />
+                <img
+                  src={team}
+                  alt="team"
+                  style={{ height: "20vh", width: "13vh" }}
+                />
               </center>
             </div>
             <div

@@ -81,11 +81,6 @@ class TeamAllocationMissionContainer extends Component {
                 <TeamAllocationMission
                   {...this.props}
                   {...this.state}
-                  missionList={this.props.missionsList.find(
-                    misiionData =>
-                      misiionData.missionsId ===
-                      this.props.match.params.missionId
-                  )}
                   handleAddMission={this.handleAddMission}
                 />
               )}

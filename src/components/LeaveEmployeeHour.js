@@ -13,7 +13,6 @@ import {
   CommunicationComment,
   ActionList
 } from "material-ui/svg-icons";
-import { teal700 } from "material-ui/styles/colors";
 
 const flexcontainer = {
   display: "flex",

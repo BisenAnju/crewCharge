@@ -12,6 +12,7 @@ import * as moment from "moment";
 import ReactWeeklyDayPicker from "./WeeklyDayPicker";
 import { classNames } from "../constants/weeklydaypicker";
 import "../styles/style.css";
+import { loader } from "../constants/loader";
 class TeamAllocationPeopleList extends React.Component {
   constructor(props) {
     super(props);
@@ -46,6 +47,7 @@ class TeamAllocationPeopleList extends React.Component {
     this.setState({
       leavesList: nextProps.leavesList,
       missionsList,
+      isLoading: false,
       projectsList: nextProps.projectsList,
       usersList: nextProps.usersList,
       nowDate: moment(Date()).format("LL")
@@ -93,17 +95,11 @@ class TeamAllocationPeopleList extends React.Component {
       leavesList,
       missionsList,
       selectedDate: selctedCurrentDate,
-      startDay
+      startDay,
+      isLoading: false
     });
   };
-  contentButton = {
-    top: "auto",
-    bottom: 20,
-    left: "auto",
-    right: 20,
-    position: "fixed",
-    margin: 0
-  };
+
   render() {
     return (
       <div>
@@ -135,107 +131,104 @@ class TeamAllocationPeopleList extends React.Component {
         <Divider />
         <div
           style={{
-            height: "70vh",
+            height: "73vh",
             overflow: "auto",
             display: "self"
           }}
         >
-          {this.state.usersList.map((row, id) => {
-            let projectId = [];
-            this.state.missionsList.map(missionRow => {
-              if (missionRow.assignTo.find(data => data === row.uid))
-                projectId = this.state.projectsList.filter(
-                  data => data.projectId === missionRow.projectId
-                );
-            });
-            let backcolor = null;
-            {
-              this.props.leavesList.find(
-                leaveDate =>
-                  moment(leaveDate.from.seconds * 1000).format("LL") <=
-                    moment(this.state.selectedDate).format("LL") &&
-                  (moment(leaveDate.to.seconds * 1000).format("LL") >=
-                    moment(this.state.selectedDate).format("LL") &&
-                    leaveDate.userId === row.uid)
-              )
-                ? (backcolor = "#C73DAC")
-                : (backcolor = null);
-            }
-            return (
-              <Card key={id}>
-                <CardHeader
-                  title={row.displayName}
-                  avatar={
-                    <Avatar
-                      style={{
-                        border: 5,
-                        border: "solid",
-                        borderColor: backcolor,
-                        width: 50,
-                        height: 50
-                      }}
-                      src={row.photoURL}
-                    />
-                  }
-                  actAsExpander={true}
-                  style={{ padding: 5 }}
-                  titleStyle={{
-                    paddingTop: 10,
-                    paddingRight: 5,
-                    fontWeight: "bold"
-                  }}
-                  children={projectId.map((projectRow, index) => (
-                    <img
-                      key={index}
-                      style={{
-                        width: 35,
-                        height: 35,
-                        borderRadius: 5,
-                        float: "right"
-                      }}
-                      src={projectRow.logoURL}
-                    />
-                  ))}
-                />
-                {this.state.missionsList.map((missionRow, index) => {
+          {this.state.isLoading
+            ? loader
+            : this.state.usersList.map((row, id) => {
+                let projectId = [];
+                let paddingStyle = 0;
+                this.state.missionsList.map(missionRow => {
                   if (missionRow.assignTo.find(data => data === row.uid))
-                    return (
-                      <CardText
-                        key={index}
-                        expandable={true}
-                        style={{
-                          padding: 5
-                        }}
-                      >
-                        <Paper
-                          className={"paperDiv"}
-                          style={{
-                            padding: 10,
-                            boxShadow: -1,
-                            MozBoxShadow: -1
-                          }}
-                        >
-                          <h3>{missionRow.name}</h3>
-                          <h4>Project Dead Line</h4>
-                          <h5 style={{ float: "left", marginRight: 10 }}>
-                            {moment(
-                              missionRow.deadline.startDate.seconds * 1000
-                            ).format("ll")}
-                          </h5>
-                          <h5 style={{ float: "left", marginRight: 10 }}>-</h5>
-                          <h5>
-                            {moment(
-                              missionRow.deadline.endDate.seconds * 1000
-                            ).format("ll")}
-                          </h5>
-                          <h5>Massege: {missionRow.deadline.remarks}</h5>
-                        </Paper>
-                      </CardText>
+                    projectId = this.state.projectsList.filter(
+                      data => data.projectId === missionRow.projectId
                     );
-                })}
-              </Card>
-            );
-          })}
+                });
+                let backcolor = null;
+                {
+                  this.props.leavesList.find(
+                    leaveDate =>
+                      moment(leaveDate.from.seconds * 1000).format("LL") <=
+                        moment(this.state.selectedDate).format("LL") &&
+                      (moment(leaveDate.to.seconds * 1000).format("LL") >=
+                        moment(this.state.selectedDate).format("LL") &&
+                        leaveDate.userId === row.uid)
+                  )
+                    ? (backcolor = "leavesAnimation")
+                    : (backcolor = "leavesAnima");
+                }
+                return (
+                  <Card key={id}>
+                    <CardHeader
+                      title={row.displayName}
+                      avatar={
+                        <Avatar className={backcolor} src={row.photoURL} />
+                      }
+                      actAsExpander={true}
+                      style={{ padding: 5 }}
+                      titleStyle={{
+                        paddingTop: 10,
+                        paddingRight: 5,
+                        fontWeight: "bold"
+                      }}
+                      children={projectId.map((projectRow, index) => (
+                        <img
+                          key={index}
+                          style={{
+                            paddingTop: 5,
+                            width: 35,
+                            height: 35,
+                            borderRadius: 5,
+                            float: "right"
+                          }}
+                          src={projectRow.logoURL}
+                        />
+                      ))}
+                    />
+                    {this.state.missionsList.map((missionRow, index) => {
+                      if (missionRow.assignTo.find(data => data === row.uid))
+                        return (
+                          <CardText
+                            key={index}
+                            expandable={true}
+                            style={{
+                              padding: 5
+                            }}
+                          >
+                            <Paper
+                              className={"paperDiv"}
+                              style={{
+                                padding: 10,
+                                boxShadow: -1,
+                                MozBoxShadow: -1
+                              }}
+                            >
+                              <h3>{missionRow.name}</h3>
+                              <h4>Project Dead Line</h4>
+                              <h5 style={{ float: "left", marginRight: 10 }}>
+                                {moment(
+                                  missionRow.deadline.startDate.seconds * 1000
+                                ).format("ll")}
+                              </h5>
+                              <h5 style={{ float: "left", marginRight: 10 }}>
+                                -
+                              </h5>
+                              <h5>
+                                {moment(
+                                  missionRow.deadline.endDate.seconds * 1000
+                                ).format("ll")}
+                              </h5>
+                              <h5>Massege: {missionRow.deadline.remarks}</h5>
+                            </Paper>
+                          </CardText>
+                        );
+                    })}
+                  </Card>
+                );
+              })}
         </div>
       </div>
     );

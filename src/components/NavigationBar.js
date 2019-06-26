@@ -16,13 +16,13 @@ import {
   NavigationArrowBack,
   ActionHome,
   ActionPowerSettingsNew,
-  ActionList,
   ActionInput
 } from "material-ui/svg-icons";
-import leave from "../images/leave1.png";
-import meeting from "../images/meeting1.png";
-import complaint from "../images/complaint1.png";
-import project from "../images/project1.png";
+import leave from "../images/leave.svg";
+import complaint from "../images/complaint.svg";
+import team from "../images/team.svg";
+import allocation from "../images/allocation.svg";
+import addLocation from "material-ui/svg-icons/maps/add-location";
 class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
@@ -167,7 +167,7 @@ class NavigationBar extends React.Component {
               }}
               primaryText="Peoples "
               leftIcon={
-                <img src={meeting} style={{ height: "35px", width: "35px" }} />
+                <img src={team} style={{ height: "35px", width: "35px" }} />
               }
             />
             <ListItem
@@ -177,7 +177,10 @@ class NavigationBar extends React.Component {
               }}
               primaryText="Projects "
               leftIcon={
-                <img src={project} style={{ height: "35px", width: "35px" }} />
+                <img
+                  src={allocation}
+                  style={{ height: "35px", width: "35px" }}
+                />
               }
             />
             {this.props.userData.map((user, index) =>

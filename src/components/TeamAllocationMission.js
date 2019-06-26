@@ -5,15 +5,11 @@ import {
   SelectField,
   RaisedButton,
   MenuItem,
-  Snackbar,
-  Avatar
+  Snackbar
 } from "material-ui";
 import DatePicker from "material-ui/DatePicker";
 import Layout from "../layouts/Layout";
-import { orange500, white } from "material-ui/styles/colors";
-import { ActionHome, CommunicationMessage } from "material-ui/svg-icons";
-import TextFieldIcon from "material-ui-textfield-icon";
-import { assignmentExpression } from "@babel/types";
+import { white } from "material-ui/styles/colors";
 class TeamAllocationMission extends React.Component {
   constructor(props) {
     super(props);
@@ -27,15 +23,25 @@ class TeamAllocationMission extends React.Component {
       endDate: null,
       remarks: null,
       openSnackbar: null,
-      message: null,
-      mission: []
+      message: null
     };
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.missionList);
-    this.setState({
-      mission: nextProps.missionList
-    });
+    if (nextProps.missionsList.length > 0) {
+      let missionList = nextProps.missionsList.find(
+        misiionData =>
+          misiionData.missionsId === this.props.match.params.missionId
+      );
+      console.log(missionList);
+      this.setState({
+        missionName: missionList.name,
+        values: missionList.assignTo,
+        projectId: missionList.projectId,
+        startDate: missionList.deadline.startDate,
+        endDate: missionList.deadline.endDate,
+        remarks: missionList.deadline.remarks
+      });
+    }
   }
   handleUsersChange = (event, index, values) => this.setState({ values });
   menuItems(values) {
@@ -131,6 +137,7 @@ class TeamAllocationMission extends React.Component {
           </SelectField>
           <DatePicker
             floatingLabelText="Start Date"
+            value={this.state.startDate}
             floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
             floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
             fullWidth={true}
@@ -138,6 +145,7 @@ class TeamAllocationMission extends React.Component {
           />
           <DatePicker
             floatingLabelText="End Date"
+            value={this.state.endDate}
             floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
             floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
             fullWidth={true}
@@ -145,6 +153,7 @@ class TeamAllocationMission extends React.Component {
           />
           <TextField
             floatingLabelText="Remarks"
+            defaultValue={this.state.missionName}
             floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
             floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
             fullWidth={true}
