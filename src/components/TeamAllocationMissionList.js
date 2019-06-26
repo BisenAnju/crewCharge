@@ -11,6 +11,7 @@ import {
 import { Tabs, Tab } from "material-ui/Tabs";
 import { withRouter } from "react-router-dom";
 import Layout from "../layouts/Layout";
+import Subheader from "material-ui/Subheader";
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
@@ -50,197 +51,181 @@ class TeamAllocationMissionList extends React.Component {
   render() {
     return (
       <Layout navigationTitle="Projects Allocation" showBackNavigation={true}>
-        <div>
-          <div>
-            <Tabs
-              value={this.state.value}
-              onChange={this.handleTabChange}
-              tabItemContainerStyle={{ backgroundColor: "transparent" }}
-              inkBarStyle={{ backgroundColor: "#f08f4c" }}
-            >
-              <Tab label="Peoples List" style={{ color: "#f08f4c" }} value={0}>
-                <div>
-                  <TeamAllocationPeopleList {...this.props} />
-                </div>
-              </Tab>
-              <Tab label="Project List" style={{ color: "#f08f4c" }} value={1}>
-                <div>
-                  <TeamAllocationProjectList {...this.props} />
-                </div>
-              </Tab>
-              <Tab label="Manage" style={{ color: "#f08f4c" }} value={2}>
-                <div>
-                  <div
-                    style={{
-                      position: "relative",
-                      height: "40vh",
-                      overflow: "auto"
-                    }}
-                  >
-                    <Divider style={{ backgroundColor: orange100 }} />
-                    <p
-                      style={{
-                        color: grey500,
-                        padding: 20,
-                        position: "relative"
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleTabChange}
+          tabItemContainerStyle={{ backgroundColor: "transparent" }}
+          inkBarStyle={{ backgroundColor: "#f08f4c" }}
+        >
+          <Tab label="Peoples List" style={{ color: "#f08f4c" }} value={0}>
+            <div>
+              <TeamAllocationPeopleList {...this.props} />
+            </div>
+          </Tab>
+          <Tab label="Project List" style={{ color: "#f08f4c" }} value={1}>
+            <div>
+              <TeamAllocationProjectList {...this.props} />
+            </div>
+          </Tab>
+          <Tab label="Manage" style={{ color: "#f08f4c" }} value={2}>
+            <div>
+              <div
+                style={{
+                  position: "relative",
+                  height: "41vh",
+                  overflow: "scroll"
+                }}
+              >
+                <Subheader className="sticky">Missions List</Subheader>
+                <Divider style={{ backgroundColor: orange100 }} />
+                <List>
+                  {this.props.missionsList.map((row, index) => (
+                    <div key={index}>
+                      <div>
+                        <ListItem
+                          key={index}
+                          primaryText={row.name}
+                          rightIconButton={
+                            <IconMenu
+                              menuStyle={{
+                                backgroundColor: "rgba(242, 243, 242, 0.5)"
+                              }}
+                              iconButtonElement={
+                                <IconButton style={{ marginTop: 4 }}>
+                                  <MoreVertIcon />
+                                </IconButton>
+                              }
+                            >
+                              <MenuItem
+                                onClick={e => {
+                                  e.preventDefault();
+                                  this.handleEditMissionChange(row.missionsId);
+                                }}
+                              >
+                                Edit
+                              </MenuItem>
+                              <MenuItem
+                                onClick={e => {
+                                  e.preventDefault();
+                                  this.handleArchiveMissionChange(
+                                    row.missionsId
+                                  );
+                                }}
+                              >
+                                Archive
+                              </MenuItem>
+                            </IconMenu>
+                          }
+                          secondaryTextLines={2}
+                          secondaryText={
+                            "Deadline :" +
+                            moment(
+                              row.deadline.startDate.seconds * 1000
+                            ).format("LL") +
+                            " - " +
+                            moment(row.deadline.endDate.seconds * 1000).format(
+                              "LL"
+                            )
+                          }
+                        />
+                      </div>
+                      <Divider style={{ backgroundColor: orange100 }} />
+                    </div>
+                  ))}
+                </List>
+              </div>
+              <div
+                style={{
+                  position: "relative",
+                  height: "41vh",
+                  overflow: "scroll"
+                }}
+              >
+                <Subheader className="sticky" style={{ overflow: "scroll" }}>
+                  Project List
+                </Subheader>
+                <Divider style={{ backgroundColor: orange100 }} />
+                <List>
+                  {this.props.projectsList.map((row, index) => (
+                    <div key={index}>
+                      <div>
+                        <ListItem
+                          primaryText={row.name}
+                          leftAvatar={<Avatar src={row.logoURL} />}
+                          rightIconButton={
+                            <IconMenu
+                              menuStyle={{
+                                backgroundColor: "rgba(242, 243, 242, 0.5)"
+                              }}
+                              iconButtonElement={
+                                <IconButton style={{ marginTop: 4 }}>
+                                  <MoreVertIcon />
+                                </IconButton>
+                              }
+                            >
+                              <MenuItem
+                                onClick={e => {
+                                  e.preventDefault();
+                                  this.handleEditProjectChange(row.projectId);
+                                }}
+                              >
+                                Edit
+                              </MenuItem>
+                              <MenuItem
+                                onClick={e => {
+                                  e.preventDefault();
+                                  this.handleArchiveProjectChange(
+                                    row.projectId
+                                  );
+                                }}
+                              >
+                                Archive
+                              </MenuItem>
+                            </IconMenu>
+                          }
+                        />
+                      </div>
+                      <Divider style={{ backgroundColor: orange100 }} />
+                    </div>
+                  ))}
+                </List>
+              </div>
+              <div style={this.contentButton}>
+                <FloatingActionButton backgroundColor={"rgb(253, 145, 77)"}>
+                  <div>
+                    <IconMenu
+                      iconButtonElement={
+                        <IconButton style={{ marginTop: 4 }}>
+                          <ContentAdd color={"white"} />
+                        </IconButton>
+                      }
+                      menuStyle={{
+                        backgroundColor: "rgba(242, 243, 242, 0.5)",
+                        padding: 0
+                      }}
+                      anchorOrigin={{
+                        horizontal: "right",
+                        vertical: "bottom"
+                      }}
+                      targetOrigin={{
+                        horizontal: "right",
+                        vertical: "bottom"
                       }}
                     >
-                      <span style={{ padding: 10 }}>Missions List</span>
-                    </p>
-                    <Divider style={{ backgroundColor: orange100 }} />
-                    <List>
-                      {this.props.missionsList.map((row, index) => (
-                        <div key={index}>
-                          <div>
-                            <ListItem
-                              key={index}
-                              primaryText={row.name}
-                              rightIconButton={
-                                <IconMenu
-                                  menuStyle={{
-                                    backgroundColor: "rgba(242, 243, 242, 0.5)"
-                                  }}
-                                  iconButtonElement={
-                                    <IconButton style={{ marginTop: 4 }}>
-                                      <MoreVertIcon />
-                                    </IconButton>
-                                  }
-                                >
-                                  <MenuItem
-                                    onClick={e => {
-                                      e.preventDefault();
-                                      this.handleEditMissionChange(
-                                        row.missionsId
-                                      );
-                                    }}
-                                  >
-                                    Edit
-                                  </MenuItem>
-                                  <MenuItem
-                                    onClick={e => {
-                                      e.preventDefault();
-                                      this.handleArchiveMissionChange(
-                                        row.missionsId
-                                      );
-                                    }}
-                                  >
-                                    Archive
-                                  </MenuItem>
-                                </IconMenu>
-                              }
-                              secondaryTextLines={2}
-                              secondaryText={
-                                "Deadline :" +
-                                moment(
-                                  row.deadline.startDate.seconds * 1000
-                                ).format("LL") +
-                                " - " +
-                                moment(
-                                  row.deadline.endDate.seconds * 1000
-                                ).format("LL")
-                              }
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </List>
+                      <MenuItem onClick={this.props.handleAddMission}>
+                        Add Mission
+                      </MenuItem>
+                      <Divider />
+                      <MenuItem onClick={this.props.handleAddproject}>
+                        Add Project
+                      </MenuItem>
+                    </IconMenu>
                   </div>
-                  <Divider style={{ backgroundColor: orange100 }} />
-                  <div
-                    style={{
-                      position: "relative",
-                      height: "40vh",
-                      overflow: "auto"
-                    }}
-                  >
-                    <p style={{ color: grey500, padding: 20 }}>
-                      <span style={{ padding: 10 }}>Project List</span>
-                    </p>
-                    <Divider style={{ backgroundColor: orange100 }} />
-                    <List>
-                      {this.props.projectsList.map((row, index) => (
-                        <div key={index}>
-                          <div>
-                            <ListItem
-                              primaryText={row.name}
-                              leftAvatar={<Avatar src={row.logoURL} />}
-                              rightIconButton={
-                                <IconMenu
-                                  menuStyle={{
-                                    backgroundColor: "rgba(242, 243, 242, 0.5)"
-                                  }}
-                                  iconButtonElement={
-                                    <IconButton style={{ marginTop: 4 }}>
-                                      <MoreVertIcon />
-                                    </IconButton>
-                                  }
-                                >
-                                  <MenuItem
-                                    onClick={e => {
-                                      e.preventDefault();
-                                      this.handleEditProjectChange(
-                                        row.projectId
-                                      );
-                                    }}
-                                  >
-                                    Edit
-                                  </MenuItem>
-                                  <MenuItem
-                                    onClick={e => {
-                                      e.preventDefault();
-                                      this.handleArchiveProjectChange(
-                                        row.projectId
-                                      );
-                                    }}
-                                  >
-                                    Archive
-                                  </MenuItem>
-                                </IconMenu>
-                              }
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </List>
-                  </div>
-                  <div style={this.contentButton}>
-                    <FloatingActionButton backgroundColor={"rgb(253, 145, 77)"}>
-                      <div>
-                        <IconMenu
-                          iconButtonElement={
-                            <IconButton style={{ marginTop: 4 }}>
-                              <ContentAdd color={"white"} />
-                            </IconButton>
-                          }
-                          menuStyle={{
-                            backgroundColor: "rgba(242, 243, 242, 0.5)",
-                            padding: 0
-                          }}
-                          anchorOrigin={{
-                            horizontal: "right",
-                            vertical: "bottom"
-                          }}
-                          targetOrigin={{
-                            horizontal: "right",
-                            vertical: "bottom"
-                          }}
-                        >
-                          <MenuItem onClick={this.props.handleAddMission}>
-                            Add Mission
-                          </MenuItem>
-                          <Divider />
-                          <MenuItem onClick={this.props.handleAddproject}>
-                            Add Project
-                          </MenuItem>
-                        </IconMenu>
-                      </div>
-                    </FloatingActionButton>
-                  </div>
-                </div>
-              </Tab>
-            </Tabs>
-          </div>
-        </div>
+                </FloatingActionButton>
+              </div>
+            </div>
+          </Tab>
+        </Tabs>
       </Layout>
     );
   }
