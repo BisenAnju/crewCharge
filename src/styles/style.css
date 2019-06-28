@@ -451,3 +451,8 @@ ul.ChatLog {
     background-color: white;
   }
 }
+div.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
