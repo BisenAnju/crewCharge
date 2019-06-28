@@ -148,6 +148,7 @@ export class SelectfieldClass extends React.Component {
   render() {
     return (
       <SelectField
+        maxHeight={180}
         floatingLabelStyle={{ color: "rgb(240, 143, 76)" }}
         floatingLabelText="Select complaint type"
         id="complaintType"

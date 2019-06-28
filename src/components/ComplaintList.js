@@ -112,7 +112,9 @@ class ComplaintList extends React.Component {
                 : this.props.listData
                     .filter(
                       data =>
-                        data.adminReply === undefined &&
+                        (data.adminReply === undefined ||
+                          (data.adminReply !== undefined &&
+                            data.statusByAdmin === "pending")) &&
                         data.isArchived === false
                     )
                     .map((doc, index) => {
@@ -140,6 +142,7 @@ class ComplaintList extends React.Component {
                             leftAvatar={
                               <Avatar size={48} src={doc.userImageURL} />
                             }
+                            hoverColor={"rgba(253, 145, 77, 0.43)"}
                             secondaryTextLines={2}
                             primaryText={doc.username}
                             secondaryText={
@@ -176,58 +179,67 @@ class ComplaintList extends React.Component {
                 ? loader
                 : this.props.listData
                     .filter(
-                      data => data.adminReply && data.isArchived === false
+                      data =>
+                        data.statusByAdmin !== undefined &&
+                        data.statusByAdmin === "resolve" &&
+                        data.isArchived === false
                     )
                     .map((doc, index) => {
                       let userdata = this.props.userData.find(
                         data => data.uid === doc.userId
                       );
-                      doc.username = userdata.displayName;
-                      doc.userImageURL = userdata.photoURL;
-                      doc.icon =
-                        icn[
-                          doc.complaintType
-                            .replace(" ", "")
-                            .replace("/", "")
-                            .replace("-", "")
-                        ];
-                      return (
-                        <ListItem
-                          key={index}
-                          onClick={() =>
-                            this.props.history.push("/complaintview/" + doc.id)
-                          }
-                          leftAvatar={<Avatar src={doc.userImageURL} />}
-                          secondaryTextLines={2}
-                          primaryText={doc.username}
-                          secondaryText={
-                            <p>
-                              <span>
-                                {doc.title +
-                                  " - " +
-                                  moment(
-                                    new Date(doc.addedOn.seconds * 1000)
-                                  ).format("DD MMM YYYY")}
-                              </span>
-                              <br />
-                              {doc.complaintType}
-                            </p>
-                          }
-                          rightIconButton={
-                            <IconButton
-                              onClick={e => {
-                                e.preventDefault();
-                                this.props.archive(true, doc.id);
-                                this.setState({
-                                  lastArchivedDocId: doc.id
-                                });
-                              }}
-                            >
-                              <Archived />
-                            </IconButton>
-                          }
-                        />
-                      );
+                      try {
+                        doc.username = userdata.displayName;
+                        doc.userImageURL = userdata.photoURL;
+                        doc.icon =
+                          icn[
+                            doc.complaintType
+                              .replace(" ", "")
+                              .replace("/", "")
+                              .replace("-", "")
+                          ];
+                        return (
+                          <ListItem
+                            key={index}
+                            onClick={() =>
+                              this.props.history.push(
+                                "/complaintview/" + doc.id
+                              )
+                            }
+                            leftAvatar={<Avatar src={doc.userImageURL} />}
+                            secondaryTextLines={2}
+                            primaryText={doc.username}
+                            secondaryText={
+                              <p>
+                                <span>
+                                  {doc.title +
+                                    " - " +
+                                    moment(
+                                      new Date(doc.addedOn.seconds * 1000)
+                                    ).format("DD MMM YYYY")}
+                                </span>
+                                <br />
+                                {doc.complaintType}
+                              </p>
+                            }
+                            rightIconButton={
+                              <IconButton
+                                onClick={e => {
+                                  e.preventDefault();
+                                  this.props.archive(true, doc.id);
+                                  this.setState({
+                                    lastArchivedDocId: doc.id
+                                  });
+                                }}
+                              >
+                                <Archived />
+                              </IconButton>
+                            }
+                          />
+                        );
+                      } catch (e) {
+                        console.log();
+                      }
                     })}
             </List>
           </div>
