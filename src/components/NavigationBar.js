@@ -16,13 +16,14 @@ import {
   NavigationArrowBack,
   ActionHome,
   ActionPowerSettingsNew,
-  ActionInput
+  ActionInput,
+  NotificationEventNote,
+  SocialGroup,
+  ActionDateRange,
+  ActionAssignment,
+  ActionSettings
 } from "material-ui/svg-icons";
-import leave from "../images/leave.svg";
-import complaint from "../images/complaint.svg";
-import team from "../images/team.svg";
-import allocation from "../images/allocation.svg";
-import addLocation from "material-ui/svg-icons/maps/add-location";
+
 class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
@@ -117,14 +118,7 @@ class NavigationBar extends React.Component {
               }
             />
             <Divider />
-            {/* <ListItem
-              onClick={e => {
-                e.preventDefault();
-                this.props.history.push("/leavedashboard");
-              }}
-              primaryText="Leave dashboard"
-              leftIcon={<ActionDashboard />}
-            /> */}
+
             <ListItem
               onClick={e => {
                 e.preventDefault();
@@ -132,9 +126,13 @@ class NavigationBar extends React.Component {
               }}
               primaryText="Complaints"
               leftIcon={
-                <img
-                  src={complaint}
-                  style={{ height: "35px", width: "35px" }}
+                <NotificationEventNote
+                  style={{
+                    fill: "#fd914d",
+                    heigth: "22px",
+                    width: "22px",
+                    left: "12px"
+                  }}
                 />
               }
             />
@@ -150,9 +148,13 @@ class NavigationBar extends React.Component {
                     }}
                     primaryText="Leaves"
                     leftIcon={
-                      <img
-                        src={leave}
-                        style={{ height: "35px", width: "35px" }}
+                      <ActionDateRange
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
                       />
                     }
                   />
@@ -167,7 +169,14 @@ class NavigationBar extends React.Component {
               }}
               primaryText="Peoples "
               leftIcon={
-                <img src={team} style={{ height: "35px", width: "35px" }} />
+                <SocialGroup
+                  style={{
+                    fill: "#fd914d",
+                    heigth: "22px",
+                    width: "22px",
+                    left: "12px"
+                  }}
+                />
               }
             />
             <ListItem
@@ -177,9 +186,13 @@ class NavigationBar extends React.Component {
               }}
               primaryText="Projects "
               leftIcon={
-                <img
-                  src={allocation}
-                  style={{ height: "35px", width: "35px" }}
+                <ActionAssignment
+                  style={{
+                    fill: "#fd914d",
+                    heigth: "22px",
+                    width: "22px",
+                    left: "12px"
+                  }}
                 />
               }
             />
@@ -193,14 +206,36 @@ class NavigationBar extends React.Component {
                     }}
                     primaryText="Leaves"
                     leftIcon={
-                      <img
-                        src={leave}
-                        style={{ height: "35px", width: "35px" }}
+                      <ActionDateRange
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
                       />
                     }
                   />
 
                   <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/configuration");
+                    }}
+                    primaryText="Configuration"
+                    leftIcon={
+                      <ActionSettings
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  />
+
+                  {/* <ListItem
                     onClick={e => {
                       e.preventDefault();
                       this.props.history.push("/teamallocation/mission");
@@ -233,22 +268,6 @@ class NavigationBar extends React.Component {
                         }}
                       />
                     }
-                  />
-                  {/* <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/leavepurpose");
-                    }}
-                    primaryText="Add Leave Purpose"
-                    leftIcon={<ActionDashboard />}
-                  /> */}
-                  {/* <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/complainttype");
-                    }}
-                    primaryText="Add Complaint Type"
-                    leftIcon={<ActionDashboard />}
                   /> */}
                 </div>
               ) : null

@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../layouts/Layout";
 import { RaisedButton, TextField, Snackbar } from "material-ui";
-import { lightGreen800 } from "material-ui/styles/colors";
-import Dropzone from "react-dropzone";
+// import Dropzone from "react-dropzone";
 import ImageCompressor from "image-compressor.js";
 import firebase from "firebase";
+
+const styles = {
+  floatingLabelFocusStyle: {
+    color: "#fd914d"
+  }
+};
 class ComplaintType extends Component {
   constructor(props) {
     super(props);
@@ -63,19 +68,19 @@ class ComplaintType extends Component {
   };
   render() {
     return (
-      <Layout navigationTitle="Complaint Type" showBackNavigation={true}>
-        <div>
-          <br />
-          <center>
-            <TextField
-              floatingLabelText="Complaint type"
-              onChange={this.textChange}
-              value={this.state.complainttype}
-              name="complainttype"
-            />
-          </center>
-          <br />
-          <Dropzone onDrop={this.getIcon} accept="image/*">
+      <div>
+        <br />
+        <center>
+          <TextField
+            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+            floatingLabelText="Complaint type"
+            onChange={this.textChange}
+            value={this.state.complainttype}
+            name="complainttype"
+          />
+        </center>
+        <br />
+        {/* <Dropzone onDrop={this.getIcon} accept="image/*">
             {({ getRootProps, getInputProps, isDragActive }) => {
               return (
                 <div {...getRootProps}>
@@ -90,25 +95,24 @@ class ComplaintType extends Component {
                 </div>
               );
             }}
-          </Dropzone>
-          <br />
-          <br />
-          <center>
-            <RaisedButton
-              label="ADD"
-              backgroundColor={lightGreen800}
-              labelColor="white"
-              onClick={this.handleComplaint}
-            />
-          </center>
-          <Snackbar
-            open={this.state.snackOpen}
-            message="Add complaint type..."
-            autoHideDuration={4000}
-            onRequestClose={this.handleRequestClose}
+          </Dropzone> */}
+        <br />
+        <br />
+        <center>
+          <RaisedButton
+            label="ADD"
+            backgroundColor="#fd914d"
+            labelColor="white"
+            onClick={this.handleComplaint}
           />
-        </div>
-      </Layout>
+        </center>
+        <Snackbar
+          open={this.state.snackOpen}
+          message="Add complaint type..."
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose}
+        />
+      </div>
     );
   }
 }

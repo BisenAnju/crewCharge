@@ -25,17 +25,16 @@ class Dashboard extends Component {
             style={{
               display: "flex",
               flexDirection: "column",
-              height: "calc(100vh - 224px)"
+              height: "calc(100vh - 245px)"
             }}
           >
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", flex: "1" }}>
               <div
                 style={{
                   display: "flex",
                   flexDirection: "column",
                   boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
                   backgroundImage: ' url("' + blur + '")',
-
                   width: "50%",
                   margin: "0% 2%",
                   borderRadius: "10px",
@@ -48,28 +47,31 @@ class Dashboard extends Component {
               >
                 <div
                   style={{
+                    display: "flex",
+                    justifyContent: "center",
                     padding: "7%",
-                    backgroundColor: "transparent"
+                    backgroundColor: "transparent",
+                    flex: "1"
                   }}
                 >
-                  <center>
-                    <img
-                      src={leave}
-                      alt="leave"
-                      style={{ height: "20vh", width: "13vh" }}
-                    />
-                  </center>
+                  <img
+                    style={{ height: "15vh", width: "15vh" }}
+                    src={leave}
+                    alt="leave"
+                  />
                 </div>
                 <div
                   style={{
-                    padding: "10px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "17px",
+                    display: "flex",
                     backgroundColor: "transparent",
-                    color: "#ccc2bb"
+                    color: "#ccc2bb",
+                    flex: "1"
                   }}
                 >
-                  <center>
-                    <h3>Leave Dashboard</h3>
-                  </center>
+                  Leave Dashboard
                 </div>
               </div>
 
@@ -79,7 +81,6 @@ class Dashboard extends Component {
                   flexDirection: "column",
                   boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
                   backgroundImage: ' url("' + blur + '")',
-
                   width: "50%",
                   margin: "0% 2%",
                   borderRadius: "10px",
@@ -92,33 +93,36 @@ class Dashboard extends Component {
               >
                 <div
                   style={{
+                    display: "flex",
+                    justifyContent: "center",
                     padding: "7%",
-                    backgroundColor: "transparent"
+                    backgroundColor: "transparent",
+                    flex: "1"
                   }}
                 >
-                  <center>
-                    <img
-                      src={allocation}
-                      alt="allocation"
-                      style={{ height: "20vh", width: "13vh" }}
-                    />
-                  </center>
+                  <img
+                    src={allocation}
+                    alt="allocation"
+                    style={{ height: "15vh", width: "15vh" }}
+                  />
                 </div>
                 <div
                   style={{
-                    padding: "10px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "17px",
+                    display: "flex",
+                    flex: "1",
                     backgroundColor: "transparent",
                     color: "#ccc2bb"
                   }}
                 >
-                  <center>
-                    <h3>Team Allocation</h3>
-                  </center>
+                  Team Allocation
                 </div>
               </div>
             </div>
 
-            <div style={{ display: "flex", marginTop: "3%" }}>
+            <div style={{ display: "flex", marginTop: "3%", flex: "1" }}>
               <div
                 style={{
                   display: "flex",
@@ -137,28 +141,32 @@ class Dashboard extends Component {
               >
                 <div
                   style={{
+                    display: "flex",
+                    justifyContent: "center",
                     padding: "7%",
-                    backgroundColor: "transparent"
+                    backgroundColor: "transparent",
+                    flex: "1"
                   }}
                 >
-                  <center>
-                    <img
-                      src={complaint}
-                      alt="complaint"
-                      style={{ height: "20vh", width: "13vh" }}
-                    />
-                  </center>
+                  <img
+                    src={complaint}
+                    alt="complaint"
+                    style={{ height: "15vh", width: "15vh" }}
+                  />
                 </div>
                 <div
                   style={{
-                    padding: "10px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "17px",
+                    display: "flex",
+                    flex: "1",
                     backgroundColor: "transparent",
-                    color: "#ccc2bb"
+                    color: "#ccc2bb",
+                    wordBreak: "break-all"
                   }}
                 >
-                  <center>
-                    <h3>Complaint & Feedback</h3>
-                  </center>
+                  Complaint & Feedback
                 </div>
               </div>
               <div
@@ -179,28 +187,32 @@ class Dashboard extends Component {
               >
                 <div
                   style={{
+                    display: "flex",
+                    justifyContent: "center",
                     padding: "7%",
-                    backgroundColor: "transparent"
+                    backgroundColor: "transparent",
+                    flex: "1"
                   }}
                 >
-                  <center>
-                    <img
-                      src={team}
-                      alt="team"
-                      style={{ height: "20vh", width: "13vh" }}
-                    />
-                  </center>
+                  <img
+                    src={team}
+                    alt="team"
+                    style={{ height: "15vh", width: "15vh" }}
+                  />
                 </div>
                 <div
                   style={{
-                    padding: "10px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "17px",
+                    display: "flex",
+                    flex: "1",
                     backgroundColor: "transparent",
-                    color: "#ccc2bb"
+                    color: "#ccc2bb",
+                    wordBreak: "break-all"
                   }}
                 >
-                  <center>
-                    <h3>Client Communication</h3>
-                  </center>
+                  Client Communication
                 </div>
               </div>
             </div>

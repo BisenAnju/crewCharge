@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import Layout from "../layouts/Layout";
 import { RaisedButton, TextField, Snackbar } from "material-ui";
-import { lightGreen800 } from "material-ui/styles/colors";
-import Dropzone from "react-dropzone";
+// import Dropzone from "react-dropzone";
 import ImageCompressor from "image-compressor.js";
 import firebase from "firebase";
+
+const styles = {
+  floatingLabelFocusStyle: {
+    color: "#fd914d"
+  }
+};
 class LeavePurpose extends Component {
   constructor(props) {
     super(props);
-    this.state = { purpose: null, snackOpen: false };
+    this.state = { purpose: "", snackOpen: false };
   }
 
   getIcon = (acceptedFiles, rejectedFiles) => {
@@ -52,7 +56,7 @@ class LeavePurpose extends Component {
   };
   handlePurpose = e => {
     e.preventDefault();
-    if (this.state.purpose === null) {
+    if (this.state.purpose === "") {
       this.setState({ snackOpen: true });
       return false;
     }
@@ -63,52 +67,51 @@ class LeavePurpose extends Component {
   };
   render() {
     return (
-      <Layout navigationTitle="AddLeave Purpose" showBackNavigation={true}>
-        <div>
-          <br />
-          <center>
-            <TextField
-              floatingLabelText="Leave Purpose"
-              onChange={this.textChange}
-              value={this.state.purpose}
-              name="purpose"
-            />
-          </center>
-          <br />
-          <Dropzone onDrop={this.getIcon} accept="image/*">
-            {({ getRootProps, getInputProps, isDragActive }) => {
-              return (
-                <div {...getRootProps}>
-                  <input {...getInputProps} />
-                  <u>
-                    <RaisedButton
-                      label="Upload Icon"
-                      primary={true}
-                      style={{ marginLeft: "15%" }}
-                    />
-                  </u>
-                </div>
-              );
-            }}
-          </Dropzone>
-          <br />
-          <br />
-          <center>
-            <RaisedButton
-              label="ADD"
-              backgroundColor={lightGreen800}
-              labelColor="white"
-              onClick={this.handlePurpose}
-            />
-          </center>
-          <Snackbar
-            open={this.state.snackOpen}
-            message="Add Purpose..."
-            autoHideDuration={4000}
-            onRequestClose={this.handleRequestClose}
+      <div>
+        <br />
+        <center>
+          <TextField
+            floatingLabelText="Leave Purpose"
+            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+            onChange={this.textChange}
+            value={this.state.purpose}
+            name="purpose"
           />
-        </div>
-      </Layout>
+        </center>
+        <br />
+        {/* <Dropzone onDrop={this.getIcon} accept="image/*">
+          {({ getRootProps, getInputProps, isDragActive }) => {
+            return (
+              <div {...getRootProps}>
+                <input {...getInputProps} />
+                <u>
+                  <RaisedButton
+                    label="Upload Icon"
+                    primary={true}
+                    style={{ marginLeft: "15%" }}
+                  />
+                </u>
+              </div>
+            );
+          }}
+        </Dropzone> */}
+        <br />
+        <br />
+        <center>
+          <RaisedButton
+            label="ADD"
+            backgroundColor="#fd914d"
+            labelColor="white"
+            onClick={this.handlePurpose}
+          />
+        </center>
+        <Snackbar
+          open={this.state.snackOpen}
+          message="Add Purpose..."
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose}
+        />
+      </div>
     );
   }
 }
