@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import withUser from "../hoc/withUser";
 import moment from "moment";
+import "../styles/style.css";
 import { List, ListItem, CircularProgress, Avatar, Divider } from "material-ui";
 import {
   ActionFlightTakeoff,
@@ -23,7 +24,7 @@ const tabStyles = {
 class AdminPendingTab extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { backcolor: null };
   }
   render() {
     return (
@@ -45,6 +46,11 @@ class AdminPendingTab extends React.Component {
                 .filter(data => data.leaveStatus === "Pending")
                 .map((leave, id) => (
                   <div key={id}>
+                    {/* let backcolor = null;
+                    {leave.remark != ""
+                      ? (backcolor = "leavesAnimation")
+                      : (backcolor = "leavesAnima")} */}
+
                     <ListItem
                       onClick={e => {
                         e.preventDefault();
@@ -59,6 +65,7 @@ class AdminPendingTab extends React.Component {
                       }}
                       leftAvatar={
                         <Avatar
+                          // className={backcolor}
                           src={
                             this.props.userData.findIndex(
                               user => user.uid === leave.userId

@@ -220,9 +220,10 @@ class LeaveAdminApprovalRejection extends Component {
                     <div
                       style={{
                         backgroundColor: "#E8F5E9",
-                        width: 270,
-                        height: 130,
-                        overflow: "auto"
+                        width: "42vh",
+                        height: "36vh",
+                        overflow: "auto",
+                        borderRadius: "5px"
                       }}
                     >
                       {this.state.userComment.map(comment =>
@@ -339,12 +340,14 @@ class LeaveAdminApprovalRejection extends Component {
                   }
                   secondaryText={
                     <TextField
+                      placeholder="Type Comment..."
                       multiLine={true}
                       rows={4}
                       rowsMax={4}
                       value={this.state.remark}
                       onChange={this.textChange}
                       name="remark"
+                      style={{ width: "40vh" }}
                     />
                   }
                   rightIcon={

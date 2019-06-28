@@ -31,7 +31,6 @@ class Configuration extends Component {
           </CardText>
         </Card>
 
-        <br />
         <Card style={{ margin: "10px", borderRadius: "5px" }}>
           <CardHeader
             title=" Complaint Type"
