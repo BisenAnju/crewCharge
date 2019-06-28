@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { RaisedButton, TextField, Snackbar } from "material-ui";
-// import Dropzone from "react-dropzone";
+import Dropzone from "react-dropzone";
 import ImageCompressor from "image-compressor.js";
 import firebase from "firebase";
 
@@ -17,6 +17,7 @@ class LeavePurpose extends Component {
   }
 
   getIcon = (acceptedFiles, rejectedFiles) => {
+    alert("hiiii");
     const file = acceptedFiles[0];
     if (file == null) {
       alert("Invalid File Type!");
@@ -79,7 +80,7 @@ class LeavePurpose extends Component {
           />
         </center>
         <br />
-        {/* <Dropzone onDrop={this.getIcon} accept="image/*">
+        <Dropzone onDrop={this.getIcon} accept="image/*">
           {({ getRootProps, getInputProps, isDragActive }) => {
             return (
               <div {...getRootProps}>
@@ -94,7 +95,7 @@ class LeavePurpose extends Component {
               </div>
             );
           }}
-        </Dropzone> */}
+        </Dropzone>
         <br />
         <br />
         <center>

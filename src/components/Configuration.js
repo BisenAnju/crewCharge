@@ -1,49 +1,54 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../layouts/Layout";
-import { Tabs, Tab } from "material-ui";
 import LeavePurpose from "./LeavePurpose";
 import ComplaintType from "./ComplaintType";
-
+import { Card, CardHeader, CardText } from "material-ui/Card";
+import { Avatar } from "material-ui";
 class Configuration extends Component {
   constructor(props) {
     super(props);
-    this.state = { purpose: null, value: "a" };
+    this.state = {};
   }
-  handleChange = value => {
-    this.setState({
-      value: value
-    });
-  };
-
   render() {
     return (
       <Layout navigationTitle="Configuration" showBackNavigation={true}>
-        <Tabs
-          value={this.state.value}
-          onChange={this.handleChange}
-          tabItemContainerStyle={{ backgroundColor: "transparent" }}
-          inkBarStyle={{ backgroundColor: "#f08f4c" }}
-        >
-          <Tab
-            label="Leave Purpose"
-            value="a"
-            style={{
-              color: "#f08f4c"
-            }}
-          >
-            <LeavePurpose addPurpose={this.props.addPurpose} />
-          </Tab>
-          <Tab
-            label="Complaint Type"
-            value="b"
-            style={{
-              color: "#f08f4c"
-            }}
-          >
-            <ComplaintType handleComplaint={this.props.handleComplaint} />
-          </Tab>
-        </Tabs>
+        <Card style={{ margin: "10px", borderRadius: "5px" }}>
+          <CardHeader
+            title="Leave Purpose"
+            titleColor="#fd914d"
+            avatar={
+              <Avatar size={30} backgroundColor="#fd914d" color="white">
+                L
+              </Avatar>
+            }
+            actAsExpander={true}
+            showExpandableButton={true}
+          />
+
+          <CardText expandable={true}>
+            <LeavePurpose />
+          </CardText>
+        </Card>
+
+        <br />
+        <Card style={{ margin: "10px", borderRadius: "5px" }}>
+          <CardHeader
+            title=" Complaint Type"
+            titleColor="#fd914d"
+            avatar={
+              <Avatar size={30} backgroundColor="#fd914d" color="white">
+                C
+              </Avatar>
+            }
+            actAsExpander={true}
+            showExpandableButton={true}
+          />
+
+          <CardText expandable={true}>
+            <ComplaintType />
+          </CardText>
+        </Card>
       </Layout>
     );
   }

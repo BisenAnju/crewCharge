@@ -16,7 +16,6 @@ import {
   NavigationArrowBack,
   ActionHome,
   ActionPowerSettingsNew,
-  ActionInput,
   NotificationEventNote,
   SocialGroup,
   ActionDateRange,

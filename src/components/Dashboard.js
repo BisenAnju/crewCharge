@@ -54,11 +54,7 @@ class Dashboard extends Component {
                     flex: "1"
                   }}
                 >
-                  <img
-                    style={{ height: "15vh", width: "15vh" }}
-                    src={leave}
-                    alt="leave"
-                  />
+                  <img style={{ height: "11vh" }} src={leave} alt="leave" />
                 </div>
                 <div
                   style={{
@@ -67,11 +63,13 @@ class Dashboard extends Component {
                     fontSize: "17px",
                     display: "flex",
                     backgroundColor: "transparent",
+                    flexDirection: "column",
                     color: "#ccc2bb",
                     flex: "1"
                   }}
                 >
-                  Leave Dashboard
+                  <div>Leave</div>
+                  <div>Dashboard</div>
                 </div>
               </div>
 
@@ -103,7 +101,7 @@ class Dashboard extends Component {
                   <img
                     src={allocation}
                     alt="allocation"
-                    style={{ height: "15vh", width: "15vh" }}
+                    style={{ height: "11vh" }}
                   />
                 </div>
                 <div
@@ -114,10 +112,12 @@ class Dashboard extends Component {
                     display: "flex",
                     flex: "1",
                     backgroundColor: "transparent",
-                    color: "#ccc2bb"
+                    color: "#ccc2bb",
+                    flexDirection: "column"
                   }}
                 >
-                  Team Allocation
+                  <div>Team</div>
+                  <div>Allocation</div>
                 </div>
               </div>
             </div>
@@ -151,7 +151,7 @@ class Dashboard extends Component {
                   <img
                     src={complaint}
                     alt="complaint"
-                    style={{ height: "15vh", width: "15vh" }}
+                    style={{ height: "11vh" }}
                   />
                 </div>
                 <div
@@ -163,10 +163,11 @@ class Dashboard extends Component {
                     flex: "1",
                     backgroundColor: "transparent",
                     color: "#ccc2bb",
-                    wordBreak: "break-all"
+                    flexDirection: "column"
                   }}
                 >
-                  Complaint & Feedback
+                  <div>Complaint &</div>
+                  <div>Feedback</div>
                 </div>
               </div>
               <div
@@ -194,11 +195,7 @@ class Dashboard extends Component {
                     flex: "1"
                   }}
                 >
-                  <img
-                    src={team}
-                    alt="team"
-                    style={{ height: "15vh", width: "15vh" }}
-                  />
+                  <img src={team} alt="team" style={{ height: "11vh" }} />
                 </div>
                 <div
                   style={{
@@ -209,10 +206,11 @@ class Dashboard extends Component {
                     flex: "1",
                     backgroundColor: "transparent",
                     color: "#ccc2bb",
-                    wordBreak: "break-all"
+                    flexDirection: "column"
                   }}
                 >
-                  Client Communication
+                  <div>Client</div>
+                  <div>Communication</div>
                 </div>
               </div>
             </div>
