@@ -63,6 +63,7 @@ class LeaveEmployeeDashboard extends React.Component {
             <AdminPendingTab
               leaveData={this.props.leaveData}
               userData={this.props.userData}
+              comment={this.props.comment}
             />
             <AdminApprovedTab
               leaveData={this.props.leaveData}

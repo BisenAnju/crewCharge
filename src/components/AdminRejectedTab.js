@@ -93,7 +93,7 @@ class AdminRejectedTab extends React.Component {
                         ).displayName
                       }
                       secondaryText={
-                        <p style={{ fontSize: 12 }}>
+                        <p style={{ fontSize: 10, fontWeight: "bold" }}>
                           <span>
                             {leave.leaveType === "Hour"
                               ? moment
@@ -124,7 +124,7 @@ class AdminRejectedTab extends React.Component {
                                     )
                                   )
                                   .format("D") +
-                                " Days " +
+                                " Day " +
                                 "  " +
                                 moment(leave.from).format("ll") +
                                 " - " +

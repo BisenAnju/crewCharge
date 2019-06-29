@@ -251,7 +251,9 @@ class LeaveAdminApprovalRejection extends Component {
                               <div
                                 style={{ marginRight: "5px", float: "left" }}
                               >
-                                <span> {comment.comment}</span>
+                                <span style={{ fontSize: "14px" }}>
+                                  {comment.comment}
+                                </span>
                                 <br />
                                 <span
                                   style={{
@@ -260,7 +262,7 @@ class LeaveAdminApprovalRejection extends Component {
                                     justifyContent: "center",
                                     display: "flex",
                                     alignItems: "center",
-                                    fontSize: "0.9rem"
+                                    fontSize: "13px"
                                   }}
                                 >
                                   {moment(
@@ -300,12 +302,14 @@ class LeaveAdminApprovalRejection extends Component {
                                     flexDirection: "column"
                                   }}
                                 >
-                                  <span>{comment.comment}</span>
+                                  <span style={{ fontSize: "14px" }}>
+                                    {comment.comment}
+                                  </span>
                                   <span
                                     style={{
                                       textAlign: "right",
                                       color: "#9e9e9e",
-                                      fontSize: "0.9rem"
+                                      fontSize: "13px"
                                     }}
                                   >
                                     {moment(
@@ -323,7 +327,8 @@ class LeaveAdminApprovalRejection extends Component {
                 />
               ) : null}
 
-              {this.props.singleData.leaveStatus === "Pending" ? (
+              {this.props.singleData.leaveStatus === "Pending" ||
+              this.props.singleData.leaveStatus === "Approved" ? (
                 <ListItem
                   disabled
                   leftIcon={<CommunicationComment />}

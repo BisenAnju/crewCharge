@@ -283,7 +283,9 @@ class LeaveEmployeeDetails extends Component {
                               <div
                                 style={{ marginRight: "5px", float: "left" }}
                               >
-                                <span> {comment.comment}</span>
+                                <span style={{ fontSize: "14px" }}>
+                                  {comment.comment}
+                                </span>
                                 <br />
                                 <span
                                   style={{
@@ -292,7 +294,7 @@ class LeaveEmployeeDetails extends Component {
                                     justifyContent: "center",
                                     display: "flex",
                                     alignItems: "center",
-                                    fontSize: "0.9rem"
+                                    fontSize: "13px"
                                   }}
                                 >
                                   {moment(
@@ -319,7 +321,7 @@ class LeaveEmployeeDetails extends Component {
                                   maxWidth: "80%",
                                   marginLeft: "10px",
                                   marginTop: "5px",
-                                  backgroundColor: "#31234e",
+                                  backgroundColor: "#c8d8c6",
                                   padding: "5px 9px",
                                   borderRadius: "0px 10px 10px 10px",
                                   wordBreak: "break-all"
@@ -332,12 +334,14 @@ class LeaveEmployeeDetails extends Component {
                                     flexDirection: "column"
                                   }}
                                 >
-                                  <span>{comment.comment}</span>
+                                  <span style={{ fontSize: "14px" }}>
+                                    {comment.comment}
+                                  </span>
                                   <span
                                     style={{
                                       textAlign: "right",
                                       color: "#9e9e9e",
-                                      fontSize: "0.9rem"
+                                      fontSize: "13px"
                                     }}
                                   >
                                     {moment(
