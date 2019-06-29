@@ -71,6 +71,7 @@ class LeaveEmployeeDetails extends Component {
         <div>
           <List>
             <ListItem
+              disabled
               leftAvatar={
                 <Avatar
                   src={this.props.user.photoURL}
@@ -126,6 +127,7 @@ class LeaveEmployeeDetails extends Component {
           >
             <List>
               <ListItem
+                disabled
                 leftIcon={
                   this.props.singleData.purpose === "vacation" ? (
                     <ActionFlightTakeoff style={{ fill: "#303F9F" }} />
@@ -154,6 +156,7 @@ class LeaveEmployeeDetails extends Component {
                 }
               />
               <ListItem
+                disabled
                 leftIcon={<ActionDateRange style={{ fill: pink900 }} />}
                 primaryText={moment(this.props.singleData.addedOn).format(
                   "lll"
@@ -163,12 +166,14 @@ class LeaveEmployeeDetails extends Component {
 
               {this.props.singleData.leaveStatus === "Approved" ? (
                 <ListItem
+                  disabled
                   leftIcon={<SocialPerson style={{ fill: "#F27B13" }} />}
                   primaryText={this.props.singleData.approvedRejectedBy}
                   secondaryText={<p style={{ fontSize: 14 }}>Approved By</p>}
                 />
               ) : this.props.singleData.leaveStatus === "Rejected" ? (
                 <ListItem
+                  disabled
                   leftIcon={<SocialPerson style={{ fill: "#F27B13" }} />}
                   primaryText={this.props.singleData.approvedRejectedBy}
                   secondaryText={<p style={{ fontSize: 14 }}>Rejected By</p>}
@@ -177,6 +182,7 @@ class LeaveEmployeeDetails extends Component {
 
               {this.props.singleData.leaveStatus === "Approved" ? (
                 <ListItem
+                  disabled
                   leftIcon={<ActionDateRange style={{ fill: "#16724A" }} />}
                   primaryText={moment(
                     this.props.singleData.approvedRejectedOn
@@ -185,6 +191,7 @@ class LeaveEmployeeDetails extends Component {
                 />
               ) : this.props.singleData.leaveStatus === "Rejected" ? (
                 <ListItem
+                  disabled
                   leftIcon={<ActionDateRange style={{ fill: "#16724A" }} />}
                   primaryText={moment(
                     this.props.singleData.approvedRejectedOn
@@ -194,6 +201,7 @@ class LeaveEmployeeDetails extends Component {
               ) : null}
               {this.props.singleData.leaveType === "Full" ? (
                 <ListItem
+                  disabled
                   leftIcon={<ActionToday style={{ fill: lime800 }} />}
                   primaryText={moment(this.props.singleData.dueDate).format(
                     "ll"
@@ -202,6 +210,7 @@ class LeaveEmployeeDetails extends Component {
                 />
               ) : null}
               <ListItem
+                disabled
                 leftIcon={<ImageTimer style={{ fill: deepOrange900 }} />}
                 primaryText={
                   this.props.singleData.leaveType === "Full"
@@ -225,6 +234,7 @@ class LeaveEmployeeDetails extends Component {
                 secondaryText={<p style={{ fontSize: 14 }}>Duration</p>}
               />
               <ListItem
+                disabled
                 leftIcon={<CommunicationComment style={{ fill: "#597B2E" }} />}
                 primaryText={this.props.singleData.reason}
                 secondaryText={<p style={{ fontSize: 14 }}>Reason</p>}
@@ -233,6 +243,7 @@ class LeaveEmployeeDetails extends Component {
 
               {this.state.userComment.length > 0 ? (
                 <ListItem
+                  disabled
                   leftIcon={
                     <CommunicationComment style={{ fill: "#871268" }} />
                   }
@@ -240,9 +251,10 @@ class LeaveEmployeeDetails extends Component {
                     <div
                       style={{
                         backgroundColor: "#E8F5E9",
-                        width: 270,
-                        height: 170,
-                        overflow: "auto"
+                        width: "42vh",
+                        height: "35vh",
+                        overflow: "auto",
+                        borderRadius: "5px"
                       }}
                     >
                       {this.state.userComment.map((comment, index) =>
@@ -344,8 +356,10 @@ class LeaveEmployeeDetails extends Component {
               ) : null}
 
               {this.state.userComment.length > 0 ? (
-                this.props.singleData.leaveStatus === "Pending" ? (
+                this.props.singleData.leaveStatus === "Pending" ||
+                this.props.singleData.leaveStatus === "Approved" ? (
                   <ListItem
+                    disabled
                     leftIcon={<CommunicationComment />}
                     primaryText={
                       <p
@@ -360,12 +374,14 @@ class LeaveEmployeeDetails extends Component {
                     }
                     secondaryText={
                       <TextField
+                        disabled
                         placeholder="Type Comment..."
                         multiLine
                         rows={4}
                         value={this.state.remark}
                         onChange={this.textChange}
                         name="remark"
+                        style={{ width: "40vh" }}
                       />
                     }
                     rightIcon={

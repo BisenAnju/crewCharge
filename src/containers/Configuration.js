@@ -1,24 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Route,
   BrowserRouter as Router,
   withRouter,
   Switch
 } from "react-router-dom";
+import Configuration from "../components/Configuration";
 import withFirebase from "../hoc/withFirebase";
-import ComplaintType from "../components/ComplaintType";
 
-class ComplaintTypeContainer extends Component {
+class ConfigurationContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  addComplaint = complaint => {
+  addPurpose = purpose => {
     this.props.db
-      .collection("complaintType")
+      .collection("leavePurpose")
       .add({
-        displayName: complaint.charAt(0).toUpperCase() + complaint.slice(1)
+        purpose: purpose.toLowerCase(),
+        displayName: purpose.charAt(0).toUpperCase() + purpose.slice(1)
       })
       .then(this.props.history.goBack())
       .catch(err => {
@@ -33,9 +34,9 @@ class ComplaintTypeContainer extends Component {
           <Switch>
             <Route
               exact
-              path={"/complainttype"}
+              path={"/configuration"}
               render={props => (
-                <ComplaintType {...props} addComplaint={this.addComplaint} />
+                <Configuration {...props} addPurpose={this.addPurpose} />
               )}
             />
           </Switch>
@@ -44,5 +45,4 @@ class ComplaintTypeContainer extends Component {
     );
   }
 }
-
-export default withFirebase(withRouter(ComplaintTypeContainer));
+export default withFirebase(withRouter(ConfigurationContainer));

@@ -7,8 +7,6 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import DashboardContainer from "./containers/Dashboard";
 import ComplaintList from "./containers/ComplaintList";
 import ComplaintView from "./containers/ComplaintView";
-import ComplaintType from "./containers/ComplaintType";
-import LeavePurposeContainer from "./containers/LeavePurpose";
 import LoginContainer from "./containers/Login";
 // import "./styles/App.css";
 import LeaveDashboardContainer from "./containers/LeaveDashboard";
@@ -18,6 +16,7 @@ import ProjectsContainer from "./containers/Projects";
 import TeamAllocationMissionContainer from "./containers/TeamAllocationMission";
 import TeamAllocationProjectContainer from "./containers/TeamAllocationProject";
 import TeamAllocationPeoplesListContainer from "./containers/TeamAllocationPeoplesList";
+import ConfigurationContainer from "./containers/Configuration";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -78,12 +77,8 @@ class App extends Component {
                   )}
                 />
                 <Route
-                  path={"/complainttype"}
-                  render={props => <ComplaintType {...props} />}
-                />
-                <Route
-                  path={"/leavepurpose"}
-                  render={props => <LeavePurposeContainer {...props} />}
+                  path={"/configuration"}
+                  render={props => <ConfigurationContainer {...props} />}
                 />
                 <Route
                   path={"/complaintlist"}

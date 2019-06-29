@@ -12,7 +12,8 @@ import {
   CardText,
   Avatar,
   CardActions,
-  Snackbar
+  Snackbar,
+  Subheader
 } from "material-ui";
 import Layout from "../layouts/Layout";
 import moment from "moment";
@@ -95,7 +96,7 @@ class ComplaintView extends React.Component {
               <center>
                 <Avatar
                   backgroundColor="rgba(0, 0, 0, 0)"
-                  color="black"
+                  color="rgb(253, 145, 77)"
                   {...(this.props.data.complaintType === "Harassment"
                     ? {
                         src:
@@ -128,10 +129,10 @@ class ComplaintView extends React.Component {
                   style={{ width: "50%", float: "right", textAlignLast: "end" }}
                   secondaryTextLines={1}
                   disabled
-                  secondaryText={"Date & Time"}
+                  secondaryText={"Date"}
                   primaryText={moment(
                     new Date(this.props.data.addedOn.seconds * 1000)
-                  ).format("DD MMM YYYY h:m A")}
+                  ).format("DD MMM YYYY")}
                 />
                 <ListItem
                   disabled
@@ -140,7 +141,6 @@ class ComplaintView extends React.Component {
                 />
                 <CardText
                   style={{
-                    // marginTop: "-8%",
                     overflowWrap: "break-word",
                     paddingBottom: "13%",
                     fontSize: "16px"
@@ -149,7 +149,10 @@ class ComplaintView extends React.Component {
                   {this.props.data.description}
                 </CardText>
               </List>
-              {this.props.isAdmin === true && (
+              {this.props.isAdmin === true &&
+              ((this.props.data.statusByAdmin !== undefined &&
+                this.props.data.statusByAdmin !== "resolve") ||
+                this.props.data.statusByAdmin === undefined) ? (
                 <div>
                   <CardText>
                     <h4>Do Action</h4>
@@ -170,7 +173,6 @@ class ComplaintView extends React.Component {
                     >
                       <MenuItem value="pending" primaryText="Pending" />
                       <MenuItem value="resolve" primaryText="Resolved" />
-                      <MenuItem value="other" primaryText="Other" />
                     </SelectField>
                     <TextField
                       underlineFocusStyle={{
@@ -205,6 +207,22 @@ class ComplaintView extends React.Component {
                       onClick={this.formSubmit}
                     />
                   </CardActions>
+                </div>
+              ) : (
+                <div>
+                  <Subheader>Action by admin</Subheader>
+                  <ListItem
+                    disabled
+                    secondaryText={"Status"}
+                    primaryText={this.props.data.statusByAdmin}
+                    secondaryTextLines={1}
+                  />
+                  <ListItem
+                    secondaryTextLines={1}
+                    disabled
+                    secondaryText={"Action"}
+                    primaryText={this.props.data.adminReply}
+                  />
                 </div>
               )}
             </Card>

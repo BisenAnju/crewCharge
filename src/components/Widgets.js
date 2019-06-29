@@ -126,9 +126,16 @@ class Widgets extends Component {
                                                     if (
                                                       col.referenceName === data
                                                     ) {
-                                                      Object.values(
+                                                      return Object.values(
                                                         workItem.fields
                                                       ).map(val => {
+                                                        // typeof val ===
+                                                        //   "object" &&
+                                                        // val !== null
+                                                        //   ? console.log(
+                                                        //       val["displayName"]
+                                                        //     )
+                                                        //   : console.log(val);
                                                         return (
                                                           <tbody>
                                                             <tr>
