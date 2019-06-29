@@ -10,35 +10,40 @@ import {
 import DatePicker from "material-ui/DatePicker";
 import Layout from "../layouts/Layout";
 import { white } from "material-ui/styles/colors";
+import * as moment from "moment";
 class TeamAllocationMission extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       displayStyle: "none",
       open: false,
-      missionName: null,
+      missionName: "",
       values: [],
       projectId: null,
-      startDate: null,
-      endDate: null,
-      remarks: null,
+      startDate: new Date(),
+      endDate: new Date(),
+      remarks: "",
       openSnackbar: null,
       message: null
     };
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.missionsList.length > 0) {
+    if (
+      nextProps.missionsList.length > 0 &&
+      this.props.match.params.missionId !== undefined
+    ) {
       let missionList = nextProps.missionsList.find(
         misiionData =>
           misiionData.missionsId === this.props.match.params.missionId
       );
-      console.log(missionList);
+      const startDate = missionList.deadline.startDate;
+      const endDate = missionList.deadline.endDate;
       this.setState({
         missionName: missionList.name,
         values: missionList.assignTo,
         projectId: missionList.projectId,
-        startDate: missionList.deadline.startDate,
-        endDate: missionList.deadline.endDate,
+        startDate,
+        endDate,
         remarks: missionList.deadline.remarks
       });
     }
@@ -61,13 +66,15 @@ class TeamAllocationMission extends React.Component {
     });
   };
   handleStartDateChange = (event, date) => {
+    const startDate = moment(date).format("lll");
     this.setState({
-      startDate: date
+      startDate
     });
   };
   handleEndDateChange = (event, date) => {
+    const endDate = moment(date).format("lll");
     this.setState({
-      endDate: date
+      endDate
     });
   };
   handleRmarkChange = (event, index, values) => {
@@ -91,13 +98,14 @@ class TeamAllocationMission extends React.Component {
     });
   };
   render() {
+    console.log(this.state.startDate);
     const { values } = this.state;
     return (
       <Layout navigationTitle="Mission" showBackNavigation={true}>
         <div style={{ padding: 10 }}>
           <TextField
             floatingLabelText="Enter Mission"
-            defaultValue={this.state.missionName}
+            value={this.state.missionName}
             fullWidth={true}
             floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
             floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
@@ -137,7 +145,7 @@ class TeamAllocationMission extends React.Component {
           </SelectField>
           <DatePicker
             floatingLabelText="Start Date"
-            value={this.state.startDate}
+            value={new Date(this.state.startDate)} //2019-06-28
             floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
             floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
             fullWidth={true}
@@ -145,7 +153,7 @@ class TeamAllocationMission extends React.Component {
           />
           <DatePicker
             floatingLabelText="End Date"
-            value={this.state.endDate}
+            value={new Date(this.state.endDate)}
             floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
             floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
             fullWidth={true}
@@ -153,7 +161,7 @@ class TeamAllocationMission extends React.Component {
           />
           <TextField
             floatingLabelText="Remarks"
-            defaultValue={this.state.missionName}
+            value={this.state.remarks}
             floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
             floatingLabelFocusStyle={{ color: "rgb(253, 145, 77)" }}
             fullWidth={true}
@@ -162,29 +170,43 @@ class TeamAllocationMission extends React.Component {
             onChange={this.handleRmarkChange}
           />
           <div style={{ padding: 10, float: "right", marginRight: "40%" }}>
-            {/* <RaisedButton
-              label="Cancel"
-              onClick={this.handleClose}
-              backgroundColor={orange500}
-              labelColor={white}
-              style={{ marginRight: 10 }}
-            /> */}
-            <RaisedButton
-              label="Save"
-              labelColor={white}
-              backgroundColor={"rgb(253, 145, 77)"}
-              onClick={e => {
-                e.preventDefault();
-                this.props.handleAddMission(
-                  this.state.missionName,
-                  this.state.values,
-                  this.state.startDate,
-                  this.state.endDate,
-                  this.state.remarks,
-                  this.state.projectId
-                );
-              }}
-            />
+            {this.props.match.params.missionId !== undefined ? (
+              <RaisedButton
+                label="Update"
+                onClick={this.handleClose}
+                backgroundColor={"rgb(253, 145, 77)"}
+                labelColor={white}
+                onClick={e => {
+                  e.preventDefault();
+                  this.props.handleUpdateMission(
+                    this.state.missionName,
+                    this.state.values,
+                    this.state.startDate,
+                    this.state.endDate,
+                    this.state.remarks,
+                    this.state.projectId,
+                    this.props.match.params.missionId
+                  );
+                }}
+              />
+            ) : (
+              <RaisedButton
+                label="Save"
+                labelColor={white}
+                backgroundColor={"rgb(253, 145, 77)"}
+                onClick={e => {
+                  e.preventDefault();
+                  this.props.handleAddMission(
+                    this.state.missionName,
+                    this.state.values,
+                    this.state.startDate,
+                    this.state.endDate,
+                    this.state.remarks,
+                    this.state.projectId
+                  );
+                }}
+              />
+            )}
           </div>
           <div>
             <Snackbar

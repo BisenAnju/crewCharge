@@ -58,6 +58,47 @@ class TeamAllocationMissionContainer extends Component {
         );
     }
   };
+  handleUpdateMission = (
+    missionName,
+    values,
+    startDate,
+    endDate,
+    remarks,
+    projectId,
+    missionId
+  ) => {
+    if (
+      missionName === null ||
+      values.length < 0 ||
+      startDate === null ||
+      endDate === null ||
+      projectId === null
+    ) {
+      this.setState({ openSnackbar: true, message: "Fill all Required field" });
+    } else {
+      this.props.db
+        .collection("missions")
+        .doc(missionId)
+        .update({
+          name: missionName,
+          projectId: projectId,
+          assignTo: values,
+          deadline: {
+            startDate: startDate,
+            endDate: endDate,
+            remarks: remarks
+          },
+          status: "Active"
+        })
+        .then(
+          this.setState({
+            openSnackbar: true,
+            message: "Mission Add Success fully"
+          }),
+          (window.location = "/teamallocation")
+        );
+    }
+  };
   render() {
     return (
       <div>
@@ -71,6 +112,7 @@ class TeamAllocationMissionContainer extends Component {
                   {...this.props}
                   {...this.state}
                   handleAddMission={this.handleAddMission}
+                  handleUpdateMission={this.handleUpdateMission}
                 />
               )}
             />
@@ -82,6 +124,7 @@ class TeamAllocationMissionContainer extends Component {
                   {...this.props}
                   {...this.state}
                   handleAddMission={this.handleAddMission}
+                  handleUpdateMission={this.handleUpdateMission}
                 />
               )}
             />

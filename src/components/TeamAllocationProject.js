@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { TextField, RaisedButton, Snackbar } from "material-ui";
+import { TextField, RaisedButton } from "material-ui";
 import Layout from "../layouts/Layout";
 import { white } from "material-ui/styles/colors";
 import Dropzone from "react-dropzone";
@@ -19,6 +19,14 @@ class TeamAllocationProject extends React.Component {
       isLoadingUploadImage: 1,
       temporaryImageURL: null
     };
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.projectList !== null) {
+      this.setState({
+        projectName: nextProps.projectList.name,
+        temporaryImageURL: nextProps.projectList.logoURL
+      });
+    }
   }
   handleTextChange = (event, index, projectName) => {
     this.setState({
@@ -65,12 +73,13 @@ class TeamAllocationProject extends React.Component {
     });
   };
   render() {
+    console.log(this.props.projectsList);
     return (
       <Layout navigationTitle="Project" showBackNavigation={true}>
         <div style={{ padding: 10 }}>
           <TextField
             floatingLabelText="Enter Project Name"
-            defaultValue={this.state.projectName}
+            value={this.state.projectName}
             fullWidth={true}
             onChange={this.handleTextChange}
           />
@@ -91,45 +100,53 @@ class TeamAllocationProject extends React.Component {
                 accept="image/*"
                 style={{ height: 100 }}
               >
-                <div>
-                  <u>
-                    <RaisedButton
-                      label="Upload..."
-                      labelColor={white}
-                      backgroundColor={"rgb(253, 145, 77)"}
-                    />
-                  </u>
-                </div>
+                {({ getRootProps, getInputProps, isDragActive }) => {
+                  return (
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <u>
+                        <RaisedButton
+                          label="Upload..."
+                          labelColor={white}
+                          backgroundColor={"rgb(253, 145, 77)"}
+                        />
+                      </u>
+                    </div>
+                  );
+                }}
               </Dropzone>
             </div>
           </div>
           <div style={{ padding: 10, alignItems: "center", marginLeft: "35%" }}>
-            {/* <RaisedButton
-              label="Cancel"
-              labelColor={white}
-              backgroundColor={"rgb(253, 145, 77)"}
-              onClick={this.handleClose}
-              style={{ marginRight: 10 }}
-            /> */}
-            <RaisedButton
-              label="Save"
-              labelColor={white}
-              backgroundColor={"rgb(253, 145, 77)"}
-              onClick={e => {
-                e.preventDefault();
-                this.props.handleAddProject(
-                  this.state.projectName,
-                  this.state.temporaryImageURL
-                );
-              }}
-            />
-          </div>
-          <div>
-            <Snackbar
-              open={this.props.openSnackbar}
-              message={this.props.message}
-              autoHideDuration={4000}
-            />
+            {this.props.match.params.projectId !== undefined ? (
+              <RaisedButton
+                label="Update"
+                labelColor={white}
+                backgroundColor={"rgb(253, 145, 77)"}
+                onClick={e => {
+                  e.preventDefault();
+                  this.props.handleUpdateProject(
+                    this.state.projectName,
+                    this.state.temporaryImageURL,
+                    this.props.match.params.projectId
+                  );
+                }}
+                style={{ marginRight: 10 }}
+              />
+            ) : (
+              <RaisedButton
+                label="Save"
+                labelColor={white}
+                backgroundColor={"rgb(253, 145, 77)"}
+                onClick={e => {
+                  e.preventDefault();
+                  this.props.handleAddProject(
+                    this.state.projectName,
+                    this.state.temporaryImageURL
+                  );
+                }}
+              />
+            )}
           </div>
         </div>
       </Layout>
