@@ -98,7 +98,6 @@ class TeamAllocationMission extends React.Component {
     });
   };
   render() {
-    console.log(this.state.startDate);
     const { values } = this.state;
     return (
       <Layout navigationTitle="Mission" showBackNavigation={true}>
