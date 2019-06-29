@@ -13,6 +13,7 @@ import ReactWeeklyDayPicker from "./WeeklyDayPicker";
 import { classNames } from "../constants/weeklydaypicker";
 import "../styles/style.css";
 import { loader } from "../constants/loader";
+import Subheader from "material-ui/Subheader";
 class TeamAllocationPeopleList extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +23,7 @@ class TeamAllocationPeopleList extends React.Component {
       usersList: [],
       selectedValue: 1,
       projectsList: [],
+      missionsfilterList: [],
       missionsList: [],
       leavesList: [],
       nowDate: null,
@@ -36,37 +38,32 @@ class TeamAllocationPeopleList extends React.Component {
     });
   };
   componentWillReceiveProps(nextProps) {
-    let nowDate = moment().format("l");
-    let missionsList = nextProps.missionsList.filter(
-      missionData =>
-        moment(missionData.deadline.startDate.seconds * 1000).format("l") <=
-          nowDate &&
-        moment(missionData.deadline.endDate.seconds * 1000).format("l") >=
-          nowDate
-    );
-    this.setState({
-      leavesList: nextProps.leavesList,
-      missionsList,
-      isLoading: false,
-      projectsList: nextProps.projectsList,
-      usersList: nextProps.usersList,
-      nowDate: moment(Date()).format("LL")
-    });
+    this.inititalizePropsValue(nextProps);
   }
-  handleTypeChange = (event, index, value) => {
-    if (value === 2) {
-      window.location = "/teamallocation/projectlist";
-    }
-  };
   componentWillMount() {
+    this.inititalizePropsValue(this.props);
     let nowDate = new Date();
     let nowDay = new Date().getDay();
     let finalDate = nowDate.setDate(new Date().getDate() - nowDay + 1);
     let startDay = new Date(finalDate);
     this.setState({ startDay });
   }
-  handleaddMission = () => {
-    window.location = "/teamallocation/mission";
+  inititalizePropsValue = whichProps => {
+    let nowDate = moment().format("l");
+    let missionsfilterList = whichProps.missionsList.filter(
+      missionData =>
+        moment(missionData.deadline.startDate).format("l") <= nowDate &&
+        moment(missionData.deadline.endDate).format("l") >= nowDate
+    );
+    this.setState({
+      leavesList: whichProps.leavesList,
+      missionsfilterList,
+      missionsList: whichProps.missionsList,
+      isLoading: false,
+      projectsList: whichProps.projectsList,
+      usersList: whichProps.usersList,
+      nowDate: moment(Date()).format("LL")
+    });
   };
   functionSelectedDate = selectedDate => {
     this.filterDateWise(selectedDate);
@@ -84,22 +81,19 @@ class TeamAllocationPeopleList extends React.Component {
         moment(data.from.seconds * 1000).format("L") <= selectedDate &&
         moment(data.to.seconds * 1000).format("L") >= selectedDate
     );
-    let missionsList = this.props.missionsList.filter(
+    let missionsfilterList = this.state.missionsList.filter(
       missionData =>
-        moment(missionData.deadline.startDate.seconds * 1000).format("L") <=
-          selectedDate &&
-        moment(missionData.deadline.endDate.seconds * 1000).format("L") >=
-          selectedDate
+        moment(missionData.deadline.startDate).format("L") <= selectedDate &&
+        moment(missionData.deadline.endDate).format("L") >= selectedDate
     );
     this.setState({
       leavesList,
-      missionsList,
+      missionsfilterList,
       selectedDate: selctedCurrentDate,
       startDay,
       isLoading: false
     });
   };
-
   render() {
     return (
       <div>
@@ -136,14 +130,13 @@ class TeamAllocationPeopleList extends React.Component {
             display: "self"
           }}
         >
-          {this.state.isLoading
+          {this.state.loader
             ? loader
             : this.state.usersList.map((row, id) => {
                 let projectId = [];
-                let paddingStyle = 0;
-                this.state.missionsList.map(missionRow => {
+                this.state.missionsfilterList.map(missionRow => {
                   if (missionRow.assignTo.find(data => data === row.uid))
-                    projectId = this.state.projectsList.filter(
+                    projectId = this.state.projectsList.find(
                       data => data.projectId === missionRow.projectId
                     );
                 });
@@ -174,21 +167,34 @@ class TeamAllocationPeopleList extends React.Component {
                         paddingRight: 5,
                         fontWeight: "bold"
                       }}
-                      children={projectId.map((projectRow, index) => (
-                        <img
-                          key={index}
-                          style={{
-                            paddingTop: 5,
-                            width: 35,
-                            height: 35,
-                            borderRadius: 5,
-                            float: "right"
-                          }}
-                          src={projectRow.logoURL}
-                        />
-                      ))}
+                      children={
+                        projectId.logoURL !== undefined ? (
+                          <img
+                            style={{
+                              paddingTop: 5,
+                              width: 35,
+                              height: 35,
+                              borderRadius: 5,
+                              float: "right"
+                            }}
+                            src={projectId.logoURL}
+                          />
+                        ) : (
+                          <Subheader
+                            style={{
+                              width: 35,
+                              height: 35,
+                              borderRadius: 5,
+                              float: "right",
+                              marginRight: 10
+                            }}
+                          >
+                            N/A
+                          </Subheader>
+                        )
+                      }
                     />
-                    {this.state.missionsList.map((missionRow, index) => {
+                    {this.state.missionsfilterList.map((missionRow, index) => {
                       if (missionRow.assignTo.find(data => data === row.uid))
                         return (
                           <CardText
