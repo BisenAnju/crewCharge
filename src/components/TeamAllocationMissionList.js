@@ -17,13 +17,14 @@ import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import TeamAllocationProjectList from "./TeamAllocationProjectList";
 import TeamAllocationPeopleList from "./TeamAllocationPeoplesList";
-import { grey500, orange100 } from "material-ui/styles/colors";
-import * as moment from "moment";
+import { orange100 } from "material-ui/styles/colors";
+import withFirebase from "../hoc/withFirebase";
 class TeamAllocationMissionList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 0
+      value: 0,
+      massage: null
     };
   }
   handleTabChange = value => {
@@ -31,18 +32,7 @@ class TeamAllocationMissionList extends React.Component {
       value: value
     });
   };
-  handleEditMissionChange(missionsId) {
-    window.location = "/teamallocation/mission/" + missionsId;
-  }
-  handleArchiveMissionChange(missionsId) {
-    console.log(missionsId);
-  }
-  handleEditProjectChange(projectId) {
-    window.location = "/teamallocation/project/" + projectId;
-  }
-  handleArchiveProjectChange(projectId) {
-    console.log(projectId);
-  }
+
   contentButton = {
     bottom: 20,
     right: 20,
@@ -99,7 +89,9 @@ class TeamAllocationMissionList extends React.Component {
                               <MenuItem
                                 onClick={e => {
                                   e.preventDefault();
-                                  this.handleEditMissionChange(row.missionsId);
+                                  this.props.history.push(
+                                    "/teamallocation/mission/" + row.missionsId
+                                  );
                                 }}
                               >
                                 Edit
@@ -107,7 +99,7 @@ class TeamAllocationMissionList extends React.Component {
                               <MenuItem
                                 onClick={e => {
                                   e.preventDefault();
-                                  this.handleArchiveMissionChange(
+                                  this.props.handleArchiveMissionChange(
                                     row.missionsId
                                   );
                                 }}
@@ -118,14 +110,9 @@ class TeamAllocationMissionList extends React.Component {
                           }
                           secondaryTextLines={2}
                           secondaryText={
-                            "Deadline :" +
-                            moment(
-                              row.deadline.startDate.seconds * 1000
-                            ).format("LL") +
+                            row.deadline.startDate +
                             " - " +
-                            moment(row.deadline.endDate.seconds * 1000).format(
-                              "LL"
-                            )
+                            row.deadline.endDate
                           }
                         />
                       </div>
@@ -166,7 +153,9 @@ class TeamAllocationMissionList extends React.Component {
                               <MenuItem
                                 onClick={e => {
                                   e.preventDefault();
-                                  this.handleEditProjectChange(row.projectId);
+                                  this.props.history.push(
+                                    "/teamallocation/project/" + row.projectId
+                                  );
                                 }}
                               >
                                 Edit
@@ -174,7 +163,7 @@ class TeamAllocationMissionList extends React.Component {
                               <MenuItem
                                 onClick={e => {
                                   e.preventDefault();
-                                  this.handleArchiveProjectChange(
+                                  this.props.handleArchiveProjectChange(
                                     row.projectId
                                   );
                                 }}
@@ -212,11 +201,21 @@ class TeamAllocationMissionList extends React.Component {
                         vertical: "bottom"
                       }}
                     >
-                      <MenuItem onClick={this.props.handleAddMission}>
+                      <MenuItem
+                        onClick={e => {
+                          e.preventDefault();
+                          this.props.history.push("/teamallocation/mission");
+                        }}
+                      >
                         Add Mission
                       </MenuItem>
                       <Divider />
-                      <MenuItem onClick={this.props.handleAddproject}>
+                      <MenuItem
+                        onClick={e => {
+                          e.preventDefault();
+                          this.props.history.push("/teamallocation/project");
+                        }}
+                      >
                         Add Project
                       </MenuItem>
                     </IconMenu>
@@ -226,8 +225,15 @@ class TeamAllocationMissionList extends React.Component {
             </div>
           </Tab>
         </Tabs>
+        {/* <div>
+          <Snackbar
+            open={this.props.openSnackbar}
+            message={this.state.massage}
+            autoHideDuration={4000}
+          />
+        </div> */}
       </Layout>
     );
   }
 }
-export default withRouter(TeamAllocationMissionList);
+export default withRouter(withFirebase(TeamAllocationMissionList));

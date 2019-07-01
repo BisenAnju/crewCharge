@@ -140,19 +140,21 @@ class LeaveEmployeeDetails extends Component {
                 primaryText={this.props.singleData.purpose}
                 secondaryText={<p style={{ fontSize: 14 }}>Purpose</p>}
                 rightIcon={
-                  <IconButton
-                    touch={true}
-                    style={{ margin: "0px 25px 0px 0px" }}
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push(
-                        `/leavedashboard/leaveapply/` +
-                          this.props.singleData.leaveId
-                      );
-                    }}
-                  >
-                    <ImageEdit />
-                  </IconButton>
+                  this.props.singleData.leaveStatus === "Pending" ? (
+                    <IconButton
+                      touch={true}
+                      style={{ margin: "0px 25px 0px 0px" }}
+                      onClick={e => {
+                        e.preventDefault();
+                        this.props.history.push(
+                          `/leavedashboard/leaveapply/` +
+                            this.props.singleData.leaveId
+                        );
+                      }}
+                    >
+                      <ImageEdit />
+                    </IconButton>
+                  ) : null
                 }
               />
               <ListItem

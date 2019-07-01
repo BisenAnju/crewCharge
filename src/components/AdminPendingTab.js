@@ -24,10 +24,9 @@ const tabStyles = {
 class AdminPendingTab extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { avatarColor: null };
+    this.state = {};
   }
   render() {
-    console.log(this.props.comment);
     return (
       <div
         style={{
@@ -60,18 +59,16 @@ class AdminPendingTab extends React.Component {
                             );
                       }}
                       leftAvatar={
-                        this.props.comment === "true" ? (
-                          <Avatar
-                            src={
-                              this.props.userData.findIndex(
-                                user => user.uid === leave.userId
-                              ) >= 0 &&
-                              this.props.userData.find(
-                                user => user.uid === leave.userId
-                              ).photoURL
-                            }
-                          />
-                        ) : null
+                        <Avatar
+                          src={
+                            this.props.userData.findIndex(
+                              user => user.uid === leave.userId
+                            ) >= 0 &&
+                            this.props.userData.find(
+                              user => user.uid === leave.userId
+                            ).photoURL
+                          }
+                        />
                       }
                       rightIcon={
                         leave.purpose === "vacation" ? (

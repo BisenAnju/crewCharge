@@ -18,7 +18,8 @@ class TeamAllocationPeoplesListContainer extends Component {
       usersList: [],
       projectsList: [],
       missionsList: [],
-      leavesList: []
+      leavesList: [],
+      massage: null
     };
   }
   componentWillMount() {
@@ -26,7 +27,6 @@ class TeamAllocationPeoplesListContainer extends Component {
     let projectsList = [];
     let leavesList = [];
     let missionsList = [];
-    let projectldata = [];
     this.props.db
       .collection("users")
       .orderBy("displayName")
@@ -44,6 +44,7 @@ class TeamAllocationPeoplesListContainer extends Component {
       });
     this.props.db
       .collection("projects")
+      .where("status", "==", "Active")
       .orderBy("name")
       .onSnapshot(snapshot => {
         snapshot.docChanges().forEach(doc => {
@@ -71,6 +72,7 @@ class TeamAllocationPeoplesListContainer extends Component {
             alert("No Data Found");
           }
         });
+
         this.setState({ isLoading: false, missionsList });
       });
     this.props.db
@@ -89,11 +91,19 @@ class TeamAllocationPeoplesListContainer extends Component {
         this.setState({ isLoading: false, leavesList });
       });
   }
-  handleAddMission = () => {
-    window.location = "/teamallocation/mission";
+  handleArchiveMissionChange = missionsId => {
+    this.props.db
+      .collection("missions")
+      .doc(missionsId)
+      .update({ status: "Archive" })
+      .then(this.setState({ massage: "Your Data Deleted" }));
   };
-  handleAddproject = () => {
-    window.location = "/teamallocation/project";
+  handleArchiveProjectChange = projectId => {
+    this.props.db
+      .collection("projects")
+      .doc(projectId)
+      .update({ status: "Archive" })
+      .then(this.setState({ massage: "Your Data Deleted" }));
   };
   render() {
     return (
@@ -105,10 +115,12 @@ class TeamAllocationPeoplesListContainer extends Component {
               path={"/teamallocation"}
               render={props => (
                 <TeamAllocationMissionList
-                  // {...this.props}
+                  {...this.props}
                   {...this.state}
                   handleAddproject={this.handleAddproject}
                   handleAddMission={this.handleAddMission}
+                  handleArchiveMissionChange={this.handleArchiveMissionChange}
+                  handleArchiveProjectChange={this.handleArchiveProjectChange}
                 />
               )}
             />
@@ -123,7 +135,10 @@ class TeamAllocationPeoplesListContainer extends Component {
               exact
               path={"/teamallocation/mission/:missionId"}
               render={props => (
-                <TeamAllocationMissionContainer {...props} {...this.state} />
+                <TeamAllocationMissionContainer
+                  {...this.props}
+                  {...this.state}
+                />
               )}
             />
             <Route
@@ -137,7 +152,10 @@ class TeamAllocationPeoplesListContainer extends Component {
               exact
               path={"/teamallocation/project/:projectId"}
               render={props => (
-                <TeamAllocationProjectContainer {...props} {...this.state} />
+                <TeamAllocationProjectContainer
+                  {...this.props}
+                  {...this.state}
+                />
               )}
             />
           </Switch>

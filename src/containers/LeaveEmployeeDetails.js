@@ -8,7 +8,7 @@ import {
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
 import LeaveEmployeeDetails from "../components/LeaveEmployeeDetails";
-
+import LeaveEmployeeApplyContainer from "./LeaveEmployeeApply";
 class LeaveEmployeeDetailsContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -127,6 +127,11 @@ class LeaveEmployeeDetailsContainer extends React.Component {
                   userData={this.props.userData}
                 />
               )}
+            />
+            <Route
+              exact
+              path={"/leavedashboard/leaveapply/:mode"}
+              render={props => <LeaveEmployeeApplyContainer {...this.props} />}
             />
           </Switch>
         </Router>

@@ -27,7 +27,28 @@ class TeamAllocationMissionContainer extends Component {
           name: projectName,
           logoURL: logo,
           createdOn: Date(),
-          createBy: this.props.user.uid
+          createBy: this.props.user.uid,
+          status: "Active"
+        })
+        .then(
+          this.setState({
+            openSnackbar: true,
+            message: "Mission Add Success fully"
+          }),
+          (window.location = "/teamallocation")
+        );
+    }
+  };
+  handleUpdateProject = (projectName, logo, projectId) => {
+    if (projectName === null || logo === null) {
+      this.setState({ openSnackbar: true, message: "Fill all Required field" });
+    } else {
+      this.props.db
+        .collection("projects")
+        .doc(projectId)
+        .update({
+          name: projectName,
+          logoURL: logo
         })
         .then(
           this.setState({
@@ -55,8 +76,7 @@ class TeamAllocationMissionContainer extends Component {
               path={"/teamallocation/project"}
               render={props => (
                 <TeamAllocationProject
-                  {...props}
-                  {...this.state}
+                  {...this.props}
                   handleAddProject={this.handleAddProject}
                 />
               )}
@@ -66,9 +86,16 @@ class TeamAllocationMissionContainer extends Component {
               path={"/teamallocation/project/:projectId"}
               render={props => (
                 <TeamAllocationProject
-                  {...props}
-                  {...this.state}
-                  handleAddProject={this.handleAddProject}
+                  {...this.props}
+                  handleUpdateProject={this.handleUpdateProject}
+                  projectList={
+                    this.props.projectsList.length > 0
+                      ? this.props.projectsList.find(
+                          data =>
+                            data.projectId === this.props.match.params.projectId
+                        )
+                      : null
+                  }
                 />
               )}
             />

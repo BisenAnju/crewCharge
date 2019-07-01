@@ -63,7 +63,7 @@ class LeaveEmployeeDashboard extends React.Component {
             <AdminPendingTab
               leaveData={this.props.leaveData}
               userData={this.props.userData}
-              comment={this.props.comment}
+              // comment={this.props.comment}
             />
             <AdminApprovedTab
               leaveData={this.props.leaveData}
@@ -79,7 +79,7 @@ class LeaveEmployeeDashboard extends React.Component {
             backgroundColor="rgb(253, 145, 77)"
             onClick={e => {
               e.preventDefault();
-              this.props.history.push(`/leavedashboard/leaveapply/new`);
+              this.props.history.push(`/leavedashboard/leaveapply/` + "new");
             }}
           >
             <ContentAdd />

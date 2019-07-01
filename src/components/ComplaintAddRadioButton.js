@@ -69,7 +69,7 @@ export class LeaveApplyRadioButton extends React.Component {
           display: "flex"
         }}
         name="shipSpeed"
-        defaultSelected="Hour"
+        defaultSelected={this.props.leaveType}
       >
         <RadioButton
           rippleStyle={{ color: "rgb(253, 145, 77)" }}
@@ -85,6 +85,7 @@ export class LeaveApplyRadioButton extends React.Component {
             width: "min-content"
           }}
           onClick={this.props.validateLeave}
+          // disabled={this.props.leaveType === "Full" ? true : false}
         />
         <RadioButton
           rippleStyle={{ color: "rgb(253, 145, 77)" }}
@@ -98,6 +99,7 @@ export class LeaveApplyRadioButton extends React.Component {
             width: "min-content"
           }}
           onClick={this.props.validateLeave}
+          // disabled={this.props.leaveType === "Hour" ? true : false}
         />
       </RadioButtonGroup>
     );
