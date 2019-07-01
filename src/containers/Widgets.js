@@ -3,8 +3,7 @@ import Widgets from "../components/Widgets";
 import axios from "axios";
 import { headers } from "./Projects";
 import { withRouter } from "react-router-dom";
-import { CircularProgress } from "material-ui";
-import { promises } from "fs";
+
 class WidgetsContainer extends Component {
   // Dashboard List GET https://dev.azure.com/{organization}/{project}/{team}/_apis/dashboard/dashboards?api-version=5.0-preview.2
   //Dashboard GET https://dev.azure.com/smilebots/LokusNews/{team}/_apis/dashboard/dashboards/{dashboardId}?api-version=5.0-preview.2
@@ -16,9 +15,9 @@ class WidgetsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      workItemsList: null,
-      widgetList: null,
-      columns: null,
+      workItemsList: [],
+      widgetList: [],
+      columns: [],
       isLoading: true
     };
   }
@@ -69,9 +68,18 @@ class WidgetsContainer extends Component {
                 if (widgetsItem.widgets.length > 0) {
                   // console.log("widgets");
                   // console.log(widgetsItem.widgets);
-                  widgetsArray.push(widgetsItem.widgets);
+                  widgetsItem.widgets.map(e => {
+                    //console.log(e.typeId);
+                    if (
+                      e.typeId ===
+                      "Microsoft.VisualStudioOnline.MyWork.WitViewWidget"
+                    ) {
+                      widgetsArray.push(e);
+                      //widgetsArray = [...new Set(widgetsItem.widgets)];
+                    }
+                  });
                 } else {
-                  //           console.log("widgets length=0");
+                  // console.log("widgets length=0");
                 }
               });
             });
