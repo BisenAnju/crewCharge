@@ -96,14 +96,11 @@ class ComplaintView extends React.Component {
                 <ListItem
                   disabled
                   leftAvatar={
-                    <Avatar
-                      src={this.props.data.userImageURL}
-                      // size={50}
-                      // style={{ marginTop: 10 }}
-                    />
+                    <Avatar size={45} src={this.props.data.userImageURL} />
                   }
                   rightAvatar={
                     <Avatar
+                      size={45}
                       backgroundColor="transparent"
                       color="rgb(253, 145, 77)"
                       {...(this.props.data.complaintType === "Harassment"
@@ -227,7 +224,7 @@ class ComplaintView extends React.Component {
                       secondaryTextLines={1}
                     />
                     <ListItem
-                      secondaryTextLines={1}
+                      secondaryTextLines={2}
                       disabled
                       secondaryText={"Action"}
                       primaryText={this.props.data.adminReply}

@@ -23,6 +23,7 @@
     "material-ui-textfield-icon": "^0.2.7",
     "moment": "^2.24.0",
     "onesignal-cordova-plugin": "^2.4.7",
+    "quick-encrypt": "^1.0.8",
     "react": "^16.2.0",
     "react-big-calendar": "^0.21.0",
     "react-dom": "^16.8.6",

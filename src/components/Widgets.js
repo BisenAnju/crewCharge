@@ -14,7 +14,7 @@ import {
   CircularProgress
 } from "material-ui";
 import Layout from "../layouts/Layout";
-import { lang } from "../locales/i18n";
+import theaters from "material-ui/svg-icons/action/theaters";
 
 class Widgets extends Component {
   constructor(props) {
@@ -28,21 +28,48 @@ class Widgets extends Component {
   }
 
   componentWillMount() {
+    console.log("will mount");
     setTimeout(() => {
+      console.log(this.state.widgetList.length);
+      const final = [];
+      let singleObj = {};
+      const finalMapRet = this.state.widgetList.map((widget, index) => {
+        // console.log("widget");
+        // console.log(widget);
+
+        singleObj = {
+          widgetId: widget.id,
+          widgetName: widget.name
+          // columnRefName: this.state.columns[index].referenceName,
+          // columnTitle: col.name,
+          // workItemId: workItem.id,
+          // workItemData: workItem.fields
+        };
+        // console.log("column");
+        // console.log(col);
+
+        // console.log("workItems");
+        // console.log(workItem);
+        // return {
+        //   widgetId: widget.id,
+        //   widgetName: widget.name,
+        //   columnRefName: col.referenceName,
+        //   columnTitle: col.name,
+        //   workItemId: workItem.id,
+        //   workItemData: workItem.fields
+        // };
+      });
+
+      console.log("---------------");
+      console.log(final);
+      console.log("***************");
+      console.log(finalMapRet);
+
       this.setState({
         isLoading: false
       });
-    }, 3000);
+    }, 2500);
   }
-
-  // componentDidMount() {
-  //   console.log("will mount");
-  //   if (this.props.widgetList.length > 0) {
-  //     this.setState({
-  //       isLoading: false
-  //     });
-  //   }
-  // }
 
   componentWillReceiveProps(nextProps) {
     console.log("will receive");
@@ -77,107 +104,99 @@ class Widgets extends Component {
             <h3>
               Widgets:
               {this.state.widgetList.length > 0 ? (
-                this.state.widgetList[0].length
+                this.state.widgetList.length
               ) : (
                 <div>No widgets found</div>
               )}
             </h3>
-            {this.state.widgetList.map((widgets, widgetListIndex) => {
-              return widgets.map((widget, widgetIndex) => {
-                if (widget.settings.length > 127) {
-                  //counter++;
-                  return (
-                    <div id="widget" key={widgetIndex}>
-                      <Card style={cardStyle}>
-                        <CardHeader title={widget.name} />
-                        <CardText
-                          style={{
-                            display: "flex",
-                            margin: "0 20px"
-                          }}
-                        >
-                          {this.state.columns.map((column, columnIndex) => {
-                            // console.log(widgetIndex);
-                            // console.log(columnIndex);
-                            if (widgetIndex === columnIndex) {
-                              return column.map((col, colIndex) => {
-                                return (
-                                  <div
-                                    key={colIndex}
-                                    style={{ margin: "0 10px" }}
-                                  >
-                                    {col.name}
+            {this.state.widgetList.map((widget, widgetIndex) => {
+              return (
+                <div id="widget" key={widgetIndex}>
+                  <Card style={cardStyle}>
+                    <CardHeader title={widget.name} />
+                    <CardText
+                      style={{
+                        display: "flex",
+                        margin: "0 20px"
+                      }}
+                    >
+                      {this.state.columns.map((column, columnIndex) => {
+                        // console.log(widgetIndex);
+                        // console.log(columnIndex);
+                        if (widgetIndex === columnIndex) {
+                          return column.map((col, colIndex) => {
+                            return (
+                              <div key={colIndex} style={{ margin: "0 10px" }}>
+                                {col.name}
 
-                                    <div
-                                      key={"divTable-" + colIndex}
-                                      id="tableData"
-                                    >
-                                      <table key={"table-" + colIndex}>
-                                        {this.state.workItemsList.map(
-                                          (workItems, workItemsIndex) => {
-                                            if (
-                                              widgetIndex === workItemsIndex
-                                            ) {
-                                              return workItems.map(
-                                                (workItem, workItemIndex) => {
-                                                  return Object.keys(
+                                <div
+                                  key={"divTable-" + colIndex}
+                                  id="tableData"
+                                >
+                                  <table key={"table-" + colIndex}>
+                                    {this.state.workItemsList.map(
+                                      (workItems, workItemsIndex) => {
+                                        if (widgetIndex === workItemsIndex) {
+                                          return workItems.map(
+                                            (workItem, workItemIndex) => {
+                                              return (
+                                                <div>
+                                                  <thead>
+                                                    <tr>
+                                                      {col.referenceName ===
+                                                      "System.Id" ? (
+                                                        <td>{workItem.id}</td>
+                                                      ) : null}
+                                                    </tr>
+                                                  </thead>
+                                                  {Object.entries(
                                                     workItem.fields
                                                   ).map(data => {
+                                                    // console.log(data);
                                                     if (
-                                                      col.referenceName === data
+                                                      data[0] ===
+                                                      col.referenceName
                                                     ) {
-                                                      return Object.values(
-                                                        workItem.fields
-                                                      ).map(val => {
-                                                        // typeof val ===
-                                                        //   "object" &&
-                                                        // val !== null
-                                                        //   ? console.log(
-                                                        //       val["displayName"]
-                                                        //     )
-                                                        //   : console.log(val);
-                                                        return (
-                                                          <tbody>
-                                                            <tr>
-                                                              {typeof val ===
-                                                                "object" &&
-                                                              val !== null ? (
-                                                                <td>
-                                                                  {
-                                                                    val[
-                                                                      "displayName"
-                                                                    ]
-                                                                  }
-                                                                </td>
-                                                              ) : (
-                                                                <td>{val}</td>
-                                                              )}
-                                                            </tr>
-                                                          </tbody>
-                                                        );
-                                                      });
+                                                      console.log(data[1]);
+                                                      return (
+                                                        <tbody>
+                                                          <tr>
+                                                            {typeof data[1] ===
+                                                            "object" ? (
+                                                              <td>
+                                                                {
+                                                                  data[1]
+                                                                    .displayName
+                                                                }
+                                                              </td>
+                                                            ) : (
+                                                              <td>{data[1]}</td>
+                                                            )}
+                                                          </tr>
+                                                        </tbody>
+                                                      );
                                                     }
-                                                  });
-                                                }
+                                                  })}
+                                                </div>
                                               );
                                             }
-                                          }
-                                        )}
-                                      </table>
-                                    </div>
-                                  </div>
-                                );
-                              });
-                            } else {
-                              //console.log("index not matched");
-                            }
-                          })}
-                        </CardText>
-                      </Card>
-                    </div>
-                  );
-                }
-              });
+                                          );
+                                        }
+                                      }
+                                    )}
+                                  </table>
+                                </div>
+                              </div>
+                            );
+                          });
+                        } else {
+                          //console.log("index not matched");
+                        }
+                      })}
+                    </CardText>
+                  </Card>
+                </div>
+              );
             })}
           </div>
         )}
