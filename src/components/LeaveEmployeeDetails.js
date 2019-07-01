@@ -140,19 +140,21 @@ class LeaveEmployeeDetails extends Component {
                 primaryText={this.props.singleData.purpose}
                 secondaryText={<p style={{ fontSize: 14 }}>Purpose</p>}
                 rightIcon={
-                  <IconButton
-                    touch={true}
-                    style={{ margin: "0px 25px 0px 0px" }}
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push(
-                        `/leavedashboard/leaveapply/` +
-                          this.props.singleData.leaveId
-                      );
-                    }}
-                  >
-                    <ImageEdit />
-                  </IconButton>
+                  this.props.singleData.leaveStatus === "Pending" ? (
+                    <IconButton
+                      touch={true}
+                      style={{ margin: "0px 25px 0px 0px" }}
+                      onClick={e => {
+                        e.preventDefault();
+                        this.props.history.push(
+                          `/leavedashboard/leaveapply/` +
+                            this.props.singleData.leaveId
+                        );
+                      }}
+                    >
+                      <ImageEdit />
+                    </IconButton>
+                  ) : null
                 }
               />
               <ListItem
@@ -283,7 +285,9 @@ class LeaveEmployeeDetails extends Component {
                               <div
                                 style={{ marginRight: "5px", float: "left" }}
                               >
-                                <span> {comment.comment}</span>
+                                <span style={{ fontSize: "14px" }}>
+                                  {comment.comment}
+                                </span>
                                 <br />
                                 <span
                                   style={{
@@ -292,7 +296,7 @@ class LeaveEmployeeDetails extends Component {
                                     justifyContent: "center",
                                     display: "flex",
                                     alignItems: "center",
-                                    fontSize: "0.9rem"
+                                    fontSize: "13px"
                                   }}
                                 >
                                   {moment(
@@ -319,7 +323,7 @@ class LeaveEmployeeDetails extends Component {
                                   maxWidth: "80%",
                                   marginLeft: "10px",
                                   marginTop: "5px",
-                                  backgroundColor: "#31234e",
+                                  backgroundColor: "#c8d8c6",
                                   padding: "5px 9px",
                                   borderRadius: "0px 10px 10px 10px",
                                   wordBreak: "break-all"
@@ -332,12 +336,14 @@ class LeaveEmployeeDetails extends Component {
                                     flexDirection: "column"
                                   }}
                                 >
-                                  <span>{comment.comment}</span>
+                                  <span style={{ fontSize: "14px" }}>
+                                    {comment.comment}
+                                  </span>
                                   <span
                                     style={{
                                       textAlign: "right",
                                       color: "#9e9e9e",
-                                      fontSize: "0.9rem"
+                                      fontSize: "13px"
                                     }}
                                   >
                                     {moment(

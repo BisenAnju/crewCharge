@@ -24,7 +24,7 @@ const tabStyles = {
 class AdminPendingTab extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { backcolor: null };
+    this.state = {};
   }
   render() {
     return (
@@ -46,11 +46,6 @@ class AdminPendingTab extends React.Component {
                 .filter(data => data.leaveStatus === "Pending")
                 .map((leave, id) => (
                   <div key={id}>
-                    {/* let backcolor = null;
-                    {leave.remark != ""
-                      ? (backcolor = "leavesAnimation")
-                      : (backcolor = "leavesAnima")} */}
-
                     <ListItem
                       onClick={e => {
                         e.preventDefault();
@@ -65,7 +60,6 @@ class AdminPendingTab extends React.Component {
                       }}
                       leftAvatar={
                         <Avatar
-                          // className={backcolor}
                           src={
                             this.props.userData.findIndex(
                               user => user.uid === leave.userId
@@ -100,7 +94,7 @@ class AdminPendingTab extends React.Component {
                         ).displayName
                       }
                       secondaryText={
-                        <p style={{ fontSize: 12 }}>
+                        <p style={{ fontSize: 10, fontWeight: "bold" }}>
                           <span>
                             {leave.leaveType === "Hour"
                               ? moment
@@ -131,7 +125,7 @@ class AdminPendingTab extends React.Component {
                                     )
                                   )
                                   .format("D") +
-                                " Days " +
+                                " Day " +
                                 "  " +
                                 moment(leave.from).format("ll") +
                                 " - " +

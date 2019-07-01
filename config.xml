@@ -10,7 +10,6 @@
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <preference name="AndroidLaunchMode" value="singleTask" />
-    <preference name="Orientation" value="portrait" />
     <universal-links>
         <host name="projects41fe0.page.link" scheme="https" />
         <host name="project-s-41fe0.firebaseapp.com" scheme="https">

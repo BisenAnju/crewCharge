@@ -135,6 +135,7 @@ class LeaveEmployeeApplyContainer extends React.Component {
   };
 
   render() {
+    console.log(this.props.match.params.mode);
     return (
       <div>
         <Router>
@@ -146,7 +147,7 @@ class LeaveEmployeeApplyContainer extends React.Component {
                 {...props}
                 addLeaves={this.addLeaves}
                 singleData={this.props.singleData.find(
-                  data => data.leaveId === this.props.match.params.leaveId
+                  data => data.leaveId === this.props.match.params.mode
                 )}
                 isLoading={this.state.isLoading}
                 purposeData={this.state.purposeData}

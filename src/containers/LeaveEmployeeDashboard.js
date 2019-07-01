@@ -18,6 +18,7 @@ class LeaveEmployeeDashboardContainer extends React.Component {
       isLoading: true,
       leaveData: [],
       userData: []
+      // comment: ""
     };
   }
 
@@ -32,6 +33,18 @@ class LeaveEmployeeDashboardContainer extends React.Component {
           const leaveData = [];
           snapshot.forEach(doc => {
             if (doc.exists) {
+              // this.props.db
+              //   .collection("leaves")
+              //   .doc(doc.id)
+              //   .collection("comment")
+              //   .get()
+              //   .then(shot => {
+              //     if (shot.size > 0) {
+              //       this.setState({ comment: "true" });
+              //     } else {
+              //       this.setState({ comment: "false" });
+              //     }
+              //   });
               const leave = doc.data();
               leave.leaveId = doc.id;
               leave.from = new Date(leave.from.seconds * 1000);
@@ -93,6 +106,7 @@ class LeaveEmployeeDashboardContainer extends React.Component {
                   userData={this.state.userData}
                   leaveData={this.state.leaveData}
                   isLoading={this.state.isLoading}
+                  // comment={this.state.comment}
                 />
               )}
             />
