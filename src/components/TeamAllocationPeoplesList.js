@@ -180,17 +180,15 @@ class TeamAllocationPeopleList extends React.Component {
                             src={projectId.logoURL}
                           />
                         ) : (
-                          <Subheader
+                          <Avatar
                             style={{
-                              width: 35,
-                              height: 35,
-                              borderRadius: 5,
+                              background: "red",
+                              height: "10px",
+                              width: "10px",
                               float: "right",
-                              marginRight: 10
+                              marginTop: 10
                             }}
-                          >
-                            N/A
-                          </Subheader>
+                          />
                         )
                       }
                     />
