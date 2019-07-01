@@ -62,10 +62,8 @@ class TeamAllocationProjectList extends React.Component {
     );
     let missionsList = this.props.missionsList.filter(
       missionData =>
-        moment(missionData.deadline.startDate.seconds * 1000).format("L") >=
-          selectedDate ||
-        moment(missionData.deadline.endDate.seconds * 1000).format("L") <=
-          selectedDate
+        moment(missionData.deadline.startDate).format("L") >= selectedDate ||
+        moment(missionData.deadline.endDate).format("L") <= selectedDate
     );
     this.setState({ leavesList, missionsList, selectedDate: selctedDate1 });
   };
@@ -166,15 +164,11 @@ class TeamAllocationProjectList extends React.Component {
                         <h3>{missionRow.name}</h3>
                         <h4>Project Dead Line</h4>
                         <h5 style={{ float: "left", marginRight: 10 }}>
-                          {moment(
-                            missionRow.deadline.startDate.seconds * 1000
-                          ).format("ll")}
+                          {moment(missionRow.deadline.startDate).format("ll")}
                         </h5>
                         <h5 style={{ float: "left", marginRight: 10 }}>-</h5>
                         <h5>
-                          {moment(
-                            missionRow.deadline.endDate.seconds * 1000
-                          ).format("ll")}
+                          {moment(missionRow.deadline.endDate).format("ll")}
                         </h5>
                         <h5>Massege: {missionRow.deadline.remarks}</h5>
                       </div>

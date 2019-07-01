@@ -14,7 +14,13 @@ class TeamAllocationMissionContainer extends Component {
     super(props);
     this.state = {
       openSnackbar: false,
-      message: ""
+      message: "",
+      values: [],
+      projectId: null,
+      startDate: new Date(),
+      endDate: new Date(),
+      missionName: "",
+      remarks: null
     };
   }
   handleAddMission = (
@@ -99,6 +105,27 @@ class TeamAllocationMissionContainer extends Component {
         );
     }
   };
+  componentWillMount() {
+    if (
+      this.props.missionsList.length > 0 &&
+      this.props.match.params.missionId !== undefined
+    ) {
+      let missionList = this.props.missionsList.find(
+        misiionData =>
+          misiionData.missionsId === this.props.match.params.missionId
+      );
+      const startDate = missionList.deadline.startDate;
+      const endDate = missionList.deadline.endDate;
+      this.setState({
+        missionName: missionList.name,
+        values: missionList.assignTo,
+        projectId: missionList.projectId,
+        startDate,
+        endDate,
+        remarks: missionList.deadline.remarks
+      });
+    }
+  }
   render() {
     return (
       <div>
@@ -139,7 +166,6 @@ class TeamAllocationMissionContainer extends Component {
     );
   }
 }
-
 export default withRouter(
   withFirebase(withUser(TeamAllocationMissionContainer))
 );

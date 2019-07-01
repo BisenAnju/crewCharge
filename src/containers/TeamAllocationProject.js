@@ -105,7 +105,6 @@ class TeamAllocationMissionContainer extends Component {
     );
   }
 }
-
 export default withRouter(
   withFirebase(withUser(TeamAllocationMissionContainer))
 );
