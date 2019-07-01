@@ -55,7 +55,7 @@ class TeamAllocationMissionContainer extends Component {
             openSnackbar: true,
             message: "Mission Add Success fully"
           }),
-          (window.location = "/teamallocation")
+          this.props.history.push("/teamallocation")
         );
     }
   };
@@ -105,7 +105,6 @@ class TeamAllocationMissionContainer extends Component {
     );
   }
 }
-
 export default withRouter(
   withFirebase(withUser(TeamAllocationMissionContainer))
 );

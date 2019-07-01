@@ -128,7 +128,10 @@ class TeamAllocationPeoplesListContainer extends Component {
               exact
               path={"/teamallocation/mission"}
               render={props => (
-                <TeamAllocationMissionContainer {...props} {...this.state} />
+                <TeamAllocationMissionContainer
+                  {...this.props}
+                  {...this.state}
+                />
               )}
             />
             <Route
@@ -145,7 +148,10 @@ class TeamAllocationPeoplesListContainer extends Component {
               exact
               path={"/teamallocation/project"}
               render={props => (
-                <TeamAllocationProjectContainer {...props} {...this.state} />
+                <TeamAllocationProjectContainer
+                  {...this.props}
+                  {...this.state}
+                />
               )}
             />
             <Route

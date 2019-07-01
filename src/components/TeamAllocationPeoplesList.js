@@ -96,36 +96,46 @@ class TeamAllocationPeopleList extends React.Component {
   };
   render() {
     return (
-      <div>
-        <div style={{ position: "relative" }}>
-          <Divider />
-          <div>
-            <ReactWeeklyDayPicker
-              daysCount={7}
-              classNames={classNames}
-              startDay={this.state.startDay}
-              selectedDays={[this.state.selectedDate]}
-              multipleDaySelect={false}
-              selectDay={this.functionSelectedDate}
-              unselectDay={function(day) {}}
-              onPrevClick={function(startDay, selectedDays) {}}
-              onNextClick={function(startDay, selectedDays) {}}
-              unselectable={false}
-              format={"MM/DD/YYYY"}
-              selected={this.state.selected}
-              firstLineFormat={"ddd"}
-              secondLineFormat={"D"}
-              firstLineMobileFormat={"ddd"}
-              secondLineMobileFormat={"D"}
-              mobilView={window.innerWidth < 1024}
-              beforeToday={true}
-            />
-          </div>
-        </div>
+      <div
+        style={{
+          position: "relative",
+          display: "flex",
+          flexDirection: "column"
+        }}
+      >
         <Divider />
         <div
           style={{
-            height: "73vh",
+            display: "flex",
+            flexDirection: "column"
+          }}
+        >
+          <ReactWeeklyDayPicker
+            daysCount={7}
+            classNames={classNames}
+            startDay={this.state.startDay}
+            selectedDays={[this.state.selectedDate]}
+            multipleDaySelect={false}
+            selectDay={this.functionSelectedDate}
+            unselectDay={function(day) {}}
+            onPrevClick={function(startDay, selectedDays) {}}
+            onNextClick={function(startDay, selectedDays) {}}
+            unselectable={false}
+            format={"MM/DD/YYYY"}
+            selected={this.state.selected}
+            firstLineFormat={"ddd"}
+            secondLineFormat={"D"}
+            firstLineMobileFormat={"ddd"}
+            secondLineMobileFormat={"D"}
+            mobilView={window.innerWidth < 1024}
+            beforeToday={true}
+          />
+        </div>
+
+        <Divider />
+        <div
+          style={{
+            height: "70vh",
             overflow: "auto",
             display: "self"
           }}
@@ -180,17 +190,15 @@ class TeamAllocationPeopleList extends React.Component {
                             src={projectId.logoURL}
                           />
                         ) : (
-                          <Subheader
+                          <Avatar
                             style={{
-                              width: 35,
-                              height: 35,
-                              borderRadius: 5,
+                              background: "red",
+                              height: "10px",
+                              width: "10px",
                               float: "right",
-                              marginRight: 10
+                              marginTop: 10
                             }}
-                          >
-                            N/A
-                          </Subheader>
+                          />
                         )
                       }
                     />

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { RaisedButton, TextField, Snackbar } from "material-ui";
-import Dropzone from "react-dropzone";
-import ImageCompressor from "image-compressor.js";
-import firebase from "firebase";
+// import Dropzone from "react-dropzone";
+// import ImageCompressor from "image-compressor.js";
+// import firebase from "firebase";
 
 const styles = {
   floatingLabelFocusStyle: {
@@ -16,42 +16,42 @@ class LeavePurpose extends Component {
     this.state = { purpose: "", snackOpen: false };
   }
 
-  getIcon = (acceptedFiles, rejectedFiles) => {
-    alert("hiiii");
-    const file = acceptedFiles[0];
-    if (file == null) {
-      alert("Invalid File Type!");
-    } else {
-      this.setState({ completed1: true, isLoadingUploadImage: 2 });
-    }
-    new ImageCompressor(file, {
-      quality: 0.55,
-      maxWidth: 1500,
-      success: result => {
-        const image = firebase
-          .storage()
-          .ref()
-          .child("images");
-        const ref = image.child(new Date().toString());
-        ref.put(file).then(() => {
-          ref.getDownloadURL().then(url => {
-            console.log(url);
-            const updatedImageURL = url;
-            console.log(updatedImageURL);
-            const pictures = this.state.pictures;
-            pictures.push(url);
-            this.setState({
-              completed: true,
-              pictures,
-              temporaryImageURL: updatedImageURL,
-              isLoadingUploadImage: 3
-            });
-            console.log(updatedImageURL);
-          });
-        });
-      }
-    });
-  };
+  // getIcon = (acceptedFiles, rejectedFiles) => {
+  //   alert("hiiii");
+  //   const file = acceptedFiles[0];
+  //   if (file == null) {
+  //     alert("Invalid File Type!");
+  //   } else {
+  //     this.setState({ completed1: true, isLoadingUploadImage: 2 });
+  //   }
+  //   new ImageCompressor(file, {
+  //     quality: 0.55,
+  //     maxWidth: 1500,
+  //     success: result => {
+  //       const image = firebase
+  //         .storage()
+  //         .ref()
+  //         .child("images");
+  //       const ref = image.child(new Date().toString());
+  //       ref.put(file).then(() => {
+  //         ref.getDownloadURL().then(url => {
+  //           console.log(url);
+  //           const updatedImageURL = url;
+  //           console.log(updatedImageURL);
+  //           const pictures = this.state.pictures;
+  //           pictures.push(url);
+  //           this.setState({
+  //             completed: true,
+  //             pictures,
+  //             temporaryImageURL: updatedImageURL,
+  //             isLoadingUploadImage: 3
+  //           });
+  //           console.log(updatedImageURL);
+  //         });
+  //       });
+  //     }
+  //   });
+  // };
   textChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -80,7 +80,7 @@ class LeavePurpose extends Component {
           />
         </center>
         <br />
-        <Dropzone onDrop={this.getIcon} accept="image/*">
+        {/* <Dropzone onDrop={this.getIcon} accept="image/*">
           {({ getRootProps, getInputProps, isDragActive }) => {
             return (
               <div {...getRootProps}>
@@ -95,7 +95,7 @@ class LeavePurpose extends Component {
               </div>
             );
           }}
-        </Dropzone>
+        </Dropzone> */}
         <br />
         <br />
         <center>

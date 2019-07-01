@@ -20,11 +20,11 @@ class TeamAllocationProject extends React.Component {
       temporaryImageURL: null
     };
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.projectList !== null) {
+  componentWillMount() {
+    if (this.props.projectList !== null) {
       this.setState({
-        projectName: nextProps.projectList.name,
-        temporaryImageURL: nextProps.projectList.logoURL
+        projectName: this.props.projectList.name,
+        temporaryImageURL: this.props.projectList.logoURL
       });
     }
   }
@@ -73,7 +73,6 @@ class TeamAllocationProject extends React.Component {
     });
   };
   render() {
-    console.log(this.props.projectsList);
     return (
       <Layout navigationTitle="Project" showBackNavigation={true}>
         <div style={{ padding: 10 }}>

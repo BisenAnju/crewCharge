@@ -79,7 +79,7 @@ class LeaveEmployeeDashboard extends React.Component {
             backgroundColor="rgb(253, 145, 77)"
             onClick={e => {
               e.preventDefault();
-              this.props.history.push(`/leavedashboard/leaveapply/` + "new");
+              this.props.history.push(`/leavedashboard/leaveapply/new`);
             }}
           >
             <ContentAdd />
