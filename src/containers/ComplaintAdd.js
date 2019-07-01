@@ -6,10 +6,11 @@ import withUser from "../hoc/withUser";
 class NewComplaintContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { player_ids: [] };
+    this.state = { playerIds: [], publicKeys: [] };
   }
   componentWillMount() {
-    let player_ids = [];
+    let playerIds = [],
+      publicKeys = [];
     this.props.db
       .collection("users")
       .where("userType", "==", "Admin")
@@ -20,10 +21,11 @@ class NewComplaintContainer extends React.Component {
           if (doc.exists && doc.data().userNotificationPlayerId !== undefined) {
             const details = doc.data();
             details.id = doc.id;
-            player_ids.push(details.userNotificationPlayerId);
+            playerIds.push(details.userNotificationPlayerId);
+            publicKeys.push(details.publicKeys);
           }
         });
-        this.setState({ player_ids });
+        this.setState({ playerIds, publicKeys });
       });
   }
   AddComplaint = data => {
@@ -79,11 +81,11 @@ class NewComplaintContainer extends React.Component {
             var message = {
               app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
               contents: { en: data.complaintType },
-              include_player_ids: ths.state.player_ids,
+              include_player_ids: ths.state.playerIds,
               headings: { en: "New Complaint" },
               data: { Route: "/complaintview/", Id: ref.id }
             };
-            console.log(ths.state.player_ids);
+            console.log(ths.state.playerIds);
             sendNotification(message);
           }, 2000);
         }
