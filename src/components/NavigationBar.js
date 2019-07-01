@@ -49,7 +49,7 @@ class NavigationBar extends React.Component {
           }}
           onRightIconButtonClick={() =>
             this.props.navigationTitle !== "Dashboard" &&
-            this.props.history.goBack("/dashboard")
+            this.props.history.goBack("/")
           }
           onLeftIconButtonClick={() =>
             this.props.showBackNavigation
