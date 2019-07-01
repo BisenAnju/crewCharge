@@ -39,6 +39,17 @@ class LeaveEmployeeHourLeave extends Component {
       playerId: []
     };
   }
+
+  componentWillMount() {
+    if (this.props.singleData !== undefined) {
+      this.setState({
+        purpose: this.props.singleData.purpose,
+        from: this.props.singleData.from,
+        to: this.props.singleData.to,
+        reason: this.props.singleData.reason
+      });
+    }
+  }
   handleChange = (event, index, purpose) => this.setState({ purpose });
   //Handle change time picker for both clocks
   handleChangeTimePicker1 = (event, date) => {
@@ -63,7 +74,19 @@ class LeaveEmployeeHourLeave extends Component {
     }
     this.props.addLeaves({ ...this.state }, this.props.leaveType);
   };
-
+  updateLeave = e => {
+    e.preventDefault();
+    if (
+      this.state.from === null ||
+      this.state.to === null ||
+      this.state.reason === null ||
+      this.state.purpose === null
+    ) {
+      this.setState({ snackOpen: true });
+      return false;
+    }
+    this.props.updateLeaveData({ ...this.state }, this.props.leaveType);
+  };
   handleRequestClose = () => {
     this.setState({ snackOpen: false });
   };
@@ -78,11 +101,7 @@ class LeaveEmployeeHourLeave extends Component {
           </div>
           <div>
             <SelectField
-              value={
-                this.props.singleData !== undefined
-                  ? this.props.singleData.purpose
-                  : this.state.purpose
-              }
+              value={this.state.purpose}
               onChange={this.handleChange}
               floatingLabelText="Select Purpose"
             >
@@ -108,11 +127,7 @@ class LeaveEmployeeHourLeave extends Component {
               format="ampm"
               floatingLabelText="From Time"
               hintText="Select Time (from)"
-              value={
-                this.props.singleData !== undefined
-                  ? this.props.singleData.from
-                  : this.state.from
-              }
+              value={this.state.from}
               onChange={this.handleChangeTimePicker1}
             />
           </div>
@@ -129,11 +144,7 @@ class LeaveEmployeeHourLeave extends Component {
               format="ampm"
               floatingLabelText="To Time"
               hintText="Select Time (to)"
-              value={
-                this.props.singleData !== undefined
-                  ? this.props.singleData.to
-                  : this.state.to
-              }
+              value={this.state.to}
               errorStyle={{ color: "#f08f4c" }}
               errorText={
                 this.state.from > this.state.to &&
@@ -160,11 +171,7 @@ class LeaveEmployeeHourLeave extends Component {
               rows={2}
               rowsMax={4}
               name="reason"
-              value={
-                this.props.singleData !== undefined
-                  ? this.props.singleData.reason
-                  : this.state.reason
-              }
+              value={this.state.reason}
               onChange={this.textChange}
             />
           </div>
@@ -172,14 +179,25 @@ class LeaveEmployeeHourLeave extends Component {
 
         <br />
         <center>
-          <div className="flexAppItem">
-            <RaisedButton
-              label="SUBMIT"
-              backgroundColor="rgb(253, 145, 77)"
-              labelColor="white"
-              onClick={this.validateForm}
-            />
-          </div>
+          {this.props.singleData === undefined ? (
+            <div className="flexAppItem">
+              <RaisedButton
+                label="SUBMIT"
+                backgroundColor="rgb(253, 145, 77)"
+                labelColor="white"
+                onClick={this.validateForm}
+              />
+            </div>
+          ) : (
+            <div className="flexAppItem">
+              <RaisedButton
+                label="UPDATE"
+                backgroundColor="rgb(253, 145, 77)"
+                labelColor="white"
+                onClick={this.updateLeave}
+              />
+            </div>
+          )}
         </center>
 
         <Snackbar
