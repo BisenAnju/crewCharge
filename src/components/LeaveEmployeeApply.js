@@ -12,7 +12,13 @@ class LeaveEmployeeApply extends Component {
       leaveType: "Hour"
     };
   }
-
+  componentWillMount() {
+    if (this.props.singleData !== undefined) {
+      this.props.singleData.leaveType === "Full"
+        ? this.setState({ leaveType: "Full" })
+        : this.setState({ leaveType: "Hour" });
+    }
+  }
   handleChange = (event, index, leaveType) => this.setState({ leaveType });
   validateInput = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -24,20 +30,21 @@ class LeaveEmployeeApply extends Component {
         <div id="error_checking">
           <br />
 
-          <LeaveApplyRadioButton validateLeave={this.validateInput} />
+          <LeaveApplyRadioButton
+            validateLeave={this.validateInput}
+            {...this.state}
+          />
 
           {this.state.leaveType === "Hour" ? (
             <LeaveEmployeeHour
+              {...this.props}
               leaveType={this.state.leaveType}
-              addLeaves={this.props.addLeaves}
-              purposeData={this.props.purposeData}
             />
           ) : (
             this.state.leaveType === "Full" && (
               <LeaveEmployeeFullDay
+                {...this.props}
                 leaveType={this.state.leaveType}
-                addLeaves={this.props.addLeaves}
-                purposeData={this.props.purposeData}
               />
             )
           )}

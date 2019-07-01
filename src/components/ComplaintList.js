@@ -9,7 +9,8 @@ import {
   IconButton,
   Snackbar,
   List,
-  ListItem
+  ListItem,
+  Divider
 } from "material-ui";
 import Archived from "material-ui/svg-icons/content/archive";
 import ContentAdd from "material-ui/svg-icons/content/add";
@@ -60,6 +61,8 @@ class ComplaintList extends React.Component {
       slideIndex: 0,
       style: { background: "aliceblue", fontWeight: "bold" }
     };
+    console.log(localStorage.getItem("publickey"));
+    console.log(localStorage.getItem("privatekey"));
   }
   handleChange = slideIndex => this.setState({ slideIndex });
   render() {
@@ -132,33 +135,55 @@ class ComplaintList extends React.Component {
                               .replace("-", "")
                           ];
                         return (
-                          <ListItem
-                            key={index}
-                            onClick={() =>
-                              this.props.history.push(
-                                `/complaintview/${doc.id}`
-                              )
-                            }
-                            leftAvatar={
-                              <Avatar size={48} src={doc.userImageURL} />
-                            }
-                            hoverColor={"rgba(253, 145, 77, 0.43)"}
-                            secondaryTextLines={2}
-                            primaryText={doc.username}
-                            secondaryText={
-                              <p>
-                                <span>
-                                  {doc.title +
-                                    " - " +
-                                    moment(
-                                      new Date(doc.addedOn.seconds * 1000)
-                                    ).format("DD MMM YYYY")}
-                                </span>
-                                <br />
-                                {doc.complaintType}
-                              </p>
-                            }
-                          />
+                          <div key={index}>
+                            <ListItem
+                              style={{
+                                borderLeft:
+                                  doc.statusByAdmin === undefined
+                                    ? "4px solid #f08f4c"
+                                    : "4px solid rgb(248, 249, 248)",
+                                fontWeight:
+                                  doc.statusByAdmin === undefined
+                                    ? "bold"
+                                    : "null"
+                              }}
+                              onClick={() =>
+                                this.props.history.push(
+                                  `/complaintview/${doc.id}`
+                                )
+                              }
+                              leftAvatar={
+                                <Avatar size={48} src={doc.userImageURL} />
+                              }
+                              hoverColor={"rgba(253, 145, 77, 0.43)"}
+                              secondaryTextLines={2}
+                              primaryText={doc.username}
+                              secondaryText={
+                                <p>
+                                  <span>
+                                    {doc.title +
+                                      " - " +
+                                      moment(
+                                        new Date(doc.addedOn.seconds * 1000)
+                                      ).format("DD MMM YYYY")}
+                                  </span>
+                                  <br />
+                                  {doc.priority === "high" ? (
+                                    <span style={{ color: "red" }}>
+                                      {doc.complaintType}
+                                    </span>
+                                  ) : doc.priority === "medium" ? (
+                                    <span style={{ color: "#b3b312" }}>
+                                      {doc.complaintType}
+                                    </span>
+                                  ) : (
+                                    doc.complaintType
+                                  )}
+                                </p>
+                              }
+                            />
+                            <Divider inset={true} />
+                          </div>
                         );
                       } catch (e) {
                         console.log();

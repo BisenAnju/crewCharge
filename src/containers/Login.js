@@ -19,6 +19,12 @@ class LoginContainer extends Component {
         userEmailId: this.props.firebase.auth.currentUser.email
       };
 
+      let QuickEncrypt = require("quick-encrypt");
+      let keys = QuickEncrypt.generate(2048);
+      console.time("time");
+      let publicKey = keys.public;
+      localStorage.setItem("privatekey", keys.private);
+      console.timeEnd("time");
       //ADD USER
       this.props.db
         .collection("users")
@@ -36,7 +42,19 @@ class LoginContainer extends Component {
                 .update({
                   userNotificationPlayerId: JSON.parse(
                     localStorage.getItem("playerId")
-                  ).id
+                  ).id,
+                  publicKey: publicKey
+                });
+            }
+            if (
+              querySnapshot.data().publicKey === undefined ||
+              querySnapshot.data().publicKey !== publicKey
+            ) {
+              this.props.db
+                .collection("users")
+                .doc(user.userId)
+                .update({
+                  publicKey: publicKey
                 });
             }
           } else {
@@ -53,7 +71,8 @@ class LoginContainer extends Component {
                 email: user.userEmailId,
                 photoURL: user.userImage,
                 userType: "Employee",
-                userNotificationPlayerId: playerId
+                userNotificationPlayerId: playerId,
+                publicKey: publicKey
               })
               .then(function() {
                 console.log("You have been successfully registered");

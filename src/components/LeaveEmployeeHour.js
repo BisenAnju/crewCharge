@@ -68,12 +68,17 @@ class LeaveEmployeeHourLeave extends Component {
           </div>
           <div>
             <SelectField
-              value={this.state.purpose}
+              value={
+                this.props.singleData !== undefined
+                  ? this.props.singleData.purpose
+                  : this.state.purpose
+              }
               onChange={this.handleChange}
               floatingLabelText="Select Purpose"
             >
-              {this.props.purposeData.map(purpose => (
+              {this.props.purposeData.map((purpose, id) => (
                 <MenuItem
+                  key={id}
                   value={purpose.purpose}
                   primaryText={purpose.displayName}
                 />
@@ -91,7 +96,11 @@ class LeaveEmployeeHourLeave extends Component {
             <TimePicker
               format="ampm"
               hintText="Select Time (from)"
-              value={this.state.from}
+              value={
+                this.props.singleData !== undefined
+                  ? this.props.singleData.from
+                  : this.state.from
+              }
               onChange={this.handleChangeTimePicker1}
             />
           </div>
@@ -105,7 +114,11 @@ class LeaveEmployeeHourLeave extends Component {
             <TimePicker
               format="ampm"
               hintText="Select Time (to)"
-              value={this.state.to}
+              value={
+                this.props.singleData !== undefined
+                  ? this.props.singleData.to
+                  : this.state.to
+              }
               errorStyle={{ color: "#f08f4c" }}
               errorText={
                 this.state.from > this.state.to &&
@@ -129,7 +142,11 @@ class LeaveEmployeeHourLeave extends Component {
               rows={2}
               rowsMax={4}
               name="reason"
-              value={this.state.reason}
+              value={
+                this.props.singleData !== undefined
+                  ? this.props.singleData.reason
+                  : this.state.reason
+              }
               onChange={this.textChange}
             />
           </div>

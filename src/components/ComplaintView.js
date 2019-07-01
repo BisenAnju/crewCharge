@@ -13,7 +13,8 @@ import {
   Avatar,
   CardActions,
   Snackbar,
-  Subheader
+  Subheader,
+  Divider
 } from "material-ui";
 import Layout from "../layouts/Layout";
 import moment from "moment";
@@ -90,43 +91,42 @@ class ComplaintView extends React.Component {
               />
             </center>
           ) : (
-            <Card
-              style={{ boxShadow: "0px", backgroundColor: "rgba(0, 0, 0, 0)" }}
-            >
-              <center>
-                <Avatar
-                  backgroundColor="rgba(0, 0, 0, 0)"
-                  color="rgb(253, 145, 77)"
-                  {...(this.props.data.complaintType === "Harassment"
-                    ? {
-                        src:
-                          icn[
-                            this.props.data.complaintType
-                              .replace(" ", "")
-                              .replace("/", "")
-                          ]
-                      }
-                    : {
-                        icon:
-                          icn[
-                            this.props.data.complaintType
-                              .replace(" ", "")
-                              .replace("/", "")
-                          ]
-                      })}
-                  size={130}
-                />
-              </center>
-              <List style={{ marginTop: "5%" }}>
+            <div>
+              <List>
                 <ListItem
-                  style={{ width: "50%", float: "left" }}
                   disabled
-                  secondaryText={"Name"}
+                  leftAvatar={
+                    <Avatar size={45} src={this.props.data.userImageURL} />
+                  }
+                  rightAvatar={
+                    <Avatar
+                      size={45}
+                      backgroundColor="transparent"
+                      color="rgb(253, 145, 77)"
+                      {...(this.props.data.complaintType === "Harassment"
+                        ? {
+                            src:
+                              icn[
+                                this.props.data.complaintType
+                                  .replace(" ", "")
+                                  .replace("/", "")
+                              ]
+                          }
+                        : {
+                            icon:
+                              icn[
+                                this.props.data.complaintType
+                                  .replace(" ", "")
+                                  .replace("/", "")
+                              ]
+                          })}
+                    />
+                  }
                   primaryText={this.props.data.userName}
-                  secondaryTextLines={1}
+                  secondaryText={this.props.data.complaintType}
                 />
+                <Divider />
                 <ListItem
-                  style={{ width: "50%", float: "right", textAlignLast: "end" }}
                   secondaryTextLines={1}
                   disabled
                   secondaryText={"Date"}
@@ -139,6 +139,13 @@ class ComplaintView extends React.Component {
                   secondaryText="Title"
                   primaryText={this.props.data.title}
                 />
+              </List>
+              <Card
+                style={{
+                  boxShadow: "0px",
+                  backgroundColor: "rgba(0, 0, 0, 0)"
+                }}
+              >
                 <CardText
                   style={{
                     overflowWrap: "break-word",
@@ -148,84 +155,84 @@ class ComplaintView extends React.Component {
                 >
                   {this.props.data.description}
                 </CardText>
-              </List>
-              {this.props.isAdmin === true &&
-              ((this.props.data.statusByAdmin !== undefined &&
-                this.props.data.statusByAdmin !== "resolve") ||
-                this.props.data.statusByAdmin === undefined) ? (
-                <div>
-                  <CardText>
-                    <h4>Do Action</h4>
-                    <SelectField
-                      underlineFocusStyle={{
-                        borderBottom: "2px solid rgb(240, 143, 76)"
-                      }}
-                      floatingLabelStyle={{ color: "rgb(240, 143, 76)" }}
-                      name="statusByAdmin"
-                      style={{ width: "100%" }}
-                      value={
-                        this.props.data.statusByAdmin !== undefined
-                          ? this.props.data.statusByAdmin
-                          : this.state.statusByAdmin
-                      }
-                      onChange={this.handleChange}
-                      floatingLabelText="Select Complaint Status"
-                    >
-                      <MenuItem value="pending" primaryText="Pending" />
-                      <MenuItem value="resolve" primaryText="Resolved" />
-                    </SelectField>
-                    <TextField
-                      underlineFocusStyle={{
-                        borderBottom: "2px solid rgb(240, 143, 76)"
-                      }}
-                      floatingLabelStyle={{ color: "rgb(240, 143, 76)" }}
-                      value={
-                        this.props.data.adminReply !== undefined
-                          ? this.props.data.adminReply
-                          : this.state.adminReply
-                      }
-                      name="adminReply"
-                      onChange={this.inputValidation}
-                      style={{ width: "100%" }}
-                      floatingLabelText="Write About Action"
-                      multiLine={true}
-                      rowsMax={6}
-                    />
-                  </CardText>
-                  <CardActions
-                    style={{
-                      width: "100%"
-                    }}
-                  >
-                    <FlatButton
+                {this.props.isAdmin === true &&
+                ((this.props.data.statusByAdmin !== undefined &&
+                  this.props.data.statusByAdmin !== "resolve") ||
+                  this.props.data.statusByAdmin === undefined) ? (
+                  <div>
+                    <CardText>
+                      <h4>Do Action</h4>
+                      <SelectField
+                        underlineFocusStyle={{
+                          borderBottom: "2px solid rgb(240, 143, 76)"
+                        }}
+                        floatingLabelStyle={{ color: "rgb(240, 143, 76)" }}
+                        name="statusByAdmin"
+                        style={{ width: "100%" }}
+                        value={
+                          this.props.data.statusByAdmin !== undefined
+                            ? this.props.data.statusByAdmin
+                            : this.state.statusByAdmin
+                        }
+                        onChange={this.handleChange}
+                        floatingLabelText="Select Complaint Status"
+                      >
+                        <MenuItem value="pending" primaryText="Pending" />
+                        <MenuItem value="resolve" primaryText="Resolved" />
+                      </SelectField>
+                      <TextField
+                        underlineFocusStyle={{
+                          borderBottom: "2px solid rgb(240, 143, 76)"
+                        }}
+                        floatingLabelStyle={{ color: "rgb(240, 143, 76)" }}
+                        value={
+                          this.props.data.adminReply !== undefined
+                            ? this.props.data.adminReply
+                            : this.state.adminReply
+                        }
+                        name="adminReply"
+                        onChange={this.inputValidation}
+                        style={{ width: "100%" }}
+                        floatingLabelText="Write About Action"
+                        multiLine={true}
+                        rowsMax={6}
+                      />
+                    </CardText>
+                    <CardActions
                       style={{
-                        color: "white",
-                        backgroundColor: "rgb(240, 143, 76)"
+                        width: "100%"
                       }}
-                      label="Submit"
-                      fullWidth={true}
-                      onClick={this.formSubmit}
+                    >
+                      <FlatButton
+                        style={{
+                          color: "white",
+                          backgroundColor: "rgb(240, 143, 76)"
+                        }}
+                        label="Submit"
+                        fullWidth={true}
+                        onClick={this.formSubmit}
+                      />
+                    </CardActions>
+                  </div>
+                ) : (
+                  <div>
+                    <Subheader>Action by admin</Subheader>
+                    <ListItem
+                      disabled
+                      secondaryText={"Status"}
+                      primaryText={this.props.data.statusByAdmin}
+                      secondaryTextLines={1}
                     />
-                  </CardActions>
-                </div>
-              ) : (
-                <div>
-                  <Subheader>Action by admin</Subheader>
-                  <ListItem
-                    disabled
-                    secondaryText={"Status"}
-                    primaryText={this.props.data.statusByAdmin}
-                    secondaryTextLines={1}
-                  />
-                  <ListItem
-                    secondaryTextLines={1}
-                    disabled
-                    secondaryText={"Action"}
-                    primaryText={this.props.data.adminReply}
-                  />
-                </div>
-              )}
-            </Card>
+                    <ListItem
+                      secondaryTextLines={2}
+                      disabled
+                      secondaryText={"Action"}
+                      primaryText={this.props.data.adminReply}
+                    />
+                  </div>
+                )}
+              </Card>
+            </div>
           )}
         </div>
         <Snackbar

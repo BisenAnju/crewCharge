@@ -76,12 +76,17 @@ class LeaveEmployeeFulldayLeave extends Component {
           </div>
           <div>
             <SelectField
-              value={this.state.purpose}
+              value={
+                this.props.singleData !== undefined
+                  ? this.props.singleData.purpose
+                  : this.state.purpose
+              }
               onChange={this.handleChange}
               floatingLabelText="Select Purpose"
             >
-              {this.props.purposeData.map(purpose => (
+              {this.props.purposeData.map((purpose, id) => (
                 <MenuItem
+                  key={id}
                   value={purpose.purpose}
                   primaryText={purpose.displayName}
                 />
@@ -92,12 +97,17 @@ class LeaveEmployeeFulldayLeave extends Component {
         <br />
         <div style={flexcontainer}>
           <div>
-            <ActionDateRange style={{ marginTop: "12px", fill: "#f08f4c" }} />
+            <ActionDateRange style={{ marginTop: "38px", fill: "#f08f4c" }} />
           </div>
           <div>
             <DatePicker
+              floatingLabelText="From Date"
               hintText="Select date (from)"
-              value={this.state.from}
+              value={
+                this.props.singleData !== undefined
+                  ? this.props.singleData.from
+                  : this.state.from
+              }
               onChange={this.changeFromDate}
             />
           </div>
@@ -105,12 +115,17 @@ class LeaveEmployeeFulldayLeave extends Component {
         <br />
         <div style={flexcontainer}>
           <div>
-            <ActionDateRange style={{ marginTop: "12px", fill: "#f08f4c" }} />
+            <ActionDateRange style={{ marginTop: "38px", fill: "#f08f4c" }} />
           </div>
           <div>
             <DatePicker
+              floatingLabelText="To Date"
               hintText="Select date (to)"
-              value={this.state.to}
+              value={
+                this.props.singleData !== undefined
+                  ? this.props.singleData.to
+                  : this.state.to
+              }
               errorStyle={{ color: "#f08f4c" }}
               errorText={
                 this.state.from > this.state.to &&
@@ -124,17 +139,22 @@ class LeaveEmployeeFulldayLeave extends Component {
 
         <div style={flexcontainer}>
           <div>
-            <ActionDateRange style={{ marginTop: "12px", fill: "#f08f4c" }} />
+            <ActionDateRange style={{ marginTop: "38px", fill: "#f08f4c" }} />
           </div>
           <div>
             <DatePicker
+              floatingLabelText="Due Date"
               hintText="Select due date"
               errorText={
                 this.state.dueDate > this.state.from &&
                 "Should be smaller than from date"
               }
               errorStyle={{ color: "#f08f4c" }}
-              value={this.state.dueDate}
+              value={
+                this.props.singleData !== undefined
+                  ? this.props.singleData.dueDate
+                  : this.state.dueDate
+              }
               onChange={this.changeDueDate}
             />
           </div>
@@ -148,12 +168,17 @@ class LeaveEmployeeFulldayLeave extends Component {
           </div>
           <div>
             <TextField
+              floatingLabelText="Reason"
               hintText="Type Reason"
               multiLine={true}
               rows={2}
               rowsMax={4}
               name="reason"
-              value={this.state.reason}
+              value={
+                this.props.singleData !== undefined
+                  ? this.props.singleData.reason
+                  : this.state.reason
+              }
               onChange={this.textChange}
             />
           </div>
