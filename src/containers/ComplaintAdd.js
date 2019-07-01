@@ -2,15 +2,17 @@ import React from "react";
 import withFirebase from "../hoc/withFirebase";
 import NewComplaint from "../components/ComplaintAdd";
 import withUser from "../hoc/withUser";
+import details from "material-ui/svg-icons/image/details";
 
 class NewComplaintContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { playerIds: [], publicKeys: [] };
+    this.state = { playerIds: [], publicKeys: [], adminDetails: [] };
   }
   componentWillMount() {
     let playerIds = [],
-      publicKeys = [];
+      publicKeys = [],
+      adminDetails = [];
     this.props.db
       .collection("users")
       .where("userType", "==", "Admin")
@@ -23,9 +25,10 @@ class NewComplaintContainer extends React.Component {
             details.id = doc.id;
             playerIds.push(details.userNotificationPlayerId);
             publicKeys.push(details.publicKeys);
+            adminDetails.push(details);
           }
         });
-        this.setState({ playerIds, publicKeys });
+        this.setState({ adminDetails, playerIds, publicKeys });
       });
   }
   AddComplaint = data => {
@@ -92,7 +95,13 @@ class NewComplaintContainer extends React.Component {
       });
   };
   render() {
-    return <NewComplaint AddComplaint={this.AddComplaint} />;
+    return (
+      <NewComplaint
+        complaintType={this.props.complaintType}
+        AddComplaint={this.AddComplaint}
+        adminDetails={this.state.adminDetails}
+      />
+    );
   }
 }
 

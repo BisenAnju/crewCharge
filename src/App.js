@@ -23,10 +23,30 @@ class App extends Component {
     this.state = {
       isLoading: true,
       userData: [],
-      leaveData: []
+      leaveData: [],
+      complaintTypeData: []
     };
   }
   componentWillMount() {
+    this.props.db
+      .collection("complaintType")
+      .get()
+      .then(
+        doc => {
+          const complaintTypeData = [];
+          doc.forEach(docitem => {
+            if (docitem.exists) {
+              complaintTypeData.push(docitem.data());
+            }
+          });
+          this.setState({
+            complaintTypeData
+          });
+        },
+        err => {
+          console.log(`Encountered error: ${err}`);
+        }
+      );
     let userData = [];
     this.props.db.collection("users").onSnapshot(snapshot => {
       snapshot.forEach(doc => {
@@ -73,6 +93,7 @@ class App extends Component {
                       {...props}
                       loggedInUser={this.props.user}
                       userData={this.state.userData}
+                      complaintType={this.state.complaintTypeData}
                     />
                   )}
                 />

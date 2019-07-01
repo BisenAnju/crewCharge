@@ -158,24 +158,13 @@ export class SelectfieldClass extends React.Component {
         value={this.props.complaintTypeValue}
         onChange={this.props.selectChange}
       >
-        <MenuItem value="Favoritism" primaryText="Favoritism" />
-        <MenuItem value="Feedback" primaryText="Feedback" />
-        <MenuItem value="Harassment" primaryText="Harassment" />
-        <MenuItem
-          primaryText="Issues With Co-Workers"
-          value="Issues With Co-Workers"
-        />
-        <MenuItem
-          value="Lack Of Vacation/Sick Leave"
-          primaryText="Lack of Vacation/Sick Leave"
-        />
-        <MenuItem value="Office Cleanliness" primaryText="Office Cleanliness" />
-        <MenuItem value="Office Temperature" primaryText="Office Temperature" />
-        <MenuItem value="Other" primaryText="Other" />
-        <MenuItem value="Overworked" primaryText="Overworked" />
-        <MenuItem value="Pay" primaryText="Pay" />
-        <MenuItem value="Policy Changes" primaryText="Policy Changes" />
-        <MenuItem value="Work Hours" primaryText="Work Hours" />
+        {this.props.complaintType.map((data, index) => (
+          <MenuItem
+            key={index}
+            value={data.value}
+            primaryText={data.displayName}
+          />
+        ))}
       </SelectField>
     );
   }

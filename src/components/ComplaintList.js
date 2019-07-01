@@ -61,8 +61,8 @@ class ComplaintList extends React.Component {
       slideIndex: 0,
       style: { background: "aliceblue", fontWeight: "bold" }
     };
-    console.log(localStorage.getItem("publickey"));
-    console.log(localStorage.getItem("privatekey"));
+    // console.log(localStorage.getItem("publickey"));
+    // console.log(localStorage.getItem("privatekey"));
   }
   handleChange = slideIndex => this.setState({ slideIndex });
   render() {
@@ -124,7 +124,12 @@ class ComplaintList extends React.Component {
                       let userdata = this.props.userData.find(
                         data => data.id === doc.userId
                       );
+                      let compType = this.props.complaintType.find(
+                        data => data.value === doc.complaintType
+                      );
+                      console.log(doc);
                       try {
+                        doc.complaintType = compType.displayName;
                         doc.username = userdata.displayName;
                         doc.userImageURL = userdata.photoURL;
                         doc.icon =

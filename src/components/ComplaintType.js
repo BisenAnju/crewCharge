@@ -61,7 +61,7 @@ class ComplaintType extends Component {
       this.setState({ snackOpen: true });
       return false;
     }
-    this.props.addComplaint(this.state.complainttype);
+    this.props.addPurpose("value", "complaintType", this.state.complainttype);
   };
   handleRequestClose = () => {
     this.setState({ snackOpen: false });
