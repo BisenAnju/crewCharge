@@ -61,6 +61,8 @@ class ComplaintList extends React.Component {
       slideIndex: 0,
       style: { background: "aliceblue", fontWeight: "bold" }
     };
+    console.log(localStorage.getItem("publickey"));
+    console.log(localStorage.getItem("privatekey"));
   }
   handleChange = slideIndex => this.setState({ slideIndex });
   render() {
@@ -133,7 +135,7 @@ class ComplaintList extends React.Component {
                               .replace("-", "")
                           ];
                         return (
-                          <div>
+                          <div key={index}>
                             <ListItem
                               style={{
                                 borderLeft:
@@ -145,7 +147,6 @@ class ComplaintList extends React.Component {
                                     ? "bold"
                                     : "null"
                               }}
-                              key={index}
                               onClick={() =>
                                 this.props.history.push(
                                   `/complaintview/${doc.id}`
@@ -167,7 +168,17 @@ class ComplaintList extends React.Component {
                                       ).format("DD MMM YYYY")}
                                   </span>
                                   <br />
-                                  {doc.complaintType}
+                                  {doc.priority === "high" ? (
+                                    <span style={{ color: "red" }}>
+                                      {doc.complaintType}
+                                    </span>
+                                  ) : doc.priority === "medium" ? (
+                                    <span style={{ color: "#b3b312" }}>
+                                      {doc.complaintType}
+                                    </span>
+                                  ) : (
+                                    doc.complaintType
+                                  )}
                                 </p>
                               }
                             />
