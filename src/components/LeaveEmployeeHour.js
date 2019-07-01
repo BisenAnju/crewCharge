@@ -18,6 +18,15 @@ const flexcontainer = {
   display: "flex",
   justifyContent: "center"
 };
+
+const styles = {
+  underlineStyle: {
+    borderColor: "#fd914d"
+  },
+  floatingLabelFocusStyle: {
+    color: "#fd914d"
+  }
+};
 class LeaveEmployeeHourLeave extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +36,6 @@ class LeaveEmployeeHourLeave extends Component {
       to: null,
       snackOpen: false,
       reason: null,
-      messageText: "",
       playerId: []
     };
   }
@@ -64,7 +72,9 @@ class LeaveEmployeeHourLeave extends Component {
       <div>
         <div style={flexcontainer}>
           <div>
-            <ActionList style={{ marginTop: "38px", fill: "#f08f4c" }} />
+            <ActionList
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <SelectField
@@ -86,15 +96,17 @@ class LeaveEmployeeHourLeave extends Component {
             </SelectField>
           </div>
         </div>
-        <br />
 
         <div style={flexcontainer}>
           <div>
-            <ImageTimer style={{ marginTop: "50%", fill: "#f08f4c" }} />
+            <ImageTimer
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <TimePicker
               format="ampm"
+              floatingLabelText="From Time"
               hintText="Select Time (from)"
               value={
                 this.props.singleData !== undefined
@@ -105,14 +117,17 @@ class LeaveEmployeeHourLeave extends Component {
             />
           </div>
         </div>
-        <br />
+
         <div style={flexcontainer}>
           <div>
-            <ImageTimer style={{ marginTop: "50%", fill: "#f08f4c" }} />
+            <ImageTimer
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <TimePicker
               format="ampm"
+              floatingLabelText="To Time"
               hintText="Select Time (to)"
               value={
                 this.props.singleData !== undefined
@@ -132,11 +147,14 @@ class LeaveEmployeeHourLeave extends Component {
         <div style={flexcontainer}>
           <div>
             <CommunicationComment
-              style={{ marginTop: "38px", fill: "#f08f4c" }}
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
             />
           </div>
           <div>
             <TextField
+              underlineFocusStyle={styles.underlineStyle}
+              floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+              floatingLabelText="Reason"
               hintText="Type Reason"
               multiLine={true}
               rows={2}
@@ -152,7 +170,6 @@ class LeaveEmployeeHourLeave extends Component {
           </div>
         </div>
 
-        <br />
         <br />
         <center>
           <div className="flexAppItem">

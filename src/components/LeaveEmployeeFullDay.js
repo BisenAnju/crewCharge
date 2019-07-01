@@ -18,6 +18,14 @@ const flexcontainer = {
   display: "flex",
   justifyContent: "center"
 };
+const styles = {
+  underlineStyle: {
+    borderColor: "#fd914d"
+  },
+  floatingLabelFocusStyle: {
+    color: "#fd914d"
+  }
+};
 class LeaveEmployeeFulldayLeave extends Component {
   constructor() {
     super();
@@ -72,7 +80,9 @@ class LeaveEmployeeFulldayLeave extends Component {
       <div>
         <div style={flexcontainer}>
           <div>
-            <ActionList style={{ marginTop: "38px", fill: "#f08f4c" }} />
+            <ActionList
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <SelectField
@@ -94,10 +104,12 @@ class LeaveEmployeeFulldayLeave extends Component {
             </SelectField>
           </div>
         </div>
-        <br />
+
         <div style={flexcontainer}>
           <div>
-            <ActionDateRange style={{ marginTop: "38px", fill: "#f08f4c" }} />
+            <ActionDateRange
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <DatePicker
@@ -112,10 +124,12 @@ class LeaveEmployeeFulldayLeave extends Component {
             />
           </div>
         </div>
-        <br />
+
         <div style={flexcontainer}>
           <div>
-            <ActionDateRange style={{ marginTop: "38px", fill: "#f08f4c" }} />
+            <ActionDateRange
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <DatePicker
@@ -135,11 +149,12 @@ class LeaveEmployeeFulldayLeave extends Component {
             />
           </div>
         </div>
-        <br />
 
         <div style={flexcontainer}>
           <div>
-            <ActionDateRange style={{ marginTop: "38px", fill: "#f08f4c" }} />
+            <ActionDateRange
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <DatePicker
@@ -163,11 +178,13 @@ class LeaveEmployeeFulldayLeave extends Component {
         <div style={flexcontainer}>
           <div>
             <CommunicationComment
-              style={{ marginTop: "38px", fill: "#f08f4c" }}
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
             />
           </div>
           <div>
             <TextField
+              underlineFocusStyle={styles.underlineStyle}
+              floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
               floatingLabelText="Reason"
               hintText="Type Reason"
               multiLine={true}
@@ -184,7 +201,6 @@ class LeaveEmployeeFulldayLeave extends Component {
           </div>
         </div>
 
-        <br />
         <br />
         <center>
           <div className="flexAppItem">
