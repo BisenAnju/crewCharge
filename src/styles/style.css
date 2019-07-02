@@ -237,7 +237,7 @@ ul.ChatLog {
   width: 100%;
   display: block;
   position: relative;
-  padding: 9px 20px;
+  padding: 9px 19px;
 }
 .rwdpDayBoxDesktop .rwdp-DayCircle-container {
   margin-top: 10px;
@@ -245,8 +245,8 @@ ul.ChatLog {
   border: none;
   background: transparent;
   cursor: pointer;
-  width: 14vw;
-  margin: 1px;
+  width: 15%;
+  margin: 2px;
 }
 .rwdpDayBoxDesktop .rwdp-DayCircle {
   border: 2px solid rgb(253, 145, 77);

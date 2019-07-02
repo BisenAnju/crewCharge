@@ -12,7 +12,7 @@ class TeamAllocationProject extends React.Component {
     super(props);
     this.state = {
       files: [],
-      projectName: null,
+      projectName: "",
       pictures: [],
       completed1: false,
       isLoadingSingleUser: true,
@@ -21,7 +21,7 @@ class TeamAllocationProject extends React.Component {
     };
   }
   componentWillMount() {
-    if (this.props.projectList !== null) {
+    if (this.props.projectList !== undefined) {
       this.setState({
         projectName: this.props.projectList.name,
         temporaryImageURL: this.props.projectList.logoURL
@@ -35,7 +35,7 @@ class TeamAllocationProject extends React.Component {
     });
   };
   handleClose = () => {
-    this.setState({ projectName: null, files: [] });
+    this.setState({ projectName: "", files: [] });
   };
   editProfile = (acceptedFiles, rejectedFiles) => {
     const file = acceptedFiles[0];

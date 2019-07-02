@@ -13,7 +13,7 @@ import ReactWeeklyDayPicker from "./WeeklyDayPicker";
 import { classNames } from "../constants/weeklydaypicker";
 import "../styles/style.css";
 import { loader } from "../constants/loader";
-import Subheader from "material-ui/Subheader";
+
 class TeamAllocationPeopleList extends React.Component {
   constructor(props) {
     super(props);
@@ -98,18 +98,12 @@ class TeamAllocationPeopleList extends React.Component {
     return (
       <div
         style={{
-          position: "relative",
           display: "flex",
-          flexDirection: "column"
+          flexDirection: "column",
+          height: "calc(100vh - 112px)"
         }}
       >
-        <Divider />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column"
-          }}
-        >
+        <div>
           <ReactWeeklyDayPicker
             daysCount={7}
             classNames={classNames}
@@ -135,9 +129,8 @@ class TeamAllocationPeopleList extends React.Component {
         <Divider />
         <div
           style={{
-            height: "70vh",
-            overflow: "auto",
-            display: "self"
+            height: "calc(100vh - 186px)",
+            overflow: "scroll"
           }}
         >
           {this.state.loader
@@ -196,7 +189,7 @@ class TeamAllocationPeopleList extends React.Component {
                               height: "10px",
                               width: "10px",
                               float: "right",
-                              marginTop: 10
+                              margin: "10px"
                             }}
                           />
                         )
