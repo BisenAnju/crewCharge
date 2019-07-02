@@ -21,7 +21,7 @@ class ComplaintType extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      complainttype: null,
+      complaintType: null,
       snackOpen: false,
       temporaryImageURL: null,
       pictures: [],
@@ -74,11 +74,16 @@ class ComplaintType extends Component {
   };
   handleComplaint = e => {
     e.preventDefault();
-    if (this.state.complainttype === null) {
+    if (this.state.complaintType === null) {
       this.setState({ snackOpen: true });
       return false;
     }
-    this.props.addPurpose("value", "complaintType", this.state.complainttype);
+    this.props.addPurpose(
+      "value",
+      "complaintType",
+      this.state.complaintType,
+      this.state.temporaryImageURL
+    );
   };
   handleRequestClose = () => {
     this.setState({ snackOpen: false });
@@ -92,8 +97,8 @@ class ComplaintType extends Component {
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             floatingLabelText="Complaint type"
             onChange={this.textChange}
-            value={this.state.complainttype}
-            name="complainttype"
+            value={this.state.complaintType}
+            name="complaintType"
           />
         </center>
         <br />

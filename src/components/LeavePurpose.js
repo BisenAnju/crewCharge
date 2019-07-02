@@ -79,7 +79,12 @@ class LeavePurpose extends Component {
       this.setState({ snackOpen: true });
       return false;
     }
-    this.props.addPurpose("purpose", "leavePurpose", this.state);
+    this.props.addPurpose(
+      "purpose",
+      "leavePurpose",
+      this.state.purpose,
+      this.state.temporaryImageURL
+    );
   };
   handleRequestClose = () => {
     this.setState({ snackOpen: false });

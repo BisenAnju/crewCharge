@@ -9,24 +9,22 @@ class ConfigurationContainer extends React.Component {
     this.state = {};
   }
 
-  addPurpose = (field, collection, data) => {
-    console.log(data);
-    // this.props.db
-    //   .collection(collection)
-    //   .add({
-    //     [field]: data.purpose
-    //       .replace(" ", "")
-    //       .replace("/", "")
-    //       .replace("-", "")
-    //       .toLowerCase(),
-    //     displayName:
-    //       data.purpose.charAt(0).toUpperCase() + data.purpose.slice(1)
-    //     //  icon:
-    //   })
-    //   .then //     this.props.history.goBack()
-    //   .catch(err => {
-    //     console.log("Error getting documents", err);
-    //   });
+  addPurpose = (field, collection, data, iconURL) => {
+    this.props.db
+      .collection(collection)
+      .add({
+        [field]: data
+          .replace(" ", "")
+          .replace("/", "")
+          .replace("-", "")
+          .toLowerCase(),
+        displayName: data.charAt(0).toUpperCase() + data.slice(1),
+        iconUrl: iconURL
+      })
+      .then(this.props.history.goBack())
+      .catch(err => {
+        console.log("Error getting documents", err);
+      });
   };
 
   render() {

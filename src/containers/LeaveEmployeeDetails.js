@@ -125,6 +125,7 @@ class LeaveEmployeeDetailsContainer extends React.Component {
                   )}
                   commentData={this.state.commentData}
                   userData={this.props.userData}
+                  purposeData={this.props.purposeData}
                 />
               )}
             />

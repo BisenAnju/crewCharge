@@ -6,7 +6,8 @@ import {
   MenuItem,
   RaisedButton,
   TextField,
-  Snackbar
+  Snackbar,
+  Avatar
 } from "material-ui";
 import {
   ActionDateRange,
@@ -100,6 +101,7 @@ class LeaveEmployeeFulldayLeave extends Component {
     });
   };
   render() {
+    console.log(this.props.purposeData);
     return (
       <div>
         <div style={flexcontainer}>
@@ -119,6 +121,17 @@ class LeaveEmployeeFulldayLeave extends Component {
                   key={id}
                   value={purpose.purpose}
                   primaryText={purpose.displayName}
+                  rightIcon={
+                    <Avatar
+                      src={purpose.iconUrl}
+                      style={{
+                        height: "27px",
+                        width: "27px",
+                        backgroundColor: "white",
+                        borderRadius: "0%"
+                      }}
+                    />
+                  }
                 />
               ))}
             </SelectField>

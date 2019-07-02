@@ -1,5 +1,5 @@
 const config = {
-  apiKey: "AIzaSyC3udb2_WCXPBQ1HOuRs1UF1aCfMGG_JU4",
+  apiKey: "AIzaSyBd7Ko5jw0t5R0qRH87DKvvLN8fiQNuylo",
   authDomain: "project-s-41fe0.firebaseapp.com",
   databaseURL: "https://project-s-41fe0.firebaseio.com",
   projectId: "project-s-41fe0",

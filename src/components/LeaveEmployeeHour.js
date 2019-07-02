@@ -6,7 +6,8 @@ import {
   TextField,
   Snackbar,
   SelectField,
-  MenuItem
+  MenuItem,
+  Avatar
 } from "material-ui";
 import {
   ImageTimer,
@@ -110,6 +111,17 @@ class LeaveEmployeeHourLeave extends Component {
                   key={id}
                   value={purpose.purpose}
                   primaryText={purpose.displayName}
+                  rightIcon={
+                    <Avatar
+                      src={purpose.iconUrl}
+                      style={{
+                        height: "27px",
+                        width: "27px",
+                        backgroundColor: "white",
+                        borderRadius: "0%"
+                      }}
+                    />
+                  }
                 />
               ))}
             </SelectField>

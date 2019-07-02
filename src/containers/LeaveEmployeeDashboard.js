@@ -18,7 +18,6 @@ class LeaveEmployeeDashboardContainer extends React.Component {
       isLoading: true,
       leaveData: [],
       userData: []
-      // comment: ""
     };
   }
 
@@ -103,6 +102,7 @@ class LeaveEmployeeDashboardContainer extends React.Component {
                 <LeaveEmployeeApplyContainer
                   {...props}
                   singleData={this.state.leaveData}
+                  purposeData={this.props.purposeData}
                 />
               )}
             />
@@ -114,6 +114,7 @@ class LeaveEmployeeDashboardContainer extends React.Component {
                   {...props}
                   singleData={this.state.leaveData}
                   userData={this.state.userData}
+                  purposeData={this.props.purposeData}
                 />
               )}
             />
@@ -126,6 +127,7 @@ class LeaveEmployeeDashboardContainer extends React.Component {
                   {...props}
                   userData={this.state.userData}
                   leaveData={this.state.leaveData}
+                  purposeData={this.props.purposeData}
                   isLoading={this.state.isLoading}
                 />
               )}

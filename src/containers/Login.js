@@ -21,7 +21,7 @@ class LoginContainer extends Component {
 
       let QuickEncrypt = require("quick-encrypt");
       // let keys = QuickEncrypt.generate(2048);
-      console.time("time");
+      // console.time("time");
       let publicKey = "";
       // localStorage.setItem("privatekey", keys.private);
       console.timeEnd("time");

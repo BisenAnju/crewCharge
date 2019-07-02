@@ -138,6 +138,7 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
                     data => data.leaveId === this.props.match.params.leaveId
                   )}
                   commentData={this.state.commentData}
+                  purposeData={this.props.purposeData}
                 />
               )}
             />

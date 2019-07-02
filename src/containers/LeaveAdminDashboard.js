@@ -88,6 +88,7 @@ class LeaveAdminDashboardContainer extends React.Component {
                   {...props}
                   userData={this.state.userData}
                   singleData={this.state.leaveData}
+                  purposeData={this.props.purposeData}
                 />
               )}
             />
@@ -101,6 +102,7 @@ class LeaveAdminDashboardContainer extends React.Component {
                   userData={this.state.userData}
                   leaveData={this.state.leaveData}
                   isLoading={this.state.isLoading}
+                  purposeData={this.props.purposeData}
                 />
               )}
             />

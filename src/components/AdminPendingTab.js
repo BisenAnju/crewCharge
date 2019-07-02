@@ -26,6 +26,24 @@ class AdminPendingTab extends React.Component {
     super(props);
     this.state = {};
   }
+
+  getIconUrl = purpose => {
+    let iconURL = [];
+    iconURL = this.props.purposeData.find(item => item.purpose === purpose);
+    if (iconURL !== undefined)
+      return (
+        <Avatar
+          src={iconURL.iconUrl}
+          style={{
+            height: "27px",
+            width: "27px",
+            backgroundColor: "white",
+            borderRadius: "0%"
+          }}
+        />
+      );
+  };
+
   render() {
     return (
       <div
@@ -70,21 +88,7 @@ class AdminPendingTab extends React.Component {
                           }
                         />
                       }
-                      rightIcon={
-                        leave.purpose === "vacation" ? (
-                          <ActionFlightTakeoff
-                            style={{ marginTop: 28, fill: "#303F9F" }}
-                          />
-                        ) : leave.purpose === "sickness" ? (
-                          <MapsLocalHospital
-                            style={{ marginTop: 28, fill: "#EF5350" }}
-                          />
-                        ) : (
-                          <SocialSentimentVerySatisfied
-                            style={{ marginTop: 28, fill: "#C2185B" }}
-                          />
-                        )
-                      }
+                      rightIcon={this.getIconUrl(leave.purpose)}
                       primaryText={
                         this.props.userData.findIndex(
                           user => user.uid === leave.userId
