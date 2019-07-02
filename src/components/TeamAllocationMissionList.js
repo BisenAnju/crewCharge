@@ -91,7 +91,6 @@ class TeamAllocationMissionList extends React.Component {
                         <div>
                           <ListItem
                             key={index}
-                            primaryText={row.name}
                             rightIconButton={
                               <IconMenu
                                 menuStyle={{
@@ -126,15 +125,32 @@ class TeamAllocationMissionList extends React.Component {
                                 </MenuItem>
                               </IconMenu>
                             }
-                            secondaryTextLines={2}
-                            secondaryText={
-                              moment(row.deadline.startDate).format("ll") +
-                              " - " +
-                              moment(row.deadline.endDate).format("ll") +
-                              ", Remarks:" +
-                              row.deadline.remarks
-                            }
-                          />
+                          >
+                            <div>
+                              <div>
+                                <h4>{row.name}</h4>
+                              </div>
+                              <div style={{ paddingTop: 5 }}>
+                                <span style={{ fontSize: "14px" }}>
+                                  {moment(row.deadline.startDate).format("ll") +
+                                    " - " +
+                                    moment(row.deadline.endDate).format("ll")}
+                                </span>
+                              </div>
+                              <div
+                                style={{
+                                  maxWidth: "290px",
+                                  overflowWrap: "break-word",
+                                  wordWrap: "break-word",
+                                  paddingTop: 5
+                                }}
+                              >
+                                <span style={{ fontSize: "14px" }}>
+                                  Remarks: {row.deadline.remarks}
+                                </span>
+                              </div>
+                            </div>
+                          </ListItem>
                         </div>
                         <Divider style={{ backgroundColor: orange100 }} />
                       </div>
