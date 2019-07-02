@@ -14,14 +14,20 @@ class ConfigurationContainer extends React.Component {
     this.state = {};
   }
 
-  addPurpose = purpose => {
+  addPurpose = (field, collection, purpose) => {
     this.props.db
-      .collection("leavePurpose")
+      .collection(collection)
       .add({
-        purpose: purpose.toLowerCase(),
+        [field]: purpose
+          .replace(" ", "")
+          .replace("/", "")
+          .replace("-", "")
+          .toLowerCase(),
         displayName: purpose.charAt(0).toUpperCase() + purpose.slice(1)
       })
-      .then(this.props.history.goBack())
+      .then
+      // this.props.history.goBack()
+      ()
       .catch(err => {
         console.log("Error getting documents", err);
       });

@@ -16,11 +16,31 @@ class ComplaintListContainer extends React.Component {
       archivedListItem: [],
       userData: [],
       snackOpen: false,
-      message: ""
+      message: "",
+      complaintTypeData: []
     };
     this.handleArchive = this.handleArchive.bind(this);
   }
   componentWillMount() {
+    this.props.db
+      .collection("complaintType")
+      .get()
+      .then(
+        doc => {
+          const complaintTypeData = [];
+          doc.forEach(docitem => {
+            if (docitem.exists) {
+              complaintTypeData.push(docitem.data());
+            }
+          });
+          this.setState({
+            complaintTypeData
+          });
+        },
+        err => {
+          console.log(`Encountered error: ${err}`);
+        }
+      );
     let userData = [],
       query = this.props.db.collection("users");
     query.onSnapshot(snapshot => {
@@ -102,6 +122,7 @@ class ComplaintListContainer extends React.Component {
                 listData={this.state.listItem}
                 isAdmin={this.state.isAdmin}
                 userData={this.state.userData}
+                complaintType={this.state.complaintTypeData}
               />
             )}
           />
@@ -113,6 +134,7 @@ class ComplaintListContainer extends React.Component {
                 {...props}
                 isAdmin={this.state.isAdmin}
                 userData={this.state.userData}
+                complaintType={this.state.complaintTypeData}
               />
             )}
           />
@@ -123,6 +145,7 @@ class ComplaintListContainer extends React.Component {
                 {...props}
                 loggedInUser={this.props.user}
                 userData={this.state.userData}
+                complaintType={this.state.complaintTypeData}
               />
             )}
           />

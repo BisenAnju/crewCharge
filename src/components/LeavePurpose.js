@@ -61,7 +61,7 @@ class LeavePurpose extends Component {
       this.setState({ snackOpen: true });
       return false;
     }
-    this.props.addPurpose(this.state.purpose);
+    this.props.addPurpose("purpose", "leavePurpose", this.state.purpose);
   };
   handleRequestClose = () => {
     this.setState({ snackOpen: false });

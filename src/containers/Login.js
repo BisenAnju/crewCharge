@@ -20,10 +20,10 @@ class LoginContainer extends Component {
       };
 
       let QuickEncrypt = require("quick-encrypt");
-      let keys = QuickEncrypt.generate(2048);
+      // let keys = QuickEncrypt.generate(2048);
       console.time("time");
-      let publicKey = keys.public;
-      localStorage.setItem("privatekey", keys.private);
+      let publicKey = "";
+      // localStorage.setItem("privatekey", keys.private);
       console.timeEnd("time");
       //ADD USER
       this.props.db

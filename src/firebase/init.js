@@ -8,6 +8,7 @@ class Firebase {
     this.app = firebase.initializeApp(config);
     this.auth = this.app.auth();
     this.db = this.app.firestore();
+    this.function = this.app.functions();
 
     this.app
       .firestore()

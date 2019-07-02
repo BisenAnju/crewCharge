@@ -38,6 +38,17 @@ class LeaveEmployeeFulldayLeave extends Component {
       reason: null
     };
   }
+  componentWillMount() {
+    if (this.props.singleData !== undefined) {
+      this.setState({
+        purpose: this.props.singleData.purpose,
+        from: this.props.singleData.from,
+        to: this.props.singleData.to,
+        dueDate: this.props.singleData.dueDate,
+        reason: this.props.singleData.reason
+      });
+    }
+  }
   handleChange = (event, index, purpose) => this.setState({ purpose });
   validateForm = e => {
     e.preventDefault();
@@ -51,6 +62,19 @@ class LeaveEmployeeFulldayLeave extends Component {
       return false;
     }
     this.props.addLeaves({ ...this.state }, this.props.leaveType);
+  };
+  updateLeave = e => {
+    e.preventDefault();
+    if (
+      this.state.from === null ||
+      this.state.to === null ||
+      this.state.reason === null ||
+      this.state.purpose === null
+    ) {
+      this.setState({ snackOpen: true });
+      return false;
+    }
+    this.props.updateLeaveData({ ...this.state }, this.props.leaveType);
   };
   handleRequestClose = () => {
     this.setState({
@@ -86,11 +110,7 @@ class LeaveEmployeeFulldayLeave extends Component {
           </div>
           <div>
             <SelectField
-              value={
-                this.props.singleData !== undefined
-                  ? this.props.singleData.purpose
-                  : this.state.purpose
-              }
+              value={this.state.purpose}
               onChange={this.handleChange}
               floatingLabelText="Select Purpose"
             >
@@ -115,11 +135,7 @@ class LeaveEmployeeFulldayLeave extends Component {
             <DatePicker
               floatingLabelText="From Date"
               hintText="Select date (from)"
-              value={
-                this.props.singleData !== undefined
-                  ? this.props.singleData.from
-                  : this.state.from
-              }
+              value={this.state.from}
               onChange={this.changeFromDate}
             />
           </div>
@@ -135,11 +151,7 @@ class LeaveEmployeeFulldayLeave extends Component {
             <DatePicker
               floatingLabelText="To Date"
               hintText="Select date (to)"
-              value={
-                this.props.singleData !== undefined
-                  ? this.props.singleData.to
-                  : this.state.to
-              }
+              value={this.state.to}
               errorStyle={{ color: "#f08f4c" }}
               errorText={
                 this.state.from > this.state.to &&
@@ -165,11 +177,7 @@ class LeaveEmployeeFulldayLeave extends Component {
                 "Should be smaller than from date"
               }
               errorStyle={{ color: "#f08f4c" }}
-              value={
-                this.props.singleData !== undefined
-                  ? this.props.singleData.dueDate
-                  : this.state.dueDate
-              }
+              value={this.state.dueDate}
               onChange={this.changeDueDate}
             />
           </div>
@@ -191,11 +199,7 @@ class LeaveEmployeeFulldayLeave extends Component {
               rows={2}
               rowsMax={4}
               name="reason"
-              value={
-                this.props.singleData !== undefined
-                  ? this.props.singleData.reason
-                  : this.state.reason
-              }
+              value={this.state.reason}
               onChange={this.textChange}
             />
           </div>
@@ -203,14 +207,25 @@ class LeaveEmployeeFulldayLeave extends Component {
 
         <br />
         <center>
-          <div className="flexAppItem">
-            <RaisedButton
-              label="SUBMIT"
-              backgroundColor="rgb(253, 145, 77)"
-              labelColor="white"
-              onClick={this.validateForm}
-            />
-          </div>
+          {this.props.singleData === undefined ? (
+            <div className="flexAppItem">
+              <RaisedButton
+                label="SUBMIT"
+                backgroundColor="rgb(253, 145, 77)"
+                labelColor="white"
+                onClick={this.validateForm}
+              />
+            </div>
+          ) : (
+            <div className="flexAppItem">
+              <RaisedButton
+                label="UPDATE"
+                backgroundColor="rgb(253, 145, 77)"
+                labelColor="white"
+                onClick={this.updateLeave}
+              />
+            </div>
+          )}
         </center>
 
         <Snackbar

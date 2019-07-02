@@ -85,6 +85,9 @@ class ComplaintViewContainer extends React.Component {
           detail.playerid = userdata.userNotificationPlayerId;
           detail.userImageURL = userdata.photoURL;
           detail.userName = userdata.displayName;
+          detail.complaintType = this.props.complaintType.find(
+            data => data.value === doc.data().complaintType
+          ).displayName;
 
           this.setState({ detail, isLoading: false });
         }

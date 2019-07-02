@@ -98,20 +98,6 @@ class LeaveEmployeeDashboardContainer extends React.Component {
           <Switch>
             <Route
               exact
-              path={"/leavedashboard"}
-              render={props => (
-                <LeaveEmployeeDashboard
-                  key={this.state.leaveData.leaveId}
-                  {...props}
-                  userData={this.state.userData}
-                  leaveData={this.state.leaveData}
-                  isLoading={this.state.isLoading}
-                  // comment={this.state.comment}
-                />
-              )}
-            />
-            <Route
-              exact
               path={"/leavedashboard/leaveapply/:mode"}
               render={props => (
                 <LeaveEmployeeApplyContainer
@@ -128,6 +114,19 @@ class LeaveEmployeeDashboardContainer extends React.Component {
                   {...props}
                   singleData={this.state.leaveData}
                   userData={this.state.userData}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={"/leavedashboard"}
+              render={props => (
+                <LeaveEmployeeDashboard
+                  key={this.state.leaveData.leaveId}
+                  {...props}
+                  userData={this.state.userData}
+                  leaveData={this.state.leaveData}
+                  isLoading={this.state.isLoading}
                 />
               )}
             />
