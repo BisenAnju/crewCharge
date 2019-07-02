@@ -48,14 +48,10 @@ class TeamAllocationMissionList extends React.Component {
           inkBarStyle={{ backgroundColor: "#f08f4c" }}
         >
           <Tab label="Peoples List" style={{ color: "#f08f4c" }} value={0}>
-            <div>
-              <TeamAllocationPeopleList {...this.props} />
-            </div>
+            <TeamAllocationPeopleList {...this.props} />
           </Tab>
           <Tab label="Project List" style={{ color: "#f08f4c" }} value={1}>
-            <div>
-              <TeamAllocationProjectList {...this.props} />
-            </div>
+            <TeamAllocationProjectList {...this.props} />
           </Tab>
           <Tab label="Manage" style={{ color: "#f08f4c" }} value={2}>
             <div
