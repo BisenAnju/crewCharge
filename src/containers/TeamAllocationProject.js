@@ -77,7 +77,8 @@ class TeamAllocationMissionContainer extends Component {
               render={props => (
                 <TeamAllocationProject
                   {...this.props}
-                  handleAddProject={this.handleAddProject}
+                  handleUpdateProject={this.handleUpdateProject}
+                  projectList={null}
                 />
               )}
             />

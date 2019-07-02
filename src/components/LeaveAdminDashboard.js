@@ -44,15 +44,18 @@ class LeaveAdminDashboard extends Component {
               leaveData={this.props.leaveData}
               userData={this.props.userData}
               adminId={this.props.user.uid}
+              purposeData={this.props.purposeData}
             />
             <AdminApprovedTab
               leaveData={this.props.leaveData}
               userData={this.props.userData}
               adminId={this.props.user.uid}
+              purposeData={this.props.purposeData}
             />
             <AdminRejectedTab
               leaveData={this.props.leaveData}
               userData={this.props.userData}
+              purposeData={this.props.purposeData}
               adminId={this.props.user.uid}
             />
           </SwipeableViews>

@@ -1,15 +1,14 @@
 import React from "react";
-import { Route, BrowserRouter as Router, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
 import LeaveEmployeeApply from "../components/LeaveEmployeeApply";
-import LeaveEmployeeDashboardContainer from "./LeaveEmployeeDashboard";
 import moment from "moment";
 
 class LeaveEmployeeApplyContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isLoading: true, player_ids: [], purposeData: [] };
+    this.state = { isLoading: true, player_ids: [] };
   }
 
   componentWillMount() {
@@ -27,30 +26,7 @@ class LeaveEmployeeApplyContainer extends React.Component {
           }
         });
         this.setState({ player_ids });
-        console.log(this.state.player_ids);
       });
-
-    // get purpose
-    this.props.db
-      .collection("leavePurpose")
-      .get()
-      .then(
-        doc => {
-          const purposeData = [];
-          doc.forEach(docitem => {
-            if (docitem.exists) {
-              purposeData.push(docitem.data());
-            }
-          });
-          this.setState({
-            isLoading: false,
-            purposeData
-          });
-        },
-        err => {
-          console.log(`Encountered error: ${err}`);
-        }
-      );
   }
 
   // Add leaves data
@@ -136,7 +112,6 @@ class LeaveEmployeeApplyContainer extends React.Component {
   };
 
   updateLeaveData = (leaveData, leaveType) => {
-    console.log(this.props.match.params.mode);
     this.props.db
       .collection("leaves")
       .doc(this.props.match.params.mode)
@@ -203,7 +178,7 @@ class LeaveEmployeeApplyContainer extends React.Component {
           data => data.leaveId === this.props.match.params.mode
         )}
         isLoading={this.state.isLoading}
-        purposeData={this.state.purposeData}
+        purposeData={this.props.purposeData}
       />
     );
   }

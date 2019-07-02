@@ -48,6 +48,22 @@ class LeaveEmployeeDetails extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({ userComment: nextProps.commentData });
   }
+  getIconUrl = purpose => {
+    let iconURL = [];
+    iconURL = this.props.purposeData.find(item => item.purpose === purpose);
+    if (iconURL !== undefined)
+      return (
+        <Avatar
+          src={iconURL.iconUrl}
+          style={{
+            height: "27px",
+            width: "27px",
+            backgroundColor: "white",
+            borderRadius: "0%"
+          }}
+        />
+      );
+  };
   handleDraft = e => {
     let playerId = this.props.userData.filter(
       user => user.uid === this.props.user.uid
@@ -63,6 +79,7 @@ class LeaveEmployeeDetails extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   render() {
+    console.log(this.props.purposeData);
     return (
       <Layout
         navigationTitle={this.state.navigationTitle}
@@ -128,15 +145,7 @@ class LeaveEmployeeDetails extends Component {
             <List>
               <ListItem
                 disabled
-                leftIcon={
-                  this.props.singleData.purpose === "vacation" ? (
-                    <ActionFlightTakeoff style={{ fill: "#303F9F" }} />
-                  ) : this.props.singleData.purpose === "general" ? (
-                    <SocialSentimentVerySatisfied style={{ fill: "#C2185B" }} />
-                  ) : (
-                    <MapsLocalHospital style={{ fill: "#EF5350" }} />
-                  )
-                }
+                leftIcon={this.getIconUrl(this.props.singleData.purpose)}
                 primaryText={this.props.singleData.purpose}
                 secondaryText={<p style={{ fontSize: 14 }}>Purpose</p>}
                 rightIcon={

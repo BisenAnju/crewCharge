@@ -34,7 +34,7 @@ class TeamAllocationMissionList extends React.Component {
     });
   };
   contentButton = {
-    bottom: 5,
+    bottom: 2,
     right: 40,
     position: "absolute"
   };
@@ -48,14 +48,10 @@ class TeamAllocationMissionList extends React.Component {
           inkBarStyle={{ backgroundColor: "#f08f4c" }}
         >
           <Tab label="Peoples List" style={{ color: "#f08f4c" }} value={0}>
-            <div>
-              <TeamAllocationPeopleList {...this.props} />
-            </div>
+            <TeamAllocationPeopleList {...this.props} />
           </Tab>
           <Tab label="Project List" style={{ color: "#f08f4c" }} value={1}>
-            <div>
-              <TeamAllocationProjectList {...this.props} />
-            </div>
+            <TeamAllocationProjectList {...this.props} />
           </Tab>
           <Tab label="Manage" style={{ color: "#f08f4c" }} value={2}>
             <div
@@ -68,16 +64,24 @@ class TeamAllocationMissionList extends React.Component {
               <div
                 style={{
                   display: "flex",
-                  flexDirection: "column",
-                  height: "41vh"
+                  flexDirection: "column"
                 }}
               >
                 <div>
-                  <Subheader className="sticky">Missions List</Subheader>
+                  <Subheader
+                    style={{
+                      textAlign: "center",
+                      fontSize: "17px",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    Missions List
+                  </Subheader>
                 </div>
                 <Divider style={{ backgroundColor: orange100 }} />
                 <div
                   style={{
+                    height: "30vh",
                     overflow: "scroll"
                   }}
                 >
@@ -87,7 +91,6 @@ class TeamAllocationMissionList extends React.Component {
                         <div>
                           <ListItem
                             key={index}
-                            primaryText={row.name}
                             rightIconButton={
                               <IconMenu
                                 menuStyle={{
@@ -122,15 +125,32 @@ class TeamAllocationMissionList extends React.Component {
                                 </MenuItem>
                               </IconMenu>
                             }
-                            secondaryTextLines={2}
-                            secondaryText={
-                              moment(row.deadline.startDate).format("ll") +
-                              " - " +
-                              moment(row.deadline.endDate).format("ll") +
-                              ", Remarks:" +
-                              row.deadline.remarks
-                            }
-                          />
+                          >
+                            <div>
+                              <div>
+                                <h4>{row.name}</h4>
+                              </div>
+                              <div style={{ paddingTop: 5 }}>
+                                <span style={{ fontSize: "14px" }}>
+                                  {moment(row.deadline.startDate).format("ll") +
+                                    " - " +
+                                    moment(row.deadline.endDate).format("ll")}
+                                </span>
+                              </div>
+                              <div
+                                style={{
+                                  maxWidth: "290px",
+                                  overflowWrap: "break-word",
+                                  wordWrap: "break-word",
+                                  paddingTop: 5
+                                }}
+                              >
+                                <span style={{ fontSize: "14px" }}>
+                                  Remarks: {row.deadline.remarks}
+                                </span>
+                              </div>
+                            </div>
+                          </ListItem>
                         </div>
                         <Divider style={{ backgroundColor: orange100 }} />
                       </div>
@@ -141,18 +161,24 @@ class TeamAllocationMissionList extends React.Component {
               <div
                 style={{
                   display: "flex",
-                  flexDirection: "column",
-                  height: "41vh"
+                  flexDirection: "column"
                 }}
               >
                 <div>
-                  <Subheader className="sticky" style={{ overflow: "scroll" }}>
+                  <Subheader
+                    style={{
+                      textAlign: "center",
+                      fontSize: "17px",
+                      fontWeight: "bold"
+                    }}
+                  >
                     Project List
                   </Subheader>
                 </div>
                 <Divider style={{ backgroundColor: orange100 }} />
                 <div
                   style={{
+                    height: "30vh",
                     overflow: "scroll"
                   }}
                 >
@@ -204,49 +230,52 @@ class TeamAllocationMissionList extends React.Component {
                   </List>
                 </div>
               </div>
-              <div style={this.contentButton}>
-                <FloatingActionButton backgroundColor={"rgb(253, 145, 77)"}>
-                  <div>
-                    <IconMenu
-                      iconButtonElement={
-                        <IconButton style={{ marginTop: 4 }}>
-                          <ContentAdd color={"white"} />
-                        </IconButton>
-                      }
-                      menuStyle={{
-                        backgroundColor: "rgba(242, 243, 242, 0.5)",
-                        padding: 0
-                      }}
-                      anchorOrigin={{
-                        horizontal: "right",
-                        vertical: "bottom"
-                      }}
-                      targetOrigin={{
-                        horizontal: "right",
-                        vertical: "bottom"
+              {/* <div style={this.contentButton}> */}
+              <FloatingActionButton
+                backgroundColor={"rgb(253, 145, 77)"}
+                style={this.contentButton}
+              >
+                <div>
+                  <IconMenu
+                    iconButtonElement={
+                      <IconButton style={{ marginTop: 4 }}>
+                        <ContentAdd color={"white"} />
+                      </IconButton>
+                    }
+                    menuStyle={{
+                      backgroundColor: "rgba(242, 243, 242, 0.5)",
+                      padding: 0
+                    }}
+                    anchorOrigin={{
+                      horizontal: "right",
+                      vertical: "bottom"
+                    }}
+                    targetOrigin={{
+                      horizontal: "right",
+                      vertical: "bottom"
+                    }}
+                  >
+                    <MenuItem
+                      onClick={e => {
+                        e.preventDefault();
+                        this.props.history.push("/teamallocation/mission");
                       }}
                     >
-                      <MenuItem
-                        onClick={e => {
-                          e.preventDefault();
-                          this.props.history.push("/teamallocation/mission");
-                        }}
-                      >
-                        Add Mission
-                      </MenuItem>
-                      <Divider />
-                      <MenuItem
-                        onClick={e => {
-                          e.preventDefault();
-                          this.props.history.push("/teamallocation/project");
-                        }}
-                      >
-                        Add Project
-                      </MenuItem>
-                    </IconMenu>
-                  </div>
-                </FloatingActionButton>
-              </div>
+                      Add Mission
+                    </MenuItem>
+                    <Divider />
+                    <MenuItem
+                      onClick={e => {
+                        e.preventDefault();
+                        this.props.history.push("/teamallocation/project");
+                      }}
+                    >
+                      Add Project
+                    </MenuItem>
+                  </IconMenu>
+                </div>
+              </FloatingActionButton>
+              {/* </div> */}
             </div>
           </Tab>
         </Tabs>

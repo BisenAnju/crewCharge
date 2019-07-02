@@ -91,7 +91,22 @@ class LeaveAdminApprovalRejection extends Component {
       () => this.setState({ remark: "" })
     );
   };
-
+  getIconUrl = purpose => {
+    let iconURL = [];
+    iconURL = this.props.purposeData.find(item => item.purpose === purpose);
+    if (iconURL !== undefined)
+      return (
+        <Avatar
+          src={iconURL.iconUrl}
+          style={{
+            height: "27px",
+            width: "27px",
+            backgroundColor: "white",
+            borderRadius: "0%"
+          }}
+        />
+      );
+  };
   textChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -138,29 +153,21 @@ class LeaveAdminApprovalRejection extends Component {
             <List>
               <ListItem
                 disabled
-                leftIcon={
-                  this.props.singleData.purpose === "vacation" ? (
-                    <ActionFlightTakeoff style={{ fill: "#303F9F" }} />
-                  ) : this.props.singleData.purpose === "general" ? (
-                    <SocialSentimentVerySatisfied style={{ fill: "#C2185B" }} />
-                  ) : (
-                    <MapsLocalHospital style={{ fill: "#EF5350" }} />
-                  )
-                }
+                leftIcon={this.getIconUrl(this.props.singleData.purpose)}
                 primaryText={this.props.singleData.purpose}
                 secondaryText={<p style={{ fontSize: 14 }}>Purpose</p>}
-                rightIcon={
-                  <IconButton
-                    touch={true}
-                    style={{ margin: "0px 25px 0px 0px" }}
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push(`/leavedashboard/leaveapply`);
-                    }}
-                  >
-                    <ImageEdit />
-                  </IconButton>
-                }
+                // rightIcon={
+                //   <IconButton
+                //     touch={true}
+                //     style={{ margin: "0px 25px 0px 0px" }}
+                //     onClick={e => {
+                //       e.preventDefault();
+                //       this.props.history.push(`/leavedashboard/leaveapply`);
+                //     }}
+                //   >
+                //     <ImageEdit />
+                //   </IconButton>
+                // }
               />
               <ListItem
                 disabled

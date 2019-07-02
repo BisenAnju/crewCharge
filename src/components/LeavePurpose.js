@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { RaisedButton, TextField, Snackbar } from "material-ui";
-// import Dropzone from "react-dropzone";
-// import ImageCompressor from "image-compressor.js";
-// import firebase from "firebase";
-
+import {
+  RaisedButton,
+  TextField,
+  Snackbar,
+  CircularProgress,
+  FloatingActionButton
+} from "material-ui";
+import Dropzone from "react-dropzone";
+import ImageCompressor from "image-compressor.js";
+import firebase from "firebase";
+import { FileFileUpload } from "material-ui/svg-icons";
+import { grey100 } from "material-ui/styles/colors";
 const styles = {
   floatingLabelFocusStyle: {
     color: "#fd914d"
@@ -13,45 +20,56 @@ const styles = {
 class LeavePurpose extends Component {
   constructor(props) {
     super(props);
-    this.state = { purpose: "", snackOpen: false };
+    this.state = {
+      purpose: "",
+      snackOpen: false,
+      temporaryImageURL: null,
+      pictures: [],
+      completed: false,
+      loading: false,
+      isLoadingUploadImage: 1
+    };
   }
-
-  // getIcon = (acceptedFiles, rejectedFiles) => {
-  //   alert("hiiii");
-  //   const file = acceptedFiles[0];
-  //   if (file == null) {
-  //     alert("Invalid File Type!");
-  //   } else {
-  //     this.setState({ completed1: true, isLoadingUploadImage: 2 });
-  //   }
-  //   new ImageCompressor(file, {
-  //     quality: 0.55,
-  //     maxWidth: 1500,
-  //     success: result => {
-  //       const image = firebase
-  //         .storage()
-  //         .ref()
-  //         .child("images");
-  //       const ref = image.child(new Date().toString());
-  //       ref.put(file).then(() => {
-  //         ref.getDownloadURL().then(url => {
-  //           console.log(url);
-  //           const updatedImageURL = url;
-  //           console.log(updatedImageURL);
-  //           const pictures = this.state.pictures;
-  //           pictures.push(url);
-  //           this.setState({
-  //             completed: true,
-  //             pictures,
-  //             temporaryImageURL: updatedImageURL,
-  //             isLoadingUploadImage: 3
-  //           });
-  //           console.log(updatedImageURL);
-  //         });
-  //       });
-  //     }
-  //   });
-  // };
+  getIcon = (acceptedFiles, rejectedFiles) => {
+    const file = acceptedFiles[0];
+    if (file == null) {
+      alert("Invalid File Type!");
+    } else {
+      this.setState({
+        completed1: true,
+        loading: true,
+        isLoadingUploadImage: 2
+      });
+    }
+    new ImageCompressor(file, {
+      quality: 0.55,
+      maxWidth: 1500,
+      success: result => {
+        const image = firebase
+          .storage()
+          .ref()
+          .child("images");
+        const ref = image.child(new Date().toString());
+        ref.put(file).then(() => {
+          ref.getDownloadURL().then(url => {
+            console.log(url);
+            const updatedImageURL = url;
+            console.log(updatedImageURL);
+            const pictures = this.state.pictures;
+            pictures.push(url);
+            this.setState({
+              completed: true,
+              pictures,
+              loading: false,
+              temporaryImageURL: updatedImageURL,
+              isLoadingUploadImage: 3
+            });
+            console.log(updatedImageURL);
+          });
+        });
+      }
+    });
+  };
   textChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -61,7 +79,12 @@ class LeavePurpose extends Component {
       this.setState({ snackOpen: true });
       return false;
     }
-    this.props.addPurpose("purpose", "leavePurpose", this.state.purpose);
+    this.props.addPurpose(
+      "purpose",
+      "leavePurpose",
+      this.state.purpose,
+      this.state.temporaryImageURL
+    );
   };
   handleRequestClose = () => {
     this.setState({ snackOpen: false });
@@ -80,22 +103,54 @@ class LeavePurpose extends Component {
           />
         </center>
         <br />
-        {/* <Dropzone onDrop={this.getIcon} accept="image/*">
-          {({ getRootProps, getInputProps, isDragActive }) => {
-            return (
-              <div {...getRootProps}>
-                <input {...getInputProps} />
-                <u>
-                  <RaisedButton
-                    label="Upload Icon"
-                    primary={true}
-                    style={{ marginLeft: "15%" }}
-                  />
-                </u>
-              </div>
-            );
+        <div
+          style={{
+            border: "1px solid #d3d3d3",
+            height: "80px",
+            width: "256px",
+            marginLeft: 35
           }}
-        </Dropzone> */}
+        >
+          <div
+            style={{
+              width: 50,
+              height: 50,
+              float: "right",
+              marginRight: 30,
+              marginTop: 10
+            }}
+          >
+            {this.state.loading ? (
+              <CircularProgress
+                size={20}
+                color={"#fd914d"}
+                style={{ margin: 10 }}
+              />
+            ) : this.state.temporaryImageURL !== null ? (
+              <img
+                style={{ width: 50, height: 50 }}
+                src={this.state.temporaryImageURL}
+              />
+            ) : null}
+          </div>
+          <Dropzone onDrop={this.getIcon} accept="image/*">
+            {({ getRootProps, getInputProps }) => (
+              <section>
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  <u>
+                    <FloatingActionButton
+                      backgroundColor={grey100}
+                      style={{ margin: 10 }}
+                    >
+                      {<FileFileUpload style={{ fill: "#fd914d" }} />}
+                    </FloatingActionButton>
+                  </u>
+                </div>
+              </section>
+            )}
+          </Dropzone>
+        </div>
         <br />
         <br />
         <center>
