@@ -181,9 +181,9 @@ class NavigationBar extends React.Component {
             <ListItem
               onClick={e => {
                 e.preventDefault();
-                this.props.history.push("/teamallocation/projectlist");
+                this.props.history.push("/projects");
               }}
-              primaryText="Projects "
+              primaryText="Client Communication"
               leftIcon={
                 <ActionAssignment
                   style={{
@@ -233,41 +233,6 @@ class NavigationBar extends React.Component {
                       />
                     }
                   />
-
-                  {/* <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/teamallocation/mission");
-                    }}
-                    primaryText="Add Missions"
-                    leftIcon={
-                      <ActionInput
-                        style={{
-                          fill: "#fd914d",
-                          heigth: "22px",
-                          width: "22px",
-                          left: "12px"
-                        }}
-                      />
-                    }
-                  />
-                  <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/teamallocation/project");
-                    }}
-                    primaryText="Add Projects"
-                    leftIcon={
-                      <ActionInput
-                        style={{
-                          fill: "#fd914d",
-                          heigth: "22px",
-                          width: "22px",
-                          left: "12px"
-                        }}
-                      />
-                    }
-                  /> */}
                 </div>
               ) : null
             )}
