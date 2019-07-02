@@ -101,7 +101,6 @@ class LeaveEmployeeFulldayLeave extends Component {
     });
   };
   render() {
-    console.log(this.props.purposeData);
     return (
       <div>
         <div style={flexcontainer}>

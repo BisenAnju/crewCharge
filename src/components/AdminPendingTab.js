@@ -43,7 +43,11 @@ class AdminPendingTab extends React.Component {
         />
       );
   };
-
+  getAvatar = userId => {
+    let avatarUrl = [];
+    avatarUrl = this.props.userData.find(item => item.uid === userId);
+    if (avatarUrl !== undefined) return <Avatar src={avatarUrl.photoURL} />;
+  };
   render() {
     return (
       <div
@@ -76,18 +80,7 @@ class AdminPendingTab extends React.Component {
                               "/leavedashboard/leavedetails/" + leave.leaveId
                             );
                       }}
-                      leftAvatar={
-                        <Avatar
-                          src={
-                            this.props.userData.findIndex(
-                              user => user.uid === leave.userId
-                            ) >= 0 &&
-                            this.props.userData.find(
-                              user => user.uid === leave.userId
-                            ).photoURL
-                          }
-                        />
-                      }
+                      leftAvatar={this.getAvatar(leave.userId)}
                       rightIcon={this.getIconUrl(leave.purpose)}
                       primaryText={
                         this.props.userData.findIndex(
