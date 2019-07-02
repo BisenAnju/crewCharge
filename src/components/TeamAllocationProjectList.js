@@ -172,7 +172,6 @@ class TeamAllocationProjectList extends React.Component {
                       <br />
                       <div>
                         <h3>{missionRow.name}</h3>
-                        <h4>Project Dead Line</h4>
                         <h5 style={{ float: "left", marginRight: 10 }}>
                           {moment(missionRow.deadline.startDate).format("ll")}
                         </h5>

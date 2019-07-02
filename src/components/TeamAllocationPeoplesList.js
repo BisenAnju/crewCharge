@@ -214,19 +214,19 @@ class TeamAllocationPeopleList extends React.Component {
                               }}
                             >
                               <h3>{missionRow.name}</h3>
-                              <h4>Project Dead Line</h4>
+                              {/* <h4>Project Dead Line</h4> */}
                               <h5 style={{ float: "left", marginRight: 10 }}>
-                                {moment(
-                                  missionRow.deadline.startDate.seconds * 1000
-                                ).format("ll")}
+                                {moment(missionRow.deadline.startDate).format(
+                                  "ll"
+                                )}
                               </h5>
                               <h5 style={{ float: "left", marginRight: 10 }}>
                                 -
                               </h5>
                               <h5>
-                                {moment(
-                                  missionRow.deadline.endDate.seconds * 1000
-                                ).format("ll")}
+                                {moment(missionRow.deadline.endDate).format(
+                                  "ll"
+                                )}
                               </h5>
                               <h5>Massege: {missionRow.deadline.remarks}</h5>
                             </Paper>

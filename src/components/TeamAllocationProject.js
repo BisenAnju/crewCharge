@@ -1,12 +1,18 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { TextField, RaisedButton } from "material-ui";
+import {
+  TextField,
+  RaisedButton,
+  CircularProgress,
+  FloatingActionButton
+} from "material-ui";
 import Layout from "../layouts/Layout";
-import { white } from "material-ui/styles/colors";
+import { white, grey100 } from "material-ui/styles/colors";
 import Dropzone from "react-dropzone";
 import withFirebase from "../hoc/withFirebase";
 import firebase from "firebase";
 import ImageCompressor from "image-compressor.js";
+import { FileFileUpload } from "material-ui/svg-icons";
 class TeamAllocationProject extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +27,7 @@ class TeamAllocationProject extends React.Component {
     };
   }
   componentWillMount() {
-    if (this.props.projectList !== undefined) {
+    if (this.props.projectList !== null) {
       this.setState({
         projectName: this.props.projectList.name,
         temporaryImageURL: this.props.projectList.logoURL
@@ -80,41 +86,61 @@ class TeamAllocationProject extends React.Component {
             floatingLabelText="Enter Project Name"
             value={this.state.projectName}
             fullWidth={true}
+            floatingLabelStyle={{ color: "rgb(253, 145, 77)" }}
+            underlineFocusStyle={{ borderColor: "rgb(253, 145, 77)" }}
             onChange={this.handleTextChange}
           />
-          <div style={{ height: 100, marginTop: 20 }}>
-            {this.state.temporaryImageURL === null ? (
-              ""
-            ) : (
-              <div style={{ float: "right", marginRight: 20 }}>
-                <img
-                  src={this.state.temporaryImageURL}
-                  style={{ width: 80, height: 80 }}
+          <div
+            style={{
+              border: "1px solid #d3d3d3",
+              height: "80px",
+              width: "256px",
+              marginLeft: 35
+            }}
+          >
+            <div
+              style={{
+                width: 50,
+                height: 50,
+                float: "right",
+                marginRight: 30,
+                marginTop: 10
+              }}
+            >
+              {this.state.loading ? (
+                <CircularProgress
+                  size={20}
+                  color={"#fd914d"}
+                  style={{ margin: 10 }}
                 />
-              </div>
-            )}
-            <div>
-              <Dropzone
-                onDrop={this.editProfile}
-                accept="image/*"
-                style={{ height: 100 }}
-              >
-                {({ getRootProps, getInputProps, isDragActive }) => {
-                  return (
-                    <div {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      <u>
-                        <RaisedButton
-                          label="Upload..."
-                          labelColor={white}
-                          backgroundColor={"rgb(253, 145, 77)"}
-                        />
-                      </u>
-                    </div>
-                  );
-                }}
-              </Dropzone>
+              ) : this.state.temporaryImageURL !== null ? (
+                <img
+                  style={{ width: 50, height: 50 }}
+                  src={this.state.temporaryImageURL}
+                />
+              ) : null}
             </div>
+            <Dropzone
+              onDrop={this.editProfile}
+              accept="image/*"
+              style={{ height: 100 }}
+            >
+              {({ getRootProps, getInputProps, isDragActive }) => {
+                return (
+                  <div {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    <u>
+                      <FloatingActionButton
+                        backgroundColor={grey100}
+                        style={{ margin: 10 }}
+                      >
+                        {<FileFileUpload style={{ fill: "#fd914d" }} />}
+                      </FloatingActionButton>
+                    </u>
+                  </div>
+                );
+              }}
+            </Dropzone>
           </div>
           <div style={{ padding: 10, alignItems: "center", marginLeft: "35%" }}>
             {this.props.match.params.projectId !== undefined ? (
