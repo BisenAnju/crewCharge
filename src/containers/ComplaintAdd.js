@@ -39,6 +39,7 @@ class NewComplaintContainer extends React.Component {
     let uid = [],
       ths = this;
     //////// encrypt //////////
+    uid.push(this.props.user.uid);
     this.state.adminDetails.map(data => {
       uid.push(data.uid);
     });
