@@ -234,7 +234,9 @@ class TeamAllocationMissionList extends React.Component {
                       <MenuItem
                         onClick={e => {
                           e.preventDefault();
-                          this.props.history.push("/teamallocation/project");
+                          this.props.history.push(
+                            "/teamallocation/project/new"
+                          );
                         }}
                       >
                         Add Project
