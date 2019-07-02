@@ -125,9 +125,8 @@ class ComplaintList extends React.Component {
                         data => data.id === doc.userId
                       );
                       let compType = this.props.complaintType.find(
-                        data => data.value === doc.complaintType
+                        data => data.value === doc.Type
                       );
-                      console.log(doc);
                       try {
                         doc.complaintType = compType.displayName;
                         doc.username = userdata.displayName;

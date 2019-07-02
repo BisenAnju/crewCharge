@@ -19,11 +19,25 @@ class LoginContainer extends Component {
         userEmailId: this.props.firebase.auth.currentUser.email
       };
 
-      let QuickEncrypt = require("quick-encrypt");
-      // let keys = QuickEncrypt.generate(2048);
+      let QuickEncrypt = require("quick-encrypt"),
+        keys = QuickEncrypt.generate(2048),
+        publicKey;
       console.time("time");
-      let publicKey = "";
-      // localStorage.setItem("privatekey", keys.private);
+      if (
+        localStorage.getItem("publickey") === "" ||
+        localStorage.getItem("publickey") === null ||
+        localStorage.getItem("publickey") === undefined
+      ) {
+        localStorage.setItem("publickey", keys.public);
+      }
+      publicKey = localStorage.getItem("publickey");
+      if (
+        localStorage.getItem("privatekey") === "" ||
+        localStorage.getItem("privatekey") === null ||
+        localStorage.getItem("privatekey") === undefined
+      ) {
+        localStorage.setItem("privatekey", keys.private);
+      }
       console.timeEnd("time");
       //ADD USER
       this.props.db

@@ -1,8 +1,12 @@
 import React from "react";
 import withFirebase from "../hoc/withFirebase";
-import NewComplaint from "../components/ComplaintAdd";
 import withUser from "../hoc/withUser";
-import details from "material-ui/svg-icons/image/details";
+import { serverPublicKey, serverFunction } from "../constants/server";
+import NewComplaint from "../components/ComplaintAdd";
+import { async } from "q";
+
+const QuickEncrypt = require("quick-encrypt");
+const Cryptr = require("cryptr");
 
 class NewComplaintContainer extends React.Component {
   constructor(props) {
@@ -32,17 +36,38 @@ class NewComplaintContainer extends React.Component {
       });
   }
   AddComplaint = data => {
-    let ths = this;
+    let uid = [],
+      ths = this;
+    //////// encrypt //////////
+    this.state.adminDetails.map(data => {
+      uid.push(data.uid);
+    });
+
+    const description =
+        data.description.charAt(0).toUpperCase() + data.description.slice(1),
+      title = data.title.charAt(0).toUpperCase() + data.title.slice(1),
+      Uid = this.props.user.uid;
+
+    let toId = uid,
+      randomKey = Math.floor(Math.random() * 1000 + 1).toString();
+
+    const cryptr = new Cryptr(randomKey);
+    let encryptedDescription = cryptr.encrypt(description),
+      encryptedTitle = cryptr.encrypt(title),
+      encryptedUid = cryptr.encrypt(Uid),
+      encryptedKeyForServer = QuickEncrypt.encrypt(randomKey, serverPublicKey);
+    ///////////encrypt///////////
     this.props.db
       .collection("complaints")
       .add({
-        userId: this.props.user.uid,
+        encryptedKeyForServer: encryptedKeyForServer,
+        receiverId: toId,
+        userId: encryptedUid,
         complaintType: data.complaintType,
         isAnonymous: data.isAnonymous,
         isArchived: false,
-        title: data.title.charAt(0).toUpperCase() + data.title.slice(1),
-        description:
-          data.description.charAt(0).toUpperCase() + data.description.slice(1),
+        title: encryptedTitle,
+        description: encryptedDescription,
         priority: data.priority,
         addedOn: new Date()
       })
@@ -99,7 +124,6 @@ class NewComplaintContainer extends React.Component {
       <NewComplaint
         complaintType={this.props.complaintType}
         AddComplaint={this.AddComplaint}
-        adminDetails={this.state.adminDetails}
       />
     );
   }
