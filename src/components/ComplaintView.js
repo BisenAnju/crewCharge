@@ -130,9 +130,7 @@ class ComplaintView extends React.Component {
                   secondaryTextLines={1}
                   disabled
                   secondaryText={"Date"}
-                  primaryText={moment(
-                    new Date(this.props.data.addedOn.seconds * 1000)
-                  ).format("DD MMM YYYY")}
+                  primaryText={this.props.data.date}
                 />
                 <ListItem
                   disabled

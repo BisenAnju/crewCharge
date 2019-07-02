@@ -165,11 +165,12 @@ class ComplaintList extends React.Component {
                               secondaryText={
                                 <p>
                                   <span>
-                                    {doc.title +
+                                    {doc.title + " - " + doc.addedOn}
+                                    {/* {doc.title +
                                       " - " +
                                       moment(
                                         new Date(doc.addedOn.seconds * 1000)
-                                      ).format("DD MMM YYYY")}
+                                      ).format("DD MMM YYYY")} */}
                                   </span>
                                   <br />
                                   {doc.priority === "high" ? (

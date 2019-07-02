@@ -83,7 +83,7 @@ class ComplaintViewContainer extends React.Component {
       .then(async doc => {
         if (doc.exists) {
           const detail = doc.data();
-          detail.date = detail.addedOn.toDate();
+          // detail.date = detail.addedOn.toDate();
           detail.complaintType = this.props.complaintType.find(
             data => data.value === detail.complaintType
           ).displayName;
@@ -105,7 +105,7 @@ class ComplaintViewContainer extends React.Component {
               );
               const cryptr = new Cryptr(decryptedKeyFromServer);
               detail.description = await cryptr.decrypt(detail.description);
-              detail.userId = await cryptr.decrypt(detail.userId);
+              detail.date = await cryptr.decrypt(detail.addedOn);
               detail.title = await cryptr.decrypt(detail.title);
               let userdata = this.props.userData.find(
                 data => data.uid === detail.userId

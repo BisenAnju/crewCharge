@@ -87,7 +87,7 @@ class ComplaintListContainer extends React.Component {
                     details.description
                   );
                   details.title = await cryptr.decrypt(details.title);
-                  details.userId = await cryptr.decrypt(details.userId);
+                  details.addedOn = await cryptr.decrypt(details.addedOn);
                 }
               }
               ///////////// list ///////////

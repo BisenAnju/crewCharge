@@ -47,7 +47,8 @@ class NewComplaintContainer extends React.Component {
     const description =
         data.description.charAt(0).toUpperCase() + data.description.slice(1),
       title = data.title.charAt(0).toUpperCase() + data.title.slice(1),
-      Uid = this.props.user.uid;
+      d = new Date(),
+      date = d.toDateString();
 
     let toId = uid,
       randomKey = Math.floor(Math.random() * 1000 + 1).toString();
@@ -55,7 +56,7 @@ class NewComplaintContainer extends React.Component {
     const cryptr = new Cryptr(randomKey);
     let encryptedDescription = cryptr.encrypt(description),
       encryptedTitle = cryptr.encrypt(title),
-      encryptedUid = cryptr.encrypt(Uid),
+      encryptedDate = cryptr.encrypt(date),
       encryptedKeyForServer = QuickEncrypt.encrypt(randomKey, serverPublicKey);
     ///////////encrypt///////////
     this.props.db
@@ -63,14 +64,14 @@ class NewComplaintContainer extends React.Component {
       .add({
         encryptedKeyForServer: encryptedKeyForServer,
         receiverId: toId,
-        userId: encryptedUid,
+        userId: this.props.user.uid,
         complaintType: data.complaintType,
         isAnonymous: data.isAnonymous,
         isArchived: false,
         title: encryptedTitle,
         description: encryptedDescription,
         priority: data.priority,
-        addedOn: new Date()
+        addedOn: encryptedDate
       })
       .then(ref => {
         if (ref.id !== "undefined") {
