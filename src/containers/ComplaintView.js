@@ -1,6 +1,10 @@
 import React from "react";
 import withFirebase from "../hoc/withFirebase";
+import withUser from "../hoc/withUser";
 import ComplaintView from "../components/ComplaintView";
+
+const QuickEncrypt = require("quick-encrypt");
+const Cryptr = require("cryptr");
 
 class ComplaintViewContainer extends React.Component {
   constructor(props) {
@@ -62,6 +66,7 @@ class ComplaintViewContainer extends React.Component {
       });
   }
   componentWillMount() {
+    let ths = this;
     this.props.db
       .collection("users")
       .doc(this.props.loggedInUser.uid)
@@ -75,21 +80,44 @@ class ComplaintViewContainer extends React.Component {
       .collection("complaints")
       .doc(this.props.match.params.id)
       .get()
-      .then(doc => {
+      .then(async doc => {
         if (doc.exists) {
           const detail = doc.data();
-          detail.date = doc.data().addedOn.toDate();
-          let userdata = this.props.userData.find(
-            data => data.uid === doc.data().userId
-          );
-          detail.playerid = userdata.userNotificationPlayerId;
-          detail.userImageURL = userdata.photoURL;
-          detail.userName = userdata.displayName;
+          // detail.date = detail.addedOn.toDate();
           detail.complaintType = this.props.complaintType.find(
-            data => data.value === doc.data().complaintType
+            data => data.value === detail.complaintType
           ).displayName;
-
+          ///////////// list ///////////
+          let a = localStorage.getItem("privatekey");
+          if (typeof detail.receiverId === "object") {
+            if (detail.receiverId.find(data => data === this.props.user.uid)) {
+              var func = this.props.firebase.function.httpsCallable("encPrac");
+              var encryptedKeyforReciever = await func({
+                encryptedKeyForServer: detail.encryptedKeyForServer,
+                docId: doc.id,
+                requesterId: ths.props.user.uid
+              }).then(res => {
+                return res.data;
+              });
+              var decryptedKeyFromServer = await QuickEncrypt.decrypt(
+                encryptedKeyforReciever.toString(),
+                a.toString()
+              );
+              const cryptr = new Cryptr(decryptedKeyFromServer);
+              detail.description = await cryptr.decrypt(detail.description);
+              detail.date = await cryptr.decrypt(detail.addedOn);
+              detail.title = await cryptr.decrypt(detail.title);
+              let userdata = this.props.userData.find(
+                data => data.uid === detail.userId
+              );
+              detail.playerid = userdata.userNotificationPlayerId;
+              detail.userImageURL = userdata.photoURL;
+              detail.userName = userdata.displayName;
+            }
+          }
+          ///////////// list ///////////
           this.setState({ detail, isLoading: false });
+          console.log(detail);
         }
       });
   }
@@ -105,4 +133,4 @@ class ComplaintViewContainer extends React.Component {
   }
 }
 
-export default withFirebase(ComplaintViewContainer);
+export default withUser(withFirebase(ComplaintViewContainer));

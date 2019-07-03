@@ -2,7 +2,6 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
-import { serverPublicKey, serverFunction } from "../constants/server";
 import {
   TextField,
   Snackbar,
@@ -16,9 +15,6 @@ import {
   SelectfieldClass,
   AnonymousRadioButton
 } from "./ComplaintAddRadioButton";
-
-const QuickEncrypt = require("quick-encrypt");
-const Cryptr = require("cryptr");
 
 const styles = {
   block: { marginTop: "2%" },
@@ -59,69 +55,17 @@ class NewComplaint extends React.Component {
 
   validateAll(e) {
     e.preventDefault();
-    // let uid = [];
-    // this.props.adminDetails.map(data => {
-    //   uid.push(data.uid);
-    // });
-    // const dataToEncrypt = "hello";
-    // var toId = uid;
-    // var randomKey = Math.floor(Math.random() * 1000 + 1).toString();
-    // console.log(randomKey);
-    // const cryptr = new Cryptr(randomKey);
-    // var encryptedMsg = cryptr.encrypt(dataToEncrypt);
-    // console.log(encryptedMsg);
-    // var encryptedKeyForServer = QuickEncrypt.encrypt(
-    //   randomKey,
-    //   serverPublicKey
-    // );
-    // console.log("encrypted key for server");
-    // console.log(encryptedKeyForServer);
-    // this.props.db.collection("AEnc").add({
-    //   toId: toId,
-    //   encryptedMsg: encryptedMsg,
-    //   encryptedKeyForServer: encryptedKeyForServer
-    // });
-
-    /////////////////////////////askdlfjskdjfljalsdjflkasjdf
-    // console.log(this.props);
-    // let messages = [];
-    // this.props.db.collection("AEnc").onSnapshot(snapshot => {
-    //   snapshot.forEach(async snap => {
-    //     let s = snap.data();
-    //     console.log("tee");
-    //     if (typeof s.toId === "object") {
-    //       if (s.toId.find(data => data === this.props.user.uid)) {
-    //         var func = this.props.firebase.function.httpsCallable("encPrac");
-    //         var encryptedKeyforReciever = await func({
-    //           encryptedKeyForServer: s.encryptedKeyForServer.toString(),
-    //           docId: snap.id.toString(),
-    //           requesterId: this.props.user.uid
-    //         }).then(res => {
-    //           console.log(res.data);
-    //           return res.data;
-    //         });
-
-    //         var decryptedKeyFromServer = await QuickEncrypt.decrypt(
-    //           encryptedKeyforReciever,
-    //           localStorage.getItem("privateKey")
-    //         );
-    //         const cryptr = new Cryptr(decryptedKeyFromServer);
-    //         const decryptedString = await cryptr.decrypt(s.encryptedMsg);
-    //         messages.push({
-    //           fromId: s.fromId,
-    //           toId: s.toId,
-    //           msg: decryptedString
-    //         });
-    //       }
-    //     } else {
-    //       console.log("i think it is group chat");
-    //     }
-    //     console.log(messages);
-    //   });
-    // });
-    ////////////////////////////asdfsdfsdf
-
     let ths = this;
+    // validate is internet connected
+    if (navigator.onLine === false) {
+      this.setState({
+        loading: false,
+        message: "No internet access",
+        snackOpen: true
+      });
+      return false;
+    }
+
     // validate isAnonymous,priority,complaint type,complaint detail
     if (
       this.state.isAnonymous === null ||
@@ -131,16 +75,6 @@ class NewComplaint extends React.Component {
       this.state.title === ""
     ) {
       this.setState({ snackOpen: true });
-      return false;
-    }
-
-    // validate is internet connected
-    if (navigator.onLine === false) {
-      this.setState({
-        loading: false,
-        message: "No internet access",
-        snackOpen: true
-      });
       return false;
     }
 

@@ -6,6 +6,9 @@ import NewComplaintContainer from "./ComplaintAdd";
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
 
+const QuickEncrypt = require("quick-encrypt");
+const Cryptr = require("cryptr");
+
 class ComplaintListContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -22,25 +25,6 @@ class ComplaintListContainer extends React.Component {
     this.handleArchive = this.handleArchive.bind(this);
   }
   componentWillMount() {
-    this.props.db
-      .collection("complaintType")
-      .get()
-      .then(
-        doc => {
-          const complaintTypeData = [];
-          doc.forEach(docitem => {
-            if (docitem.exists) {
-              complaintTypeData.push(docitem.data());
-            }
-          });
-          this.setState({
-            complaintTypeData
-          });
-        },
-        err => {
-          console.log(`Encountered error: ${err}`);
-        }
-      );
     let userData = [],
       query = this.props.db.collection("users");
     query.onSnapshot(snapshot => {
@@ -70,22 +54,69 @@ class ComplaintListContainer extends React.Component {
         if (this.state.isAdmin === false) {
           query2 = query2.where("userId", "==", this.props.user.uid);
         }
-        query2
-          // .startAt(new Date("2018"))
-          // .where("complaintDate",endAt(new Date('2019-05-05')))
-          .onSnapshot(snapshot => {
-            listItem = [];
-            snapshot.forEach(doc => {
-              if (doc.exists) {
-                const details = doc.data();
-                details.id = doc.id;
-                listItem.push(details);
+        query2.onSnapshot(snapshot => {
+          listItem = [];
+          snapshot.forEach(async doc => {
+            if (doc.exists) {
+              const details = doc.data();
+              details.id = doc.id;
+              details.Type = doc.data().complaintType;
+              ///////////// list ///////////
+              let a = localStorage.getItem("privatekey");
+              let messages = [];
+              if (typeof details.receiverId === "object") {
+                if (
+                  details.receiverId.find(data => data === this.props.user.uid)
+                ) {
+                  var func = this.props.firebase.function.httpsCallable(
+                    "encPrac"
+                  );
+                  var encryptedKeyforReciever = await func({
+                    encryptedKeyForServer: details.encryptedKeyForServer,
+                    docId: doc.id,
+                    requesterId: this.props.user.uid
+                  }).then(res => {
+                    return res.data;
+                  });
+                  var decryptedKeyFromServer = await QuickEncrypt.decrypt(
+                    encryptedKeyforReciever.toString(),
+                    a.toString()
+                  );
+                  const cryptr = new Cryptr(decryptedKeyFromServer);
+                  details.description = await cryptr.decrypt(
+                    details.description
+                  );
+                  details.title = await cryptr.decrypt(details.title);
+                  details.addedOn = await cryptr.decrypt(details.addedOn);
+                }
               }
-            });
-            this.setState({ listItem });
-            this.setState({ isLoading: false });
+              ///////////// list ///////////
+              listItem.push(details);
+            }
           });
+          this.setState({ listItem });
+          this.setState({ isLoading: false });
+        });
       });
+    this.props.db
+      .collection("complaintType")
+      .get()
+      .then(
+        doc => {
+          const complaintTypeData = [];
+          doc.forEach(docitem => {
+            if (docitem.exists) {
+              complaintTypeData.push(docitem.data());
+            }
+          });
+          this.setState({
+            complaintTypeData
+          });
+        },
+        err => {
+          console.log(`Encountered error: ${err}`);
+        }
+      );
   }
   snackbarHandleRequestClose = () => this.setState({ snackOpen: false });
   handleArchive(status, userId) {
