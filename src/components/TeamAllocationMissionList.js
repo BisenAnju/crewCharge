@@ -86,75 +86,79 @@ class TeamAllocationMissionList extends React.Component {
                   }}
                 >
                   <List>
-                    {this.props.missionsList.map((row, index) => (
-                      <div key={index}>
-                        <div>
-                          <ListItem
-                            key={index}
-                            rightIconButton={
-                              <IconMenu
-                                menuStyle={{
-                                  backgroundColor: "rgba(242, 243, 242, 0.5)"
-                                }}
-                                iconButtonElement={
-                                  <IconButton style={{ marginTop: 4 }}>
-                                    <MoreVertIcon />
-                                  </IconButton>
-                                }
-                              >
-                                <MenuItem
-                                  onClick={e => {
-                                    e.preventDefault();
-                                    this.props.history.push(
-                                      "/teamallocation/mission/" +
+                    {this.props.missionsList
+                      .filter(data => data.status === "Active")
+                      .map((row, index) => (
+                        <div key={index}>
+                          <div>
+                            <ListItem
+                              key={index}
+                              rightIconButton={
+                                <IconMenu
+                                  menuStyle={{
+                                    backgroundColor: "rgba(242, 243, 242, 0.5)"
+                                  }}
+                                  iconButtonElement={
+                                    <IconButton style={{ marginTop: 4 }}>
+                                      <MoreVertIcon />
+                                    </IconButton>
+                                  }
+                                >
+                                  <MenuItem
+                                    onClick={e => {
+                                      e.preventDefault();
+                                      this.props.history.push(
+                                        "/teamallocation/mission/" +
+                                          row.missionsId
+                                      );
+                                    }}
+                                  >
+                                    Edit
+                                  </MenuItem>
+                                  <MenuItem
+                                    onClick={e => {
+                                      e.preventDefault();
+                                      this.props.handleArchiveMissionChange(
                                         row.missionsId
-                                    );
-                                  }}
-                                >
-                                  Edit
-                                </MenuItem>
-                                <MenuItem
-                                  onClick={e => {
-                                    e.preventDefault();
-                                    this.props.handleArchiveMissionChange(
-                                      row.missionsId
-                                    );
-                                  }}
-                                >
-                                  Archive
-                                </MenuItem>
-                              </IconMenu>
-                            }
-                          >
-                            <div>
+                                      );
+                                    }}
+                                  >
+                                    Archive
+                                  </MenuItem>
+                                </IconMenu>
+                              }
+                            >
                               <div>
-                                <h4>{row.name}</h4>
+                                <div>
+                                  <h4>{row.name}</h4>
+                                </div>
+                                <div style={{ paddingTop: 5 }}>
+                                  <span style={{ fontSize: "14px" }}>
+                                    {moment(row.deadline.startDate).format(
+                                      "ll"
+                                    ) +
+                                      " - " +
+                                      moment(row.deadline.endDate).format("ll")}
+                                  </span>
+                                </div>
+                                <div
+                                  style={{
+                                    maxWidth: "290px",
+                                    overflowWrap: "break-word",
+                                    wordWrap: "break-word",
+                                    paddingTop: 5
+                                  }}
+                                >
+                                  <span style={{ fontSize: "14px" }}>
+                                    Remarks: {row.deadline.remarks}
+                                  </span>
+                                </div>
                               </div>
-                              <div style={{ paddingTop: 5 }}>
-                                <span style={{ fontSize: "14px" }}>
-                                  {moment(row.deadline.startDate).format("ll") +
-                                    " - " +
-                                    moment(row.deadline.endDate).format("ll")}
-                                </span>
-                              </div>
-                              <div
-                                style={{
-                                  maxWidth: "290px",
-                                  overflowWrap: "break-word",
-                                  wordWrap: "break-word",
-                                  paddingTop: 5
-                                }}
-                              >
-                                <span style={{ fontSize: "14px" }}>
-                                  Remarks: {row.deadline.remarks}
-                                </span>
-                              </div>
-                            </div>
-                          </ListItem>
+                            </ListItem>
+                          </div>
+                          <Divider style={{ backgroundColor: orange100 }} />
                         </div>
-                        <Divider style={{ backgroundColor: orange100 }} />
-                      </div>
-                    ))}
+                      ))}
                   </List>
                 </div>
               </div>

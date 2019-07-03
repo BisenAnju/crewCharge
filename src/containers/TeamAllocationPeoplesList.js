@@ -15,6 +15,7 @@ class TeamAllocationPeoplesListContainer extends Component {
     super(props);
     this.state = {
       isLoading: true,
+      isLoadingMission: true,
       usersList: [],
       projectsList: [],
       missionsList: [],
@@ -31,10 +32,10 @@ class TeamAllocationPeoplesListContainer extends Component {
       .collection("users")
       .orderBy("displayName")
       .onSnapshot(snapshot => {
-        snapshot.docChanges().forEach(doc => {
-          if (doc.doc.exists) {
-            const usersDetails = doc.doc.data();
-            usersDetails.userId = doc.doc.id;
+        snapshot.forEach(doc => {
+          if (doc.exists) {
+            const usersDetails = doc.data();
+            usersDetails.userId = doc.id;
             usersList.push(usersDetails);
           } else {
             alert("No Data Found");
@@ -47,10 +48,11 @@ class TeamAllocationPeoplesListContainer extends Component {
       .where("status", "==", "Active")
       .orderBy("name")
       .onSnapshot(snapshot => {
-        snapshot.docChanges().forEach(doc => {
-          if (doc.doc.exists) {
-            const projectDetails = doc.doc.data();
-            projectDetails.projectId = doc.doc.id;
+        projectsList = [];
+        snapshot.forEach(doc => {
+          if (doc.exists) {
+            const projectDetails = doc.data();
+            projectDetails.projectId = doc.id;
             projectsList.push(projectDetails);
           } else {
             alert("No Data Found");
@@ -63,26 +65,26 @@ class TeamAllocationPeoplesListContainer extends Component {
       .where("status", "==", "Active")
       .orderBy("name")
       .onSnapshot(snapshot => {
-        snapshot.docChanges().forEach(doc => {
-          if (doc.doc.exists) {
-            const missionsDetails = doc.doc.data();
-            missionsDetails.missionsId = doc.doc.id;
+        missionsList = [];
+        snapshot.forEach(doc => {
+          if (doc.exists) {
+            const missionsDetails = doc.data();
+            missionsDetails.missionsId = doc.id;
             missionsList.push(missionsDetails);
           } else {
             alert("No Data Found");
           }
         });
-
-        this.setState({ isLoading: false, missionsList });
+        this.setState({ isLoadingMission: false, missionsList });
       });
     this.props.db
       .collection("leaves")
       .where("leaveStatus", "==", "Approved")
       .onSnapshot(snapshot => {
-        snapshot.docChanges().forEach(doc => {
-          if (doc.doc.exists) {
-            const leavesDetails = doc.doc.data();
-            leavesDetails.leavesId = doc.doc.id;
+        snapshot.forEach(doc => {
+          if (doc.exists) {
+            const leavesDetails = doc.data();
+            leavesDetails.leavesId = doc.id;
             leavesList.push(leavesDetails);
           } else {
             alert("No Data Found");
@@ -106,7 +108,9 @@ class TeamAllocationPeoplesListContainer extends Component {
       .then(this.setState({ massage: "Your Data Deleted" }));
   };
   render() {
-    return (
+    return this.state.isLoadingMission ? (
+      "wait"
+    ) : (
       <div>
         <Router>
           <Switch>
