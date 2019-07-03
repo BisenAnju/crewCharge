@@ -22,7 +22,6 @@ class NewComplaintContainer extends React.Component {
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
-          console.log(doc.data());
           if (doc.exists && doc.data().userNotificationPlayerId !== undefined) {
             const details = doc.data();
             details.id = doc.id;
@@ -107,7 +106,12 @@ class NewComplaintContainer extends React.Component {
             };
             var message = {
               app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
-              contents: { en: data.complaintTypeName },
+              contents: {
+                en:
+                  data.isAnonymous === true
+                    ? "Anonymous"
+                    : ths.props.user.displayName
+              },
               include_player_ids: ths.state.playerIds,
               headings: { en: data.title },
               data: { Route: "/complaintview/", Id: ref.id }
