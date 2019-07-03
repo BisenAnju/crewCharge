@@ -4,11 +4,6 @@ import withUser from "../hoc/withUser";
 import moment from "moment";
 import "../styles/style.css";
 import { List, ListItem, CircularProgress, Avatar, Divider } from "material-ui";
-import {
-  ActionFlightTakeoff,
-  MapsLocalHospital,
-  SocialSentimentVerySatisfied
-} from "material-ui/svg-icons";
 const tabStyles = {
   headline: {
     fontSize: 24,

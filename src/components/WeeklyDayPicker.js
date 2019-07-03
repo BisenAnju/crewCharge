@@ -1,6 +1,5 @@
-import React, { PropTypes } from "react";
+import React from "react";
 import moment from "moment";
-import styles from "../styles/style.css";
 import { withRouter } from "react-router-dom";
 export class DayCircle extends React.Component {
   makeClassNames() {
@@ -217,7 +216,7 @@ class ReactWeeklyDayPicker extends React.Component {
   checkSelectedDay(day) {
     let selected = false;
     if (this.state.selectedDays.length > 0) {
-      this.state.selectedDays.forEach((d, i) => {
+      this.state.selectedDays.forEach(d => {
         if (day.isSame(d, "day")) {
           selected = true;
         }
@@ -229,21 +228,21 @@ class ReactWeeklyDayPicker extends React.Component {
     let unavailable = false;
     if (this.state.unavailables) {
       if (this.state.unavailables.weekly) {
-        this.state.unavailables.weekly.forEach((d, i) => {
+        this.state.unavailables.weekly.forEach(d => {
           if (day.weekday() === d) {
             unavailable = false;
           }
         });
       }
       if (this.state.unavailables.dates) {
-        this.state.unavailables.dates.forEach((d, i) => {
+        this.state.unavailables.dates.forEach(d => {
           if (day.isSame(moment(d), "day")) {
             unavailable = false;
           }
         });
       }
       if (this.state.unavailables.relative) {
-        this.state.unavailables.relative.forEach((r, i) => {
+        this.state.unavailables.relative.forEach(r => {
           if (
             day.isSame(
               moment()
@@ -269,21 +268,21 @@ class ReactWeeklyDayPicker extends React.Component {
     let hidden = false;
     if (this.state.hiddens) {
       if (this.state.hiddens.weekly) {
-        this.state.hiddens.weekly.forEach((d, i) => {
+        this.state.hiddens.weekly.forEach(d => {
           if (day.weekday() === d) {
             hidden = true;
           }
         });
       }
       if (this.state.hiddens.dates) {
-        this.state.hiddens.dates.forEach((d, i) => {
+        this.state.hiddens.dates.forEach(d => {
           if (day.isSame(moment(d), "day")) {
             hidden = true;
           }
         });
       }
       if (this.state.hiddens.relative) {
-        this.state.hiddens.relative.forEach((r, i) => {
+        this.state.hiddens.relative.forEach(r => {
           if (
             day.isSame(
               moment()

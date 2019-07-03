@@ -3,11 +3,6 @@ import { withRouter } from "react-router-dom";
 import withUser from "../hoc/withUser";
 import moment from "moment";
 import { List, ListItem, CircularProgress, Avatar, Divider } from "material-ui";
-import {
-  ActionFlightTakeoff,
-  MapsLocalHospital,
-  SocialSentimentVerySatisfied
-} from "material-ui/svg-icons";
 const tabStyles = {
   headline: {
     fontSize: 24,

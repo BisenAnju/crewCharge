@@ -128,6 +128,7 @@ class ComplaintType extends Component {
               />
             ) : this.state.temporaryImageURL !== null ? (
               <img
+                alt={"img"}
                 style={{ width: 50, height: 50 }}
                 src={this.state.temporaryImageURL}
               />

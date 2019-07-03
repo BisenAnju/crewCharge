@@ -18,9 +18,6 @@ import {
   ActionCheckCircle,
   NavigationCancel,
   CommunicationComment,
-  ActionFlightTakeoff,
-  MapsLocalHospital,
-  SocialSentimentVerySatisfied,
   HardwareKeyboardArrowRight,
   ImageEdit
 } from "material-ui/svg-icons";
@@ -64,7 +61,7 @@ class LeaveEmployeeDetails extends Component {
         />
       );
   };
-  handleDraft = e => {
+  handleDraft = () => {
     let playerId = this.props.userData.filter(
       user => user.uid === this.props.user.uid
     )[0].userNotificationPlayerId;
