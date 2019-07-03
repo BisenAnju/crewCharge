@@ -89,7 +89,7 @@ class NewComplaintContainer extends React.Component {
               data: { Route: "/complaintview/", Id: ref.id }
             };
             console.log(ths.state.playerIds);
-            sendNotification(message);
+            // sendNotification(message);
           }, 2000);
         }
       });
