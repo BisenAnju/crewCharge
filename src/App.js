@@ -24,7 +24,8 @@ class App extends Component {
       isLoading: true,
       userData: [],
       leaveData: [],
-      complaintTypeData: []
+      complaintTypeData: [],
+      u: null
     };
   }
   componentWillMount() {
@@ -66,6 +67,7 @@ class App extends Component {
         {this.props.user ? (
           <div>
             <Router>
+              {localStorage.setItem("user", this.props.user)}
               <Switch>
                 <Route
                   path={"/teamallocation"}
@@ -144,14 +146,16 @@ class App extends Component {
             </Router>
           </div>
         ) : (
-          <div>
-            <Router>
-              <Route
-                path={"/"}
-                render={props => <LoginContainer {...props} />}
-              />
-            </Router>
-          </div>
+          localStorage.getItem("user") === null && (
+            <div>
+              <Router>
+                <Route
+                  path={"/"}
+                  render={props => <LoginContainer {...props} />}
+                />
+              </Router>
+            </div>
+          )
         )}
       </div>
     );

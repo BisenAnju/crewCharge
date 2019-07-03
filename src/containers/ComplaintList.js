@@ -54,7 +54,7 @@ class ComplaintListContainer extends React.Component {
         if (this.state.isAdmin === false) {
           query2 = query2.where("userId", "==", this.props.user.uid);
         }
-        query2.onSnapshot(snapshot => {
+        query2.onSnapshot(async snapshot => {
           listItem = [];
           snapshot.forEach(async doc => {
             if (doc.exists) {
@@ -93,7 +93,7 @@ class ComplaintListContainer extends React.Component {
               listItem.push(details);
             }
           });
-          this.setState({ listItem });
+          await this.setState({ listItem });
           this.setState({ isLoading: false });
         });
       });
