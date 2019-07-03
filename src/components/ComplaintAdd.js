@@ -40,7 +40,10 @@ class NewComplaint extends React.Component {
 
   // get value of selected option of selectfield
   selectChange = (event, index, complaintType) => {
-    this.setState({ complaintType });
+    this.setState({
+      complaintType,
+      complaintTypeName: event.target.firstChild.nodeValue
+    });
   };
 
   validateInput = e => {

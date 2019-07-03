@@ -212,7 +212,7 @@ class ComplaintView extends React.Component {
                       />
                     </CardActions>
                   </div>
-                ) : (
+                ) : this.props.data.statusByAdmin !== undefined ? (
                   <div>
                     <Subheader>Action by admin</Subheader>
                     <ListItem
@@ -228,7 +228,7 @@ class ComplaintView extends React.Component {
                       primaryText={this.props.data.adminReply}
                     />
                   </div>
-                )}
+                ) : null}
               </Card>
             </div>
           )}
