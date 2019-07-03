@@ -59,7 +59,6 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
-      "cordova-universal-links-plugin": {},
       "cordova-plugin-buildinfo": {},
       "cordova-plugin-browsertab": {},
       "cordova-plugin-inappbrowser": {},
@@ -69,7 +68,8 @@
         "ANDROID_HOST": " ",
         "ANDROID_PATHPREFIX": "/"
       },
-      "onesignal-cordova-plugin": {}
+      "onesignal-cordova-plugin": {},
+      "cordova-universal-links-plugin": {}
     },
     "platforms": [
       "browser",
