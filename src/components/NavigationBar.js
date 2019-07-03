@@ -22,7 +22,7 @@ import {
   ActionAssignment,
   ActionSettings
 } from "material-ui/svg-icons";
-
+import privacy from "../images/privacy.png";
 class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
@@ -236,7 +236,24 @@ class NavigationBar extends React.Component {
                 </div>
               ) : null
             )}
-
+            <ListItem
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push("/privacypolicy");
+              }}
+              primaryText="Privacy Policy"
+              leftIcon={
+                <Avatar
+                  backgroundColor="white"
+                  src={privacy}
+                  style={{
+                    borderRadius: 0,
+                    marginLeft: "22px",
+                    marginTop: "10px"
+                  }}
+                />
+              }
+            />
             <Divider />
             <ListItem
               onClick={() => {

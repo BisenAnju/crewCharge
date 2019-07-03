@@ -8,7 +8,7 @@ import DashboardContainer from "./containers/Dashboard";
 import ComplaintList from "./containers/ComplaintList";
 import ComplaintView from "./containers/ComplaintView";
 import LoginContainer from "./containers/Login";
-// import "./styles/App.css";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 import LeaveDashboardContainer from "./containers/LeaveDashboard";
 import LeaveAdminApprovalRejectionContainer from "./containers/LeaveAdminApprovalRejection";
 import LeaveEmployeeDetailsContainer from "./containers/LeaveEmployeeDetails";
@@ -67,6 +67,10 @@ class App extends Component {
           <div>
             <Router>
               <Switch>
+                <Route
+                  path={"/privacypolicy"}
+                  render={props => <PrivacyPolicy />}
+                />
                 <Route
                   path={"/teamallocation"}
                   render={props => (
