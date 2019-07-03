@@ -1,9 +1,8 @@
 import React from "react";
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
-import { serverPublicKey, serverFunction } from "../constants/server";
+import { serverPublicKey } from "../constants/server";
 import NewComplaint from "../components/ComplaintAdd";
-import { async } from "q";
 
 const QuickEncrypt = require("quick-encrypt");
 const Cryptr = require("cryptr");
@@ -40,9 +39,7 @@ class NewComplaintContainer extends React.Component {
       ths = this;
     //////// encrypt //////////
     uid.push(this.props.user.uid);
-    this.state.adminDetails.map(data => {
-      uid.push(data.uid);
-    });
+    this.state.adminDetails.map(data => uid.push(data.uid));
 
     const description =
         data.description.charAt(0).toUpperCase() + data.description.slice(1),
@@ -116,7 +113,7 @@ class NewComplaintContainer extends React.Component {
               data: { Route: "/complaintview/", Id: ref.id }
             };
             console.log(ths.state.playerIds);
-            // sendNotification(message);
+            sendNotification(message);
           }, 2000);
         }
       });
