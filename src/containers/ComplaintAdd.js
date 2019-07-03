@@ -110,13 +110,13 @@ class NewComplaintContainer extends React.Component {
             };
             var message = {
               app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
-              contents: { en: data.complaintType },
+              contents: { en: data.complaintTypeName },
               include_player_ids: ths.state.playerIds,
               headings: { en: "New Complaint" },
               data: { Route: "/complaintview/", Id: ref.id }
             };
             console.log(ths.state.playerIds);
-            sendNotification(message);
+            // sendNotification(message);
           }, 2000);
         }
       });
