@@ -55,7 +55,7 @@ class ComplaintView extends React.Component {
     });
   };
   handleOpen = val => this.setState({ open: val });
-  handleChange = (event, index, statusByAdmin) =>
+  handleChange = (_event, _index, statusByAdmin) =>
     this.setState({ statusByAdmin });
   inputValidation = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -103,23 +103,7 @@ class ComplaintView extends React.Component {
                       size={45}
                       backgroundColor="transparent"
                       color="rgb(253, 145, 77)"
-                      {...(this.props.data.complaintType === "Harassment"
-                        ? {
-                            src:
-                              icn[
-                                this.props.data.complaintType
-                                  .replace(" ", "")
-                                  .replace("/", "")
-                              ]
-                          }
-                        : {
-                            icon:
-                              icn[
-                                this.props.data.complaintType
-                                  .replace(" ", "")
-                                  .replace("/", "")
-                              ]
-                          })}
+                      src={this.props.data.iconUrl}
                     />
                   }
                   primaryText={this.props.data.userName}

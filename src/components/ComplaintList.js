@@ -18,14 +18,6 @@ import Layout from "../layouts/Layout";
 import UnArchived from "material-ui/svg-icons/content/unarchive";
 import moment from "moment";
 import Feedback from "material-ui/svg-icons/action/feedback";
-import Overworked from "material-ui/svg-icons/action/work";
-import LackOfVacationSickLeave from "material-ui/svg-icons/action/watch-later";
-import Pay from "material-ui/svg-icons/action/payment";
-import OfficeTemperature from "material-ui/svg-icons/image/texture";
-import OfficeCleanliness from "material-ui/svg-icons/places/rv-hookup";
-import Harassment from "../images/harassment.png";
-import Favoritism from "../images/favoritism.png";
-import IssuesWithCoWorkers from "../images/co-workers.png";
 import SwipeableViews from "react-swipeable-views";
 
 const loader = (
@@ -43,17 +35,7 @@ const loader = (
     />
   </center>
 );
-const icn = {
-  IssuesWithCoWorkers: IssuesWithCoWorkers,
-  Favoritism: Favoritism,
-  Harassment: Harassment,
-  Feedback: <Feedback />,
-  Overworked: <Overworked />,
-  LackOfVacationSickLeave: <LackOfVacationSickLeave />,
-  Pay: <Pay />,
-  OfficeTemperature: <OfficeTemperature />,
-  OfficeCleanliness: <OfficeCleanliness />
-};
+
 class ComplaintList extends React.Component {
   constructor(props) {
     super(props);
@@ -131,13 +113,6 @@ class ComplaintList extends React.Component {
                         doc.complaintType = compType.displayName;
                         doc.username = userdata.displayName;
                         doc.userImageURL = userdata.photoURL;
-                        doc.icon =
-                          icn[
-                            doc.complaintType
-                              .replace(" ", "")
-                              .replace("/", "")
-                              .replace("-", "")
-                          ];
                         return (
                           <div key={index}>
                             <ListItem
@@ -221,13 +196,7 @@ class ComplaintList extends React.Component {
                       try {
                         doc.username = userdata.displayName;
                         doc.userImageURL = userdata.photoURL;
-                        doc.icon =
-                          icn[
-                            doc.complaintType
-                              .replace(" ", "")
-                              .replace("/", "")
-                              .replace("-", "")
-                          ];
+
                         return (
                           <ListItem
                             key={index}
@@ -308,13 +277,6 @@ class ComplaintList extends React.Component {
                   );
                   doc.username = userdata.displayName;
                   doc.userImageURL = userdata.photoURL;
-                  doc.icon =
-                    icn[
-                      doc.complaintType
-                        .replace(" ", "")
-                        .replace("/", "")
-                        .replace("-", "")
-                    ];
                   return (
                     <ListItem
                       key={index}

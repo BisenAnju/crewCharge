@@ -18,10 +18,21 @@ class ComplaintViewContainer extends React.Component {
   }
   submit(adminReply, statusByAdmin) {
     let ths = this;
+    //////// encrypt //////////
+    adminReply = adminReply.charAt(0).toUpperCase() + adminReply.slice(1);
+    statusByAdmin =
+      statusByAdmin.charAt(0).toUpperCase() + statusByAdmin.slice(1);
+
+    const cryptr = new Cryptr(this.state.detail.decryptedKeyFromServer);
+    let encryptedAdminReply = cryptr.encrypt(adminReply);
+    ///////////encrypt///////////
     this.props.db
       .collection("complaints")
       .doc(this.props.match.params.id)
-      .update({ adminReply, statusByAdmin })
+      .update({
+        adminReply: encryptedAdminReply,
+        statusByAdmin
+      })
       .then(function() {
         var sendNotification = function(data) {
           var headers = {
@@ -84,9 +95,11 @@ class ComplaintViewContainer extends React.Component {
         if (doc.exists) {
           const detail = doc.data();
           // detail.date = detail.addedOn.toDate();
-          detail.complaintType = this.props.complaintType.find(
+          let com = this.props.complaintType.find(
             data => data.value === detail.complaintType
-          ).displayName;
+          );
+          detail.complaintType = com.displayName;
+          detail.iconUrl = com.iconUrl !== undefined ? com.iconUrl : null;
           ///////////// list ///////////
           let a = localStorage.getItem("privatekey");
           if (typeof detail.receiverId === "object") {
@@ -104,12 +117,16 @@ class ComplaintViewContainer extends React.Component {
                 a.toString()
               );
               const cryptr = new Cryptr(decryptedKeyFromServer);
+              if (detail.statusByAdmin !== undefined) {
+                detail.adminReply = await cryptr.decrypt(detail.adminReply);
+              }
               detail.description = await cryptr.decrypt(detail.description);
               detail.date = await cryptr.decrypt(detail.addedOn);
               detail.title = await cryptr.decrypt(detail.title);
               let userdata = this.props.userData.find(
                 data => data.uid === detail.userId
               );
+              detail.decryptedKeyFromServer = decryptedKeyFromServer;
               detail.playerid = userdata.userNotificationPlayerId;
               detail.userImageURL = userdata.photoURL;
               detail.userName = userdata.displayName;
@@ -117,7 +134,6 @@ class ComplaintViewContainer extends React.Component {
           }
           ///////////// list ///////////
           this.setState({ detail, isLoading: false });
-          console.log(detail);
         }
       });
   }

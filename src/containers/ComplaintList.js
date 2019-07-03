@@ -63,7 +63,6 @@ class ComplaintListContainer extends React.Component {
               details.Type = doc.data().complaintType;
               ///////////// list ///////////
               let a = localStorage.getItem("privatekey");
-              let messages = [];
               if (typeof details.receiverId === "object") {
                 if (
                   details.receiverId.find(data => data === this.props.user.uid)
