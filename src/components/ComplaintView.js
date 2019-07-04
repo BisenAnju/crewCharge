@@ -17,24 +17,6 @@ import {
   Divider
 } from "material-ui";
 import Layout from "../layouts/Layout";
-import moment from "moment";
-import Feedback from "material-ui/svg-icons/action/feedback";
-import Overworked from "material-ui/svg-icons/action/work";
-import LackOfVacationSickLeave from "material-ui/svg-icons/action/watch-later";
-import Pay from "material-ui/svg-icons/action/payment";
-import OfficeTemperature from "material-ui/svg-icons/image/texture";
-import OfficeCleanliness from "material-ui/svg-icons/places/rv-hookup";
-import Harassment from "../images/harassment.png";
-
-const icn = {
-  Harassment: Harassment,
-  Feedback: <Feedback />,
-  Overworked: <Overworked />,
-  LackOfVacationSickLeave: <LackOfVacationSickLeave />,
-  Pay: <Pay />,
-  OfficeTemperature: <OfficeTemperature />,
-  OfficeCleanliness: <OfficeCleanliness />
-};
 
 class ComplaintView extends React.Component {
   constructor(props) {

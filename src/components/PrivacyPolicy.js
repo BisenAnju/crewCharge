@@ -55,7 +55,7 @@ export default class PrivacyPolicy extends React.Component {
               <li>
                 <a
                   href="https://www.google.com/policies/privacy/"
-                  target="_blank"
+                  target={"_blank"}
                 >
                   Google Play Services
                 </a>
@@ -63,7 +63,7 @@ export default class PrivacyPolicy extends React.Component {
               <li>
                 <a
                   href="https://support.google.com/admob/answer/6128543?hl=en"
-                  target="_blank"
+                  target={"_blank"}
                 >
                   AdMob
                 </a>
@@ -71,7 +71,7 @@ export default class PrivacyPolicy extends React.Component {
               <li>
                 <a
                   href="https://firebase.google.com/policies/analytics"
-                  target="_blank"
+                  target={"_blank"}
                 >
                   Firebase Analytics
                 </a>
@@ -79,7 +79,7 @@ export default class PrivacyPolicy extends React.Component {
               <li>
                 <a
                   href="https://www.facebook.com/about/privacy"
-                  target="_blank"
+                  target={"_blank"}
                 >
                   Facebook
                 </a>
@@ -87,7 +87,7 @@ export default class PrivacyPolicy extends React.Component {
               <li>
                 <a
                   href="http://try.crashlytics.com/terms/privacy-policy.pdf"
-                  target="_blank"
+                  target={"_blank"}
                 >
                   Crashlytics
                 </a>

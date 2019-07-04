@@ -17,7 +17,6 @@ import ContentAdd from "material-ui/svg-icons/content/add";
 import Layout from "../layouts/Layout";
 import UnArchived from "material-ui/svg-icons/content/unarchive";
 import moment from "moment";
-import Feedback from "material-ui/svg-icons/action/feedback";
 import SwipeableViews from "react-swipeable-views";
 
 const loader = (

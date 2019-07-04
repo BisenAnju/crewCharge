@@ -1,20 +1,8 @@
 import React, { Component } from "react";
 import { cardStyle } from "./Projects";
 import { withRouter } from "react-router-dom";
-import {
-  CardText,
-  Card,
-  CardHeader,
-  Table,
-  TableBody,
-  TableRow,
-  TableRowColumn,
-  TableHeader,
-  TableHeaderColumn,
-  CircularProgress
-} from "material-ui";
+import { CardText, Card, CardHeader, CircularProgress } from "material-ui";
 import Layout from "../layouts/Layout";
-import theaters from "material-ui/svg-icons/action/theaters";
 
 class Widgets extends Component {
   constructor(props) {
@@ -32,22 +20,9 @@ class Widgets extends Component {
     setTimeout(() => {
       console.log(this.state.widgetList.length);
       const final = [];
-      let singleObj = {};
-      const finalMapRet = this.state.widgetList.map((widget, index) => {
-        // console.log("widget");
-        // console.log(widget);
-
-        singleObj = {
-          widgetId: widget.id,
-          widgetName: widget.name
-          // columnRefName: this.state.columns[index].referenceName,
-          // columnTitle: col.name,
-          // workItemId: workItem.id,
-          // workItemData: workItem.fields
-        };
+      const finalMapRet = this.state.widgetList.map(widget => {
         // console.log("column");
         // console.log(col);
-
         // console.log("workItems");
         // console.log(workItem);
         // return {
@@ -137,50 +112,48 @@ class Widgets extends Component {
                                     {this.state.workItemsList.map(
                                       (workItems, workItemsIndex) => {
                                         if (widgetIndex === workItemsIndex) {
-                                          return workItems.map(
-                                            (workItem, workItemIndex) => {
-                                              return (
-                                                <div>
-                                                  <thead>
-                                                    <tr>
-                                                      {col.referenceName ===
-                                                      "System.Id" ? (
-                                                        <td>{workItem.id}</td>
-                                                      ) : null}
-                                                    </tr>
-                                                  </thead>
-                                                  {Object.entries(
-                                                    workItem.fields
-                                                  ).map(data => {
-                                                    // console.log(data);
-                                                    if (
-                                                      data[0] ===
-                                                      col.referenceName
-                                                    ) {
-                                                      console.log(data[1]);
-                                                      return (
-                                                        <tbody>
-                                                          <tr>
-                                                            {typeof data[1] ===
-                                                            "object" ? (
-                                                              <td>
-                                                                {
-                                                                  data[1]
-                                                                    .displayName
-                                                                }
-                                                              </td>
-                                                            ) : (
-                                                              <td>{data[1]}</td>
-                                                            )}
-                                                          </tr>
-                                                        </tbody>
-                                                      );
-                                                    }
-                                                  })}
-                                                </div>
-                                              );
-                                            }
-                                          );
+                                          return workItems.map(workItem => {
+                                            return (
+                                              <div>
+                                                <thead>
+                                                  <tr>
+                                                    {col.referenceName ===
+                                                    "System.Id" ? (
+                                                      <td>{workItem.id}</td>
+                                                    ) : null}
+                                                  </tr>
+                                                </thead>
+                                                {Object.entries(
+                                                  workItem.fields
+                                                ).map(data => {
+                                                  // console.log(data);
+                                                  if (
+                                                    data[0] ===
+                                                    col.referenceName
+                                                  ) {
+                                                    console.log(data[1]);
+                                                    return (
+                                                      <tbody>
+                                                        <tr>
+                                                          {typeof data[1] ===
+                                                          "object" ? (
+                                                            <td>
+                                                              {
+                                                                data[1]
+                                                                  .displayName
+                                                              }
+                                                            </td>
+                                                          ) : (
+                                                            <td>{data[1]}</td>
+                                                          )}
+                                                        </tr>
+                                                      </tbody>
+                                                    );
+                                                  }
+                                                })}
+                                              </div>
+                                            );
+                                          });
                                         }
                                       }
                                     )}

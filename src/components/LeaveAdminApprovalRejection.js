@@ -7,11 +7,7 @@ import {
   ImageTimer,
   ActionToday,
   CommunicationComment,
-  ActionFlightTakeoff,
-  MapsLocalHospital,
-  SocialSentimentVerySatisfied,
-  HardwareKeyboardArrowRight,
-  ImageEdit
+  HardwareKeyboardArrowRight
 } from "material-ui/svg-icons";
 import {
   Divider,
@@ -66,7 +62,7 @@ class LeaveAdminApprovalRejection extends Component {
       () => this.props.handleChange({ ...this.state })
     );
   };
-  handleReject = e => {
+  handleReject = () => {
     let playerId = this.props.userData.filter(
       user => user.uid === this.props.singleData.userId
     )[0].userNotificationPlayerId;
@@ -78,7 +74,7 @@ class LeaveAdminApprovalRejection extends Component {
       () => this.props.handleChange({ ...this.state })
     );
   };
-  handleDraft = e => {
+  handleDraft = () => {
     let playerId = this.props.userData.filter(
       user => user.uid === this.props.singleData.userId
     )[0].userNotificationPlayerId;
