@@ -30,10 +30,11 @@ class ProjectMissionList extends React.Component {
         });
     };
     contentButton = {
-        bottom: "2%",
-        marginRight:"2%",
+       
+        top:"85%",
+        Right:"10%",
         marginLeft: "79%",
-       position: "relative"
+       position: "fixed"
     };
     render() {
         return (
@@ -212,6 +213,7 @@ class ProjectMissionList extends React.Component {
                             </div>
                         </div>
                 <div style={this.contentButton}>
+                    <div style={{marginBottom:10}}>
                         <FloatingActionButton
                             backgroundColor={"rgb(253, 145, 77)"}
                             
@@ -254,6 +256,7 @@ class ProjectMissionList extends React.Component {
                                 </IconMenu>
                             </div>
                         </FloatingActionButton>
+                    </div>
                         </div>
                     </div>
         );
