@@ -23,7 +23,8 @@ class TeamAllocationProject extends React.Component {
       completed1: false,
       isLoadingSingleUser: true,
       isLoadingUploadImage: 1,
-      temporaryImageURL: null
+      temporaryImageURL: null,
+      loading: false
     };
   }
   componentWillMount() {
@@ -48,7 +49,11 @@ class TeamAllocationProject extends React.Component {
     if (file == null) {
       alert("Invalid File Type!");
     } else {
-      this.setState({ completed1: true, isLoadingUploadImage: 2 });
+      this.setState({
+        completed1: true,
+        loading: true,
+        isLoadingUploadImage: 2
+      });
     }
     new ImageCompressor(file, {
       quality: 0.55,
@@ -69,6 +74,7 @@ class TeamAllocationProject extends React.Component {
             this.setState({
               completed: true,
               pictures,
+              loading: false,
               temporaryImageURL: updatedImageURL,
               isLoadingUploadImage: 3
             });

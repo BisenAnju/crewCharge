@@ -1,6 +1,6 @@
-import React, { PropTypes } from "react";
+import React from "react";
 import moment from "moment";
-import styles from "../styles/style.css";
+import "../styles/style.css";
 import { withRouter } from "react-router-dom";
 export class DayCircle extends React.Component {
   makeClassNames() {

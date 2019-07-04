@@ -10,6 +10,7 @@ import withUser from "../hoc/withUser";
 import TeamAllocationMissionContainer from "./TeamAllocationMission";
 import TeamAllocationProjectContainer from "./TeamAllocationProject";
 import TeamAllocationMissionList from "../components/TeamAllocationMissionList";
+import { loader } from "../constants/loader";
 class TeamAllocationPeoplesListContainer extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +33,7 @@ class TeamAllocationPeoplesListContainer extends Component {
       .collection("users")
       .orderBy("displayName")
       .onSnapshot(snapshot => {
+        usersList = [];
         snapshot.forEach(doc => {
           if (doc.exists) {
             const usersDetails = doc.data();
@@ -81,6 +83,7 @@ class TeamAllocationPeoplesListContainer extends Component {
       .collection("leaves")
       .where("leaveStatus", "==", "Approved")
       .onSnapshot(snapshot => {
+        leavesList = [];
         snapshot.forEach(doc => {
           if (doc.exists) {
             const leavesDetails = doc.data();
@@ -105,11 +108,11 @@ class TeamAllocationPeoplesListContainer extends Component {
       .collection("projects")
       .doc(projectId)
       .update({ status: "Archive" })
-      .then(this.setState({ massage: "Your Data Deleted" }));
+      .then();
   };
   render() {
     return this.state.isLoadingMission ? (
-      "wait"
+      loader
     ) : (
       <div>
         <Router>

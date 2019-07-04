@@ -9,6 +9,7 @@ import TeamAllocationMission from "../components/TeamAllocationMission";
 import TeanAllocationProjectContainer from "./TeamAllocationProject";
 import { withFirebase } from "../firebase";
 import withUser from "../hoc/withUser";
+import * as moment from "moment";
 class TeamAllocationMissionContainer extends Component {
   constructor(props) {
     super(props);
@@ -49,8 +50,8 @@ class TeamAllocationMissionContainer extends Component {
           createdOn: Date(),
           createdBy: this.props.user.uid,
           deadline: {
-            startDate: startDate,
-            endDate: endDate,
+            startDate: moment(startDate).format("lll"),
+            endDate: moment(endDate).format("lll"),
             remarks: remarks
           },
           status: "Active"
@@ -60,7 +61,7 @@ class TeamAllocationMissionContainer extends Component {
             openSnackbar: true,
             message: "Mission Add Success fully"
           }),
-          (window.location = "/teamallocation")
+          this.props.history.push("/teamallocation")
         );
     }
   };
@@ -82,6 +83,8 @@ class TeamAllocationMissionContainer extends Component {
     ) {
       this.setState({ openSnackbar: true, message: "Fill all Required field" });
     } else {
+      console.log(startDate);
+      console.log(endDate);
       this.props.db
         .collection("missions")
         .doc(missionId)
@@ -90,8 +93,8 @@ class TeamAllocationMissionContainer extends Component {
           projectId: projectId,
           assignTo: values,
           deadline: {
-            startDate: startDate,
-            endDate: endDate,
+            startDate: moment(startDate).format("lll"),
+            startDate: moment(endDate).format("lll"),
             remarks: remarks
           },
           status: "Active"
