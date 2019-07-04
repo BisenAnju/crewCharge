@@ -271,6 +271,7 @@ class NavigationBar extends React.Component {
                 />
               }
             />
+            <ListItem insetChildren={true} primaryText={"v1.0.1"} />
           </List>
         </Drawer>
       </div>
