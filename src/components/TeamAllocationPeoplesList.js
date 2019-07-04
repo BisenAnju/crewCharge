@@ -64,7 +64,7 @@ class TeamAllocationPeopleList extends React.Component {
           missionsList.push(data);
         });
     });
-    let missionsfilterList = missionsList.find(
+    let missionsfilterList = missionsList.filter(
       missionData =>
         moment(missionData.deadline.startDate).format("l") <= nowDate &&
         moment(missionData.deadline.endDate).format("l") >= nowDate
