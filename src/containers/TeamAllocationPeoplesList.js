@@ -96,20 +96,7 @@ class TeamAllocationPeoplesListContainer extends Component {
         this.setState({ isLoading: false, leavesList });
       });
   }
-  handleArchiveMissionChange = missionsId => {
-    this.props.db
-      .collection("missions")
-      .doc(missionsId)
-      .update({ status: "Archive" })
-      .then(this.setState({ massage: "Your Data Deleted" }));
-  };
-  handleArchiveProjectChange = projectId => {
-    this.props.db
-      .collection("projects")
-      .doc(projectId)
-      .update({ status: "Archive" })
-      .then();
-  };
+
   render() {
     return this.state.isLoadingMission ? (
       loader
