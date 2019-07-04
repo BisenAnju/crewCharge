@@ -12,6 +12,7 @@ import {
   ListItem,
   Divider
 } from "material-ui";
+import Anonymous from "../images/anonymous.png";
 import Archived from "material-ui/svg-icons/content/archive";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import Layout from "../layouts/Layout";
@@ -42,8 +43,6 @@ class ComplaintList extends React.Component {
       slideIndex: 0,
       style: { background: "aliceblue", fontWeight: "bold" }
     };
-    // console.log(localStorage.getItem("publickey"));
-    // console.log(localStorage.getItem("privatekey"));
   }
   handleChange = slideIndex => this.setState({ slideIndex });
   render() {
@@ -91,83 +90,92 @@ class ComplaintList extends React.Component {
                 overflowX: "hidden"
               }}
             >
-              {this.props.loading
-                ? loader
-                : this.props.listData
-                    .filter(
-                      data =>
-                        (data.adminReply === undefined ||
-                          (data.adminReply !== undefined &&
-                            data.statusByAdmin === "pending")) &&
-                        data.isArchived === false
-                    )
-                    .map((doc, index) => {
-                      let userdata = this.props.userData.find(
-                        data => data.id === doc.userId
-                      );
-                      let compType = this.props.complaintType.find(
-                        data => data.value === doc.Type
-                      );
-                      try {
-                        doc.complaintType = compType.displayName;
-                        doc.username = userdata.displayName;
-                        doc.userImageURL = userdata.photoURL;
-                        return (
-                          <div key={index}>
-                            <ListItem
-                              style={{
-                                borderLeft:
-                                  doc.statusByAdmin === undefined
-                                    ? "4px solid #f08f4c"
-                                    : "4px solid rgb(248, 249, 248)",
-                                fontWeight:
-                                  doc.statusByAdmin === undefined
-                                    ? "bold"
-                                    : "null"
-                              }}
-                              onClick={() =>
-                                this.props.history.push(
-                                  `/complaintview/${doc.id}`
-                                )
+              {this.props.loading ? (
+                loader
+              ) : this.props.pendingList.length > 0 ? (
+                this.props.pendingList.map((doc, index) => {
+                  let userdata = this.props.userData.find(
+                    data => data.id === doc.userId
+                  );
+                  let compType = this.props.complaintType.find(
+                    data => data.value === doc.Type
+                  );
+                  try {
+                    doc.complaintType = compType.displayName;
+                    doc.username =
+                      doc.isAnonymous === false
+                        ? userdata.displayName
+                        : doc.userId === this.props.loggedInUser.uid
+                        ? userdata.displayName
+                        : "Anonymous";
+                    doc.userImageURL = userdata.photoURL;
+                    return (
+                      <div key={index}>
+                        <ListItem
+                          style={{
+                            borderLeft:
+                              doc.statusByAdmin === undefined
+                                ? "4px solid #f08f4c"
+                                : "4px solid rgb(248, 249, 248)",
+                            fontWeight:
+                              doc.statusByAdmin === undefined ? "bold" : "null"
+                          }}
+                          onClick={() =>
+                            this.props.history.push(`/complaintview/${doc.id}`)
+                          }
+                          leftAvatar={
+                            <Avatar
+                              size={48}
+                              src={
+                                doc.isAnonymous === false
+                                  ? doc.userImageURL
+                                  : doc.userId === this.props.loggedInUser.uid
+                                  ? doc.userImageURL
+                                  : Anonymous
                               }
-                              leftAvatar={
-                                <Avatar size={48} src={doc.userImageURL} />
-                              }
-                              hoverColor={"rgba(253, 145, 77, 0.43)"}
-                              secondaryTextLines={2}
-                              primaryText={doc.username}
-                              secondaryText={
-                                <p>
-                                  <span>
-                                    {doc.title + " - " + doc.addedOn}
-                                    {/* {doc.title +
+                            />
+                          }
+                          hoverColor={"rgba(253, 145, 77, 0.43)"}
+                          secondaryTextLines={2}
+                          primaryText={doc.username}
+                          secondaryText={
+                            <p>
+                              <span>
+                                {doc.title + " - " + doc.addedOn}
+                                {/* {doc.title +
                                       " - " +
                                       moment(
                                         new Date(doc.addedOn.seconds * 1000)
                                       ).format("DD MMM YYYY")} */}
-                                  </span>
-                                  <br />
-                                  {doc.priority === "high" ? (
-                                    <span style={{ color: "red" }}>
-                                      {doc.complaintType}
-                                    </span>
-                                  ) : doc.priority === "medium" ? (
-                                    <span style={{ color: "#b3b312" }}>
-                                      {doc.complaintType}
-                                    </span>
-                                  ) : (
-                                    doc.complaintType
-                                  )}
-                                </p>
-                              }
-                            />
-                            <Divider inset={true} />
-                          </div>
-                        );
-                      } catch (e) {
-                        console.log();
-                      }
-                    })}
+                              </span>
+                              <br />
+                              {doc.priority === "high" ? (
+                                <span style={{ color: "red" }}>
+                                  {doc.complaintType}
+                                </span>
+                              ) : doc.priority === "medium" ? (
+                                <span style={{ color: "#b3b312" }}>
+                                  {doc.complaintType}
+                                </span>
+                              ) : (
+                                doc.complaintType
+                              )}
+                            </p>
+                          }
+                        />
+                        <Divider inset={true} />
+                      </div>
+                    );
+                  } catch (e) {
+                    console.log();
+                  }
+                })
+              ) : (
+                <ListItem
+                  disabled={true}
+                  primaryText={"There is no complaint"}
+                />
+              )}
             </List>
           </div>
           <div>
@@ -179,66 +187,77 @@ class ComplaintList extends React.Component {
                 overflowX: "hidden"
               }}
             >
-              {this.props.loading
-                ? loader
-                : this.props.listData
-                    .filter(
-                      data =>
-                        data.statusByAdmin !== undefined &&
-                        data.statusByAdmin === "resolve" &&
-                        data.isArchived === false
-                    )
-                    .map((doc, index) => {
-                      let userdata = this.props.userData.find(
-                        data => data.uid === doc.userId
-                      );
-                      try {
-                        doc.username = userdata.displayName;
-                        doc.userImageURL = userdata.photoURL;
+              {this.props.loading ? (
+                loader
+              ) : this.props.resolvedList.length > 0 ? (
+                this.props.resolvedList.map((doc, index) => {
+                  let userdata = this.props.userData.find(
+                    data => data.uid === doc.userId
+                  );
+                  try {
+                    doc.username =
+                      doc.isAnonymous === false
+                        ? userdata.displayName
+                        : doc.userId === this.props.loggedInUser.uid
+                        ? userdata.displayName
+                        : "Anonymous";
+                    doc.userImageURL = userdata.photoURL;
 
-                        return (
-                          <ListItem
-                            key={index}
-                            onClick={() =>
-                              this.props.history.push(
-                                "/complaintview/" + doc.id
-                              )
-                            }
-                            leftAvatar={<Avatar src={doc.userImageURL} />}
-                            secondaryTextLines={2}
-                            primaryText={doc.username}
-                            secondaryText={
-                              <p>
-                                <span>
-                                  {doc.title +
-                                    " - " +
-                                    moment(
-                                      new Date(doc.addedOn.seconds * 1000)
-                                    ).format("DD MMM YYYY")}
-                                </span>
-                                <br />
-                                {doc.complaintType}
-                              </p>
-                            }
-                            rightIconButton={
-                              <IconButton
-                                onClick={e => {
-                                  e.preventDefault();
-                                  this.props.archive(true, doc.id);
-                                  this.setState({
-                                    lastArchivedDocId: doc.id
-                                  });
-                                }}
-                              >
-                                <Archived />
-                              </IconButton>
-                            }
-                          />
-                        );
-                      } catch (e) {
-                        console.log();
-                      }
-                    })}
+                    return (
+                      <ListItem
+                        key={index}
+                        onClick={() =>
+                          this.props.history.push("/complaintview/" + doc.id)
+                        }
+                        leftAvatar={
+                          doc.isAnonymous === false ? (
+                            <Avatar src={doc.userImageURL} />
+                          ) : doc.userId === this.props.loggedInUser.uid ? (
+                            <Avatar src={doc.userImageURL} />
+                          ) : (
+                            <Avatar icon={Anonymous} />
+                          )
+                        }
+                        secondaryTextLines={2}
+                        primaryText={doc.username}
+                        secondaryText={
+                          <p>
+                            <span>
+                              {doc.title +
+                                " - " +
+                                moment(
+                                  new Date(doc.addedOn.seconds * 1000)
+                                ).format("DD MMM YYYY")}
+                            </span>
+                            <br />
+                            {doc.complaintType}
+                          </p>
+                        }
+                        rightIconButton={
+                          <IconButton
+                            onClick={e => {
+                              e.preventDefault();
+                              this.props.archive(true, doc.id);
+                              this.setState({
+                                lastArchivedDocId: doc.id
+                              });
+                            }}
+                          >
+                            <Archived />
+                          </IconButton>
+                        }
+                      />
+                    );
+                  } catch (e) {
+                    console.log();
+                  }
+                })
+              ) : (
+                <ListItem
+                  disabled={true}
+                  primaryText={"There is no resolved complaint"}
+                />
+              )}
             </List>
           </div>
           <div>
@@ -268,9 +287,8 @@ class ComplaintList extends React.Component {
                   }}
                 />
               </div> */}
-              {this.props.listData
-                .filter(data => data.isArchived === true)
-                .map((doc, index) => {
+              {this.props.resolvedList.length > 0 ? (
+                this.props.archivedList.map((doc, index) => {
                   let userdata = this.props.userData.find(
                     data => data.uid === doc.userId
                   );
@@ -310,7 +328,13 @@ class ComplaintList extends React.Component {
                       }
                     />
                   );
-                })}
+                })
+              ) : (
+                <ListItem
+                  disabled={true}
+                  primaryText={"There is no archived complaint"}
+                />
+              )}
             </List>
           </div>
         </SwipeableViews>

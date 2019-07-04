@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import Anonymous from "../images/anonymous.png";
 import {
   TextField,
   RefreshIndicator,
@@ -74,11 +75,22 @@ class ComplaintView extends React.Component {
             </center>
           ) : (
             <div>
+              {console.log(this.props)}
               <List>
                 <ListItem
                   disabled
                   leftAvatar={
-                    <Avatar size={45} src={this.props.data.userImageURL} />
+                    <Avatar
+                      size={45}
+                      src={
+                        this.props.data.isAnonymous === false
+                          ? this.props.data.userImageURL
+                          : this.props.data.userId ===
+                            this.props.loggedInUser.uid
+                          ? this.props.data.userImageURL
+                          : Anonymous
+                      }
+                    />
                   }
                   rightAvatar={
                     <Avatar
@@ -88,7 +100,13 @@ class ComplaintView extends React.Component {
                       src={this.props.data.iconUrl}
                     />
                   }
-                  primaryText={this.props.data.userName}
+                  primaryText={
+                    this.props.data.isAnonymous === false
+                      ? this.props.data.userName
+                      : this.props.data.userId === this.props.loggedInUser.uid
+                      ? this.props.data.userName
+                      : "Anonymous"
+                  }
                   secondaryText={this.props.data.complaintType}
                 />
                 <Divider />

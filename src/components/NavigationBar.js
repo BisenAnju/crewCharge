@@ -72,7 +72,7 @@ class NavigationBar extends React.Component {
           }
         />
         <Drawer
-          disableSwipeToOpen={false}
+          disableSwipeToOpen={true}
           docked={false}
           width={260}
           open={this.state.open}
