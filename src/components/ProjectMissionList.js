@@ -31,7 +31,7 @@ class ProjectMissionList extends React.Component {
     };
     contentButton = {
         top:"85%",
-        right:"5%",
+       
         marginLeft: "79%",
        position: "fixed"
     };
