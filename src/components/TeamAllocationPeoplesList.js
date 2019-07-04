@@ -49,7 +49,7 @@ class TeamAllocationPeopleList extends React.Component {
   }
   inititalizePropsValue = whichProps => {
     let missionsList = [];
-    let nowDate = moment().format("l");
+    let nowDate = moment().format("L");
     whichProps.projectsList.map(row => {
       whichProps.missionsList
         .filter(missionData => missionData.projectId === row.projectId)
@@ -64,12 +64,11 @@ class TeamAllocationPeopleList extends React.Component {
           missionsList.push(data);
         });
     });
-    let missionsfilterList = missionsList.filter(
+    let missionsfilterList = this.state.missionsList.filter(
       missionData =>
-        moment(missionData.deadline.startDate).format("l") <= nowDate &&
-        moment(missionData.deadline.endDate).format("l") >= nowDate
+        moment(missionData.deadline.startDate).format("L") <= nowDate &&
+        moment(missionData.deadline.endDate).format("L") >= nowDate
     );
-    console.log(missionsfilterList);
     this.setState({
       leavesList: whichProps.leavesList,
       missionsfilterList,
@@ -101,7 +100,6 @@ class TeamAllocationPeopleList extends React.Component {
         moment(missionData.deadline.startDate).format("L") <= selectedDate &&
         moment(missionData.deadline.endDate).format("L") >= selectedDate
     );
-    console.log(missionsfilterList);
     this.setState({
       leavesList,
       missionsfilterList,
