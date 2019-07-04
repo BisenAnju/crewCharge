@@ -150,10 +150,11 @@ class TeamAllocationProjectList extends React.Component {
                             missionRow.assignTo.find(
                               udata => udata === user.uid
                             )
-                          )
+                          ) {
                             return (
                               <div key={i}>
                                 <img
+                                  alt={"active"}
                                   style={{
                                     width: 40,
                                     height: 40,
@@ -165,6 +166,7 @@ class TeamAllocationProjectList extends React.Component {
                                 />
                               </div>
                             );
+                          }
                         })}
                       </div>
                       <br />

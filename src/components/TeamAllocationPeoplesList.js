@@ -13,7 +13,6 @@ import ReactWeeklyDayPicker from "./WeeklyDayPicker";
 import { classNames } from "../constants/weeklydaypicker";
 import "../styles/style.css";
 import { loader } from "../constants/loader";
-
 class TeamAllocationPeopleList extends React.Component {
   constructor(props) {
     super(props);
@@ -49,16 +48,32 @@ class TeamAllocationPeopleList extends React.Component {
     this.setState({ startDay });
   }
   inititalizePropsValue = whichProps => {
+    let missionsList = [];
     let nowDate = moment().format("l");
-    let missionsfilterList = whichProps.missionsList.filter(
+    whichProps.projectsList.map(row => {
+      whichProps.missionsList
+        .filter(missionData => missionData.projectId === row.projectId)
+        .map(missionRow => {
+          const data = missionRow;
+          data.projectId = missionRow.projectId;
+          data.assignTo = missionRow.assignTo;
+          data.deadline = missionRow.deadline;
+          data.name = missionRow.name;
+          data.status = missionRow.status;
+          data.missionId = missionRow.missionId;
+          missionsList.push(data);
+        });
+    });
+    let missionsfilterList = missionsList.find(
       missionData =>
         moment(missionData.deadline.startDate).format("l") <= nowDate &&
         moment(missionData.deadline.endDate).format("l") >= nowDate
     );
+    console.log(missionsfilterList);
     this.setState({
       leavesList: whichProps.leavesList,
       missionsfilterList,
-      missionsList: whichProps.missionsList,
+      missionsList,
       isLoading: false,
       projectsList: whichProps.projectsList,
       usersList: whichProps.usersList,
@@ -86,6 +101,7 @@ class TeamAllocationPeopleList extends React.Component {
         moment(missionData.deadline.startDate).format("L") <= selectedDate &&
         moment(missionData.deadline.endDate).format("L") >= selectedDate
     );
+    console.log(missionsfilterList);
     this.setState({
       leavesList,
       missionsfilterList,
@@ -138,10 +154,11 @@ class TeamAllocationPeopleList extends React.Component {
             : this.state.usersList.map((row, id) => {
                 let projectId = [];
                 this.state.missionsfilterList.map(missionRow => {
-                  if (missionRow.assignTo.find(data => data === row.uid))
+                  if (missionRow.assignTo.find(data => data === row.uid)) {
                     projectId = this.state.projectsList.find(
                       data => data.projectId === missionRow.projectId
                     );
+                  }
                 });
                 let backcolor = null;
                 {
@@ -173,6 +190,7 @@ class TeamAllocationPeopleList extends React.Component {
                       children={
                         projectId.logoURL !== undefined ? (
                           <img
+                            alt="active"
                             style={{
                               paddingTop: 5,
                               width: 35,
@@ -196,7 +214,7 @@ class TeamAllocationPeopleList extends React.Component {
                       }
                     />
                     {this.state.missionsfilterList.map((missionRow, index) => {
-                      if (missionRow.assignTo.find(data => data === row.uid))
+                      if (missionRow.assignTo.find(data => data === row.uid)) {
                         return (
                           <CardText
                             key={index}
@@ -232,6 +250,9 @@ class TeamAllocationPeopleList extends React.Component {
                             </Paper>
                           </CardText>
                         );
+                      } else {
+                        return null;
+                      }
                     })}
                   </Card>
                 );

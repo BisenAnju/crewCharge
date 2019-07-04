@@ -35,7 +35,7 @@ class TeamAllocationMissionContainer extends Component {
             openSnackbar: true,
             message: "Mission Add Success fully"
           }),
-          (window.location = "/teamallocation")
+          this.props.history.push("/teamallocation")
         );
     }
   };
@@ -77,6 +77,7 @@ class TeamAllocationMissionContainer extends Component {
               render={props => (
                 <TeamAllocationProject
                   {...this.props}
+                  handleAddProject={this.handleAddProject}
                   handleUpdateProject={this.handleUpdateProject}
                   projectList={null}
                 />
@@ -89,6 +90,7 @@ class TeamAllocationMissionContainer extends Component {
                 <TeamAllocationProject
                   {...this.props}
                   handleUpdateProject={this.handleUpdateProject}
+                  handleAddProject={this.handleAddProject}
                   projectList={
                     this.props.projectsList.length > 0
                       ? this.props.projectsList.find(

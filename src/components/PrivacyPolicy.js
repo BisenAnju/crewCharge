@@ -13,10 +13,8 @@ export default class PrivacyPolicy extends React.Component {
         >
           <h2>Privacy Policy</h2>
           <p>
-            {" "}
-            Krabwheel Technologies Pvt Ltd built the YourWheeler app as a Free
-            app. This SERVICE is provided by Krabwheel Technologies Pvt Ltd at
-            no cost and is intended for use as is.
+            Smilebots built the Project-s app as a Free app. This SERVICE is
+            provided by smilebots at no cost and is intended for use as is.
           </p>
           <p>
             This page is used to inform visitors regarding our policies with the
@@ -37,7 +35,7 @@ export default class PrivacyPolicy extends React.Component {
           </p>
           <p>
             <strong>Information Collection and Use</strong>
-          </p>{" "}
+          </p>
           <p>
             For a better experience, while using our Service, we may require you
             to provide us with certain personally identifiable information. The
