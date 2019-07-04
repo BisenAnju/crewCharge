@@ -192,7 +192,7 @@ class ProjectMissionList extends React.Component {
                                                                 }}
                                                             >
                                                                 Edit </MenuItem>
-                                                            <MenuItem
+                                                            {/* <MenuItem
                                                                 onClick={e => {
                                                                     e.preventDefault();
                                                                     this.props.handleArchiveProjectChange(
@@ -200,7 +200,7 @@ class ProjectMissionList extends React.Component {
                                                                     );
                                                                 }}
                                                             >
-                                                                Archive </MenuItem>
+                                                                Archive </MenuItem> */}
                                                         </IconMenu>
                                                     }
                                                 />

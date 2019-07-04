@@ -108,6 +108,7 @@ class TeamAllocationPeopleList extends React.Component {
       isLoading: false
     });
   };
+
   render() {
     return (
       <div

@@ -20,20 +20,6 @@ class TeamAllocationMissionList extends React.Component {
       slideIndex: value
     });
   };
-  handleArchiveMissionChange = missionsId => {
-    this.props.db
-      .collection("missions")
-      .doc(missionsId)
-      .update({ status: "Archive" })
-      .then(this.setState({ massage: "Your Data Deleted" }));
-  };
-  handleArchiveProjectChange = projectId => {
-    this.props.db
-      .collection("projects")
-      .doc(projectId)
-      .update({ status: "Archive" })
-      .then();
-  };
 
   render() {
     return (
@@ -56,8 +42,8 @@ class TeamAllocationMissionList extends React.Component {
           <TeamAllocationProjectList {...this.props} />
           <ProjectMissionList
             {...this.props}
-            handleArchiveProjectChange={this.handleArchiveProjectChange}
-            handleArchiveMissionChange={this.handleArchiveMissionChange}
+            handleArchiveProjectChange={this.props.handleArchiveProjectChange}
+            handleArchiveMissionChange={this.props.handleArchiveMissionChange}
           />
         </SwipeableViews>
       </Layout>
