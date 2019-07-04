@@ -36,7 +36,7 @@ class TeamAllocationMissionList extends React.Component {
     });
   };
   contentButton = {
-    bottom: 2,
+    bottom: 6,
     right: 40,
     position: "absolute"
   };

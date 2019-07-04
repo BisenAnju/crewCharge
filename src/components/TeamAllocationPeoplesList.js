@@ -51,18 +51,25 @@ class TeamAllocationPeopleList extends React.Component {
     let missionsList = [];
     let nowDate = moment().format("l");
     whichProps.projectsList.map(row => {
-      const mision = whichProps.missionsList.find(
-        missionData => missionData.projectId === row.projectId
-      );
-      if (mision !== undefined) {
-        missionsList.push(mision);
-      }
+      whichProps.missionsList
+        .filter(missionData => missionData.projectId === row.projectId)
+        .map(missionRow => {
+          const data = missionRow;
+          data.projectId = missionRow.projectId;
+          data.assignTo = missionRow.assignTo;
+          data.deadline = missionRow.deadline;
+          data.name = missionRow.name;
+          data.status = missionRow.status;
+          data.missionId = missionRow.missionId;
+          missionsList.push(data);
+        });
     });
-    let missionsfilterList = missionsList.filter(
+    let missionsfilterList = missionsList.find(
       missionData =>
         moment(missionData.deadline.startDate).format("l") <= nowDate &&
         moment(missionData.deadline.endDate).format("l") >= nowDate
     );
+    console.log(missionsfilterList);
     this.setState({
       leavesList: whichProps.leavesList,
       missionsfilterList,
