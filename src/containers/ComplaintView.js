@@ -78,15 +78,13 @@ class ComplaintViewContainer extends React.Component {
   }
   componentWillMount() {
     let ths = this;
-    this.props.db
-      .collection("users")
-      .doc(this.props.loggedInUser.uid)
-      .get()
-      .then(doc => {
-        if (doc.data().userType === "Admin") {
-          this.setState({ isAdmin: true });
-        }
-      });
+    // check usertype of loggedin user
+    if (
+      this.props.userData.find(user => user.uid === this.props.loggedInUser.uid)
+        .userType === "Admin"
+    ) {
+      this.setState({ isAdmin: true });
+    }
     this.props.db
       .collection("complaints")
       .doc(this.props.match.params.id)
@@ -107,7 +105,7 @@ class ComplaintViewContainer extends React.Component {
               var func = this.props.firebase.function.httpsCallable("encPrac");
               var encryptedKeyforReciever = await func({
                 encryptedKeyForServer: detail.encryptedKeyForServer,
-                docId: doc.id,
+                docId: null,
                 requesterId: ths.props.user.uid
               }).then(res => {
                 return res.data;
@@ -144,6 +142,7 @@ class ComplaintViewContainer extends React.Component {
         loading={this.state.isLoading}
         isAdmin={this.state.isAdmin}
         data={this.state.detail}
+        loggedInUser={this.props.loggedInUser}
       />
     );
   }

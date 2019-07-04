@@ -22,18 +22,18 @@ class App extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      userData: [],
       leaveData: [],
       complaintTypeData: [],
       u: null
     };
   }
-  componentWillMount() {
-    this.props.db
-      .collection("complaintType")
-      .get()
-      .then(
-        doc => {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user !== null) {
+      localStorage.setItem("user", nextProps.user.uid);
+      this.props.db
+        .collection("complaintType")
+        .get()
+        .then(doc => {
           const complaintTypeData = [];
           doc.forEach(docitem => {
             if (docitem.exists) {
@@ -43,35 +43,34 @@ class App extends Component {
           this.setState({
             complaintTypeData
           });
-        },
-        err => {
-          console.log(`Encountered error: ${err}`);
-        }
-      );
-    let userData = [];
-    this.props.db.collection("users").onSnapshot(snapshot => {
-      snapshot.forEach(doc => {
-        if (doc.exists) {
-          const users = doc.data();
-          users.id = doc.id;
-          userData.push(users);
-        }
-      });
-      this.setState({ userData });
-    });
+        });
+      let userData = [];
+      this.props.db
+        .collection("users")
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            if (doc.exists) {
+              const users = doc.data();
+              users.id = doc.id;
+              userData.push(users);
+            }
+          });
+          this.setState({ userData });
+        });
+    }
   }
 
   render() {
     return (
       <div>
-        {this.props.user ? (
+        {this.state.userData ? (
           <div>
             <Router>
-              {localStorage.setItem("user", this.props.user)}
               <Switch>
                 <Route
                   path={"/privacypolicy"}
-                  render={props => <PrivacyPolicy />}
+                  render={() => <PrivacyPolicy />}
                 />
                 <Route
                   path={"/teamallocation"}
@@ -91,7 +90,6 @@ class App extends Component {
                     <TeamAllocationMissionContainer {...props} />
                   )}
                 />
-
                 <Route
                   path={"/complaintview/:id"}
                   render={props => (
@@ -109,7 +107,14 @@ class App extends Component {
                 />
                 <Route
                   path={"/complaintlist"}
-                  render={props => <ComplaintList {...props} />}
+                  render={props => (
+                    <ComplaintList
+                      {...props}
+                      loggedInUser={this.props.user}
+                      userData={this.state.userData}
+                      complaintType={this.state.complaintTypeData}
+                    />
+                  )}
                 />
                 <Route
                   path={"/leavedashboard/admin/approvalrejection/:leaveId"}

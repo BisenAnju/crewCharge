@@ -13,6 +13,7 @@
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-customurlscheme": "^4.4.0",
     "cordova-plugin-inappbrowser": "^3.0.0",
+    "cordova-plugin-splashscreen": "^5.0.3",
     "cordova-plugin-whitelist": "1",
     "cordova-universal-links-plugin": "git+https://github.com/walteram/cordova-universal-links-plugin.git",
     "cryptr": "^4.0.2",
@@ -69,7 +70,8 @@
         "ANDROID_PATHPREFIX": "/"
       },
       "onesignal-cordova-plugin": {},
-      "cordova-universal-links-plugin": {}
+      "cordova-universal-links-plugin": {},
+      "cordova-plugin-splashscreen": {}
     },
     "platforms": [
       "browser",
