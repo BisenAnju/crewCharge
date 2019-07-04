@@ -26,7 +26,7 @@ class DashboardContainer extends Component {
     }
   }
   render() {
-    return <div>{this.props.user ? <Dashboard /> : <CircularProgress />}</div>;
+    return <div>{this.props.user && <Dashboard />}</div>;
   }
 }
 

@@ -58,6 +58,13 @@ class App extends Component {
           });
           this.setState({ userData });
         });
+    } else {
+      this.state = {
+        isLoading: true,
+        leaveData: [],
+        complaintTypeData: [],
+        u: null
+      };
     }
   }
 
