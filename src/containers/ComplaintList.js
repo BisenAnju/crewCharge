@@ -5,6 +5,7 @@ import ComplaintView from "../containers/ComplaintView";
 import NewComplaintContainer from "./ComplaintAdd";
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
+import { dataDecrypt } from "./DataEncryption";
 
 const QuickEncrypt = require("quick-encrypt");
 const Cryptr = require("cryptr");
@@ -49,23 +50,10 @@ class ComplaintListContainer extends React.Component {
           details.id = doc.id;
           details.Type = details.complaintType;
           ///////////// data decrypting start ///////////
-          let privatekey = localStorage.getItem("privatekey");
           if (typeof details.receiverId === "object") {
             // check authorized user
             if (details.receiverId.find(data => data === this.props.user.uid)) {
-              let func = this.props.firebase.function.httpsCallable("encPrac");
-              let encryptedKeyforReciever = await func({
-                encryptedKeyForServer: details.encryptedKeyForServer,
-                docId: null,
-                requesterId: this.props.loggedInUser.uid
-              }).then(res => {
-                return res.data;
-              });
-              let decryptedKeyFromServer = await QuickEncrypt.decrypt(
-                encryptedKeyforReciever.toString(),
-                privatekey.toString()
-              );
-              const cryptr = new Cryptr(decryptedKeyFromServer);
+              const cryptr = await dataDecrypt(details, this.props);
               details.description = await cryptr.decrypt(details.description);
               details.title = await cryptr.decrypt(details.title);
               details.addedOn = await cryptr.decrypt(details.addedOn);
@@ -76,6 +64,7 @@ class ComplaintListContainer extends React.Component {
         }
       });
       this.setState({ listItem });
+      console.log(listItem);
       setTimeout(function() {
         ths.setState({ isLoading: false });
       }, 2000);
@@ -113,7 +102,7 @@ class ComplaintListContainer extends React.Component {
                 message={this.state.message}
                 archive={this.handleArchive}
                 loading={this.state.isLoading}
-                listData={this.state.listItem}
+                // listData={this.state.listItem}
                 pendingList={this.state.listItem.filter(
                   data =>
                     (data.adminReply === undefined ||

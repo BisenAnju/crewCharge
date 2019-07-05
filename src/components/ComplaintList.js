@@ -90,6 +90,7 @@ class ComplaintList extends React.Component {
                 overflowX: "hidden"
               }}
             >
+              {console.log("pendingList" + this.props.pendingList.length)}
               {this.props.loading ? (
                 loader
               ) : this.props.pendingList.length > 0 ? (
