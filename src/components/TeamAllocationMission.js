@@ -32,7 +32,7 @@ class TeamAllocationMission extends React.Component {
       values: this.props.values,
       projectId: this.props.projectId,
       startDate: this.props.startDate,
-      endDate: this.props.startDate,
+      endDate: this.props.endDate,
       missionName: this.props.missionName,
       remarks: this.props.remarks
     });
