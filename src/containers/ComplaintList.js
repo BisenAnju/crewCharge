@@ -7,9 +7,6 @@ import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
 import { dataDecrypt } from "./DataEncryption";
 
-const QuickEncrypt = require("quick-encrypt");
-const Cryptr = require("cryptr");
-
 class ComplaintListContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -23,8 +20,8 @@ class ComplaintListContainer extends React.Component {
     this.handleArchive = this.handleArchive.bind(this);
   }
   async componentWillMount() {
-    let listItem = [],
-      ths = this;
+    let listItem = [];
+    let ths = this;
     let query = this.props.db
       .collection("complaints")
       .orderBy("addedOn", "desc");
@@ -49,6 +46,12 @@ class ComplaintListContainer extends React.Component {
           const details = doc.data();
           details.id = doc.id;
           details.Type = details.complaintType;
+          details.userData = this.props.userData.find(
+            data => data.id === details.userId
+          );
+          details.compType = this.props.complaintType.find(
+            data => data.value === details.Type
+          );
           ///////////// data decrypting start ///////////
           if (typeof details.receiverId === "object") {
             // check authorized user

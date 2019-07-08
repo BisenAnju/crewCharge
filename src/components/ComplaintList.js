@@ -19,6 +19,7 @@ import Layout from "../layouts/Layout";
 import UnArchived from "material-ui/svg-icons/content/unarchive";
 import moment from "moment";
 import SwipeableViews from "react-swipeable-views";
+import details from "material-ui/svg-icons/image/details";
 
 const loader = (
   <center>
@@ -95,21 +96,14 @@ class ComplaintList extends React.Component {
                 loader
               ) : this.props.pendingList.length > 0 ? (
                 this.props.pendingList.map((doc, index) => {
-                  let userdata = this.props.userData.find(
-                    data => data.id === doc.userId
-                  );
-                  let compType = this.props.complaintType.find(
-                    data => data.value === doc.Type
-                  );
                   try {
-                    doc.complaintType = compType.displayName;
                     doc.username =
                       doc.isAnonymous === false
-                        ? userdata.displayName
+                        ? details.userData.displayName
                         : doc.userId === this.props.loggedInUser.uid
-                        ? userdata.displayName
+                        ? details.userData.displayName
                         : "Anonymous";
-                    doc.userImageURL = userdata.photoURL;
+                    doc.userImageURL = details.userData.photoURL;
                     return (
                       <div key={index}>
                         <ListItem
@@ -152,14 +146,14 @@ class ComplaintList extends React.Component {
                               <br />
                               {doc.priority === "high" ? (
                                 <span style={{ color: "red" }}>
-                                  {doc.complaintType}
+                                  {doc.compType.displayName}
                                 </span>
                               ) : doc.priority === "medium" ? (
                                 <span style={{ color: "#b3b312" }}>
-                                  {doc.complaintType}
+                                  {doc.compType.displayName}
                                 </span>
                               ) : (
-                                doc.complaintType
+                                doc.compType.displayName
                               )}
                             </p>
                           }
@@ -231,7 +225,7 @@ class ComplaintList extends React.Component {
                                 ).format("DD MMM YYYY")}
                             </span>
                             <br />
-                            {doc.complaintType}
+                            {doc.compType.displayName}
                           </p>
                         }
                         rightIconButton={
@@ -314,7 +308,7 @@ class ComplaintList extends React.Component {
                               ).format("DD MMM YYYY")}
                           </span>
                           <br />
-                          {doc.complaintType}
+                          {doc.compType.displayName}
                         </p>
                       }
                       rightIconButton={
