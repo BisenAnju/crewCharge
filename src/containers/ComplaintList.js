@@ -21,10 +21,7 @@ class ComplaintListContainer extends React.Component {
   }
   async componentWillMount() {
     let listItem = [];
-    let ths = this;
-    let query = this.props.db
-      .collection("complaints")
-      .orderBy("addedOn", "desc");
+    let query = this.props.db.collection("complaints");
 
     // check usertype of loggedin user
     if (
@@ -67,24 +64,23 @@ class ComplaintListContainer extends React.Component {
           listItem.push(details);
         }
       });
-      this.setState({ listItem });
       console.log(listItem);
-      setTimeout(function() {
-        ths.setState({ isLoading: false });
-      }, 2000);
+      console.log(listItem.filter(data => data.addedOn !== ""));
+      this.setState({ listItem }, () => this.setState({ isLoading: false }));
+      console.log(this.state);
     });
   }
   snackbarHandleRequestClose = () => this.setState({ snackOpen: false });
-  handleArchive(status, userId) {
+  handleArchive(isArchived, userId) {
     this.props.db
       .collection("complaints")
       .doc(userId)
       .update({
-        isArchived: status
+        isArchived
       });
     this.setState({
       message:
-        status === true
+        isArchived === true
           ? "Complaint Successfully archived"
           : "Complaint Successfully Unarchived",
       snackOpen: true
