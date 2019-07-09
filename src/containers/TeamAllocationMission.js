@@ -132,39 +132,35 @@ class TeamAllocationMissionContainer extends Component {
   render() {
     return (
       <div>
-        <Router>
-          <Switch>
-            <Route
-              exact
-              path={"/teamallocation/mission"}
-              render={props => (
-                <TeamAllocationMission
-                  {...this.props}
-                  {...this.state}
-                  handleAddMission={this.handleAddMission}
-                  handleUpdateMission={this.handleUpdateMission}
-                />
-              )}
+        <Route
+          exact
+          path={"/teamallocation/mission"}
+          render={props => (
+            <TeamAllocationMission
+              {...this.props}
+              {...this.state}
+              handleAddMission={this.handleAddMission}
+              handleUpdateMission={this.handleUpdateMission}
             />
-            <Route
-              exact
-              path={"/teamallocation/mission/:missionId"}
-              render={props => (
-                <TeamAllocationMission
-                  {...this.props}
-                  {...this.state}
-                  handleAddMission={this.handleAddMission}
-                  handleUpdateMission={this.handleUpdateMission}
-                />
-              )}
+          )}
+        />
+        <Route
+          exact
+          path={"/teamallocation/mission/:missionId"}
+          render={props => (
+            <TeamAllocationMission
+              {...this.props}
+              {...this.state}
+              handleAddMission={this.handleAddMission}
+              handleUpdateMission={this.handleUpdateMission}
             />
-            <Route
-              exact
-              path={"/teamallocation/project"}
-              render={props => <TeanAllocationProjectContainer {...props} />}
-            />
-          </Switch>
-        </Router>
+          )}
+        />
+        <Route
+          exact
+          path={"/teamallocation/project"}
+          render={props => <TeanAllocationProjectContainer {...props} />}
+        />
       </div>
     );
   }

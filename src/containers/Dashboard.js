@@ -3,7 +3,6 @@ import Dashboard from "../components/Dashboard";
 import withUser from "../hoc/withUser";
 import { withFirebase } from "../firebase";
 import { withRouter } from "react-router-dom";
-import { CircularProgress } from "material-ui";
 
 class DashboardContainer extends Component {
   constructor(props) {
