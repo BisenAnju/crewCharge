@@ -97,29 +97,6 @@ class LeaveEmployeeDashboardContainer extends React.Component {
           <Switch>
             <Route
               exact
-              path={"/leavedashboard/leaveapply/:mode"}
-              render={props => (
-                <LeaveEmployeeApplyContainer
-                  {...props}
-                  singleData={this.state.leaveData}
-                  purposeData={this.props.purposeData}
-                />
-              )}
-            />
-            <Route
-              exact
-              path={"/leavedashboard/leavedetails/:leaveId"}
-              render={props => (
-                <LeaveEmployeeDetailsContainer
-                  {...props}
-                  singleData={this.state.leaveData}
-                  userData={this.state.userData}
-                  purposeData={this.props.purposeData}
-                />
-              )}
-            />
-            <Route
-              exact
               path={"/leavedashboard"}
               render={props => (
                 <LeaveEmployeeDashboard
@@ -132,12 +109,37 @@ class LeaveEmployeeDashboardContainer extends React.Component {
                 />
               )}
             />
+            <Route
+              exact
+              path={"/leavedashboard/leaveapply/:mode"}
+              render={props => (
+                <LeaveEmployeeApplyContainer
+                  {...props}
+                  singleData={this.state.leaveData}
+                  purposeData={this.props.purposeData}
+                  updateRouter={this.updateRouter}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={"/leavedashboard/leavedetails/:leaveId"}
+              render={props => (
+                <LeaveEmployeeDetailsContainer
+                  {...props}
+                  singleData={this.state.leaveData}
+                  userData={this.state.userData}
+                  purposeData={this.props.purposeData}
+                  updateRouter={this.updateRouter}
+                />
+              )}
+            />
           </Switch>
         </Router>
       </div>
     );
   }
 }
-export default withUser(
-  withFirebase(withRouter(LeaveEmployeeDashboardContainer))
+export default withRouter(
+  withFirebase(withUser(LeaveEmployeeDashboardContainer))
 );

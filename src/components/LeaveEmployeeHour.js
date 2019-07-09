@@ -37,7 +37,8 @@ class LeaveEmployeeHourLeave extends Component {
       to: null,
       snackOpen: false,
       reason: null,
-      playerId: []
+      playerId: [],
+      dueDate: null
     };
   }
 
