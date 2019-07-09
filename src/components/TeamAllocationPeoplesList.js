@@ -62,7 +62,9 @@ class TeamAllocationPeopleList extends React.Component {
           data.status = missionRow.status;
           data.missionId = missionRow.missionId;
           missionsList.push(data);
+          return missionsList;
         });
+      return missionsList;
     });
     let missionsfilterList = this.state.missionsList.filter(
       missionData =>
@@ -158,6 +160,7 @@ class TeamAllocationPeopleList extends React.Component {
                       data => data.projectId === missionRow.projectId
                     );
                   }
+                  return projectId;
                 });
                 let backcolor = null;
                 {

@@ -38,11 +38,11 @@ class TeamAllocationProjectList extends React.Component {
     this.inititalizePropsValue(this.props);
   }
   inititalizePropsValue = whichProps => {
-    let nowDate = moment().format("l");
+    let nowDate = moment().format("L");
     let missionsfilterList = whichProps.missionsList.filter(
       missionData =>
-        moment(missionData.deadline.startDate).format("l") <= nowDate &&
-        moment(missionData.deadline.endDate).format("l") >= nowDate
+        moment(missionData.deadline.startDate).format("L") <= nowDate &&
+        moment(missionData.deadline.endDate).format("L") >= nowDate
     );
     this.setState({
       missionsfilterList,

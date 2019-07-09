@@ -9,6 +9,7 @@ import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
 import LeaveEmployeeDetails from "../components/LeaveEmployeeDetails";
 import LeaveEmployeeApplyContainer from "./LeaveEmployeeApply";
+import LeaveEmployeeDashboard from "./LeaveEmployeeDashboard";
 class LeaveEmployeeDetailsContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -115,6 +116,20 @@ class LeaveEmployeeDetailsContainer extends React.Component {
           <Switch>
             <Route
               exact
+              path={"/leavedashboard"}
+              render={props => (
+                <LeaveEmployeeDashboard
+                  key={this.state.leaveData.leaveId}
+                  {...props}
+                  userData={this.state.userData}
+                  leaveData={this.state.leaveData}
+                  purposeData={this.props.purposeData}
+                  isLoading={this.state.isLoading}
+                />
+              )}
+            />
+            <Route
+              exact
               path={"/leavedashboard/leavedetails/:leaveId"}
               render={props => (
                 <LeaveEmployeeDetails
@@ -132,7 +147,12 @@ class LeaveEmployeeDetailsContainer extends React.Component {
             <Route
               exact
               path={"/leavedashboard/leaveapply/:mode"}
-              render={props => <LeaveEmployeeApplyContainer {...this.props} />}
+              render={props => (
+                <LeaveEmployeeApplyContainer
+                  {...this.props}
+                  updateRouter={this.props.updateRouter}
+                />
+              )}
             />
           </Switch>
         </Router>

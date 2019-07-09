@@ -76,7 +76,6 @@ class LeaveEmployeeDetails extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   render() {
-    console.log(this.props.purposeData);
     return (
       <Layout
         navigationTitle={this.state.navigationTitle}
@@ -386,7 +385,6 @@ class LeaveEmployeeDetails extends Component {
                     }
                     secondaryText={
                       <TextField
-                        disabled
                         placeholder="Type Comment..."
                         multiLine
                         rows={4}

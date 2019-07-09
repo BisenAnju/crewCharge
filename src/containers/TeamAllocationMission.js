@@ -94,7 +94,7 @@ class TeamAllocationMissionContainer extends Component {
           assignTo: values,
           deadline: {
             startDate: moment(startDate).format("lll"),
-            startDate: moment(endDate).format("lll"),
+            endDate: moment(endDate).format("lll"),
             remarks: remarks
           },
           status: "Active"
