@@ -195,9 +195,8 @@ class ComplaintList extends React.Component {
                     doc.userImageURL = doc.userData.photoURL;
 
                     return (
-                      <div>
+                      <div key={index}>
                         <ListItem
-                          key={index}
                           onClick={() =>
                             this.props.history.push("/complaintview/" + doc.id)
                           }
@@ -283,9 +282,8 @@ class ComplaintList extends React.Component {
                   doc.username = userdata.displayName;
                   doc.userImageURL = userdata.photoURL;
                   return (
-                    <div>
+                    <div key={index}>
                       <ListItem
-                        key={index}
                         onClick={() =>
                           this.props.history.push("/complaintview/" + doc.id)
                         }
