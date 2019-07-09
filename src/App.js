@@ -10,11 +10,7 @@ import ComplaintView from "./containers/ComplaintView";
 import LoginContainer from "./containers/Login";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import LeaveDashboardContainer from "./containers/LeaveDashboard";
-import LeaveAdminApprovalRejectionContainer from "./containers/LeaveAdminApprovalRejection";
-import LeaveEmployeeDetailsContainer from "./containers/LeaveEmployeeDetails";
 import ProjectsContainer from "./containers/Projects";
-import TeamAllocationMissionContainer from "./containers/TeamAllocationMission";
-import TeamAllocationProjectContainer from "./containers/TeamAllocationProject";
 import TeamAllocationPeoplesListContainer from "./containers/TeamAllocationPeoplesList";
 import ConfigurationContainer from "./containers/Configuration";
 import LinearProgress from "material-ui/LinearProgress";
@@ -87,18 +83,6 @@ class App extends Component {
                   )}
                 />
                 <Route
-                  path={"/teamallocation/project"}
-                  render={props => (
-                    <TeamAllocationProjectContainer {...props} />
-                  )}
-                />
-                <Route
-                  path={"/teamallocation/mission"}
-                  render={props => (
-                    <TeamAllocationMissionContainer {...props} />
-                  )}
-                />
-                <Route
                   path={"/complaintview/:id"}
                   render={props => (
                     <ComplaintView
@@ -121,27 +105,6 @@ class App extends Component {
                       loggedInUser={this.props.user}
                       userData={this.state.userData}
                       complaintType={this.state.complaintTypeData}
-                    />
-                  )}
-                />
-                <Route
-                  path={"/leavedashboard/admin/approvalrejection/:leaveId"}
-                  render={props => (
-                    <LeaveAdminApprovalRejectionContainer
-                      {...props}
-                      loggedInUser={this.props.user}
-                      userData={this.state.userData}
-                    />
-                  )}
-                />
-                <Route
-                  exact
-                  path={"/leavedashboard/leavedetails/:leaveId"}
-                  render={props => (
-                    <LeaveEmployeeDetailsContainer
-                      {...props}
-                      userData={this.state.userData}
-                      loggedInUser={this.props.user}
                     />
                   )}
                 />

@@ -10,7 +10,6 @@ class LeaveEmployeeApplyContainer extends React.Component {
     super(props);
     this.state = { isLoading: true, player_ids: [] };
   }
-
   componentWillMount() {
     let player_ids = [];
     this.props.db
@@ -28,7 +27,6 @@ class LeaveEmployeeApplyContainer extends React.Component {
         this.setState({ player_ids });
       });
   }
-
   // Add leaves data
   addLeaves = (leaveData, leaveType) => {
     let newDueDate = moment.utc(moment().subtract(1, "days"))._d;
@@ -183,5 +181,4 @@ class LeaveEmployeeApplyContainer extends React.Component {
     );
   }
 }
-
 export default withRouter(withFirebase(withUser(LeaveEmployeeApplyContainer)));
