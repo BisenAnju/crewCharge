@@ -31,7 +31,6 @@ class ProjectMissionList extends React.Component {
     };
     contentButton = {
         top:"85%",
-       marginRight:"5%",
         marginLeft: "79%",
        position: "fixed"
     };
@@ -215,7 +214,7 @@ class ProjectMissionList extends React.Component {
                     <div style={{marginBottom:10}}>
                         <FloatingActionButton
                             backgroundColor={"rgb(253, 145, 77)"}
-                            
+                            style={{maginBottom:2}}
                         >
                             <div>
                                 <IconMenu

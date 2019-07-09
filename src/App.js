@@ -17,6 +17,7 @@ import TeamAllocationMissionContainer from "./containers/TeamAllocationMission";
 import TeamAllocationProjectContainer from "./containers/TeamAllocationProject";
 import TeamAllocationPeoplesListContainer from "./containers/TeamAllocationPeoplesList";
 import ConfigurationContainer from "./containers/Configuration";
+import LinearProgress from "material-ui/LinearProgress";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -161,17 +162,17 @@ class App extends Component {
               </Switch>
             </Router>
           </div>
+        ) : localStorage.getItem("user") === null ? (
+          <div>
+            <Router>
+              <Route
+                path={"/"}
+                render={props => <LoginContainer {...props} />}
+              />
+            </Router>
+          </div>
         ) : (
-          localStorage.getItem("user") === null && (
-            <div>
-              <Router>
-                <Route
-                  path={"/"}
-                  render={props => <LoginContainer {...props} />}
-                />
-              </Router>
-            </div>
-          )
+          <LinearProgress mode="indeterminate" color={"rgb(253, 145, 77)"} />
         )}
       </div>
     );
