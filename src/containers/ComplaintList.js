@@ -57,9 +57,10 @@ class ComplaintListContainer extends React.Component {
             // check authorized user
             if (details.receiverId.find(data => data === this.props.user.uid)) {
               const cryptr = await dataDecrypt(details, this.props);
-              details.description = await cryptr.decrypt(details.description);
-              details.title = await cryptr.decrypt(details.title);
-              details.addedOn = await cryptr.decrypt(details.addedOn);
+              const Decrypt = cryptr.crypt;
+              details.description = await Decrypt.decrypt(details.description);
+              details.title = await Decrypt.decrypt(details.title);
+              details.addedOn = await Decrypt.decrypt(details.addedOn);
             }
           }
           ///////////// data decrypting end ///////////

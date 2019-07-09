@@ -22,10 +22,9 @@ import Layout from "../layouts/Layout";
 class ComplaintView extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       open: false,
-      adminReply: "",
-      statusByAdmin: null,
       autoHideDuration: 4000,
       snackOpen: false,
       message: "All fields are required"
@@ -38,23 +37,34 @@ class ComplaintView extends React.Component {
     });
   };
   handleOpen = val => this.setState({ open: val });
-  handleChange = (_event, _index, statusByAdmin) =>
+  handleChange = (event, index, statusByAdmin) =>
     this.setState({ statusByAdmin });
   inputValidation = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
   formSubmit() {
-    if (this.state.adminReply === "" || this.state.statusByAdmin === null) {
-      this.setState({ snackOpen: true });
+    let adminReply =
+      this.state.adminReply !== undefined
+        ? this.state.adminReply
+        : this.props.data.adminReply === undefined
+        ? null
+        : this.props.data.adminReply;
+    let statusByAdmin =
+      this.state.statusByAdmin !== undefined
+        ? this.state.statusByAdmin
+        : this.props.data.statusByAdmin === undefined
+        ? null
+        : this.props.data.statusByAdmin;
+    if (adminReply === null || statusByAdmin === null) {
+      this.setState({ message: "All fields mandatory", snackOpen: true });
       return false;
     }
-
     // validate is internet connected
     if (navigator.onLine === false) {
       this.setState({ message: "No internet access", snackOpen: true });
       return false;
     }
-    this.props.submit(this.state.adminReply, this.state.statusByAdmin);
+    this.props.submit(adminReply, statusByAdmin);
     this.handleOpen(false);
     this.setState({ message: "Submit Successful", snackOpen: true });
   }
@@ -143,6 +153,7 @@ class ComplaintView extends React.Component {
                   this.props.data.statusByAdmin === undefined) ? (
                   <div>
                     <CardText>
+                      {console.log(this.props.data)}
                       <h4>Do Action</h4>
                       <SelectField
                         underlineFocusStyle={{
@@ -152,7 +163,7 @@ class ComplaintView extends React.Component {
                         name="statusByAdmin"
                         style={{ width: "100%" }}
                         value={
-                          this.props.data.statusByAdmin !== undefined
+                          this.state.statusByAdmin === undefined
                             ? this.props.data.statusByAdmin
                             : this.state.statusByAdmin
                         }
@@ -168,7 +179,7 @@ class ComplaintView extends React.Component {
                         }}
                         floatingLabelStyle={{ color: "rgb(240, 143, 76)" }}
                         value={
-                          this.props.data.adminReply !== undefined
+                          this.state.adminReply === undefined
                             ? this.props.data.adminReply
                             : this.state.adminReply
                         }

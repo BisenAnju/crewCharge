@@ -18,5 +18,8 @@ export async function dataDecrypt(data, props) {
     encryptedKeyforReciever.toString(),
     privatekey.toString()
   );
-  return new Cryptr(decryptedKeyFromServer);
+  return {
+    crypt: new Cryptr(decryptedKeyFromServer),
+    key: decryptedKeyFromServer
+  };
 }

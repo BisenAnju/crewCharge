@@ -19,7 +19,6 @@ import Layout from "../layouts/Layout";
 import UnArchived from "material-ui/svg-icons/content/unarchive";
 import moment from "moment";
 import SwipeableViews from "react-swipeable-views";
-import details from "material-ui/svg-icons/image/details";
 
 const loader = (
   <center>
@@ -99,11 +98,11 @@ class ComplaintList extends React.Component {
                   try {
                     doc.username =
                       doc.isAnonymous === false
-                        ? details.userData.displayName
+                        ? doc.userData.displayName
                         : doc.userId === this.props.loggedInUser.uid
-                        ? details.userData.displayName
+                        ? doc.userData.displayName
                         : "Anonymous";
-                    doc.userImageURL = details.userData.photoURL;
+                    doc.userImageURL = doc.userData.photoURL;
                     return (
                       <div key={index}>
                         <ListItem
@@ -162,7 +161,7 @@ class ComplaintList extends React.Component {
                       </div>
                     );
                   } catch (e) {
-                    console.log();
+                    console.log("Internet error" + e);
                   }
                 })
               ) : (
@@ -186,62 +185,55 @@ class ComplaintList extends React.Component {
                 loader
               ) : this.props.resolvedList.length > 0 ? (
                 this.props.resolvedList.map((doc, index) => {
-                  let userdata = this.props.userData.find(
-                    data => data.uid === doc.userId
-                  );
                   try {
                     doc.username =
                       doc.isAnonymous === false
-                        ? userdata.displayName
+                        ? doc.userData.displayName
                         : doc.userId === this.props.loggedInUser.uid
-                        ? userdata.displayName
+                        ? doc.userData.displayName
                         : "Anonymous";
-                    doc.userImageURL = userdata.photoURL;
+                    doc.userImageURL = doc.userData.photoURL;
 
                     return (
-                      <ListItem
-                        key={index}
-                        onClick={() =>
-                          this.props.history.push("/complaintview/" + doc.id)
-                        }
-                        leftAvatar={
-                          doc.isAnonymous === false ? (
-                            <Avatar src={doc.userImageURL} />
-                          ) : doc.userId === this.props.loggedInUser.uid ? (
-                            <Avatar src={doc.userImageURL} />
-                          ) : (
-                            <Avatar icon={Anonymous} />
-                          )
-                        }
-                        secondaryTextLines={2}
-                        primaryText={doc.username}
-                        secondaryText={
-                          <p>
-                            <span>
-                              {doc.title +
-                                " - " +
-                                moment(
-                                  new Date(doc.addedOn.seconds * 1000)
-                                ).format("DD MMM YYYY")}
-                            </span>
-                            <br />
-                            {doc.compType.displayName}
-                          </p>
-                        }
-                        rightIconButton={
-                          <IconButton
-                            onClick={e => {
-                              e.preventDefault();
-                              this.props.archive(true, doc.id);
-                              this.setState({
-                                lastArchivedDocId: doc.id
-                              });
-                            }}
-                          >
-                            <Archived />
-                          </IconButton>
-                        }
-                      />
+                      <div key={index}>
+                        <ListItem
+                          onClick={() =>
+                            this.props.history.push("/complaintview/" + doc.id)
+                          }
+                          leftAvatar={
+                            doc.isAnonymous === false ? (
+                              <Avatar src={doc.userImageURL} />
+                            ) : doc.userId === this.props.loggedInUser.uid ? (
+                              <Avatar src={doc.userImageURL} />
+                            ) : (
+                              <Avatar icon={Anonymous} />
+                            )
+                          }
+                          secondaryTextLines={2}
+                          primaryText={doc.username}
+                          secondaryText={
+                            <p>
+                              <span>{doc.title + " - " + doc.addedOn}</span>
+                              <br />
+                              {doc.compType.displayName}
+                            </p>
+                          }
+                          rightIconButton={
+                            <IconButton
+                              onClick={e => {
+                                e.preventDefault();
+                                this.props.archive(true, doc.id);
+                                this.setState({
+                                  lastArchivedDocId: doc.id
+                                });
+                              }}
+                            >
+                              <Archived />
+                            </IconButton>
+                          }
+                        />
+                        <Divider inset={true} />
+                      </div>
                     );
                   } catch (e) {
                     console.log();
@@ -282,7 +274,7 @@ class ComplaintList extends React.Component {
                   }}
                 />
               </div> */}
-              {this.props.resolvedList.length > 0 ? (
+              {this.props.archivedList.length > 0 ? (
                 this.props.archivedList.map((doc, index) => {
                   let userdata = this.props.userData.find(
                     data => data.uid === doc.userId
@@ -290,38 +282,34 @@ class ComplaintList extends React.Component {
                   doc.username = userdata.displayName;
                   doc.userImageURL = userdata.photoURL;
                   return (
-                    <ListItem
-                      key={index}
-                      onClick={() =>
-                        this.props.history.push("/complaintview/" + doc.id)
-                      }
-                      leftAvatar={<Avatar src={doc.userImageURL} />}
-                      secondaryTextLines={2}
-                      primaryText={doc.username}
-                      secondaryText={
-                        <p>
-                          <span>
-                            {doc.title +
-                              " - " +
-                              moment(
-                                new Date(doc.addedOn.seconds * 1000)
-                              ).format("DD MMM YYYY")}
-                          </span>
-                          <br />
-                          {doc.compType.displayName}
-                        </p>
-                      }
-                      rightIconButton={
-                        <IconButton
-                          onClick={e => {
-                            e.preventDefault();
-                            this.props.archive(false, doc.id);
-                          }}
-                        >
-                          <UnArchived />
-                        </IconButton>
-                      }
-                    />
+                    <div key={index}>
+                      <ListItem
+                        onClick={() =>
+                          this.props.history.push("/complaintview/" + doc.id)
+                        }
+                        leftAvatar={<Avatar src={doc.userImageURL} />}
+                        secondaryTextLines={2}
+                        primaryText={doc.username}
+                        secondaryText={
+                          <p>
+                            <span>{doc.title + " - " + doc.addedOn}</span>
+                            <br />
+                            {doc.compType.displayName}
+                          </p>
+                        }
+                        rightIconButton={
+                          <IconButton
+                            onClick={e => {
+                              e.preventDefault();
+                              this.props.archive(false, doc.id);
+                            }}
+                          >
+                            <UnArchived />
+                          </IconButton>
+                        }
+                      />
+                      <Divider inset={true} />
+                    </div>
                   );
                 })
               ) : (
