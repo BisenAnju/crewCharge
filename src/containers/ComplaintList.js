@@ -14,13 +14,17 @@ class ComplaintListContainer extends React.Component {
       isAdmin: false,
       isLoading: true,
       listItem: [],
+      pendingList: [],
+      archivedList: [],
+      resolvedList: [],
       snackOpen: false,
       message: ""
     };
     this.handleArchive = this.handleArchive.bind(this);
   }
   async componentWillMount() {
-    let listItem = [];
+    let listItem = [],
+      ths = this;
     let query = this.props.db.collection("complaints");
 
     // check usertype of loggedin user
@@ -64,10 +68,27 @@ class ComplaintListContainer extends React.Component {
           listItem.push(details);
         }
       });
-      console.log(listItem);
-      console.log(listItem.filter(data => data.addedOn !== ""));
-      this.setState({ listItem }, () => this.setState({ isLoading: false }));
-      console.log(this.state);
+      setTimeout(() => {
+        ths.setState(
+          {
+            pendingList: listItem.filter(
+              data =>
+                (data.adminReply === undefined ||
+                  (data.adminReply !== undefined &&
+                    data.statusByAdmin === "pending")) &&
+                data.isArchived === false
+            ),
+            archivedList: listItem.filter(data => data.isArchived === true),
+            resolvedList: listItem.filter(
+              data =>
+                data.statusByAdmin !== undefined &&
+                data.statusByAdmin === "resolve" &&
+                data.isArchived === false
+            )
+          },
+          () => ths.setState({ isLoading: false })
+        );
+      }, 2000);
     });
   }
   snackbarHandleRequestClose = () => this.setState({ snackOpen: false });
@@ -103,22 +124,9 @@ class ComplaintListContainer extends React.Component {
                 archive={this.handleArchive}
                 loading={this.state.isLoading}
                 // listData={this.state.listItem}
-                pendingList={this.state.listItem.filter(
-                  data =>
-                    (data.adminReply === undefined ||
-                      (data.adminReply !== undefined &&
-                        data.statusByAdmin === "pending")) &&
-                    data.isArchived === false
-                )}
-                archivedList={this.state.listItem.filter(
-                  data => data.isArchived === true
-                )}
-                resolvedList={this.state.listItem.filter(
-                  data =>
-                    data.statusByAdmin !== undefined &&
-                    data.statusByAdmin === "resolve" &&
-                    data.isArchived === false
-                )}
+                pendingList={this.state.pendingList}
+                archivedList={this.state.archivedList}
+                resolvedList={this.state.resolvedList}
                 isAdmin={this.state.isAdmin}
                 userData={this.props.userData}
                 loggedInUser={this.props.loggedInUser}
