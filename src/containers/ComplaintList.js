@@ -6,23 +6,26 @@ import NewComplaintContainer from "./ComplaintAdd";
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
 import { dataDecrypt } from "./DataEncryption";
-
+import moment from "moment";
 class ComplaintListContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.handleArchive = this.handleArchive.bind(this);
+    this.ref = props.db.collection("complaints").orderBy("addedOn", "desc");
+    this.unsubscribe = null;
     this.state = {
       isAdmin: false,
       isLoading: true,
-      listItem: [],
+      listData: [],
+      pendingList: [],
+      archivedList: [],
+      resolvedList: [],
       snackOpen: false,
       message: ""
     };
-    this.handleArchive = this.handleArchive.bind(this);
   }
-  async componentWillMount() {
-    let listItem = [];
-    let query = this.props.db.collection("complaints");
-
+  async componentDidMount() {
+    const ths = this;
     // check usertype of loggedin user
     if (
       this.props.userData.find(user => user.uid === this.props.loggedInUser.uid)
@@ -32,41 +35,68 @@ class ComplaintListContainer extends React.Component {
     }
 
     if (this.state.isAdmin === false) {
-      query = query.where("userId", "==", this.props.loggedInUser.uid);
+      this.ref = this.ref.where("userId", "==", this.props.loggedInUser.uid);
     }
+    this.unsubscribe = await this.ref.onSnapshot(this.onCollectionUpdate);
+    setTimeout(async function() {
+      await ths.setState({
+        pendingList: ths.state.listData.filter(
+          data =>
+            (data.adminReply === undefined ||
+              (data.adminReply !== undefined &&
+                data.statusByAdmin === "pending")) &&
+            data.isArchived === false
+        ),
+        archivedList: ths.state.listData.filter(
+          data => data.isArchived === true
+        ),
+        resolvedList: ths.state.listData.filter(
+          data =>
+            data.statusByAdmin !== undefined &&
+            data.statusByAdmin === "resolve" &&
+            data.isArchived === false
+        )
+      });
+      ths.setState({ isLoading: false });
+    }, 2000);
+  }
 
-    // get complaints
-    query.onSnapshot(async snapshot => {
-      listItem = [];
-      snapshot.forEach(async doc => {
-        if (doc.exists) {
-          const details = doc.data();
-          details.id = doc.id;
-          details.Type = details.complaintType;
-          details.userData = this.props.userData.find(
-            data => data.id === details.userId
-          );
-          details.compType = this.props.complaintType.find(
-            data => data.value === details.Type
-          );
-          ///////////// data decrypting start ///////////
-          if (typeof details.receiverId === "object") {
+  onCollectionUpdate = querySnapshot => {
+    const listData = [];
+    querySnapshot.forEach(async doc => {
+      if (doc.exists) {
+        const data = doc.data();
+        data.id = doc.id;
+        data.Type = data.complaintType;
+        data.userData = this.props.userData.find(val => val.id === data.userId);
+        data.compType = this.props.complaintType.find(
+          val => val.value === data.Type
+        );
+        ///////////// data decrypting start ///////////
+        try {
+          if (typeof data.receiverId === "object") {
             // check authorized user
-            if (details.receiverId.find(data => data === this.props.user.uid)) {
-              const cryptr = await dataDecrypt(details, this.props);
+            if (data.receiverId.find(val => val === this.props.user.uid)) {
+              const cryptr = await dataDecrypt(data, this.props);
               const Decrypt = cryptr.crypt;
-              details.description = await Decrypt.decrypt(details.description);
-              details.title = await Decrypt.decrypt(details.title);
-              details.addedOn = await Decrypt.decrypt(details.addedOn);
+              data.description = await Decrypt.decrypt(data.description);
+              data.title = await Decrypt.decrypt(data.title);
+              data.addedOn = moment(
+                new Date(data.addedOn.seconds * 1000)
+              ).format("DD MMM YYYY");
             }
           }
-          ///////////// data decrypting end ///////////
-          listItem.push(details);
+        } catch (e) {
+          console.log("decryption error: " + e);
         }
-      });
-      this.setState({ listItem }, () => this.setState({ isLoading: false }));
+        ///////////// data decrypting end ///////////
+        listData.push(data);
+      }
     });
-  }
+    this.setState({
+      listData
+    });
+  };
   snackbarHandleRequestClose = () => this.setState({ snackOpen: false });
   handleArchive(isArchived, userId) {
     this.props.db
@@ -99,23 +129,10 @@ class ComplaintListContainer extends React.Component {
                 message={this.state.message}
                 archive={this.handleArchive}
                 loading={this.state.isLoading}
-                listData={this.state.listItem}
-                pendingList={this.state.listItem.filter(
-                  data =>
-                    (data.adminReply === undefined ||
-                      (data.adminReply !== undefined &&
-                        data.statusByAdmin === "pending")) &&
-                    data.isArchived === false
-                )}
-                archivedList={this.state.listItem.filter(
-                  data => data.isArchived === true
-                )}
-                resolvedList={this.state.listItem.filter(
-                  data =>
-                    data.statusByAdmin !== undefined &&
-                    data.statusByAdmin === "resolve" &&
-                    data.isArchived === false
-                )}
+                listData={this.state.listData}
+                pendingList={this.state.pendingList}
+                archivedList={this.state.archivedList}
+                resolvedList={this.state.resolvedList}
                 isAdmin={this.state.isAdmin}
                 userData={this.props.userData}
                 loggedInUser={this.props.loggedInUser}

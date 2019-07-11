@@ -40,37 +40,12 @@ class ComplaintList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
       pendingList: [],
       archivedList: [],
       resolvedList: [],
       slideIndex: 0,
       style: { background: "aliceblue", fontWeight: "bold" }
     };
-  }
-  async componentWillReceiveProps(nextProps) {
-    let listItem = await nextProps.listData,
-      ths = this;
-    await this.setState({ listItem });
-    setTimeout(async function() {
-      await ths.setState({
-        pendingList: listItem.filter(
-          data =>
-            (data.adminReply === undefined ||
-              (data.adminReply !== undefined &&
-                data.statusByAdmin === "pending")) &&
-            data.isArchived === false
-        ),
-        archivedList: listItem.filter(data => data.isArchived === true),
-        resolvedList: listItem.filter(
-          data =>
-            data.statusByAdmin !== undefined &&
-            data.statusByAdmin === "resolve" &&
-            data.isArchived === false
-        )
-      });
-      ths.setState({ isLoading: false });
-    }, 2000);
   }
   handleChange = slideIndex => this.setState({ slideIndex });
   render() {
@@ -118,10 +93,11 @@ class ComplaintList extends React.Component {
                 overflowX: "hidden"
               }}
             >
-              {this.state.isLoading ? (
+              {console.log(this.state)}
+              {this.props.loading ? (
                 loader
-              ) : this.state.pendingList.length > 0 ? (
-                this.state.pendingList.map((doc, index) => {
+              ) : this.props.pendingList.length > 0 ? (
+                this.props.pendingList.map((doc, index) => {
                   try {
                     doc.username =
                       doc.isAnonymous === false
@@ -210,8 +186,8 @@ class ComplaintList extends React.Component {
             >
               {this.props.loading ? (
                 loader
-              ) : this.state.resolvedList.length > 0 ? (
-                this.state.resolvedList.map((doc, index) => {
+              ) : this.props.resolvedList.length > 0 ? (
+                this.props.resolvedList.map((doc, index) => {
                   try {
                     doc.username =
                       doc.isAnonymous === false
@@ -301,8 +277,8 @@ class ComplaintList extends React.Component {
                   }}
                 />
               </div> */}
-              {this.state.archivedList.length > 0 ? (
-                this.state.archivedList.map((doc, index) => {
+              {this.props.archivedList.length > 0 ? (
+                this.props.archivedList.map((doc, index) => {
                   let userdata = this.props.userData.find(
                     data => data.uid === doc.userId
                   );
