@@ -14,7 +14,7 @@ class TeamAllocationProjectList extends React.Component {
       selectedValue: 2,
       projectsList: [],
       missionsList: [],
-      leavesList: [],
+      missionsfilterList: [],
       nowDate: null,
       backcolor: null,
       startDay: null,
@@ -27,47 +27,55 @@ class TeamAllocationProjectList extends React.Component {
     });
   };
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      leavesList: nextProps.leavesList,
-      missionsList: nextProps.missionsList,
-      projectsList: nextProps.projectsList,
-      usersList: nextProps.usersList,
-      nowDate: moment(Date()).format("LL")
-    });
+    this.inititalizePropsValue(nextProps);
   }
-  handleTypeChange = (event, index, value) => {
-    if (value === 1) {
-      window.location = "/teamallocation";
-    }
-  };
   componentWillMount() {
     let nowDate = new Date();
     let nowDay = new Date().getDay();
     let finalDate = nowDate.setDate(new Date().getDate() - nowDay + 1);
     let startDay = new Date(finalDate);
     this.setState({ startDay });
+    this.inititalizePropsValue(this.props);
   }
-  functionSelectedDate = async selectedDate => {
-    await this.filterDateWise(selectedDate);
+  inititalizePropsValue = whichProps => {
+    let nowDate = moment().format("L");
+    let missionsfilterList = whichProps.missionsList.filter(
+      missionData =>
+        moment(missionData.deadline.startDate).format("L") <= nowDate &&
+        moment(missionData.deadline.endDate).format("L") >= nowDate
+    );
+    this.setState({
+      missionsfilterList,
+      missionsList: whichProps.missionsList,
+      isLoading: false,
+      projectsList: whichProps.projectsList,
+      usersList: whichProps.usersList,
+      nowDate: moment(Date()).format("LL")
+    });
   };
-  handleAddProject = () => {
-    window.location = "/teamallocation/project";
+  functionSelectedDate = selectedDate => {
+    this.filterDateWise(selectedDate);
   };
   filterDateWise = selectedDate => {
+    let selctedCurrentDate = new Date(selectedDate);
     let selctedDate1 = new Date(selectedDate);
-    let leavesList = this.props.leavesList.filter(
-      data =>
-        moment(data.from.seconds * 1000).format("L") >= selectedDate ||
-        moment(data.to.seconds * 1000).format("L") <= selectedDate
+    let nowDay = new Date(selectedDate).getDay();
+    let finalDate = selctedDate1.setDate(
+      new Date(selectedDate).getDate() - nowDay + 1
     );
-    let missionsList = this.props.missionsList.filter(
+    let startDay = new Date(finalDate);
+
+    let missionsfilterList = this.state.missionsList.filter(
       missionData =>
-        moment(missionData.deadline.startDate.seconds * 1000).format("L") >=
-          selectedDate ||
-        moment(missionData.deadline.endDate.seconds * 1000).format("L") <=
-          selectedDate
+        moment(missionData.deadline.startDate).format("L") <= selectedDate &&
+        moment(missionData.deadline.endDate).format("L") >= selectedDate
     );
-    this.setState({ leavesList, missionsList, selectedDate: selctedDate1 });
+    this.setState({
+      missionsfilterList,
+      selectedDate: selctedCurrentDate,
+      startDay,
+      isLoading: false
+    });
   };
   contentButton = {
     top: "auto",
@@ -119,7 +127,7 @@ class TeamAllocationProjectList extends React.Component {
                 actAsExpander={true}
                 showExpandableButton={true}
               />
-              {this.state.missionsList.map((missionRow, index) =>
+              {this.state.missionsfilterList.map((missionRow, index) =>
                 missionRow.projectId === row.projectId ? (
                   <CardText
                     key={index}
@@ -142,10 +150,11 @@ class TeamAllocationProjectList extends React.Component {
                             missionRow.assignTo.find(
                               udata => udata === user.uid
                             )
-                          )
+                          ) {
                             return (
                               <div key={i}>
                                 <img
+                                  alt={"active"}
                                   style={{
                                     width: 40,
                                     height: 40,
@@ -157,6 +166,7 @@ class TeamAllocationProjectList extends React.Component {
                                 />
                               </div>
                             );
+                          }
                         })}
                       </div>
                       <br />
@@ -164,17 +174,12 @@ class TeamAllocationProjectList extends React.Component {
                       <br />
                       <div>
                         <h3>{missionRow.name}</h3>
-                        <h4>Project Dead Line</h4>
                         <h5 style={{ float: "left", marginRight: 10 }}>
-                          {moment(
-                            missionRow.deadline.startDate.seconds * 1000
-                          ).format("ll")}
+                          {moment(missionRow.deadline.startDate).format("ll")}
                         </h5>
                         <h5 style={{ float: "left", marginRight: 10 }}>-</h5>
                         <h5>
-                          {moment(
-                            missionRow.deadline.endDate.seconds * 1000
-                          ).format("ll")}
+                          {moment(missionRow.deadline.endDate).format("ll")}
                         </h5>
                         <h5>Massege: {missionRow.deadline.remarks}</h5>
                       </div>

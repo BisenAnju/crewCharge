@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, BrowserRouter as Router, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
 import LeaveEmployeeApply from "../components/LeaveEmployeeApply";
@@ -8,9 +8,8 @@ import moment from "moment";
 class LeaveEmployeeApplyContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isLoading: true, player_ids: [], purposeData: [] };
+    this.state = { isLoading: true, player_ids: [] };
   }
-
   componentWillMount() {
     let player_ids = [];
     this.props.db
@@ -26,32 +25,8 @@ class LeaveEmployeeApplyContainer extends React.Component {
           }
         });
         this.setState({ player_ids });
-        console.log(this.state.player_ids);
       });
-
-    // get purpose
-    this.props.db
-      .collection("leavePurpose")
-      .get()
-      .then(
-        doc => {
-          const purposeData = [];
-          doc.forEach(docitem => {
-            if (docitem.exists) {
-              purposeData.push(docitem.data());
-            }
-          });
-          this.setState({
-            isLoading: false,
-            purposeData
-          });
-        },
-        err => {
-          console.log(`Encountered error: ${err}`);
-        }
-      );
   }
-
   // Add leaves data
   addLeaves = (leaveData, leaveType) => {
     let newDueDate = moment.utc(moment().subtract(1, "days"))._d;
@@ -134,29 +109,76 @@ class LeaveEmployeeApplyContainer extends React.Component {
       });
   };
 
+  updateLeaveData = (leaveData, leaveType) => {
+    this.props.db
+      .collection("leaves")
+      .doc(this.props.match.params.mode)
+      .update({
+        leaveType,
+        leaveStatus: "Pending",
+        from: leaveData.from,
+        to: leaveData.to,
+        dueDate: leaveData.dueDate,
+        purpose: leaveData.purpose,
+        reason: leaveData.reason
+      })
+      .then(() => {
+        if (this.props.match.params.mode !== "undefined") {
+          var headers = {
+            "Content-Type": "application/json; charset=utf-8",
+            Authorization:
+              "Basic NDkwNGU2ODYtNTgwYS00MDY4LThjN2MtYzNmMGZhMGJmNzNk"
+          };
+          var options = {
+            host: "onesignal.com",
+            port: 443,
+            path: "/api/v1/notifications",
+            method: "POST",
+            headers: headers
+          };
+          var data = {
+            app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
+            contents: { en: leaveType },
+            include_player_ids: this.state.player_ids,
+            priority: 10,
+            headings: { en: "New Leave" },
+            data: {
+              Route: "/leavedashboard/admin/approvalrejection/",
+              Id: this.props.match.params.mode
+            }
+          };
+
+          var https = require("https");
+          var req = https.request(options, res => {
+            res.on("data", data => {});
+          });
+
+          req.on("error", e => {
+            console.log("ERROR:");
+            console.log(e);
+          });
+          req.write(JSON.stringify(data));
+          req.end();
+          this.props.history.push("/leavedashboard");
+        }
+      })
+      .catch(err => {
+        console.log("Error getting documents", err);
+      });
+  };
+
   render() {
     return (
-      <div>
-        <Router>
-          <Route
-            exact
-            path={"/leavedashboard/leaveapply/:mode"}
-            render={props => (
-              <LeaveEmployeeApply
-                {...props}
-                addLeaves={this.addLeaves}
-                singleData={this.props.singleData.find(
-                  data => data.leaveId === this.props.match.params.leaveId
-                )}
-                isLoading={this.state.isLoading}
-                purposeData={this.state.purposeData}
-              />
-            )}
-          />
-        </Router>
-      </div>
+      <LeaveEmployeeApply
+        addLeaves={this.addLeaves}
+        updateLeaveData={this.updateLeaveData}
+        singleData={this.props.singleData.find(
+          data => data.leaveId === this.props.match.params.mode
+        )}
+        isLoading={this.state.isLoading}
+        purposeData={this.props.purposeData}
+      />
     );
   }
 }
-
-export default withUser(withFirebase(withRouter(LeaveEmployeeApplyContainer)));
+export default withRouter(withFirebase(withUser(LeaveEmployeeApplyContainer)));

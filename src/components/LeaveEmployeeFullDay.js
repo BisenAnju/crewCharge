@@ -6,7 +6,8 @@ import {
   MenuItem,
   RaisedButton,
   TextField,
-  Snackbar
+  Snackbar,
+  Avatar
 } from "material-ui";
 import {
   ActionDateRange,
@@ -17,6 +18,14 @@ import {
 const flexcontainer = {
   display: "flex",
   justifyContent: "center"
+};
+const styles = {
+  underlineStyle: {
+    borderColor: "#fd914d"
+  },
+  floatingLabelFocusStyle: {
+    color: "#fd914d"
+  }
 };
 class LeaveEmployeeFulldayLeave extends Component {
   constructor() {
@@ -29,6 +38,17 @@ class LeaveEmployeeFulldayLeave extends Component {
       dueDate: null,
       reason: null
     };
+  }
+  componentWillMount() {
+    if (this.props.singleData !== undefined) {
+      this.setState({
+        purpose: this.props.singleData.purpose,
+        from: this.props.singleData.from,
+        to: this.props.singleData.to,
+        dueDate: this.props.singleData.dueDate,
+        reason: this.props.singleData.reason
+      });
+    }
   }
   handleChange = (event, index, purpose) => this.setState({ purpose });
   validateForm = e => {
@@ -43,6 +63,19 @@ class LeaveEmployeeFulldayLeave extends Component {
       return false;
     }
     this.props.addLeaves({ ...this.state }, this.props.leaveType);
+  };
+  updateLeave = e => {
+    e.preventDefault();
+    if (
+      this.state.from === null ||
+      this.state.to === null ||
+      this.state.reason === null ||
+      this.state.purpose === null
+    ) {
+      this.setState({ snackOpen: true });
+      return false;
+    }
+    this.props.updateLeaveData({ ...this.state }, this.props.leaveType);
   };
   handleRequestClose = () => {
     this.setState({
@@ -72,7 +105,9 @@ class LeaveEmployeeFulldayLeave extends Component {
       <div>
         <div style={flexcontainer}>
           <div>
-            <ActionList style={{ marginTop: "38px", fill: "#f08f4c" }} />
+            <ActionList
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <SelectField
@@ -80,35 +115,53 @@ class LeaveEmployeeFulldayLeave extends Component {
               onChange={this.handleChange}
               floatingLabelText="Select Purpose"
             >
-              {this.props.purposeData.map(purpose => (
+              {this.props.purposeData.map((purpose, id) => (
                 <MenuItem
+                  key={id}
                   value={purpose.purpose}
                   primaryText={purpose.displayName}
+                  rightIcon={
+                    <Avatar
+                      src={purpose.iconUrl}
+                      style={{
+                        height: "27px",
+                        width: "27px",
+                        backgroundColor: "white",
+                        borderRadius: "0%"
+                      }}
+                    />
+                  }
                 />
               ))}
             </SelectField>
           </div>
         </div>
-        <br />
+
         <div style={flexcontainer}>
           <div>
-            <ActionDateRange style={{ marginTop: "12px", fill: "#f08f4c" }} />
+            <ActionDateRange
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <DatePicker
+              floatingLabelText="From Date"
               hintText="Select date (from)"
               value={this.state.from}
               onChange={this.changeFromDate}
             />
           </div>
         </div>
-        <br />
+
         <div style={flexcontainer}>
           <div>
-            <ActionDateRange style={{ marginTop: "12px", fill: "#f08f4c" }} />
+            <ActionDateRange
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <DatePicker
+              floatingLabelText="To Date"
               hintText="Select date (to)"
               value={this.state.to}
               errorStyle={{ color: "#f08f4c" }}
@@ -120,14 +173,16 @@ class LeaveEmployeeFulldayLeave extends Component {
             />
           </div>
         </div>
-        <br />
 
         <div style={flexcontainer}>
           <div>
-            <ActionDateRange style={{ marginTop: "12px", fill: "#f08f4c" }} />
+            <ActionDateRange
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <DatePicker
+              floatingLabelText="Due Date"
               hintText="Select due date"
               errorText={
                 this.state.dueDate > this.state.from &&
@@ -143,11 +198,14 @@ class LeaveEmployeeFulldayLeave extends Component {
         <div style={flexcontainer}>
           <div>
             <CommunicationComment
-              style={{ marginTop: "38px", fill: "#f08f4c" }}
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
             />
           </div>
           <div>
             <TextField
+              underlineFocusStyle={styles.underlineStyle}
+              floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+              floatingLabelText="Reason"
               hintText="Type Reason"
               multiLine={true}
               rows={2}
@@ -160,16 +218,26 @@ class LeaveEmployeeFulldayLeave extends Component {
         </div>
 
         <br />
-        <br />
         <center>
-          <div className="flexAppItem">
-            <RaisedButton
-              label="SUBMIT"
-              backgroundColor="rgb(253, 145, 77)"
-              labelColor="white"
-              onClick={this.validateForm}
-            />
-          </div>
+          {this.props.singleData === undefined ? (
+            <div className="flexAppItem">
+              <RaisedButton
+                label="SUBMIT"
+                backgroundColor="rgb(253, 145, 77)"
+                labelColor="white"
+                onClick={this.validateForm}
+              />
+            </div>
+          ) : (
+            <div className="flexAppItem">
+              <RaisedButton
+                label="UPDATE"
+                backgroundColor="rgb(253, 145, 77)"
+                labelColor="white"
+                onClick={this.updateLeave}
+              />
+            </div>
+          )}
         </center>
 
         <Snackbar

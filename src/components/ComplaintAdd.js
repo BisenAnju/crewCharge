@@ -1,5 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import withFirebase from "../hoc/withFirebase";
+import withUser from "../hoc/withUser";
 import {
   TextField,
   Snackbar,
@@ -38,7 +40,10 @@ class NewComplaint extends React.Component {
 
   // get value of selected option of selectfield
   selectChange = (event, index, complaintType) => {
-    this.setState({ complaintType });
+    this.setState({
+      complaintType,
+      complaintTypeName: event.target.firstChild.nodeValue
+    });
   };
 
   validateInput = e => {
@@ -54,6 +59,16 @@ class NewComplaint extends React.Component {
   validateAll(e) {
     e.preventDefault();
     let ths = this;
+    // validate is internet connected
+    if (navigator.onLine === false) {
+      this.setState({
+        loading: false,
+        message: "No internet access",
+        snackOpen: true
+      });
+      return false;
+    }
+
     // validate isAnonymous,priority,complaint type,complaint detail
     if (
       this.state.isAnonymous === null ||
@@ -66,15 +81,6 @@ class NewComplaint extends React.Component {
       return false;
     }
 
-    // validate is internet connected
-    if (navigator.onLine === false) {
-      this.setState({
-        loading: false,
-        message: "No internet access",
-        snackOpen: true
-      });
-      return false;
-    }
     ths.setState({ loading: true });
     if (this.props.AddComplaint(this.state)) {
       ths.setState({ message: "Submitted Successfully", snackOpen: true });
@@ -92,6 +98,7 @@ class NewComplaint extends React.Component {
               <PriorityRadioButton validatePriority={this.validateInput} />
               <SelectfieldClass
                 selectChange={this.selectChange}
+                complaintType={this.props.complaintType}
                 complaintTypeValue={this.state.complaintType}
               />
               <TextField
@@ -152,4 +159,4 @@ class NewComplaint extends React.Component {
     );
   }
 }
-export default withRouter(NewComplaint);
+export default withUser(withFirebase(withRouter(NewComplaint)));

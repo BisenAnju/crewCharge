@@ -8,8 +8,12 @@ class NavigationBarContainers extends Component {
     this.state = {
       userData: []
     };
+    this.logOut = this.logOut.bind(this);
   }
-
+  logOut() {
+    this.props.firebase.logOut();
+    localStorage.clear();
+  }
   componentWillMount() {
     // User Data
     this.props.db.collection("users").onSnapshot(
@@ -38,7 +42,7 @@ class NavigationBarContainers extends Component {
           userData={this.state.userData}
           navigationTitle={this.props.navigationTitle}
           showBackNavigation={this.props.showBackNavigation}
-          logOut={this.props.firebase.logOut}
+          logOut={this.logOut}
         />
       </div>
     );

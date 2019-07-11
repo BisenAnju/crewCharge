@@ -22,7 +22,7 @@ import {
   ActionAssignment,
   ActionSettings
 } from "material-ui/svg-icons";
-
+import privacy from "../images/privacy.png";
 class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
@@ -49,7 +49,7 @@ class NavigationBar extends React.Component {
           }}
           onRightIconButtonClick={() =>
             this.props.navigationTitle !== "Dashboard" &&
-            this.props.history.goBack("/dashboard")
+            this.props.history.push("/")
           }
           onLeftIconButtonClick={() =>
             this.props.showBackNavigation
@@ -72,7 +72,7 @@ class NavigationBar extends React.Component {
           }
         />
         <Drawer
-          disableSwipeToOpen={false}
+          disableSwipeToOpen={true}
           docked={false}
           width={260}
           open={this.state.open}
@@ -181,9 +181,9 @@ class NavigationBar extends React.Component {
             <ListItem
               onClick={e => {
                 e.preventDefault();
-                this.props.history.push("/teamallocation/projectlist");
+                this.props.history.push("/projects");
               }}
-              primaryText="Projects "
+              primaryText="Client Communication"
               leftIcon={
                 <ActionAssignment
                   style={{
@@ -233,45 +233,27 @@ class NavigationBar extends React.Component {
                       />
                     }
                   />
-
-                  {/* <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/teamallocation/mission");
-                    }}
-                    primaryText="Add Missions"
-                    leftIcon={
-                      <ActionInput
-                        style={{
-                          fill: "#fd914d",
-                          heigth: "22px",
-                          width: "22px",
-                          left: "12px"
-                        }}
-                      />
-                    }
-                  />
-                  <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/teamallocation/project");
-                    }}
-                    primaryText="Add Projects"
-                    leftIcon={
-                      <ActionInput
-                        style={{
-                          fill: "#fd914d",
-                          heigth: "22px",
-                          width: "22px",
-                          left: "12px"
-                        }}
-                      />
-                    }
-                  /> */}
                 </div>
               ) : null
             )}
-
+            <ListItem
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push("/privacypolicy");
+              }}
+              primaryText="Privacy Policy"
+              leftIcon={
+                <Avatar
+                  backgroundColor="white"
+                  src={privacy}
+                  style={{
+                    borderRadius: 0,
+                    marginLeft: "22px",
+                    marginTop: "10px"
+                  }}
+                />
+              }
+            />
             <Divider />
             <ListItem
               onClick={() => {
@@ -288,6 +270,11 @@ class NavigationBar extends React.Component {
                   }}
                 />
               }
+            />
+            <ListItem
+              disabled={true}
+              insetChildren={true}
+              primaryText={"v1.0.3"}
             />
           </List>
         </Drawer>

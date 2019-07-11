@@ -1,43 +1,68 @@
 import React from "react";
 import withFirebase from "../hoc/withFirebase";
-import NewComplaint from "../components/ComplaintAdd";
 import withUser from "../hoc/withUser";
+import { serverPublicKey } from "../constants/server";
+import NewComplaint from "../components/ComplaintAdd";
+
+const QuickEncrypt = require("quick-encrypt");
+const Cryptr = require("cryptr");
 
 class NewComplaintContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { player_ids: [] };
+    this.state = { playerIds: [], publicKeys: [], adminDetails: [] };
   }
   componentWillMount() {
-    let player_ids = [];
+    let playerIds = [],
+      publicKeys = [],
+      adminDetails = [];
     this.props.db
       .collection("users")
       .where("userType", "==", "Admin")
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
-          console.log(doc.data());
           if (doc.exists && doc.data().userNotificationPlayerId !== undefined) {
             const details = doc.data();
             details.id = doc.id;
-            player_ids.push(details.userNotificationPlayerId);
+            playerIds.push(details.userNotificationPlayerId);
+            publicKeys.push(details.publicKeys);
+            adminDetails.push(details);
           }
         });
-        this.setState({ player_ids });
+        this.setState({ adminDetails, playerIds, publicKeys });
       });
   }
   AddComplaint = data => {
-    let ths = this;
+    let uid = [],
+      ths = this;
+    //////// encrypt //////////
+    uid.push(this.props.user.uid);
+    this.state.adminDetails.map(data => uid.push(data.uid));
+
+    const description =
+        data.description.charAt(0).toUpperCase() + data.description.slice(1),
+      title = data.title.charAt(0).toUpperCase() + data.title.slice(1);
+
+    let toId = uid,
+      randomKey = Math.floor(Math.random() * 1000 + 1).toString();
+
+    const cryptr = new Cryptr(randomKey);
+    let encryptedDescription = cryptr.encrypt(description),
+      encryptedTitle = cryptr.encrypt(title),
+      encryptedKeyForServer = QuickEncrypt.encrypt(randomKey, serverPublicKey);
+    ///////////encrypt///////////
     this.props.db
       .collection("complaints")
       .add({
+        encryptedKeyForServer: encryptedKeyForServer,
+        receiverId: toId,
         userId: this.props.user.uid,
         complaintType: data.complaintType,
         isAnonymous: data.isAnonymous,
         isArchived: false,
-        title: data.title.charAt(0).toUpperCase() + data.title.slice(1),
-        description:
-          data.description.charAt(0).toUpperCase() + data.description.slice(1),
+        title: encryptedTitle,
+        description: encryptedDescription,
         priority: data.priority,
         addedOn: new Date()
       })
@@ -78,19 +103,29 @@ class NewComplaintContainer extends React.Component {
             };
             var message = {
               app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
-              contents: { en: data.complaintType },
-              include_player_ids: ths.state.player_ids,
-              headings: { en: "New Complaint" },
+              contents: {
+                en:
+                  data.isAnonymous === true
+                    ? "Anonymous"
+                    : ths.props.user.displayName
+              },
+              include_player_ids: ths.state.playerIds,
+              headings: { en: data.title },
               data: { Route: "/complaintview/", Id: ref.id }
             };
-            console.log(ths.state.player_ids);
+            console.log(ths.state.playerIds);
             sendNotification(message);
           }, 2000);
         }
       });
   };
   render() {
-    return <NewComplaint AddComplaint={this.AddComplaint} />;
+    return (
+      <NewComplaint
+        complaintType={this.props.complaintType}
+        AddComplaint={this.AddComplaint}
+      />
+    );
   }
 }
 

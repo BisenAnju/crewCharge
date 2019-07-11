@@ -1,4 +1,4 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import config from "./config";
@@ -8,6 +8,7 @@ class Firebase {
     this.app = firebase.initializeApp(config);
     this.auth = this.app.auth();
     this.db = this.app.firestore();
+    this.function = this.app.functions();
 
     this.app
       .firestore()

@@ -10,11 +10,13 @@ import withUser from "../hoc/withUser";
 import TeamAllocationMissionContainer from "./TeamAllocationMission";
 import TeamAllocationProjectContainer from "./TeamAllocationProject";
 import TeamAllocationMissionList from "../components/TeamAllocationMissionList";
+import { loader } from "../constants/loader";
 class TeamAllocationPeoplesListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
+      isLoadingMission: true,
       usersList: [],
       projectsList: [],
       missionsList: [],
@@ -31,10 +33,11 @@ class TeamAllocationPeoplesListContainer extends Component {
       .collection("users")
       .orderBy("displayName")
       .onSnapshot(snapshot => {
-        snapshot.docChanges().forEach(doc => {
-          if (doc.doc.exists) {
-            const usersDetails = doc.doc.data();
-            usersDetails.userId = doc.doc.id;
+        usersList = [];
+        snapshot.forEach(doc => {
+          if (doc.exists) {
+            const usersDetails = doc.data();
+            usersDetails.userId = doc.id;
             usersList.push(usersDetails);
           } else {
             alert("No Data Found");
@@ -47,10 +50,11 @@ class TeamAllocationPeoplesListContainer extends Component {
       .where("status", "==", "Active")
       .orderBy("name")
       .onSnapshot(snapshot => {
-        snapshot.docChanges().forEach(doc => {
-          if (doc.doc.exists) {
-            const projectDetails = doc.doc.data();
-            projectDetails.projectId = doc.doc.id;
+        projectsList = [];
+        snapshot.forEach(doc => {
+          if (doc.exists) {
+            const projectDetails = doc.data();
+            projectDetails.projectId = doc.id;
             projectsList.push(projectDetails);
           } else {
             alert("No Data Found");
@@ -63,26 +67,27 @@ class TeamAllocationPeoplesListContainer extends Component {
       .where("status", "==", "Active")
       .orderBy("name")
       .onSnapshot(snapshot => {
-        snapshot.docChanges().forEach(doc => {
-          if (doc.doc.exists) {
-            const missionsDetails = doc.doc.data();
-            missionsDetails.missionsId = doc.doc.id;
+        missionsList = [];
+        snapshot.forEach(doc => {
+          if (doc.exists) {
+            const missionsDetails = doc.data();
+            missionsDetails.missionsId = doc.id;
             missionsList.push(missionsDetails);
           } else {
             alert("No Data Found");
           }
         });
-
-        this.setState({ isLoading: false, missionsList });
+        this.setState({ isLoadingMission: false, missionsList });
       });
     this.props.db
       .collection("leaves")
       .where("leaveStatus", "==", "Approved")
       .onSnapshot(snapshot => {
-        snapshot.docChanges().forEach(doc => {
-          if (doc.doc.exists) {
-            const leavesDetails = doc.doc.data();
-            leavesDetails.leavesId = doc.doc.id;
+        leavesList = [];
+        snapshot.forEach(doc => {
+          if (doc.exists) {
+            const leavesDetails = doc.data();
+            leavesDetails.leavesId = doc.id;
             leavesList.push(leavesDetails);
           } else {
             alert("No Data Found");
@@ -103,10 +108,13 @@ class TeamAllocationPeoplesListContainer extends Component {
       .collection("projects")
       .doc(projectId)
       .update({ status: "Archive" })
-      .then(this.setState({ massage: "Your Data Deleted" }));
+      .then();
   };
+
   render() {
-    return (
+    return this.state.isLoadingMission ? (
+      loader
+    ) : (
       <div>
         <Router>
           <Switch>
@@ -128,7 +136,10 @@ class TeamAllocationPeoplesListContainer extends Component {
               exact
               path={"/teamallocation/mission"}
               render={props => (
-                <TeamAllocationMissionContainer {...props} {...this.state} />
+                <TeamAllocationMissionContainer
+                  {...this.props}
+                  {...this.state}
+                />
               )}
             />
             <Route
@@ -145,7 +156,10 @@ class TeamAllocationPeoplesListContainer extends Component {
               exact
               path={"/teamallocation/project"}
               render={props => (
-                <TeamAllocationProjectContainer {...props} {...this.state} />
+                <TeamAllocationProjectContainer
+                  {...this.props}
+                  {...this.state}
+                />
               )}
             />
             <Route

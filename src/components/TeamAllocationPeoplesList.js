@@ -13,7 +13,6 @@ import ReactWeeklyDayPicker from "./WeeklyDayPicker";
 import { classNames } from "../constants/weeklydaypicker";
 import "../styles/style.css";
 import { loader } from "../constants/loader";
-import Subheader from "material-ui/Subheader";
 class TeamAllocationPeopleList extends React.Component {
   constructor(props) {
     super(props);
@@ -49,16 +48,33 @@ class TeamAllocationPeopleList extends React.Component {
     this.setState({ startDay });
   }
   inititalizePropsValue = whichProps => {
-    let nowDate = moment().format("l");
-    let missionsfilterList = whichProps.missionsList.filter(
+    let missionsList = [];
+    let nowDate = moment().format("L");
+    whichProps.projectsList.map(row => {
+      whichProps.missionsList
+        .filter(missionData => missionData.projectId === row.projectId)
+        .map(missionRow => {
+          const data = missionRow;
+          data.projectId = missionRow.projectId;
+          data.assignTo = missionRow.assignTo;
+          data.deadline = missionRow.deadline;
+          data.name = missionRow.name;
+          data.status = missionRow.status;
+          data.missionId = missionRow.missionId;
+          missionsList.push(data);
+          return missionsList;
+        });
+      return missionsList;
+    });
+    let missionsfilterList = this.state.missionsList.filter(
       missionData =>
-        moment(missionData.deadline.startDate).format("l") <= nowDate &&
-        moment(missionData.deadline.endDate).format("l") >= nowDate
+        moment(missionData.deadline.startDate).format("L") <= nowDate &&
+        moment(missionData.deadline.endDate).format("L") >= nowDate
     );
     this.setState({
       leavesList: whichProps.leavesList,
       missionsfilterList,
-      missionsList: whichProps.missionsList,
+      missionsList,
       isLoading: false,
       projectsList: whichProps.projectsList,
       usersList: whichProps.usersList,
@@ -94,40 +110,44 @@ class TeamAllocationPeopleList extends React.Component {
       isLoading: false
     });
   };
+
   render() {
     return (
-      <div>
-        <div style={{ position: "relative" }}>
-          <Divider />
-          <div>
-            <ReactWeeklyDayPicker
-              daysCount={7}
-              classNames={classNames}
-              startDay={this.state.startDay}
-              selectedDays={[this.state.selectedDate]}
-              multipleDaySelect={false}
-              selectDay={this.functionSelectedDate}
-              unselectDay={function(day) {}}
-              onPrevClick={function(startDay, selectedDays) {}}
-              onNextClick={function(startDay, selectedDays) {}}
-              unselectable={false}
-              format={"MM/DD/YYYY"}
-              selected={this.state.selected}
-              firstLineFormat={"ddd"}
-              secondLineFormat={"D"}
-              firstLineMobileFormat={"ddd"}
-              secondLineMobileFormat={"D"}
-              mobilView={window.innerWidth < 1024}
-              beforeToday={true}
-            />
-          </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "calc(100vh - 112px)"
+        }}
+      >
+        <div>
+          <ReactWeeklyDayPicker
+            daysCount={7}
+            classNames={classNames}
+            startDay={this.state.startDay}
+            selectedDays={[this.state.selectedDate]}
+            multipleDaySelect={false}
+            selectDay={this.functionSelectedDate}
+            unselectDay={function(day) {}}
+            onPrevClick={function(startDay, selectedDays) {}}
+            onNextClick={function(startDay, selectedDays) {}}
+            unselectable={false}
+            format={"MM/DD/YYYY"}
+            selected={this.state.selected}
+            firstLineFormat={"ddd"}
+            secondLineFormat={"D"}
+            firstLineMobileFormat={"ddd"}
+            secondLineMobileFormat={"D"}
+            mobilView={window.innerWidth < 1024}
+            beforeToday={true}
+          />
         </div>
+
         <Divider />
         <div
           style={{
-            height: "73vh",
-            overflow: "auto",
-            display: "self"
+            height: "calc(100vh - 186px)",
+            overflow: "scroll"
           }}
         >
           {this.state.loader
@@ -135,10 +155,12 @@ class TeamAllocationPeopleList extends React.Component {
             : this.state.usersList.map((row, id) => {
                 let projectId = [];
                 this.state.missionsfilterList.map(missionRow => {
-                  if (missionRow.assignTo.find(data => data === row.uid))
+                  if (missionRow.assignTo.find(data => data === row.uid)) {
                     projectId = this.state.projectsList.find(
                       data => data.projectId === missionRow.projectId
                     );
+                  }
+                  return projectId;
                 });
                 let backcolor = null;
                 {
@@ -170,6 +192,7 @@ class TeamAllocationPeopleList extends React.Component {
                       children={
                         projectId.logoURL !== undefined ? (
                           <img
+                            alt="active"
                             style={{
                               paddingTop: 5,
                               width: 35,
@@ -180,22 +203,20 @@ class TeamAllocationPeopleList extends React.Component {
                             src={projectId.logoURL}
                           />
                         ) : (
-                          <Subheader
+                          <Avatar
                             style={{
-                              width: 35,
-                              height: 35,
-                              borderRadius: 5,
+                              background: "red",
+                              height: "10px",
+                              width: "10px",
                               float: "right",
-                              marginRight: 10
+                              margin: "10px"
                             }}
-                          >
-                            N/A
-                          </Subheader>
+                          />
                         )
                       }
                     />
                     {this.state.missionsfilterList.map((missionRow, index) => {
-                      if (missionRow.assignTo.find(data => data === row.uid))
+                      if (missionRow.assignTo.find(data => data === row.uid)) {
                         return (
                           <CardText
                             key={index}
@@ -213,24 +234,27 @@ class TeamAllocationPeopleList extends React.Component {
                               }}
                             >
                               <h3>{missionRow.name}</h3>
-                              <h4>Project Dead Line</h4>
+                              {/* <h4>Project Dead Line</h4> */}
                               <h5 style={{ float: "left", marginRight: 10 }}>
-                                {moment(
-                                  missionRow.deadline.startDate.seconds * 1000
-                                ).format("ll")}
+                                {moment(missionRow.deadline.startDate).format(
+                                  "ll"
+                                )}
                               </h5>
                               <h5 style={{ float: "left", marginRight: 10 }}>
                                 -
                               </h5>
                               <h5>
-                                {moment(
-                                  missionRow.deadline.endDate.seconds * 1000
-                                ).format("ll")}
+                                {moment(missionRow.deadline.endDate).format(
+                                  "ll"
+                                )}
                               </h5>
                               <h5>Massege: {missionRow.deadline.remarks}</h5>
                             </Paper>
                           </CardText>
                         );
+                      } else {
+                        return null;
+                      }
                     })}
                   </Card>
                 );

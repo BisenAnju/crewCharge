@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import Anonymous from "../images/anonymous.png";
 import {
   TextField,
   RefreshIndicator,
@@ -17,32 +18,13 @@ import {
   Divider
 } from "material-ui";
 import Layout from "../layouts/Layout";
-import moment from "moment";
-import Feedback from "material-ui/svg-icons/action/feedback";
-import Overworked from "material-ui/svg-icons/action/work";
-import LackOfVacationSickLeave from "material-ui/svg-icons/action/watch-later";
-import Pay from "material-ui/svg-icons/action/payment";
-import OfficeTemperature from "material-ui/svg-icons/image/texture";
-import OfficeCleanliness from "material-ui/svg-icons/places/rv-hookup";
-import Harassment from "../images/harassment.png";
-
-const icn = {
-  Harassment: Harassment,
-  Feedback: <Feedback />,
-  Overworked: <Overworked />,
-  LackOfVacationSickLeave: <LackOfVacationSickLeave />,
-  Pay: <Pay />,
-  OfficeTemperature: <OfficeTemperature />,
-  OfficeCleanliness: <OfficeCleanliness />
-};
 
 class ComplaintView extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       open: false,
-      adminReply: "",
-      statusByAdmin: null,
       autoHideDuration: 4000,
       snackOpen: false,
       message: "All fields are required"
@@ -61,17 +43,28 @@ class ComplaintView extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   formSubmit() {
-    if (this.state.adminReply === "" || this.state.statusByAdmin === null) {
-      this.setState({ snackOpen: true });
+    let adminReply =
+      this.state.adminReply !== undefined
+        ? this.state.adminReply
+        : this.props.data.adminReply === undefined
+        ? null
+        : this.props.data.adminReply;
+    let statusByAdmin =
+      this.state.statusByAdmin !== undefined
+        ? this.state.statusByAdmin
+        : this.props.data.statusByAdmin === undefined
+        ? null
+        : this.props.data.statusByAdmin;
+    if (adminReply === null || statusByAdmin === null) {
+      this.setState({ message: "All fields mandatory", snackOpen: true });
       return false;
     }
-
     // validate is internet connected
     if (navigator.onLine === false) {
       this.setState({ message: "No internet access", snackOpen: true });
       return false;
     }
-    this.props.submit(this.state.adminReply, this.state.statusByAdmin);
+    this.props.submit(adminReply, statusByAdmin);
     this.handleOpen(false);
     this.setState({ message: "Submit Successful", snackOpen: true });
   }
@@ -92,40 +85,38 @@ class ComplaintView extends React.Component {
             </center>
           ) : (
             <div>
+              {console.log(this.props)}
               <List>
                 <ListItem
                   disabled
                   leftAvatar={
                     <Avatar
-                      src={this.props.data.userImageURL}
-                      // size={50}
-                      // style={{ marginTop: 10 }}
+                      size={45}
+                      src={
+                        this.props.data.isAnonymous === false
+                          ? this.props.data.userImageURL
+                          : this.props.data.userId ===
+                            this.props.loggedInUser.uid
+                          ? this.props.data.userImageURL
+                          : Anonymous
+                      }
                     />
                   }
                   rightAvatar={
                     <Avatar
+                      size={45}
                       backgroundColor="transparent"
                       color="rgb(253, 145, 77)"
-                      {...(this.props.data.complaintType === "Harassment"
-                        ? {
-                            src:
-                              icn[
-                                this.props.data.complaintType
-                                  .replace(" ", "")
-                                  .replace("/", "")
-                              ]
-                          }
-                        : {
-                            icon:
-                              icn[
-                                this.props.data.complaintType
-                                  .replace(" ", "")
-                                  .replace("/", "")
-                              ]
-                          })}
+                      src={this.props.data.iconUrl}
                     />
                   }
-                  primaryText={this.props.data.userName}
+                  primaryText={
+                    this.props.data.isAnonymous === false
+                      ? this.props.data.userName
+                      : this.props.data.userId === this.props.loggedInUser.uid
+                      ? this.props.data.userName
+                      : "Anonymous"
+                  }
                   secondaryText={this.props.data.complaintType}
                 />
                 <Divider />
@@ -133,9 +124,7 @@ class ComplaintView extends React.Component {
                   secondaryTextLines={1}
                   disabled
                   secondaryText={"Date"}
-                  primaryText={moment(
-                    new Date(this.props.data.addedOn.seconds * 1000)
-                  ).format("DD MMM YYYY")}
+                  primaryText={this.props.data.date}
                 />
                 <ListItem
                   disabled
@@ -164,6 +153,7 @@ class ComplaintView extends React.Component {
                   this.props.data.statusByAdmin === undefined) ? (
                   <div>
                     <CardText>
+                      {console.log(this.props.data)}
                       <h4>Do Action</h4>
                       <SelectField
                         underlineFocusStyle={{
@@ -173,7 +163,7 @@ class ComplaintView extends React.Component {
                         name="statusByAdmin"
                         style={{ width: "100%" }}
                         value={
-                          this.props.data.statusByAdmin !== undefined
+                          this.state.statusByAdmin === undefined
                             ? this.props.data.statusByAdmin
                             : this.state.statusByAdmin
                         }
@@ -189,7 +179,7 @@ class ComplaintView extends React.Component {
                         }}
                         floatingLabelStyle={{ color: "rgb(240, 143, 76)" }}
                         value={
-                          this.props.data.adminReply !== undefined
+                          this.state.adminReply === undefined
                             ? this.props.data.adminReply
                             : this.state.adminReply
                         }
@@ -217,7 +207,7 @@ class ComplaintView extends React.Component {
                       />
                     </CardActions>
                   </div>
-                ) : (
+                ) : this.props.data.statusByAdmin !== undefined ? (
                   <div>
                     <Subheader>Action by admin</Subheader>
                     <ListItem
@@ -227,13 +217,13 @@ class ComplaintView extends React.Component {
                       secondaryTextLines={1}
                     />
                     <ListItem
-                      secondaryTextLines={1}
+                      secondaryTextLines={2}
                       disabled
                       secondaryText={"Action"}
                       primaryText={this.props.data.adminReply}
                     />
                   </div>
-                )}
+                ) : null}
               </Card>
             </div>
           )}

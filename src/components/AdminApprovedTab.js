@@ -3,11 +3,6 @@ import { withRouter } from "react-router-dom";
 import withUser from "../hoc/withUser";
 import moment from "moment";
 import { List, ListItem, CircularProgress, Avatar, Divider } from "material-ui";
-import {
-  ActionFlightTakeoff,
-  MapsLocalHospital,
-  SocialSentimentVerySatisfied
-} from "material-ui/svg-icons";
 const tabStyles = {
   headline: {
     fontSize: 24,
@@ -24,7 +19,27 @@ class AdminPendingTab extends React.Component {
     super(props);
     this.state = {};
   }
-
+  getIconUrl = purpose => {
+    let iconURL = [];
+    iconURL = this.props.purposeData.find(item => item.purpose === purpose);
+    if (iconURL !== undefined)
+      return (
+        <Avatar
+          src={iconURL.iconUrl}
+          style={{
+            height: "27px",
+            width: "27px",
+            backgroundColor: "white",
+            borderRadius: "0%"
+          }}
+        />
+      );
+  };
+  getAvatar = userId => {
+    let avatarUrl = [];
+    avatarUrl = this.props.userData.find(item => item.uid === userId);
+    if (avatarUrl !== undefined) return <Avatar src={avatarUrl.photoURL} />;
+  };
   render() {
     return (
       <div
@@ -57,33 +72,8 @@ class AdminPendingTab extends React.Component {
                               "/leavedashboard/leavedetails/" + leave.leaveId
                             );
                       }}
-                      leftAvatar={
-                        <Avatar
-                          src={
-                            this.props.userData.findIndex(
-                              user => user.uid === leave.userId
-                            ) >= 0 &&
-                            this.props.userData.find(
-                              user => user.uid === leave.userId
-                            ).photoURL
-                          }
-                        />
-                      }
-                      rightIcon={
-                        leave.purpose === "vacation" ? (
-                          <ActionFlightTakeoff
-                            style={{ marginTop: 28, fill: "#303F9F" }}
-                          />
-                        ) : leave.purpose === "sickness" ? (
-                          <MapsLocalHospital
-                            style={{ marginTop: 28, fill: "#EF5350" }}
-                          />
-                        ) : (
-                          <SocialSentimentVerySatisfied
-                            style={{ marginTop: 28, fill: "#C2185B" }}
-                          />
-                        )
-                      }
+                      leftAvatar={this.getAvatar(leave.userId)}
+                      rightIcon={this.getIconUrl(leave.purpose)}
                       primaryText={
                         this.props.userData.findIndex(
                           user => user.uid === leave.userId
@@ -93,7 +83,7 @@ class AdminPendingTab extends React.Component {
                         ).displayName
                       }
                       secondaryText={
-                        <p style={{ fontSize: 12 }}>
+                        <p style={{ fontSize: 10, fontWeight: "bold" }}>
                           <span>
                             {leave.leaveType === "Hour"
                               ? moment
@@ -124,7 +114,7 @@ class AdminPendingTab extends React.Component {
                                     )
                                   )
                                   .format("D") +
-                                " Days " +
+                                " Day " +
                                 "  " +
                                 moment(leave.from).format("ll") +
                                 " - " +

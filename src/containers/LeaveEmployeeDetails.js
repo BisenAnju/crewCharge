@@ -8,7 +8,8 @@ import {
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
 import LeaveEmployeeDetails from "../components/LeaveEmployeeDetails";
-
+import LeaveEmployeeApplyContainer from "./LeaveEmployeeApply";
+import LeaveEmployeeDashboard from "./LeaveEmployeeDashboard";
 class LeaveEmployeeDetailsContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -111,25 +112,58 @@ class LeaveEmployeeDetailsContainer extends React.Component {
   render() {
     return (
       <div>
-        <Router>
-          <Switch>
-            <Route
-              exact
-              path={"/leavedashboard/leavedetails/:leaveId"}
-              render={props => (
-                <LeaveEmployeeDetails
-                  {...props}
-                  handleChange={this.handleChange}
-                  singleData={this.props.singleData.find(
-                    data => data.leaveId === this.props.match.params.leaveId
-                  )}
-                  commentData={this.state.commentData}
-                  userData={this.props.userData}
-                />
-              )}
+        <LeaveEmployeeDetails
+          handleChange={this.handleChange}
+          singleData={this.props.singleData.find(
+            data => data.leaveId === this.props.match.params.leaveId
+          )}
+          commentData={this.state.commentData}
+          userData={this.props.userData}
+          purposeData={this.props.purposeData}
+        />
+        {/* <Route
+          exact
+          path={"/leavedashboard"}
+          render={props => (
+            <LeaveEmployeeDashboard
+              key={this.state.leaveData.leaveId}
+              {...props}
+              userData={this.state.userData}
+              leaveData={this.state.leaveData}
+              purposeData={this.props.purposeData}
+              isLoading={this.state.isLoading}
             />
-          </Switch>
-        </Router>
+          )}
+        /> */}
+        {/* <Route
+          exact
+          path={"/leavedashboard/leavedetails/:leaveId"}
+          render={props => (
+            console.log(this.props.singleData),
+            (
+              <LeaveEmployeeDetails
+                {...props}
+                handleChange={this.handleChange}
+                singleData={this.props.singleData.find(
+                  data => data.leaveId === this.props.match.params.leaveId
+                )}
+                commentData={this.state.commentData}
+                userData={this.props.userData}
+                purposeData={this.props.purposeData}
+              />
+            )
+          )}
+        /> */}
+        {/* <Route
+          exact
+          path={"/leavedashboard/leaveapply/:mode"}
+          render={props => (
+            <LeaveEmployeeApplyContainer
+              {...this.props}
+              updateRouter={this.props.updateRouter}
+            />
+          )}
+        /> */}
       </div>
     );
   }

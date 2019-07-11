@@ -8,45 +8,74 @@ import DashboardContainer from "./containers/Dashboard";
 import ComplaintList from "./containers/ComplaintList";
 import ComplaintView from "./containers/ComplaintView";
 import LoginContainer from "./containers/Login";
-// import "./styles/App.css";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 import LeaveDashboardContainer from "./containers/LeaveDashboard";
-import LeaveAdminApprovalRejectionContainer from "./containers/LeaveAdminApprovalRejection";
-import LeaveEmployeeDetailsContainer from "./containers/LeaveEmployeeDetails";
 import ProjectsContainer from "./containers/Projects";
-import TeamAllocationMissionContainer from "./containers/TeamAllocationMission";
-import TeamAllocationProjectContainer from "./containers/TeamAllocationProject";
 import TeamAllocationPeoplesListContainer from "./containers/TeamAllocationPeoplesList";
 import ConfigurationContainer from "./containers/Configuration";
+import LinearProgress from "material-ui/LinearProgress";
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
-      userData: [],
-      leaveData: []
+      leaveData: [],
+      complaintTypeData: [],
+      u: null
     };
   }
-  componentWillMount() {
-    let userData = [];
-    this.props.db.collection("users").onSnapshot(snapshot => {
-      snapshot.forEach(doc => {
-        if (doc.exists) {
-          const users = doc.data();
-          users.id = doc.id;
-          userData.push(users);
-        }
-      });
-      this.setState({ userData });
-    });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user !== null) {
+      localStorage.setItem("user", nextProps.user.uid);
+      this.props.db
+        .collection("complaintType")
+        .get()
+        .then(doc => {
+          const complaintTypeData = [];
+          doc.forEach(docitem => {
+            if (docitem.exists) {
+              complaintTypeData.push(docitem.data());
+            }
+          });
+          this.setState({
+            complaintTypeData
+          });
+        });
+      let userData = [];
+      this.props.db
+        .collection("users")
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            if (doc.exists) {
+              const users = doc.data();
+              users.id = doc.id;
+              userData.push(users);
+            }
+          });
+          this.setState({ userData });
+        });
+    } else {
+      this.state = {
+        isLoading: true,
+        leaveData: [],
+        complaintTypeData: [],
+        u: null
+      };
+    }
   }
 
   render() {
     return (
       <div>
-        {this.props.user ? (
+        {this.state.userData ? (
           <div>
             <Router>
               <Switch>
+                <Route
+                  path={"/privacypolicy"}
+                  render={() => <PrivacyPolicy />}
+                />
                 <Route
                   path={"/teamallocation"}
                   render={props => (
@@ -54,25 +83,13 @@ class App extends Component {
                   )}
                 />
                 <Route
-                  path={"/teamallocation/project"}
-                  render={props => (
-                    <TeamAllocationProjectContainer {...props} />
-                  )}
-                />
-                <Route
-                  path={"/teamallocation/mission"}
-                  render={props => (
-                    <TeamAllocationMissionContainer {...props} />
-                  )}
-                />
-
-                <Route
                   path={"/complaintview/:id"}
                   render={props => (
                     <ComplaintView
                       {...props}
                       loggedInUser={this.props.user}
                       userData={this.state.userData}
+                      complaintType={this.state.complaintTypeData}
                     />
                   )}
                 />
@@ -82,26 +99,12 @@ class App extends Component {
                 />
                 <Route
                   path={"/complaintlist"}
-                  render={props => <ComplaintList {...props} />}
-                />
-                <Route
-                  path={"/leavedashboard/admin/approvalrejection/:leaveId"}
                   render={props => (
-                    <LeaveAdminApprovalRejectionContainer
+                    <ComplaintList
                       {...props}
                       loggedInUser={this.props.user}
                       userData={this.state.userData}
-                    />
-                  )}
-                />
-                <Route
-                  exact
-                  path={"/leavedashboard/leavedetails/:leaveId"}
-                  render={props => (
-                    <LeaveEmployeeDetailsContainer
-                      {...props}
-                      userData={this.state.userData}
-                      loggedInUser={this.props.user}
+                      complaintType={this.state.complaintTypeData}
                     />
                   )}
                 />
@@ -122,7 +125,7 @@ class App extends Component {
               </Switch>
             </Router>
           </div>
-        ) : (
+        ) : localStorage.getItem("user") === null ? (
           <div>
             <Router>
               <Route
@@ -131,6 +134,8 @@ class App extends Component {
               />
             </Router>
           </div>
+        ) : (
+          <LinearProgress mode="indeterminate" color={"rgb(253, 145, 77)"} />
         )}
       </div>
     );

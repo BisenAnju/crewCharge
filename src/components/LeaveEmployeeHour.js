@@ -6,7 +6,8 @@ import {
   TextField,
   Snackbar,
   SelectField,
-  MenuItem
+  MenuItem,
+  Avatar
 } from "material-ui";
 import {
   ImageTimer,
@@ -18,6 +19,15 @@ const flexcontainer = {
   display: "flex",
   justifyContent: "center"
 };
+
+const styles = {
+  underlineStyle: {
+    borderColor: "#fd914d"
+  },
+  floatingLabelFocusStyle: {
+    color: "#fd914d"
+  }
+};
 class LeaveEmployeeHourLeave extends Component {
   constructor(props) {
     super(props);
@@ -27,9 +37,20 @@ class LeaveEmployeeHourLeave extends Component {
       to: null,
       snackOpen: false,
       reason: null,
-      messageText: "",
-      playerId: []
+      playerId: [],
+      dueDate: null
     };
+  }
+
+  componentWillMount() {
+    if (this.props.singleData !== undefined) {
+      this.setState({
+        purpose: this.props.singleData.purpose,
+        from: this.props.singleData.from,
+        to: this.props.singleData.to,
+        reason: this.props.singleData.reason
+      });
+    }
   }
   handleChange = (event, index, purpose) => this.setState({ purpose });
   //Handle change time picker for both clocks
@@ -55,7 +76,19 @@ class LeaveEmployeeHourLeave extends Component {
     }
     this.props.addLeaves({ ...this.state }, this.props.leaveType);
   };
-
+  updateLeave = e => {
+    e.preventDefault();
+    if (
+      this.state.from === null ||
+      this.state.to === null ||
+      this.state.reason === null ||
+      this.state.purpose === null
+    ) {
+      this.setState({ snackOpen: true });
+      return false;
+    }
+    this.props.updateLeaveData({ ...this.state }, this.props.leaveType);
+  };
   handleRequestClose = () => {
     this.setState({ snackOpen: false });
   };
@@ -64,7 +97,9 @@ class LeaveEmployeeHourLeave extends Component {
       <div>
         <div style={flexcontainer}>
           <div>
-            <ActionList style={{ marginTop: "38px", fill: "#f08f4c" }} />
+            <ActionList
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <SelectField
@@ -72,38 +107,55 @@ class LeaveEmployeeHourLeave extends Component {
               onChange={this.handleChange}
               floatingLabelText="Select Purpose"
             >
-              {this.props.purposeData.map(purpose => (
+              {this.props.purposeData.map((purpose, id) => (
                 <MenuItem
+                  key={id}
                   value={purpose.purpose}
                   primaryText={purpose.displayName}
+                  rightIcon={
+                    <Avatar
+                      src={purpose.iconUrl}
+                      style={{
+                        height: "27px",
+                        width: "27px",
+                        backgroundColor: "white",
+                        borderRadius: "0%"
+                      }}
+                    />
+                  }
                 />
               ))}
             </SelectField>
           </div>
         </div>
-        <br />
 
         <div style={flexcontainer}>
           <div>
-            <ImageTimer style={{ marginTop: "50%", fill: "#f08f4c" }} />
+            <ImageTimer
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <TimePicker
               format="ampm"
+              floatingLabelText="From Time"
               hintText="Select Time (from)"
               value={this.state.from}
               onChange={this.handleChangeTimePicker1}
             />
           </div>
         </div>
-        <br />
+
         <div style={flexcontainer}>
           <div>
-            <ImageTimer style={{ marginTop: "50%", fill: "#f08f4c" }} />
+            <ImageTimer
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            />
           </div>
           <div>
             <TimePicker
               format="ampm"
+              floatingLabelText="To Time"
               hintText="Select Time (to)"
               value={this.state.to}
               errorStyle={{ color: "#f08f4c" }}
@@ -119,11 +171,14 @@ class LeaveEmployeeHourLeave extends Component {
         <div style={flexcontainer}>
           <div>
             <CommunicationComment
-              style={{ marginTop: "38px", fill: "#f08f4c" }}
+              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
             />
           </div>
           <div>
             <TextField
+              underlineFocusStyle={styles.underlineStyle}
+              floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+              floatingLabelText="Reason"
               hintText="Type Reason"
               multiLine={true}
               rows={2}
@@ -136,16 +191,26 @@ class LeaveEmployeeHourLeave extends Component {
         </div>
 
         <br />
-        <br />
         <center>
-          <div className="flexAppItem">
-            <RaisedButton
-              label="SUBMIT"
-              backgroundColor="rgb(253, 145, 77)"
-              labelColor="white"
-              onClick={this.validateForm}
-            />
-          </div>
+          {this.props.singleData === undefined ? (
+            <div className="flexAppItem">
+              <RaisedButton
+                label="SUBMIT"
+                backgroundColor="rgb(253, 145, 77)"
+                labelColor="white"
+                onClick={this.validateForm}
+              />
+            </div>
+          ) : (
+            <div className="flexAppItem">
+              <RaisedButton
+                label="UPDATE"
+                backgroundColor="rgb(253, 145, 77)"
+                labelColor="white"
+                onClick={this.updateLeave}
+              />
+            </div>
+          )}
         </center>
 
         <Snackbar

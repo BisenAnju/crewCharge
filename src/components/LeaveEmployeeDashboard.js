@@ -63,14 +63,17 @@ class LeaveEmployeeDashboard extends React.Component {
             <AdminPendingTab
               leaveData={this.props.leaveData}
               userData={this.props.userData}
+              purposeData={this.props.purposeData}
             />
             <AdminApprovedTab
               leaveData={this.props.leaveData}
               userData={this.props.userData}
+              purposeData={this.props.purposeData}
             />
             <AdminRejectedTab
               leaveData={this.props.leaveData}
               userData={this.props.userData}
+              purposeData={this.props.purposeData}
             />
           </SwipeableViews>
           <FloatingActionButton

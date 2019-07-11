@@ -10,7 +10,8 @@ class LoginContainer extends Component {
     this.state = {};
   }
 
-  componentWillReceiveProps(nextProps) {
+  async componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     if (nextProps.user !== null) {
       const user = {
         userName: this.props.firebase.auth.currentUser.displayName,
@@ -19,50 +20,74 @@ class LoginContainer extends Component {
         userEmailId: this.props.firebase.auth.currentUser.email
       };
 
+      let QuickEncrypt = require("quick-encrypt"),
+        keys = QuickEncrypt.generate(2048),
+        publicKey;
+      console.time("time");
+      console.log(localStorage.getItem("publickey"));
+      console.log(localStorage.getItem("privatekey"));
+      if (
+        localStorage.getItem("publickey") === "" ||
+        localStorage.getItem("publickey") === null ||
+        localStorage.getItem("publickey") === undefined
+      ) {
+        await localStorage.setItem("publickey", keys.public);
+      }
+      publicKey = localStorage.getItem("publickey");
+      if (
+        localStorage.getItem("privatekey") === "" ||
+        localStorage.getItem("privatekey") === null ||
+        localStorage.getItem("privatekey") === undefined
+      ) {
+        await localStorage.setItem("privatekey", keys.private);
+      }
+      console.timeEnd("time");
       //ADD USER
-      this.props.db
-        .collection("users")
-        .doc(user.userId)
-        .onSnapshot(querySnapshot => {
-          if (querySnapshot.exists) {
-            console.log("You are already registered");
-            if (
-              querySnapshot.data().userNotificationPlayerId === null &&
-              window.cordova
-            ) {
-              this.props.db
-                .collection("users")
-                .doc(user.userId)
-                .update({
-                  userNotificationPlayerId: JSON.parse(
-                    localStorage.getItem("playerId")
-                  ).id
-                });
-            }
-          } else {
-            let playerId = null;
-            if (window.cordova) {
-              playerId = JSON.parse(localStorage.getItem("playerId")).id;
-            }
-            this.props.db
-              .collection("users")
-              .doc(user.userId)
-              .set({
-                uid: user.userId,
-                displayName: user.userName,
-                email: user.userEmailId,
-                photoURL: user.userImage,
-                userType: "Employee",
-                userNotificationPlayerId: playerId
-              })
-              .then(function() {
-                console.log("You have been successfully registered");
-              })
-              .catch(function(error) {
-                console.error("Something went wrong ", error);
-              });
+      const u = this.props.db.collection("users").doc(user.userId);
+      u.get().then(querySnapshot => {
+        if (querySnapshot.exists) {
+          console.log("You are already registered");
+          if (
+            querySnapshot.data().userNotificationPlayerId === null &&
+            window.cordova
+          ) {
+            u.update({
+              userNotificationPlayerId: JSON.parse(
+                localStorage.getItem("playerId")
+              ).id,
+              publicKey: publicKey
+            });
           }
-        });
+          if (
+            querySnapshot.data().publicKey === undefined ||
+            querySnapshot.data().publicKey !== publicKey
+          ) {
+            u.update({
+              publicKey: publicKey
+            });
+          }
+        } else {
+          let playerId = null;
+          if (window.cordova) {
+            playerId = JSON.parse(localStorage.getItem("playerId")).id;
+          }
+          u.set({
+            uid: user.userId,
+            displayName: user.userName,
+            email: user.userEmailId,
+            photoURL: user.userImage,
+            userType: "Employee",
+            userNotificationPlayerId: playerId,
+            publicKey: publicKey
+          })
+            .then(function() {
+              console.log("You have been successfully registered");
+            })
+            .catch(function(error) {
+              console.error("Something went wrong ", error);
+            });
+        }
+      });
     }
   }
 

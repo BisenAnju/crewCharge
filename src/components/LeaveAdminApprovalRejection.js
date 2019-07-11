@@ -7,11 +7,7 @@ import {
   ImageTimer,
   ActionToday,
   CommunicationComment,
-  ActionFlightTakeoff,
-  MapsLocalHospital,
-  SocialSentimentVerySatisfied,
-  HardwareKeyboardArrowRight,
-  ImageEdit
+  HardwareKeyboardArrowRight
 } from "material-ui/svg-icons";
 import {
   Divider,
@@ -66,7 +62,7 @@ class LeaveAdminApprovalRejection extends Component {
       () => this.props.handleChange({ ...this.state })
     );
   };
-  handleReject = e => {
+  handleReject = () => {
     let playerId = this.props.userData.filter(
       user => user.uid === this.props.singleData.userId
     )[0].userNotificationPlayerId;
@@ -78,7 +74,7 @@ class LeaveAdminApprovalRejection extends Component {
       () => this.props.handleChange({ ...this.state })
     );
   };
-  handleDraft = e => {
+  handleDraft = () => {
     let playerId = this.props.userData.filter(
       user => user.uid === this.props.singleData.userId
     )[0].userNotificationPlayerId;
@@ -91,7 +87,22 @@ class LeaveAdminApprovalRejection extends Component {
       () => this.setState({ remark: "" })
     );
   };
-
+  getIconUrl = purpose => {
+    let iconURL = [];
+    iconURL = this.props.purposeData.find(item => item.purpose === purpose);
+    if (iconURL !== undefined)
+      return (
+        <Avatar
+          src={iconURL.iconUrl}
+          style={{
+            height: "27px",
+            width: "27px",
+            backgroundColor: "white",
+            borderRadius: "0%"
+          }}
+        />
+      );
+  };
   textChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -138,29 +149,21 @@ class LeaveAdminApprovalRejection extends Component {
             <List>
               <ListItem
                 disabled
-                leftIcon={
-                  this.props.singleData.purpose === "vacation" ? (
-                    <ActionFlightTakeoff style={{ fill: "#303F9F" }} />
-                  ) : this.props.singleData.purpose === "general" ? (
-                    <SocialSentimentVerySatisfied style={{ fill: "#C2185B" }} />
-                  ) : (
-                    <MapsLocalHospital style={{ fill: "#EF5350" }} />
-                  )
-                }
+                leftIcon={this.getIconUrl(this.props.singleData.purpose)}
                 primaryText={this.props.singleData.purpose}
                 secondaryText={<p style={{ fontSize: 14 }}>Purpose</p>}
-                rightIcon={
-                  <IconButton
-                    touch={true}
-                    style={{ margin: "0px 25px 0px 0px" }}
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push(`/leavedashboard/leaveapply`);
-                    }}
-                  >
-                    <ImageEdit />
-                  </IconButton>
-                }
+                // rightIcon={
+                //   <IconButton
+                //     touch={true}
+                //     style={{ margin: "0px 25px 0px 0px" }}
+                //     onClick={e => {
+                //       e.preventDefault();
+                //       this.props.history.push(`/leavedashboard/leaveapply`);
+                //     }}
+                //   >
+                //     <ImageEdit />
+                //   </IconButton>
+                // }
               />
               <ListItem
                 disabled
@@ -251,7 +254,9 @@ class LeaveAdminApprovalRejection extends Component {
                               <div
                                 style={{ marginRight: "5px", float: "left" }}
                               >
-                                <span> {comment.comment}</span>
+                                <span style={{ fontSize: "14px" }}>
+                                  {comment.comment}
+                                </span>
                                 <br />
                                 <span
                                   style={{
@@ -260,7 +265,7 @@ class LeaveAdminApprovalRejection extends Component {
                                     justifyContent: "center",
                                     display: "flex",
                                     alignItems: "center",
-                                    fontSize: "0.9rem"
+                                    fontSize: "13px"
                                   }}
                                 >
                                   {moment(
@@ -300,12 +305,14 @@ class LeaveAdminApprovalRejection extends Component {
                                     flexDirection: "column"
                                   }}
                                 >
-                                  <span>{comment.comment}</span>
+                                  <span style={{ fontSize: "14px" }}>
+                                    {comment.comment}
+                                  </span>
                                   <span
                                     style={{
                                       textAlign: "right",
                                       color: "#9e9e9e",
-                                      fontSize: "0.9rem"
+                                      fontSize: "13px"
                                     }}
                                   >
                                     {moment(
@@ -323,7 +330,8 @@ class LeaveAdminApprovalRejection extends Component {
                 />
               ) : null}
 
-              {this.props.singleData.leaveStatus === "Pending" ? (
+              {this.props.singleData.leaveStatus === "Pending" ||
+              this.props.singleData.leaveStatus === "Approved" ? (
                 <ListItem
                   disabled
                   leftIcon={<CommunicationComment />}

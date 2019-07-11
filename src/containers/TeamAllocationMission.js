@@ -9,12 +9,19 @@ import TeamAllocationMission from "../components/TeamAllocationMission";
 import TeanAllocationProjectContainer from "./TeamAllocationProject";
 import { withFirebase } from "../firebase";
 import withUser from "../hoc/withUser";
+import * as moment from "moment";
 class TeamAllocationMissionContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       openSnackbar: false,
-      message: ""
+      message: "",
+      values: [],
+      projectId: null,
+      startDate: new Date(),
+      endDate: new Date(),
+      missionName: "",
+      remarks: null
     };
   }
   handleAddMission = (
@@ -43,8 +50,8 @@ class TeamAllocationMissionContainer extends Component {
           createdOn: Date(),
           createdBy: this.props.user.uid,
           deadline: {
-            startDate: startDate,
-            endDate: endDate,
+            startDate: moment(startDate).format("lll"),
+            endDate: moment(endDate).format("lll"),
             remarks: remarks
           },
           status: "Active"
@@ -54,7 +61,7 @@ class TeamAllocationMissionContainer extends Component {
             openSnackbar: true,
             message: "Mission Add Success fully"
           }),
-          (window.location = "/teamallocation")
+          this.props.history.push("/teamallocation")
         );
     }
   };
@@ -76,6 +83,8 @@ class TeamAllocationMissionContainer extends Component {
     ) {
       this.setState({ openSnackbar: true, message: "Fill all Required field" });
     } else {
+      console.log(startDate);
+      console.log(endDate);
       this.props.db
         .collection("missions")
         .doc(missionId)
@@ -84,8 +93,8 @@ class TeamAllocationMissionContainer extends Component {
           projectId: projectId,
           assignTo: values,
           deadline: {
-            startDate: startDate,
-            endDate: endDate,
+            startDate: moment(startDate).format("lll"),
+            endDate: moment(endDate).format("lll"),
             remarks: remarks
           },
           status: "Active"
@@ -95,51 +104,67 @@ class TeamAllocationMissionContainer extends Component {
             openSnackbar: true,
             message: "Mission Add Success fully"
           }),
-          (window.location = "/teamallocation")
+          this.props.history.push("/teamallocation")
         );
     }
   };
+  componentWillMount() {
+    if (
+      this.props.missionsList.length > 0 &&
+      this.props.match.params.missionId !== undefined
+    ) {
+      let missionList = this.props.missionsList.find(
+        misiionData =>
+          misiionData.missionsId === this.props.match.params.missionId
+      );
+      const startDate = missionList.deadline.startDate;
+      const endDate = missionList.deadline.endDate;
+      this.setState({
+        missionName: missionList.name,
+        values: missionList.assignTo,
+        projectId: missionList.projectId,
+        startDate,
+        endDate,
+        remarks: missionList.deadline.remarks
+      });
+    }
+  }
   render() {
     return (
       <div>
-        <Router>
-          <Switch>
-            <Route
-              exact
-              path={"/teamallocation/mission"}
-              render={props => (
-                <TeamAllocationMission
-                  {...this.props}
-                  {...this.state}
-                  handleAddMission={this.handleAddMission}
-                  handleUpdateMission={this.handleUpdateMission}
-                />
-              )}
+        <Route
+          exact
+          path={"/teamallocation/mission"}
+          render={props => (
+            <TeamAllocationMission
+              {...this.props}
+              {...this.state}
+              handleAddMission={this.handleAddMission}
+              handleUpdateMission={this.handleUpdateMission}
             />
-            <Route
-              exact
-              path={"/teamallocation/mission/:missionId"}
-              render={props => (
-                <TeamAllocationMission
-                  {...this.props}
-                  {...this.state}
-                  handleAddMission={this.handleAddMission}
-                  handleUpdateMission={this.handleUpdateMission}
-                />
-              )}
+          )}
+        />
+        <Route
+          exact
+          path={"/teamallocation/mission/:missionId"}
+          render={props => (
+            <TeamAllocationMission
+              {...this.props}
+              {...this.state}
+              handleAddMission={this.handleAddMission}
+              handleUpdateMission={this.handleUpdateMission}
             />
-            <Route
-              exact
-              path={"/teamallocation/project"}
-              render={props => <TeanAllocationProjectContainer {...props} />}
-            />
-          </Switch>
-        </Router>
+          )}
+        />
+        <Route
+          exact
+          path={"/teamallocation/project"}
+          render={props => <TeanAllocationProjectContainer {...props} />}
+        />
       </div>
     );
   }
 }
-
 export default withRouter(
   withFirebase(withUser(TeamAllocationMissionContainer))
 );

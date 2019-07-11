@@ -27,26 +27,15 @@ class TeamAllocationMission extends React.Component {
       message: null
     };
   }
-  componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.missionsList.length > 0 &&
-      this.props.match.params.missionId !== undefined
-    ) {
-      let missionList = nextProps.missionsList.find(
-        misiionData =>
-          misiionData.missionsId === this.props.match.params.missionId
-      );
-      const startDate = missionList.deadline.startDate;
-      const endDate = missionList.deadline.endDate;
-      this.setState({
-        missionName: missionList.name,
-        values: missionList.assignTo,
-        projectId: missionList.projectId,
-        startDate,
-        endDate,
-        remarks: missionList.deadline.remarks
-      });
-    }
+  componentWillMount() {
+    this.setState({
+      values: this.props.values,
+      projectId: this.props.projectId,
+      startDate: this.props.startDate,
+      endDate: this.props.endDate,
+      missionName: this.props.missionName,
+      remarks: this.props.remarks
+    });
   }
   handleUsersChange = (event, index, values) => this.setState({ values });
   menuItems(values) {

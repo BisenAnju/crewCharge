@@ -35,7 +35,7 @@ class TeamAllocationMissionContainer extends Component {
             openSnackbar: true,
             message: "Mission Add Success fully"
           }),
-          (window.location = "/teamallocation")
+          this.props.history.push("/teamallocation")
         );
     }
   };
@@ -55,57 +55,53 @@ class TeamAllocationMissionContainer extends Component {
             openSnackbar: true,
             message: "Mission Add Success fully"
           }),
-          (window.location = "/teamallocation")
+          this.props.history.push("/teamallocation")
         );
     }
   };
   render() {
     return (
       <div>
-        <Router>
-          <Switch>
-            <Route
-              exact
-              path={"/teamallocation"}
-              render={props => (
-                <TeanAllocationMissionContainer {...this.props} />
-              )}
+        <Route
+          exact
+          path={"/teamallocation"}
+          render={props => <TeanAllocationMissionContainer {...this.props} />}
+        />
+        <Route
+          exact
+          path={"/teamallocation/project"}
+          render={props => (
+            <TeamAllocationProject
+              {...this.props}
+              handleAddProject={this.handleAddProject}
+              handleUpdateProject={this.handleUpdateProject}
+              projectList={null}
             />
-            <Route
-              exact
-              path={"/teamallocation/project"}
-              render={props => (
-                <TeamAllocationProject
-                  {...this.props}
-                  handleAddProject={this.handleAddProject}
-                />
-              )}
+          )}
+        />
+        <Route
+          exact
+          path={"/teamallocation/project/:projectId"}
+          render={props => (
+            <TeamAllocationProject
+              {...this.props}
+              handleUpdateProject={this.handleUpdateProject}
+              handleAddProject={this.handleAddProject}
+              projectList={
+                this.props.projectsList.length > 0
+                  ? this.props.projectsList.find(
+                      data =>
+                        data.projectId === this.props.match.params.projectId
+                    )
+                  : null
+              }
             />
-            <Route
-              exact
-              path={"/teamallocation/project/:projectId"}
-              render={props => (
-                <TeamAllocationProject
-                  {...this.props}
-                  handleUpdateProject={this.handleUpdateProject}
-                  projectList={
-                    this.props.projectsList.length > 0
-                      ? this.props.projectsList.find(
-                          data =>
-                            data.projectId === this.props.match.params.projectId
-                        )
-                      : null
-                  }
-                />
-              )}
-            />
-          </Switch>
-        </Router>
+          )}
+        />
       </div>
     );
   }
 }
-
 export default withRouter(
   withFirebase(withUser(TeamAllocationMissionContainer))
 );

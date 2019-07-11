@@ -237,7 +237,7 @@ ul.ChatLog {
   width: 100%;
   display: block;
   position: relative;
-  padding: 9px 20px;
+  padding: 9px 19px;
 }
 .rwdpDayBoxDesktop .rwdp-DayCircle-container {
   margin-top: 10px;
@@ -245,8 +245,8 @@ ul.ChatLog {
   border: none;
   background: transparent;
   cursor: pointer;
-  width: 16%;
-  margin: 1px;
+  width: 15%;
+  margin: 2px;
 }
 .rwdpDayBoxDesktop .rwdp-DayCircle {
   border: 2px solid rgb(253, 145, 77);
@@ -290,7 +290,7 @@ ul.ChatLog {
   border: none;
   background: transparent;
   cursor: pointer;
-  width: 16%;
+  width: 14vw;
 }
 .rwdpDayBoxMobil .rwdp-DayCircle div {
   margin-top: 5px;
@@ -349,7 +349,7 @@ ul.ChatLog {
 .rwdp-flex-box {
   display: -webkit-box;
   display: -moz-box;
-  display: box;
+  /* display: box; */
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flexbox;
@@ -455,4 +455,7 @@ div.sticky {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+}
+.imageFill {
+  filter: grayscale(10);
 }

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Route,
-  BrowserRouter as Router,
-  withRouter,
-  Switch
-} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Configuration from "../components/Configuration";
 import withFirebase from "../hoc/withFirebase";
 
@@ -14,12 +9,17 @@ class ConfigurationContainer extends React.Component {
     this.state = {};
   }
 
-  addPurpose = purpose => {
+  addPurpose = (field, collection, data, iconURL) => {
     this.props.db
-      .collection("leavePurpose")
+      .collection(collection)
       .add({
-        purpose: purpose.toLowerCase(),
-        displayName: purpose.charAt(0).toUpperCase() + purpose.slice(1)
+        [field]: data
+          .replace(" ", "")
+          .replace("/", "")
+          .replace("-", "")
+          .toLowerCase(),
+        displayName: data.charAt(0).toUpperCase() + data.slice(1),
+        iconUrl: iconURL
       })
       .then(this.props.history.goBack())
       .catch(err => {
@@ -28,21 +28,7 @@ class ConfigurationContainer extends React.Component {
   };
 
   render() {
-    return (
-      <div>
-        <Router>
-          <Switch>
-            <Route
-              exact
-              path={"/configuration"}
-              render={props => (
-                <Configuration {...props} addPurpose={this.addPurpose} />
-              )}
-            />
-          </Switch>
-        </Router>
-      </div>
-    );
+    return <Configuration addPurpose={this.addPurpose} />;
   }
 }
 export default withFirebase(withRouter(ConfigurationContainer));
