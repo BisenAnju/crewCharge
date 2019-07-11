@@ -117,7 +117,8 @@ class Widgets extends Component {
                     <CardText
                       style={{
                         display: "flex",
-                        margin: "0 20px"
+                        margin: "0 20px",
+                        overflowX: "scroll"
                       }}
                     >
                       {this.state.columns.map((column, columnIndex) => {
