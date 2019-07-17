@@ -382,14 +382,12 @@ class LeaveAdminApprovalRejection extends Component {
                       onClick={this.handleApprove}
                       backgroundColor={lightGreen800}
                       labelColor="white"
-                      disabled={this.state.remark === ""}
                     />
                     <RaisedButton
                       label="REJECT"
                       backgroundColor={lightGreen800}
                       onClick={this.handleReject}
                       labelColor="white"
-                      disabled={this.state.remark === ""}
                     />
                   </div>
                 </div>
