@@ -9,7 +9,8 @@ import {
   IconButton,
   Divider,
   List,
-  ListItem
+  ListItem,
+  Subheader
 } from "material-ui";
 import {
   NavigationMenu,
@@ -19,7 +20,6 @@ import {
   NotificationEventNote,
   SocialGroup,
   ActionDateRange,
-  ActionAssignment,
   ActionSettings
 } from "material-ui/svg-icons";
 import privacy from "../images/privacy.png";
@@ -118,92 +118,17 @@ class NavigationBar extends React.Component {
             />
             <Divider />
 
-            <ListItem
-              onClick={e => {
-                e.preventDefault();
-                this.props.history.push("/complaintlist");
-              }}
-              primaryText="Complaints"
-              leftIcon={
-                <NotificationEventNote
-                  style={{
-                    fill: "#fd914d",
-                    heigth: "22px",
-                    width: "22px",
-                    left: "12px"
-                  }}
-                />
-              }
-            />
-
-            {this.props.userData.map((user, index) =>
-              user.uid === this.props.user.uid &&
-              user.userType === "Employee" ? (
-                <div key={index}>
-                  <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/leavedashboard");
-                    }}
-                    primaryText="Leaves"
-                    leftIcon={
-                      <ActionDateRange
-                        style={{
-                          fill: "#fd914d",
-                          heigth: "22px",
-                          width: "22px",
-                          left: "12px"
-                        }}
-                      />
-                    }
-                  />
-                </div>
-              ) : null
-            )}
-
-            <ListItem
-              onClick={e => {
-                e.preventDefault();
-                this.props.history.push("/teamallocation");
-              }}
-              primaryText="Peoples "
-              leftIcon={
-                <SocialGroup
-                  style={{
-                    fill: "#fd914d",
-                    heigth: "22px",
-                    width: "22px",
-                    left: "12px"
-                  }}
-                />
-              }
-            />
-            <ListItem
-              onClick={e => {
-                e.preventDefault();
-                this.props.history.push("/projects");
-              }}
-              primaryText="Client Communication"
-              leftIcon={
-                <ActionAssignment
-                  style={{
-                    fill: "#fd914d",
-                    heigth: "22px",
-                    width: "22px",
-                    left: "12px"
-                  }}
-                />
-              }
-            />
             {this.props.userData.map((user, index) =>
               user.uid === this.props.user.uid && user.userType === "Admin" ? (
                 <div key={index}>
+                  <Subheader inset={true}>Admin</Subheader>
+
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
                       this.props.history.push("/leavedashboard/admin");
                     }}
-                    primaryText="Leaves"
+                    primaryText="Manage Leaves"
                     leftIcon={
                       <ActionDateRange
                         style={{
@@ -215,7 +140,58 @@ class NavigationBar extends React.Component {
                       />
                     }
                   />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/complaintlist");
+                    }}
+                    primaryText="Complaints"
+                    leftIcon={
+                      <NotificationEventNote
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  />
 
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/teamallocation");
+                    }}
+                    primaryText="Team Allocation"
+                    leftIcon={
+                      <SocialGroup
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  />
+                  <ListItem
+                    // onClick={e => {
+                    //   e.preventDefault();
+                    //   this.props.history.push("");
+                    // }}
+                    primaryText="User & Permission"
+                    leftIcon={
+                      <SocialGroup
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  />
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
@@ -233,9 +209,69 @@ class NavigationBar extends React.Component {
                       />
                     }
                   />
+                  {/* <ListItem
+              onClick={e => {
+                e.preventDefault();
+                this.props.history.push("/projects");
+              }}
+              primaryText="Client Communication"
+              leftIcon={
+                <ActionAssignment
+                  style={{
+                    fill: "#fd914d",
+                    heigth: "22px",
+                    width: "22px",
+                    left: "12px"
+                  }}
+                />
+              }
+            /> */}
                 </div>
               ) : null
             )}
+
+            {this.props.userData.map((user, index) =>
+              user.uid === this.props.user.uid &&
+              user.userType === "Employee" ? (
+                <div key={index}>
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/leavedashboard");
+                    }}
+                    primaryText="My Leaves"
+                    leftIcon={
+                      <ActionDateRange
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/complaintlist");
+                    }}
+                    primaryText="My Complaints"
+                    leftIcon={
+                      <NotificationEventNote
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  />
+                </div>
+              ) : null
+            )}
+
             <ListItem
               onClick={e => {
                 e.preventDefault();
