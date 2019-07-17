@@ -6,7 +6,6 @@ import LeaveEmployeeDashboard from "../components/LeaveEmployeeDashboard";
 
 class LeaveEmployeeDashboardContainer extends React.Component {
   render() {
-    console.log(this.props.leaveData);
     return (
       <div>
         <LeaveEmployeeDashboard

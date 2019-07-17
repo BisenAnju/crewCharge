@@ -75,6 +75,18 @@ class LeaveEmployeeDetails extends Component {
   textChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  getAvatar = userId => {
+    let avatarUrl = [];
+    avatarUrl = this.props.userData.find(item => item.uid === userId);
+    if (avatarUrl !== undefined)
+      return (
+        <Avatar
+          src={avatarUrl.photoURL}
+          size={20}
+          style={{ margin: "5px 0px 0px 5px" }}
+        />
+      );
+  };
   render() {
     return (
       <Layout
@@ -251,17 +263,14 @@ class LeaveEmployeeDetails extends Component {
               {this.state.userComment.length > 0 ? (
                 <ListItem
                   disabled
-                  leftIcon={
-                    <CommunicationComment style={{ fill: "#871268" }} />
-                  }
                   primaryText={
                     <div
                       style={{
                         backgroundColor: "#E8F5E9",
-                        width: "42vh",
                         height: "35vh",
                         overflow: "auto",
-                        borderRadius: "5px"
+                        borderRadius: "5px",
+                        marginTop: "-7%"
                       }}
                     >
                       {this.state.userComment.map((comment, index) =>
@@ -278,12 +287,12 @@ class LeaveEmployeeDetails extends Component {
                                 display: "flex",
                                 alignItems: "center",
                                 height: "auto",
-                                marginRight: "10px",
+                                marginRight: "5px",
                                 maxWidth: "80%",
-                                marginTop: "5px",
-                                backgroundColor: "#d8efd5",
-                                padding: "5px 9px",
-                                borderRadius: "0px 10px 10px 10px",
+                                marginTop: "12px",
+                                backgroundColor: "#add0a8",
+                                padding: "4px 4px",
+                                borderRadius: "10px 0px 10px 10px",
                                 wordBreak: "break-all"
                               }}
                             >
@@ -310,52 +319,58 @@ class LeaveEmployeeDetails extends Component {
                                 </span>
                               </div>
                             </div>
+                            <div>
+                              <Avatar
+                                src={this.props.user.photoURL}
+                                size={20}
+                                style={{ margin: "5px 5px 0px 0px" }}
+                              />
+                            </div>
                           </div>
                         ) : (
-                          <div>
+                          <div
+                            key={index}
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-start"
+                            }}
+                          >
+                            <div>{this.getAvatar(comment.userId)}</div>
                             <div
                               style={{
                                 display: "flex",
-                                justifyContent: "flex-start",
-                                alignItems: "center"
+                                alignItems: "center",
+                                height: "auto",
+                                maxWidth: "80%",
+                                marginLeft: "5px",
+                                marginTop: "12px",
+                                backgroundColor: "#c8d8c6",
+                                padding: "4px 4px",
+                                borderRadius: "0px 10px 10px 10px",
+                                wordBreak: "break-all"
                               }}
                             >
                               <div
                                 style={{
+                                  width: "auto",
                                   display: "flex",
-                                  alignItems: "center",
-                                  height: "auto",
-                                  maxWidth: "80%",
-                                  marginLeft: "10px",
-                                  marginTop: "5px",
-                                  backgroundColor: "#c8d8c6",
-                                  padding: "5px 9px",
-                                  borderRadius: "0px 10px 10px 10px",
-                                  wordBreak: "break-all"
+                                  flexDirection: "column"
                                 }}
                               >
-                                <div
+                                <span style={{ fontSize: "14px" }}>
+                                  {comment.comment}
+                                </span>
+                                <span
                                   style={{
-                                    width: "auto",
-                                    display: "flex",
-                                    flexDirection: "column"
+                                    textAlign: "right",
+                                    color: "#9e9e9e",
+                                    fontSize: "13px"
                                   }}
                                 >
-                                  <span style={{ fontSize: "14px" }}>
-                                    {comment.comment}
-                                  </span>
-                                  <span
-                                    style={{
-                                      textAlign: "right",
-                                      color: "#9e9e9e",
-                                      fontSize: "13px"
-                                    }}
-                                  >
-                                    {moment(
-                                      comment.addedOn.seconds * 1000
-                                    ).format("lll")}
-                                  </span>
-                                </div>
+                                  {moment(
+                                    comment.addedOn.seconds * 1000
+                                  ).format("lll")}
+                                </span>
                               </div>
                             </div>
                           </div>
