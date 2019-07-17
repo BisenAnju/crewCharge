@@ -68,8 +68,8 @@ class Dashboard extends Component {
                     flex: "1"
                   }}
                 >
+                  <div>My</div>
                   <div>Leave</div>
-                  <div>Dashboard</div>
                 </div>
               </div>
 
