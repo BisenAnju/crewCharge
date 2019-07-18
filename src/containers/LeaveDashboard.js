@@ -18,7 +18,6 @@ class LeaveDashboardContainer extends Component {
     this.state = {
       isLoading: true,
       purposeData: [],
-      isLoading: true,
       leaveData: [],
       userData: []
     };

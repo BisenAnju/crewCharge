@@ -15,7 +15,10 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
   }
 
   handleChange = data => {
+    let ths = this;
+    console.log(data);
     let matchParams = this.props.match.params.leaveId;
+    console.log(matchParams);
     this.props.db
       .collection("leaves")
       .doc(matchParams)
@@ -59,9 +62,9 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
           };
           var message = {
             app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
-            contents: { en: "Admin Reply" },
+            contents: { en: data.remark },
             include_player_ids: [data.userPlayerId],
-            headings: { en: data.remark },
+            headings: { en: ths.props.user.displayName },
             data: {
               Route: "/leavedashboard/leavedetails/",
               Id: matchParams
@@ -96,7 +99,7 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
       .collection("leaves")
       .doc(this.props.match.params.leaveId)
       .collection("comment")
-      .orderBy("addedOn", "desc")
+      .orderBy("addedOn", "asc")
       .onSnapshot(
         snapshot => {
           const commentData = [];

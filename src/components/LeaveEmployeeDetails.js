@@ -32,7 +32,7 @@ import {
   lime800,
   pink900
 } from "material-ui/styles/colors";
-import { send } from "q";
+
 const styles = {
   underlineStyle: {
     borderColor: "#727976"
@@ -270,14 +270,13 @@ class LeaveEmployeeDetails extends Component {
               {this.state.userComment.length > 0 ? (
                 <div
                   style={{
-                    id: "1",
                     width: "100%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center"
                   }}
                 >
-                  <div style={{ id: "2", width: "95%" }}>
+                  <div style={{ width: "95%" }}>
                     <ListItem
                       style={{ padding: "0px" }}
                       disabled
@@ -287,7 +286,8 @@ class LeaveEmployeeDetails extends Component {
                             backgroundColor: "#E8F5E9",
                             height: "52vh",
                             overflow: "auto",
-                            borderRadius: "10px"
+                            borderRadius: "10px",
+                            paddingBottom: "20%"
                           }}
                         >
                           {this.state.userComment.map((comment, index) =>

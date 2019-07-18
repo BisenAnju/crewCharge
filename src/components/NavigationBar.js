@@ -81,10 +81,6 @@ class NavigationBar extends React.Component {
           <List>
             <ListItem
               disabled
-              onClick={e => {
-                e.preventDefault();
-                this.props.history.push("/leavedashboard/admin");
-              }}
               secondaryText={
                 this.props.userData.findIndex(
                   user => user.email === this.props.user.email
@@ -235,6 +231,8 @@ class NavigationBar extends React.Component {
               user.uid === this.props.user.uid &&
               user.userType === "Employee" ? (
                 <div key={index}>
+                  <Subheader inset={true}>Employee</Subheader>
+
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
@@ -269,6 +267,7 @@ class NavigationBar extends React.Component {
                       />
                     }
                   />
+                  <Divider />
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
@@ -287,6 +286,7 @@ class NavigationBar extends React.Component {
                       />
                     }
                   />
+                  <Divider />
                 </div>
               ) : null
             )}
@@ -311,7 +311,10 @@ class NavigationBar extends React.Component {
             <Divider />
 
             <div
-              style={{ marginTop: "77%", fontSize: "85%", textAlign: "center" }}
+              style={{
+                fontSize: "85%",
+                textAlign: "center"
+              }}
             >
               v1.0.3
             </div>

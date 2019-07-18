@@ -48,7 +48,9 @@ class LoginContainer extends Component {
         if (querySnapshot.exists) {
           console.log("You are already registered");
           if (
-            querySnapshot.data().userNotificationPlayerId === null &&
+            (querySnapshot.data().userNotificationPlayerId === null ||
+              querySnapshot.data().userNotificationPlayerId ===
+                JSON.parse(localStorage.getItem("playerId")).id) &&
             window.cordova
           ) {
             u.update({
