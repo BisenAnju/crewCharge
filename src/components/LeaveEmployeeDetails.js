@@ -43,8 +43,9 @@ class LeaveEmployeeDetails extends Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({ userComment: nextProps.commentData });
+    this.setState({ userComment: nextProps.commentData, remark: "" });
   }
+
   getIconUrl = purpose => {
     let iconURL = [];
     iconURL = this.props.purposeData.find(item => item.purpose === purpose);
