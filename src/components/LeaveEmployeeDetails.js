@@ -9,6 +9,8 @@ import {
   TextField
 } from "material-ui";
 import Layout from "../layouts/Layout";
+import sendimg from "../images/send.svg";
+
 import {
   ActionHelp,
   ActionDateRange,
@@ -18,7 +20,6 @@ import {
   ActionCheckCircle,
   NavigationCancel,
   CommunicationComment,
-  NavigationArrowDropRight,
   ImageEdit
 } from "material-ui/svg-icons";
 import moment from "moment";
@@ -29,9 +30,14 @@ import {
   yellow500,
   deepOrange900,
   lime800,
-  pink900,
-  indigo900
+  pink900
 } from "material-ui/styles/colors";
+import { send } from "q";
+const styles = {
+  underlineStyle: {
+    borderColor: "#727976"
+  }
+};
 class LeaveEmployeeDetails extends Component {
   constructor(props) {
     super(props);
@@ -262,168 +268,172 @@ class LeaveEmployeeDetails extends Component {
               />
 
               {this.state.userComment.length > 0 ? (
-                <ListItem
-                  disabled
-                  primaryText={
-                    <div
-                      style={{
-                        backgroundColor: "#E8F5E9",
-                        height: "35vh",
-                        overflow: "auto",
-                        borderRadius: "5px",
-                        marginTop: "-7%"
-                      }}
-                    >
-                      {this.state.userComment.map((comment, index) =>
-                        this.props.user.uid === comment.userId ? (
-                          <div
-                            key={index}
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-end"
-                            }}
-                          >
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                height: "auto",
-                                marginRight: "5px",
-                                maxWidth: "80%",
-                                marginTop: "12px",
-                                backgroundColor: "#add0a8",
-                                padding: "4px 4px",
-                                borderRadius: "10px 0px 10px 10px",
-                                wordBreak: "break-all"
-                              }}
-                            >
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  <div style={{ width: "95%" }}>
+                    <ListItem
+                      style={{ padding: "0px" }}
+                      disabled
+                      primaryText={
+                        <div
+                          style={{
+                            backgroundColor: "#E8F5E9",
+                            height: "52vh",
+                            overflow: "auto",
+                            borderRadius: "5px"
+                          }}
+                        >
+                          {this.state.userComment.map((comment, index) =>
+                            this.props.user.uid === comment.userId ? (
                               <div
-                                style={{ marginRight: "5px", float: "left" }}
-                              >
-                                <span style={{ fontSize: "14px" }}>
-                                  {comment.comment}
-                                </span>
-                                <br />
-                                <span
-                                  style={{
-                                    color: "rgba(158, 158, 158, 0.91)",
-                                    float: "right",
-                                    justifyContent: "center",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    fontSize: "13px"
-                                  }}
-                                >
-                                  {moment(
-                                    comment.addedOn.seconds * 1000
-                                  ).format("lll")}
-                                </span>
-                              </div>
-                            </div>
-                            <div>
-                              <Avatar
-                                src={this.props.user.photoURL}
-                                size={20}
-                                style={{ margin: "5px 5px 0px 0px" }}
-                              />
-                            </div>
-                          </div>
-                        ) : (
-                          <div
-                            key={index}
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-start"
-                            }}
-                          >
-                            <div>{this.getAvatar(comment.userId)}</div>
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                height: "auto",
-                                maxWidth: "80%",
-                                marginLeft: "5px",
-                                marginTop: "12px",
-                                backgroundColor: "#c8d8c6",
-                                padding: "4px 4px",
-                                borderRadius: "0px 10px 10px 10px",
-                                wordBreak: "break-all"
-                              }}
-                            >
-                              <div
+                                key={index}
                                 style={{
-                                  width: "auto",
                                   display: "flex",
-                                  flexDirection: "column"
+                                  justifyContent: "flex-end"
                                 }}
                               >
-                                <span style={{ fontSize: "14px" }}>
-                                  {comment.comment}
-                                </span>
-                                <span
+                                <div
                                   style={{
-                                    textAlign: "right",
-                                    color: "#9e9e9e",
-                                    fontSize: "13px"
+                                    display: "flex",
+                                    alignItems: "center",
+                                    height: "auto",
+                                    marginRight: "5px",
+                                    maxWidth: "80%",
+                                    marginTop: "12px",
+                                    backgroundColor: "#add0a8",
+                                    padding: "4px 4px",
+                                    borderRadius: "10px 0px 10px 10px",
+                                    wordBreak: "break-all"
                                   }}
                                 >
-                                  {moment(
-                                    comment.addedOn.seconds * 1000
-                                  ).format("lll")}
-                                </span>
+                                  <div
+                                    style={{
+                                      marginRight: "5px",
+                                      float: "left"
+                                    }}
+                                  >
+                                    <span style={{ fontSize: "14px" }}>
+                                      {comment.comment}
+                                    </span>
+                                    <br />
+                                    <span
+                                      style={{
+                                        color: "rgba(158, 158, 158, 0.91)",
+                                        float: "right",
+                                        justifyContent: "center",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        fontSize: "13px"
+                                      }}
+                                    >
+                                      {moment(
+                                        comment.addedOn.seconds * 1000
+                                      ).format("lll")}
+                                    </span>
+                                  </div>
+                                </div>
+                                <div>
+                                  <Avatar
+                                    src={this.props.user.photoURL}
+                                    size={20}
+                                    style={{ margin: "5px 5px 0px 0px" }}
+                                  />
+                                </div>
                               </div>
+                            ) : (
+                              <div
+                                key={index}
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "flex-start"
+                                }}
+                              >
+                                <div>{this.getAvatar(comment.userId)}</div>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    height: "auto",
+                                    maxWidth: "80%",
+                                    marginLeft: "5px",
+                                    marginTop: "12px",
+                                    backgroundColor: "#c8d8c6",
+                                    padding: "4px 4px",
+                                    borderRadius: "0px 10px 10px 10px",
+                                    wordBreak: "break-all"
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      width: "auto",
+                                      display: "flex",
+                                      flexDirection: "column"
+                                    }}
+                                  >
+                                    <span style={{ fontSize: "14px" }}>
+                                      {comment.comment}
+                                    </span>
+                                    <span
+                                      style={{
+                                        textAlign: "right",
+                                        color: "#9e9e9e",
+                                        fontSize: "13px"
+                                      }}
+                                    >
+                                      {moment(
+                                        comment.addedOn.seconds * 1000
+                                      ).format("lll")}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          )}
+
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-around",
+                              bottom: "0px",
+                              position: "absolute",
+                              width: "100%",
+                              backgroundColor: "#e1eae6",
+                              height: "7vh"
+                            }}
+                          >
+                            <div style={{ width: "85%" }}>
+                              <TextField
+                                placeholder="Type a message"
+                                value={this.state.remark}
+                                name="remark"
+                                onChange={this.textChange}
+                                underlineFocusStyle={styles.underlineStyle}
+                              />
+                            </div>
+                            <div>
+                              <IconButton
+                                touch={true}
+                                onClick={e => {
+                                  e.preventDefault();
+                                  this.handleDraft();
+                                }}
+                                style={{ zIndex: 1 }}
+                              >
+                                <img src={sendimg} alt="send" />
+                              </IconButton>
                             </div>
                           </div>
-                        )
-                      )}
-                    </div>
-                  }
-                />
-              ) : null}
-
-              {this.state.userComment.length > 0 ? (
-                this.props.singleData.leaveStatus === "Pending" ||
-                this.props.singleData.leaveStatus === "Approved" ? (
-                  <ListItem
-                    disabled
-                    leftIcon={<CommunicationComment />}
-                    primaryText={
-                      <p
-                        style={{
-                          fontSize: 14,
-                          color: indigo900,
-                          fontWeight: "bold"
-                        }}
-                      >
-                        Enter Comment
-                      </p>
-                    }
-                    secondaryText={
-                      <TextField
-                        placeholder="Type Comment..."
-                        multiLine
-                        rows={4}
-                        value={this.state.remark}
-                        onChange={this.textChange}
-                        name="remark"
-                        style={{ width: "40vh" }}
-                      />
-                    }
-                    rightIcon={
-                      <IconButton
-                        touch={true}
-                        onClick={e => {
-                          e.preventDefault();
-                          this.handleDraft();
-                        }}
-                        style={{ zIndex: 1, margin: "19% 12% 0px 0px" }}
-                      >
-                        <NavigationArrowDropRight />
-                      </IconButton>
-                    }
-                  />
-                ) : null
+                        </div>
+                      }
+                    />
+                  </div>
+                </div>
               ) : null}
             </List>
           </div>
