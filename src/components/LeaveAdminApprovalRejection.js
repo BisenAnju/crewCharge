@@ -389,29 +389,27 @@ class LeaveAdminApprovalRejection extends Component {
               ) : null}
             </List>
           </div>
-          {/* <br /> */}
-          {/* <br /> */}
           {this.props.singleData.leaveStatus === "Pending" ? (
             <div style={{ display: "flex", marginTop: "15%" }}>
               <FlatButton
                 style={{
                   color: "white",
-                  backgroundColor: "rgb(240, 143, 76)",
-                  width: "47%",
-                  margin: "0px 5px 0px 5px"
-                }}
-                label="Approve"
-                onClick={this.handleApprove}
-              />
-              <FlatButton
-                style={{
-                  color: "white",
-                  backgroundColor: "rgb(240, 143, 76)",
+                  backgroundColor: "#ea6648",
                   width: "47%",
                   margin: "0px 5px 0px 5px"
                 }}
                 label="Reject"
                 onClick={this.handleReject}
+              />
+              <FlatButton
+                style={{
+                  color: "white",
+                  backgroundColor: "#9cce5a",
+                  width: "47%",
+                  margin: "0px 5px 0px 5px"
+                }}
+                label="Approve"
+                onClick={this.handleApprove}
               />
             </div>
           ) : null}
