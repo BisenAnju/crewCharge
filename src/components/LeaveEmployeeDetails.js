@@ -18,7 +18,7 @@ import {
   ActionCheckCircle,
   NavigationCancel,
   CommunicationComment,
-  HardwareKeyboardArrowRight,
+  NavigationArrowDropRight,
   ImageEdit
 } from "material-ui/svg-icons";
 import moment from "moment";
@@ -419,7 +419,7 @@ class LeaveEmployeeDetails extends Component {
                         }}
                         style={{ zIndex: 1, margin: "19% 12% 0px 0px" }}
                       >
-                        <HardwareKeyboardArrowRight />
+                        <NavigationArrowDropRight />
                       </IconButton>
                     }
                   />

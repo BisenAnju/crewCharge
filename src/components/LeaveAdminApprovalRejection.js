@@ -7,19 +7,18 @@ import {
   ImageTimer,
   ActionToday,
   CommunicationComment,
-  HardwareKeyboardArrowRight
+  NavigationArrowDropRight
 } from "material-ui/svg-icons";
 import {
   Divider,
   Avatar,
-  RaisedButton,
   TextField,
   List,
   ListItem,
-  IconButton
+  IconButton,
+  FlatButton
 } from "material-ui";
 import {
-  lightGreen800,
   indigo900,
   pink900,
   lime800,
@@ -153,7 +152,7 @@ class LeaveAdminApprovalRejection extends Component {
           <Divider />
           <div
             style={{
-              height: "65vh",
+              height: "50vh",
               overflow: "auto",
               display: "self"
             }}
@@ -381,35 +380,41 @@ class LeaveAdminApprovalRejection extends Component {
                         e.preventDefault();
                         this.handleDraft();
                       }}
-                      style={{ zIndex: 1, margin: "19% 12% 0px 0px" }}
+                      style={{ zIndex: 1, margin: "20% 12% 0% 0%" }}
                     >
-                      <HardwareKeyboardArrowRight />
+                      <NavigationArrowDropRight />
                     </IconButton>
                   }
                 />
               ) : null}
-              <br />
-              <br />
-              {this.props.singleData.leaveStatus === "Pending" ? (
-                <div>
-                  <div style={flexitem}>
-                    <RaisedButton
-                      label="APPROVE"
-                      onClick={this.handleApprove}
-                      backgroundColor={lightGreen800}
-                      labelColor="white"
-                    />
-                    <RaisedButton
-                      label="REJECT"
-                      backgroundColor={lightGreen800}
-                      onClick={this.handleReject}
-                      labelColor="white"
-                    />
-                  </div>
-                </div>
-              ) : null}
             </List>
           </div>
+          <br />
+          <br />
+          {this.props.singleData.leaveStatus === "Pending" ? (
+            <div style={{ display: "flex" }}>
+              <FlatButton
+                style={{
+                  color: "white",
+                  backgroundColor: "rgb(240, 143, 76)",
+                  width: "47%",
+                  margin: "0px 5px 0px 5px"
+                }}
+                label="Approve"
+                onClick={this.handleApprove}
+              />
+              <FlatButton
+                style={{
+                  color: "white",
+                  backgroundColor: "rgb(240, 143, 76)",
+                  width: "47%",
+                  margin: "0px 5px 0px 5px"
+                }}
+                label="Reject"
+                onClick={this.handleReject}
+              />
+            </div>
+          ) : null}
         </div>
       </Layout>
     );
