@@ -389,10 +389,10 @@ class LeaveAdminApprovalRejection extends Component {
               ) : null}
             </List>
           </div>
-          <br />
-          <br />
+          {/* <br /> */}
+          {/* <br /> */}
           {this.props.singleData.leaveStatus === "Pending" ? (
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", marginTop: "15%" }}>
               <FlatButton
                 style={{
                   color: "white",
