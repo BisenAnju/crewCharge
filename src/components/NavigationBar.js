@@ -122,7 +122,6 @@ class NavigationBar extends React.Component {
               user.uid === this.props.user.uid && user.userType === "Admin" ? (
                 <div key={index}>
                   <Subheader inset={true}>Admin</Subheader>
-
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
@@ -145,7 +144,7 @@ class NavigationBar extends React.Component {
                       e.preventDefault();
                       this.props.history.push("/complaintlist");
                     }}
-                    primaryText="Complaints"
+                    primaryText="Manage Complaints"
                     leftIcon={
                       <NotificationEventNote
                         style={{
@@ -192,6 +191,8 @@ class NavigationBar extends React.Component {
                       />
                     }
                   />
+                  <Divider />
+
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
@@ -268,28 +269,28 @@ class NavigationBar extends React.Component {
                       />
                     }
                   />
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/privacypolicy");
+                    }}
+                    primaryText="Privacy Policy"
+                    leftIcon={
+                      <Avatar
+                        backgroundColor="white"
+                        src={privacy}
+                        style={{
+                          borderRadius: 0,
+                          marginLeft: "22px",
+                          marginTop: "10px"
+                        }}
+                      />
+                    }
+                  />
                 </div>
               ) : null
             )}
 
-            <ListItem
-              onClick={e => {
-                e.preventDefault();
-                this.props.history.push("/privacypolicy");
-              }}
-              primaryText="Privacy Policy"
-              leftIcon={
-                <Avatar
-                  backgroundColor="white"
-                  src={privacy}
-                  style={{
-                    borderRadius: 0,
-                    marginLeft: "22px",
-                    marginTop: "10px"
-                  }}
-                />
-              }
-            />
             <Divider />
             <ListItem
               onClick={() => {
@@ -307,11 +308,19 @@ class NavigationBar extends React.Component {
                 />
               }
             />
-            <ListItem
+            <Divider />
+
+            <div
+              style={{ marginTop: "77%", fontSize: "85%", textAlign: "center" }}
+            >
+              v1.0.3
+            </div>
+
+            {/* <ListItem
               disabled={true}
               insetChildren={true}
               primaryText={"v1.0.3"}
-            />
+            /> */}
           </List>
         </Drawer>
       </div>
