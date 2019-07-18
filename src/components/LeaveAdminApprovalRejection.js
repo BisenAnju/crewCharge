@@ -47,7 +47,7 @@ class LeaveAdminApprovalRejection extends Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({ userComment: nextProps.commentData });
+    this.setState({ userComment: nextProps.commentData, remark: "" });
   }
 
   handleApprove = () => {
@@ -235,7 +235,7 @@ class LeaveAdminApprovalRejection extends Component {
                         height: "36vh",
                         overflow: "auto",
                         borderRadius: "5px",
-                        marginTop: "-7%"
+                        marginTop: "-4%"
                       }}
                     >
                       {this.state.userComment.map((comment, index) =>
