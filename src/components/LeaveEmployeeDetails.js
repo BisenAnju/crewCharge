@@ -270,13 +270,14 @@ class LeaveEmployeeDetails extends Component {
               {this.state.userComment.length > 0 ? (
                 <div
                   style={{
+                    id: "1",
                     width: "100%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center"
                   }}
                 >
-                  <div style={{ width: "95%" }}>
+                  <div style={{ id: "2", width: "95%" }}>
                     <ListItem
                       style={{ padding: "0px" }}
                       disabled
@@ -286,7 +287,7 @@ class LeaveEmployeeDetails extends Component {
                             backgroundColor: "#E8F5E9",
                             height: "52vh",
                             overflow: "auto",
-                            borderRadius: "5px"
+                            borderRadius: "10px"
                           }}
                         >
                           {this.state.userComment.map((comment, index) =>
