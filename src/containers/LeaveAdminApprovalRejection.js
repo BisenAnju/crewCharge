@@ -59,9 +59,9 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
           };
           var message = {
             app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
-            contents: { en: data.remark },
+            contents: { en: "Admin Reply" },
             include_player_ids: [data.userPlayerId],
-            headings: { en: "Admin Reply" },
+            headings: { en: data.remark },
             data: {
               Route: "/leavedashboard/leavedetails/",
               Id: matchParams

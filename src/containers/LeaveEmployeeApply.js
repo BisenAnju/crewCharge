@@ -90,10 +90,10 @@ class LeaveEmployeeApplyContainer extends React.Component {
             };
             var message = {
               app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
-              contents: { en: leaveType },
+              contents: { en: ths.props.user.displayName },
               include_player_ids: ths.state.player_ids,
               priority: 10,
-              headings: { en: "New Leave" },
+              headings: { en: "Requested For New Leave" },
               data: {
                 Route: "/leavedashboard/admin/approvalrejection/",
                 Id: ref.id
