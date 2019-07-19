@@ -1,5 +1,10 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  withRouter
+} from "react-router-dom";
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
 import LeaveAdminApprovalRejection from "../components/LeaveAdminApprovalRejection";
@@ -10,15 +15,14 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
     super(props);
     this.state = {
       isLoading: true,
-      commentData: []
+      commentData: [],
+      playerId: []
     };
   }
 
   handleChange = data => {
     let ths = this;
-    console.log(data);
     let matchParams = this.props.match.params.leaveId;
-    console.log(matchParams);
     this.props.db
       .collection("leaves")
       .doc(matchParams)
@@ -27,52 +31,55 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
         approvedRejectedBy: this.props.user.displayName,
         approvedRejectedOn: new Date()
       })
-      .then(() => {
-        setTimeout(function() {
-          var sendNotification = function(data) {
-            var headers = {
-              "Content-Type": "application/json; charset=utf-8",
-              Authorization:
-                "Basic NDkwNGU2ODYtNTgwYS00MDY4LThjN2MtYzNmMGZhMGJmNzNk"
-            };
+      .then(ref => {
+        if (ref.id !== "undefined") {
+          setTimeout(function() {
+            var sendNotification = function(data) {
+              var headers = {
+                "Content-Type": "application/json; charset=utf-8",
+                Authorization:
+                  "Basic NDkwNGU2ODYtNTgwYS00MDY4LThjN2MtYzNmMGZhMGJmNzNk"
+              };
 
-            var options = {
-              host: "onesignal.com",
-              port: 443,
-              path: "/api/v1/notifications",
-              method: "POST",
-              headers: headers
-            };
+              var options = {
+                host: "onesignal.com",
+                port: 443,
+                path: "/api/v1/notifications",
+                method: "POST",
+                headers: headers
+              };
 
-            var https = require("https");
-            var req = https.request(options, function(res) {
-              res.on("data", function(data) {
-                console.log("Response:");
-                console.log(JSON.parse(data));
+              var https = require("https");
+              var req = https.request(options, function(res) {
+                res.on("data", function(data) {
+                  console.log("Response:");
+                  console.log(JSON.parse(data));
+                });
               });
-            });
 
-            req.on("error", function(e) {
-              console.log("ERROR:");
-              console.log(e);
-            });
+              req.on("error", function(e) {
+                console.log("ERROR:");
+                console.log(e);
+              });
 
-            req.write(JSON.stringify(data));
-            req.end();
-          };
-          var message = {
-            app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
-            contents: { en: data.remark },
-            include_player_ids: [data.userPlayerId],
-            headings: { en: ths.props.user.displayName },
-            data: {
-              Route: "/leavedashboard/leavedetails/",
-              Id: matchParams
-            }
-          };
+              req.write(JSON.stringify(data));
+              req.end();
+            };
 
-          sendNotification(message);
-        }, 2000);
+            var message = {
+              app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
+              contents: { en: data.remark },
+              include_player_ids: ths.state.playerId,
+              headings: { en: ths.props.user.displayName },
+              data: {
+                Route: "/leavedashboard/leavedetails/",
+                Id: ref.id
+              }
+            };
+
+            sendNotification(message);
+          }, 2000);
+        }
       })
       .catch(err => {
         console.log("Error getting documents", err);
@@ -94,6 +101,31 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
   };
 
   componentWillMount() {
+    //get playerId
+    let playerId = [];
+    this.props.db
+      .collection("users")
+      .where("userType", "==", "Admin")
+      .get()
+      .then(
+        snapshot => {
+          snapshot.forEach(doc => {
+            if (
+              doc.exists &&
+              doc.data().userNotificationPlayerId !== undefined
+            ) {
+              const details = doc.data();
+              details.id = doc.id;
+              playerId.push(details.userNotificationPlayerId);
+            }
+          });
+          this.setState({ playerId });
+        },
+        err => {
+          console.log(`Encountered error: ${err}`);
+        }
+      );
+
     //get comment data
     this.props.db
       .collection("leaves")
@@ -152,4 +184,6 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
   }
 }
 
-export default withUser(withFirebase(LeaveAdminApprovalRejectionContainer));
+export default withUser(
+  withFirebase(withRouter(LeaveAdminApprovalRejectionContainer))
+);
