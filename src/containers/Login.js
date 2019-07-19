@@ -53,6 +53,7 @@ class LoginContainer extends Component {
                 JSON.parse(localStorage.getItem("playerId")).id) &&
             window.cordova
           ) {
+            console.log(JSON.parse(localStorage.getItem("playerId")).id);
             u.update({
               userNotificationPlayerId: JSON.parse(
                 localStorage.getItem("playerId")

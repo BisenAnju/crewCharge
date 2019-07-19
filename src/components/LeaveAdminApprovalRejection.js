@@ -42,13 +42,28 @@ class LeaveAdminApprovalRejection extends Component {
   }
 
   handleApprove = () => {
-    this.props.handleChange({ ...this.state });
+    this.setState(
+      {
+        leaveStatus: "Approved"
+      },
+      () => this.props.handleChange({ ...this.state })
+    );
   };
   handleReject = () => {
-    this.props.handleChange({ ...this.state });
+    this.setState(
+      {
+        leaveStatus: "Rejected"
+      },
+      () => this.props.handleChange({ ...this.state })
+    );
   };
   handleDraft = () => {
-    this.props.handleChange({ ...this.state });
+    this.setState(
+      {
+        leaveStatus: "Pending"
+      },
+      () => this.props.handleChange({ ...this.state })
+    );
   };
   getIconUrl = purpose => {
     let iconURL = [];
