@@ -84,113 +84,137 @@ class LeaveEmployeeHourLeave extends Component {
   render() {
     return (
       <div>
-        <div style={flexcontainer}>
-          <div>
-            <PurposeRadioButton
-              validatePurpose={this.validatePurpose}
-              purpose={this.state.purpose}
-              purposeData={this.props.purposeData}
-            />
-          </div>
-        </div>
+        <PurposeRadioButton
+          validatePurpose={this.validatePurpose}
+          purpose={this.state.purpose}
+          purposeData={this.props.purposeData}
+        />
 
         <div
           style={{
             display: "flex",
-            justifyContent: "space-around",
-            marginTop: "8%",
-            backgroundColor: "#eae8de"
+            justifyContent: "space-around"
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "45%",
-              borderRight: "1px solid gray",
-              alignItems: "center"
-            }}
-          >
-            <div>
-              <ImageTimer style={{ fill: "#f08f4c" }} />
-            </div>
-            <div>12:00</div>
+          <div style={{ display: "flex" }}>
+            {/* <ImageTimer
+              style={{
+                fill: "#f08f4c",
+                margin: "20% 5% 0% 0%",
+                height: "30px",
+                width: "30px"
+              }}
+            /> */}
+            <TimePicker
+              textFieldStyle={{
+                width: "80%"
+              }}
+              format="ampm"
+              floatingLabelText="From"
+              hintText="Time (from)"
+              value={this.state.from}
+              onChange={this.handleChangeTimePicker1}
+              minutesStep={60}
+            />
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "45%",
-              alignItems: "center"
-            }}
-          >
-            <div>
-              <ImageTimer style={{ fill: "#f08f4c" }} />
-            </div>
-            <div>11:00</div>
+          <div style={{ display: "flex" }}>
+            {/* <ImageTimer
+              style={{
+                fill: "#f08f4c",
+                margin: "20% 5% 0% 0%",
+                height: "30px",
+                width: "30px"
+              }}
+            /> */}
+            <TimePicker
+              textFieldStyle={{
+                width: "80%"
+              }}
+              format="ampm"
+              floatingLabelText="to"
+              hintText="Time (to)"
+              value={this.state.to}
+              onChange={this.handleChangeTimePicker2}
+              minutesStep={60}
+            />
           </div>
         </div>
 
         {/* <div
           style={{
             display: "flex",
-            justifyContent: "space-around"
+            marginTop: "8%",
+            backgroundColor: "#eae8de",
+            height: "10vh"
           }}
         >
           <div
             style={{
               display: "flex",
-              width: "35%"
+              justifyContent: "space-around"
             }}
           >
-            <div style={{ width: "15%" }}>
-              <ImageTimer
-                style={{ margin: "35px 0px 0px 0px", fill: "#f08f4c" }}
-              />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "45%",
+                borderRight: "1px solid gray",
+                alignItems: "center"
+              }}
+            >
+              <div>
+                <ImageTimer style={{ fill: "#f08f4c" }} />
+              </div>
+              <div>
+                <TimePicker
+                  textFieldStyle={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center"
+                  }}
+                  format="ampm"
+                  floatingLabelText="From"
+                  hintText="Time (from)"
+                  value={this.state.from}
+                  onChange={this.handleChangeTimePicker1}
+                  minutesStep={60}
+                />
+              </div>
             </div>
-            <div style={{ width: "80%" }}>
-              <TimePicker
-                style={{ width: "20%" }}
-                format="ampm"
-                floatingLabelText="From"
-                hintText="Time (from)"
-                value={this.state.from}
-                onChange={this.handleChangeTimePicker1}
-              />
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "45%",
+                alignItems: "center"
+              }}
+            >
+              <div>
+                <ImageTimer style={{ fill: "#f08f4c" }} />
+              </div>
+              <div>
+                <TimePicker
+                  textFieldStyle={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center"
+                  }}
+                  format="ampm"
+                  floatingLabelText="to"
+                  hintText="Time (to)"
+                  value={this.state.to}
+                  onChange={this.handleChangeTimePicker2}
+                  minutesStep={60}
+                />
+              </div>
             </div>
           </div>
+        </div> */}
 
-          <div
-            style={{
-              display: "flex",
-              width: "35%"
-            }}
-          >
-            <div style={{ width: "15%" }}>
-              <ImageTimer
-                style={{ margin: "35px 0px 0px 0px", fill: "#f08f4c" }}
-              />
-            </div>
-            <div style={{ width: "80%" }}>
-              <TimePicker
-                style={{ width: "20%" }}
-                format="ampm"
-                floatingLabelText="To"
-                hintText="Time (to)"
-                value={this.state.to}
-                errorStyle={{ color: "#f08f4c" }}
-                errorText={
-                  this.state.from > this.state.to &&
-                  "Should be greater than from time"
-                }
-                onChange={this.handleChangeTimePicker2}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div style={flexcontainer}>
+        {/* <div style={flexcontainer}>
           <div>
             <CommunicationComment
               style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}

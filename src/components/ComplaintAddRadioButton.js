@@ -71,7 +71,7 @@ export class PurposeRadioButton extends React.Component {
         style={{
           display: "flex",
           justifyContent: "space-around",
-          marginTop: "10%"
+          margin: "10% 7% 0% 7%"
         }}
         name="shipSpeed"
         defaultSelected={this.props.purpose}
@@ -79,9 +79,8 @@ export class PurposeRadioButton extends React.Component {
         {this.props.purposeData.map((purpose, id) => (
           <RadioButton
             key={id}
-            style={{ marginRight: "5%" }}
             rippleStyle={{ color: "rgb(253, 145, 77)" }}
-            iconStyle={{ fill: "rgb(240, 143, 76)" }}
+            iconStyle={{ fill: "rgb(240, 143, 76)", marginRight: "8px" }}
             value={purpose.purpose}
             label={
               <Avatar
