@@ -1,19 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import {
-  DatePicker,
-  SelectField,
-  MenuItem,
-  RaisedButton,
-  TextField,
-  Snackbar,
-  Avatar
-} from "material-ui";
-import {
-  ActionDateRange,
-  CommunicationComment,
-  ActionList
-} from "material-ui/svg-icons";
+import { DatePicker, RaisedButton, TextField, Snackbar } from "material-ui";
+import { ActionDateRange, CommunicationComment } from "material-ui/svg-icons";
+import { PurposeRadioButton } from "./ComplaintAddRadioButton";
 
 const flexcontainer = {
   display: "flex",
@@ -31,12 +20,12 @@ class LeaveEmployeeFulldayLeave extends Component {
   constructor() {
     super();
     this.state = {
-      purpose: null,
+      purpose: "",
       snackOpen: false,
       from: null,
       to: null,
       dueDate: null,
-      reason: null
+      reason: ""
     };
   }
   componentWillMount() {
@@ -56,8 +45,8 @@ class LeaveEmployeeFulldayLeave extends Component {
     if (
       this.state.from === null ||
       this.state.to === null ||
-      this.state.reason === null ||
-      this.state.purpose === null
+      this.state.reason === "" ||
+      this.state.purpose === ""
     ) {
       this.setState({ snackOpen: true });
       return false;
@@ -69,8 +58,8 @@ class LeaveEmployeeFulldayLeave extends Component {
     if (
       this.state.from === null ||
       this.state.to === null ||
-      this.state.reason === null ||
-      this.state.purpose === null
+      this.state.reason === "" ||
+      this.state.purpose === ""
     ) {
       this.setState({ snackOpen: true });
       return false;
@@ -100,17 +89,21 @@ class LeaveEmployeeFulldayLeave extends Component {
       dueDate: date
     });
   };
+  validatePurpose = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
   render() {
     return (
       <div>
         <div style={flexcontainer}>
           <div>
-            <ActionList
-              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
+            <PurposeRadioButton
+              validatePurpose={this.validatePurpose}
+              purpose={this.state.purpose}
+              purposeData={this.props.purposeData}
             />
-          </div>
-          <div>
-            <SelectField
+
+            {/* <SelectField
               value={this.state.purpose}
               onChange={this.handleChange}
               floatingLabelText="Select Purpose"
@@ -133,7 +126,7 @@ class LeaveEmployeeFulldayLeave extends Component {
                   }
                 />
               ))}
-            </SelectField>
+            </SelectField> */}
           </div>
         </div>
 

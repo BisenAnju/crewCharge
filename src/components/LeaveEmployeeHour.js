@@ -1,19 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import {
-  TimePicker,
-  RaisedButton,
-  TextField,
-  Snackbar,
-  SelectField,
-  MenuItem,
-  Avatar
-} from "material-ui";
-import {
-  ImageTimer,
-  CommunicationComment,
-  ActionList
-} from "material-ui/svg-icons";
+import { TimePicker, RaisedButton, TextField, Snackbar } from "material-ui";
+import { ImageTimer, CommunicationComment } from "material-ui/svg-icons";
+import { PurposeRadioButton } from "./ComplaintAddRadioButton";
 
 const flexcontainer = {
   display: "flex",
@@ -32,11 +21,11 @@ class LeaveEmployeeHourLeave extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      purpose: null,
+      purpose: "",
       from: null,
       to: null,
       snackOpen: false,
-      reason: null,
+      reason: "",
       playerId: [],
       dueDate: null
     };
@@ -68,8 +57,8 @@ class LeaveEmployeeHourLeave extends Component {
     if (
       this.state.from === null ||
       this.state.to === null ||
-      this.state.reason === null ||
-      this.state.purpose === null
+      this.state.reason === "" ||
+      this.state.purpose === ""
     ) {
       this.setState({ snackOpen: true });
       return false;
@@ -81,8 +70,8 @@ class LeaveEmployeeHourLeave extends Component {
     if (
       this.state.from === null ||
       this.state.to === null ||
-      this.state.reason === null ||
-      this.state.purpose === null
+      this.state.reason === "" ||
+      this.state.purpose === ""
     ) {
       this.setState({ snackOpen: true });
       return false;
@@ -97,74 +86,107 @@ class LeaveEmployeeHourLeave extends Component {
       <div>
         <div style={flexcontainer}>
           <div>
-            <ActionList
-              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
-            />
-          </div>
-          <div>
-            <SelectField
-              value={this.state.purpose}
-              onChange={this.handleChange}
-              floatingLabelText="Select Purpose"
-            >
-              {this.props.purposeData.map((purpose, id) => (
-                <MenuItem
-                  key={id}
-                  value={purpose.purpose}
-                  primaryText={purpose.displayName}
-                  rightIcon={
-                    <Avatar
-                      src={purpose.iconUrl}
-                      style={{
-                        height: "27px",
-                        width: "27px",
-                        backgroundColor: "white",
-                        borderRadius: "0%"
-                      }}
-                    />
-                  }
-                />
-              ))}
-            </SelectField>
-          </div>
-        </div>
-
-        <div style={flexcontainer}>
-          <div>
-            <ImageTimer
-              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
-            />
-          </div>
-          <div>
-            <TimePicker
-              format="ampm"
-              floatingLabelText="From Time"
-              hintText="Select Time (from)"
-              value={this.state.from}
-              onChange={this.handleChangeTimePicker1}
+            <PurposeRadioButton
+              validatePurpose={this.validatePurpose}
+              purpose={this.state.purpose}
+              purposeData={this.props.purposeData}
             />
           </div>
         </div>
 
-        <div style={flexcontainer}>
-          <div>
-            <ImageTimer
-              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
-            />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            marginTop: "8%",
+            backgroundColor: "#eae8de"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "45%",
+              borderRight: "1px solid gray",
+              alignItems: "center"
+            }}
+          >
+            <div>
+              <ImageTimer style={{ fill: "#f08f4c" }} />
+            </div>
+            <div>12:00</div>
           </div>
-          <div>
-            <TimePicker
-              format="ampm"
-              floatingLabelText="To Time"
-              hintText="Select Time (to)"
-              value={this.state.to}
-              errorStyle={{ color: "#f08f4c" }}
-              errorText={
-                this.state.from > this.state.to &&
-                "Should be greater than from time"
-              }
-              onChange={this.handleChangeTimePicker2}
-            />
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "45%",
+              alignItems: "center"
+            }}
+          >
+            <div>
+              <ImageTimer style={{ fill: "#f08f4c" }} />
+            </div>
+            <div>11:00</div>
+          </div>
+        </div>
+
+        {/* <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              width: "35%"
+            }}
+          >
+            <div style={{ width: "15%" }}>
+              <ImageTimer
+                style={{ margin: "35px 0px 0px 0px", fill: "#f08f4c" }}
+              />
+            </div>
+            <div style={{ width: "80%" }}>
+              <TimePicker
+                style={{ width: "20%" }}
+                format="ampm"
+                floatingLabelText="From"
+                hintText="Time (from)"
+                value={this.state.from}
+                onChange={this.handleChangeTimePicker1}
+              />
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              width: "35%"
+            }}
+          >
+            <div style={{ width: "15%" }}>
+              <ImageTimer
+                style={{ margin: "35px 0px 0px 0px", fill: "#f08f4c" }}
+              />
+            </div>
+            <div style={{ width: "80%" }}>
+              <TimePicker
+                style={{ width: "20%" }}
+                format="ampm"
+                floatingLabelText="To"
+                hintText="Time (to)"
+                value={this.state.to}
+                errorStyle={{ color: "#f08f4c" }}
+                errorText={
+                  this.state.from > this.state.to &&
+                  "Should be greater than from time"
+                }
+                onChange={this.handleChangeTimePicker2}
+              />
+            </div>
           </div>
         </div>
 
@@ -188,7 +210,7 @@ class LeaveEmployeeHourLeave extends Component {
               onChange={this.textChange}
             />
           </div>
-        </div>
+        </div> */}
 
         <br />
         <center>
