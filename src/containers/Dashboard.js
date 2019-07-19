@@ -18,6 +18,7 @@ class DashboardContainer extends Component {
     let navigationNotification = JSON.parse(
       localStorage.getItem("navigationNotification")
     );
+    console.log("data:- " + navigationNotification);
     if (navigationNotification !== null) {
       let path = navigationNotification.route + navigationNotification.id;
       localStorage.removeItem("navigationNotification");

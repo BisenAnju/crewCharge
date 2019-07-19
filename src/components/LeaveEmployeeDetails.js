@@ -9,7 +9,6 @@ import {
   TextField
 } from "material-ui";
 import Layout from "../layouts/Layout";
-import sendimg from "../images/send.svg";
 
 import {
   ActionHelp,
@@ -20,7 +19,8 @@ import {
   ActionCheckCircle,
   NavigationCancel,
   CommunicationComment,
-  ImageEdit
+  ImageEdit,
+  ContentSend
 } from "material-ui/svg-icons";
 import moment from "moment";
 import withUser from "../hoc/withUser";
@@ -411,13 +411,14 @@ class LeaveEmployeeDetails extends Component {
                             <div>
                               <IconButton
                                 touch={true}
+                                iconStyle={{ height: "25px", width: "25px" }}
                                 onClick={e => {
                                   e.preventDefault();
                                   this.handleDraft();
                                 }}
                                 style={{ zIndex: 1 }}
                               >
-                                <img src={sendimg} alt="send" />
+                                <ContentSend />
                               </IconButton>
                             </div>
                           </div>

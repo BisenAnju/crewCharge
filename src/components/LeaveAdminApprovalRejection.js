@@ -5,9 +5,9 @@ import {
   ActionDateRange,
   ImageTimer,
   ActionToday,
+  ContentSend,
   CommunicationComment
 } from "material-ui/svg-icons";
-import sendimg from "../images/send.svg";
 import {
   Divider,
   Avatar,
@@ -369,9 +369,10 @@ class LeaveAdminApprovalRejection extends Component {
                                 e.preventDefault();
                                 this.handleDraft();
                               }}
+                              iconStyle={{ height: "25px", width: "25px" }}
                               style={{ zIndex: 1 }}
                             >
-                              <img src={sendimg} alt="send" />
+                              <ContentSend />
                             </IconButton>
                           </div>
                         </div>
