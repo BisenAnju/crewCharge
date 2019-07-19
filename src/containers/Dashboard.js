@@ -19,9 +19,9 @@ class DashboardContainer extends Component {
       localStorage.getItem("navigationNotification")
     );
     if (navigationNotification !== null) {
-      let rute = navigationNotification.route + navigationNotification.id;
+      let path = navigationNotification.route + navigationNotification.id;
       localStorage.removeItem("navigationNotification");
-      if (rute) this.props.history.push(rute);
+      if (path) this.props.history.push(path);
     }
   }
   render() {

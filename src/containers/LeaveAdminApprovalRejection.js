@@ -72,8 +72,8 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
               include_player_ids: ths.state.playerId,
               headings: { en: ths.props.user.displayName },
               data: {
-                Route: "/leavedashboard/leavedetails/",
-                Id: ref.id
+                route: "/leavedashboard/leavedetails/",
+                id: ref.id
               }
             };
 

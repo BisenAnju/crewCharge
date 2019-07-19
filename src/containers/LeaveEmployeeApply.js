@@ -95,8 +95,8 @@ class LeaveEmployeeApplyContainer extends React.Component {
               priority: 10,
               headings: { en: ths.props.user.displayName },
               data: {
-                Route: "/leavedashboard/admin/approvalrejection/",
-                Id: ref.id
+                route: "/leavedashboard/admin/approvalrejection/",
+                id: ref.id
               }
             };
 

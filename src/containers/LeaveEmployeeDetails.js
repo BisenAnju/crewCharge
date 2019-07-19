@@ -67,8 +67,8 @@ class LeaveEmployeeDetailsContainer extends React.Component {
               include_player_ids: ths.state.playerId,
               headings: { en: ths.props.user.displayName },
               data: {
-                Route: "/leavedashboard/admin/approvalrejection/",
-                Id: ref.id
+                route: "/leavedashboard/admin/approvalrejection/",
+                id: ref.id
               }
             };
 

@@ -14,13 +14,10 @@ const startApp = () => {
           "323e54fd-ee29-4bb2-bafc-e292b01c694f"
         )
           .handleNotificationOpened(jsonData => {
-            console.log(jsonData);
-            const tempRoute =
-              jsonData.notification.payload.additionalData.Route;
-            const tempId = jsonData.notification.payload.additionalData.Id;
+            const data = jsonData.notification.payload.additionalData;
             localStorage.setItem(
               "navigationNotification",
-              JSON.stringify({ route: tempRoute, id: tempId })
+              JSON.stringify({ route: data.route, id: data.id })
             );
           })
           .endInit();

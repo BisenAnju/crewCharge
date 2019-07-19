@@ -23,7 +23,6 @@ class LeaveDashboardContainer extends Component {
     };
   }
   componentWillMount() {
-    console.log(this.props);
     // get purpose
     this.props.db
       .collection("leaves")
