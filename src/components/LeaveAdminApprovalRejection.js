@@ -34,8 +34,7 @@ class LeaveAdminApprovalRejection extends Component {
       remark: "",
       leaveStatus: null,
       userName: null,
-      userComment: [],
-      userPlayerId: []
+      userComment: []
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -43,40 +42,13 @@ class LeaveAdminApprovalRejection extends Component {
   }
 
   handleApprove = () => {
-    let playerId = this.props.userData.filter(
-      user => user.uid === this.props.singleData.userId
-    )[0].userNotificationPlayerId;
-    this.setState(
-      {
-        leaveStatus: "Approved",
-        userPlayerId: playerId
-      },
-      () => this.props.handleChange({ ...this.state })
-    );
+    this.props.handleChange({ ...this.state });
   };
   handleReject = () => {
-    let playerId = this.props.userData.filter(
-      user => user.uid === this.props.singleData.userId
-    )[0].userNotificationPlayerId;
-    this.setState(
-      {
-        leaveStatus: "Rejected",
-        userPlayerId: playerId
-      },
-      () => this.props.handleChange({ ...this.state })
-    );
+    this.props.handleChange({ ...this.state });
   };
   handleDraft = () => {
-    let playerId = this.props.userData.filter(
-      user => user.uid === this.props.singleData.userId
-    )[0].userNotificationPlayerId;
-    this.setState(
-      {
-        leaveStatus: "Pending",
-        userPlayerId: playerId
-      },
-      () => this.props.handleChange({ ...this.state })
-    );
+    this.props.handleChange({ ...this.state });
   };
   getIconUrl = purpose => {
     let iconURL = [];

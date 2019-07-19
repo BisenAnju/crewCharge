@@ -44,8 +44,7 @@ class LeaveEmployeeDetails extends Component {
     this.state = {
       navigationTitle: "Leave Details",
       userComment: [],
-      remark: "",
-      userPlayerId: []
+      remark: ""
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -69,15 +68,7 @@ class LeaveEmployeeDetails extends Component {
       );
   };
   handleDraft = () => {
-    let playerId = this.props.userData.filter(
-      user => user.uid === this.props.user.uid
-    )[0].userNotificationPlayerId;
-    this.setState(
-      {
-        userPlayerId: playerId
-      },
-      () => this.props.handleChange({ ...this.state })
-    );
+    this.props.handleChange({ ...this.state });
   };
   textChange = e => {
     this.setState({ [e.target.name]: e.target.value });
