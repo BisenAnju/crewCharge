@@ -1,24 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import {
-  TimePicker,
-  RaisedButton,
-  TextField,
-  Snackbar,
-  SelectField,
-  MenuItem,
-  Avatar
-} from "material-ui";
-import {
-  ImageTimer,
-  CommunicationComment,
-  ActionList
-} from "material-ui/svg-icons";
-
-const flexcontainer = {
-  display: "flex",
-  justifyContent: "center"
-};
+import { TimePicker, TextField, Snackbar, FlatButton } from "material-ui";
+import { ImageTimer } from "material-ui/svg-icons";
+import { PurposeRadioButton } from "./ComplaintAddRadioButton";
+import moment from "moment";
 
 const styles = {
   underlineStyle: {
@@ -32,13 +17,14 @@ class LeaveEmployeeHourLeave extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      purpose: null,
+      purpose: "",
       from: null,
       to: null,
       snackOpen: false,
-      reason: null,
+      reason: "",
       playerId: [],
-      dueDate: null
+      dueDate: null,
+      showDiv: false
     };
   }
 
@@ -58,7 +44,7 @@ class LeaveEmployeeHourLeave extends Component {
     this.setState({ from: date });
   };
   handleChangeTimePicker2 = (event, date) => {
-    this.setState({ to: date });
+    this.setState({ to: date, showDiv: true });
   };
   textChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -68,8 +54,8 @@ class LeaveEmployeeHourLeave extends Component {
     if (
       this.state.from === null ||
       this.state.to === null ||
-      this.state.reason === null ||
-      this.state.purpose === null
+      this.state.reason === "" ||
+      this.state.purpose === ""
     ) {
       this.setState({ snackOpen: true });
       return false;
@@ -81,8 +67,8 @@ class LeaveEmployeeHourLeave extends Component {
     if (
       this.state.from === null ||
       this.state.to === null ||
-      this.state.reason === null ||
-      this.state.purpose === null
+      this.state.reason === "" ||
+      this.state.purpose === ""
     ) {
       this.setState({ snackOpen: true });
       return false;
@@ -95,123 +81,184 @@ class LeaveEmployeeHourLeave extends Component {
   render() {
     return (
       <div>
-        <div style={flexcontainer}>
-          <div>
-            <ActionList
-              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
-            />
-          </div>
-          <div>
-            <SelectField
-              value={this.state.purpose}
-              onChange={this.handleChange}
-              floatingLabelText="Select Purpose"
-            >
-              {this.props.purposeData.map((purpose, id) => (
-                <MenuItem
-                  key={id}
-                  value={purpose.purpose}
-                  primaryText={purpose.displayName}
-                  rightIcon={
-                    <Avatar
-                      src={purpose.iconUrl}
-                      style={{
-                        height: "27px",
-                        width: "27px",
-                        backgroundColor: "white",
-                        borderRadius: "0%"
-                      }}
-                    />
-                  }
+        <PurposeRadioButton
+          validatePurpose={this.validatePurpose}
+          purpose={this.state.purpose}
+          purposeData={this.props.purposeData}
+        />
+
+        <div
+          style={{
+            display: "flex",
+            margin: "7% 4% 0% 4%",
+            backgroundColor: "#f3f5d1"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              borderRight: "1px solid gray",
+              width: "50%",
+              alignItems: "center",
+              flexDirection: "column"
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div>
+                <ImageTimer
+                  style={{
+                    fill: "#f08f4c",
+                    height: "25px",
+                    width: "25px"
+                  }}
                 />
-              ))}
-            </SelectField>
-          </div>
-        </div>
+              </div>
+              <div>From</div>
+            </div>
 
-        <div style={flexcontainer}>
-          <div>
-            <ImageTimer
-              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
-            />
-          </div>
-          <div>
-            <TimePicker
-              format="ampm"
-              floatingLabelText="From Time"
-              hintText="Select Time (from)"
-              value={this.state.from}
-              onChange={this.handleChangeTimePicker1}
-            />
-          </div>
-        </div>
-
-        <div style={flexcontainer}>
-          <div>
-            <ImageTimer
-              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
-            />
-          </div>
-          <div>
-            <TimePicker
-              format="ampm"
-              floatingLabelText="To Time"
-              hintText="Select Time (to)"
-              value={this.state.to}
-              errorStyle={{ color: "#f08f4c" }}
-              errorText={
-                this.state.from > this.state.to &&
-                "Should be greater than from time"
-              }
-              onChange={this.handleChangeTimePicker2}
-            />
-          </div>
-        </div>
-
-        <div style={flexcontainer}>
-          <div>
-            <CommunicationComment
-              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
-            />
-          </div>
-          <div>
-            <TextField
-              underlineFocusStyle={styles.underlineStyle}
-              floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-              floatingLabelText="Reason"
-              hintText="Type Reason"
-              multiLine={true}
-              rows={2}
-              rowsMax={4}
-              name="reason"
-              value={this.state.reason}
-              onChange={this.textChange}
-            />
-          </div>
-        </div>
-
-        <br />
-        <center>
-          {this.props.singleData === undefined ? (
-            <div className="flexAppItem">
-              <RaisedButton
-                label="SUBMIT"
-                backgroundColor="rgb(253, 145, 77)"
-                labelColor="white"
-                onClick={this.validateForm}
+            <div>
+              <TimePicker
+                textFieldStyle={{
+                  margin: "0% 7%",
+                  width: "86%",
+                  height: "35px",
+                  textAlign: "center"
+                }}
+                // defaultTime={{ 9: 30 }}
+                autoOk={true}
+                format="ampm"
+                value={this.state.from}
+                onChange={this.handleChangeTimePicker1}
+                minutesStep={60}
               />
             </div>
-          ) : (
-            <div className="flexAppItem">
-              <RaisedButton
-                label="UPDATE"
-                backgroundColor="rgb(253, 145, 77)"
-                labelColor="white"
-                onClick={this.updateLeave}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              width: "50%",
+              alignItems: "center",
+              flexDirection: "column"
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div>
+                <ImageTimer
+                  style={{
+                    fill: "#f08f4c",
+                    height: "25px",
+                    width: "25px"
+                  }}
+                />
+              </div>
+              <div>To</div>
+            </div>
+            <div>
+              <TimePicker
+                textFieldStyle={{
+                  margin: "0% 7%",
+                  width: "86%",
+                  height: "35px",
+                  textAlign: "center"
+                }}
+                // defaultTime={{ 5: 30 }}
+                autoOk={true}
+                format="ampm"
+                value={this.state.to}
+                onChange={this.handleChangeTimePicker2}
+                errorStyle={{ color: "#f08f4c" }}
+                errorText={
+                  this.state.from > this.state.to &&
+                  "Should be greater than from time"
+                }
+                minutesStep={60}
               />
             </div>
-          )}
-        </center>
+          </div>
+        </div>
+        {this.state.showDiv ? (
+          <div
+            style={{
+              marginTop: "7%",
+              textAlign: "center",
+              color: "midnightblue",
+              fontFamily: "monospace"
+            }}
+          >
+            {moment
+              .utc(
+                moment(moment(this.state.to), "HH:mm:ss").diff(
+                  moment(moment(this.state.from), "HH:mm:ss")
+                )
+              )
+              .format("HH:mm") +
+              " Hours " +
+              moment(new Date()).format("ll")}
+          </div>
+        ) : null}
+
+        <div
+          style={{
+            margin: "7% 4% 0% 4%",
+            backgroundColor: "#f3f5d1",
+            display: "flex",
+            alignItems: "center",
+            alignContent: "center",
+            justifyContent: "center",
+            border: "1px solid gray",
+            borderRadius: "5px"
+          }}
+        >
+          <TextField
+            underlineFocusStyle={styles.underlineStyle}
+            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+            hintText="Reason"
+            multiLine={true}
+            rows={2}
+            rowsMax={4}
+            name="reason"
+            value={this.state.reason}
+            onChange={this.textChange}
+          />
+        </div>
+
+        {this.props.singleData === undefined ? (
+          <div
+            style={{
+              display: "flex",
+              marginTop: "40%"
+            }}
+          >
+            <FlatButton
+              style={{
+                color: "white",
+                backgroundColor: "#f08f4c",
+                width: "100%",
+                margin: "0px 15px 0px 15px"
+              }}
+              label="SUBMIT"
+              onClick={this.validateForm}
+            />
+          </div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              marginTop: "40%"
+            }}
+          >
+            <FlatButton
+              style={{
+                color: "white",
+                backgroundColor: "#f08f4c",
+                width: "100%%",
+                margin: "0px 15px 0px 15px"
+              }}
+              label="UPDATE"
+              onClick={this.updateLeave}
+            />
+          </div>
+        )}
 
         <Snackbar
           open={this.state.snackOpen}

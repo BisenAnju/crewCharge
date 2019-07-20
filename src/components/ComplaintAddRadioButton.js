@@ -3,7 +3,9 @@ import {
   SelectField,
   MenuItem,
   RadioButton,
-  RadioButtonGroup
+  RadioButtonGroup,
+  Avatar,
+  Divider
 } from "material-ui";
 import { ActionDateRange, ImageTimer } from "material-ui/svg-icons";
 export class PriorityRadioButton extends React.Component {
@@ -60,36 +62,72 @@ export class PriorityRadioButton extends React.Component {
     );
   }
 }
-//Leave Management radiobtn
+
+//Leave purpose radiobtn
+export class PurposeRadioButton extends React.Component {
+  render() {
+    console.log(this.props.purpose);
+    return (
+      <RadioButtonGroup
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          margin: "10% 7% 0% 7%"
+        }}
+        name="shipSpeed"
+        defaultSelected={this.props.purpose}
+      >
+        {this.props.purposeData.map((purpose, id) => (
+          <RadioButton
+            key={id}
+            rippleStyle={{ color: "rgb(253, 145, 77)" }}
+            iconStyle={{ fill: "rgb(240, 143, 76)", marginRight: "8px" }}
+            value={purpose.purpose}
+            label={
+              <Avatar
+                src={purpose.iconUrl}
+                style={{
+                  height: "22px",
+                  width: "22px",
+                  backgroundColor: "white",
+                  borderRadius: "0%"
+                }}
+              />
+            }
+            id="purpose"
+            onClick={this.props.validatePurpose}
+          />
+        ))}
+      </RadioButtonGroup>
+    );
+  }
+}
+
+//LeaveType radiobtn
 export class LeaveApplyRadioButton extends React.Component {
   render() {
     return (
       <RadioButtonGroup
         style={{
-          display: "flex"
+          display: "flex",
+          justifyContent: "space-around"
         }}
         name="shipSpeed"
         defaultSelected={this.props.leaveType}
       >
         <RadioButton
-          rippleStyle={{ color: "rgb(253, 145, 77)" }}
-          labelStyle={{ marginLeft: "-18%" }}
           value="Hour"
           label="Hour"
           id="leaveType"
           checkedIcon={<ImageTimer style={{ fill: "#f08f4c" }} />}
           uncheckedIcon={<ImageTimer />}
           style={{
-            marginRight: "18%",
-            marginLeft: "13%",
             width: "min-content"
           }}
           onClick={this.props.validateLeave}
-          // disabled={this.props.leaveType === "Full" ? true : false}
         />
+
         <RadioButton
-          rippleStyle={{ color: "rgb(253, 145, 77)" }}
-          labelStyle={{ marginLeft: "-15%" }}
           value="Full"
           label="Full"
           id="leaveType"
@@ -99,7 +137,6 @@ export class LeaveApplyRadioButton extends React.Component {
             width: "min-content"
           }}
           onClick={this.props.validateLeave}
-          // disabled={this.props.leaveType === "Hour" ? true : false}
         />
       </RadioButtonGroup>
     );

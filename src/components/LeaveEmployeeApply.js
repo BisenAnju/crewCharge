@@ -9,7 +9,7 @@ class LeaveEmployeeApply extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      leaveType: "Hour"
+      leaveType: ""
     };
   }
   componentWillMount() {
@@ -19,7 +19,6 @@ class LeaveEmployeeApply extends Component {
         : this.setState({ leaveType: "Hour" });
     }
   }
-  handleChange = (event, index, leaveType) => this.setState({ leaveType });
   validateInput = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
