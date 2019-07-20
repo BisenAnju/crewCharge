@@ -4,7 +4,8 @@ import {
   MenuItem,
   RadioButton,
   RadioButtonGroup,
-  Avatar
+  Avatar,
+  Divider
 } from "material-ui";
 import { ActionDateRange, ImageTimer } from "material-ui/svg-icons";
 export class PriorityRadioButton extends React.Component {
@@ -125,6 +126,7 @@ export class LeaveApplyRadioButton extends React.Component {
           }}
           onClick={this.props.validateLeave}
         />
+
         <RadioButton
           value="Full"
           label="Full"

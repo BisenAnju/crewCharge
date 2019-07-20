@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { DatePicker, RaisedButton, TextField, Snackbar } from "material-ui";
-import { ActionDateRange, CommunicationComment } from "material-ui/svg-icons";
+import { DatePicker, TextField, Snackbar, FlatButton } from "material-ui";
+import { ActionDateRange } from "material-ui/svg-icons";
 import { PurposeRadioButton } from "./ComplaintAddRadioButton";
+import moment from "moment";
 
-const flexcontainer = {
-  display: "flex",
-  justifyContent: "center"
-};
 const styles = {
   underlineStyle: {
     borderColor: "#fd914d"
@@ -25,7 +22,8 @@ class LeaveEmployeeFulldayLeave extends Component {
       from: null,
       to: null,
       dueDate: null,
-      reason: ""
+      reason: "",
+      showDiv: false
     };
   }
   componentWillMount() {
@@ -81,7 +79,8 @@ class LeaveEmployeeFulldayLeave extends Component {
   };
   changeToDate = (event, date) => {
     this.setState({
-      to: date
+      to: date,
+      showDiv: true
     });
   };
   changeDueDate = (event, date) => {
@@ -95,143 +94,206 @@ class LeaveEmployeeFulldayLeave extends Component {
   render() {
     return (
       <div>
-        <div style={flexcontainer}>
-          <div>
-            <PurposeRadioButton
-              validatePurpose={this.validatePurpose}
-              purpose={this.state.purpose}
-              purposeData={this.props.purposeData}
-            />
+        <PurposeRadioButton
+          validatePurpose={this.validatePurpose}
+          purpose={this.state.purpose}
+          purposeData={this.props.purposeData}
+        />
 
-            {/* <SelectField
-              value={this.state.purpose}
-              onChange={this.handleChange}
-              floatingLabelText="Select Purpose"
-            >
-              {this.props.purposeData.map((purpose, id) => (
-                <MenuItem
-                  key={id}
-                  value={purpose.purpose}
-                  primaryText={purpose.displayName}
-                  rightIcon={
-                    <Avatar
-                      src={purpose.iconUrl}
-                      style={{
-                        height: "27px",
-                        width: "27px",
-                        backgroundColor: "white",
-                        borderRadius: "0%"
-                      }}
-                    />
-                  }
+        <div
+          style={{
+            display: "flex",
+            margin: "7% 4% 0% 4%",
+            backgroundColor: "#f3f5d1"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              borderRight: "1px solid gray",
+              width: "50%",
+              alignItems: "center",
+              flexDirection: "column"
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div>
+                <ActionDateRange
+                  style={{
+                    fill: "#f08f4c",
+                    height: "25px",
+                    width: "25px"
+                  }}
                 />
-              ))}
-            </SelectField> */}
-          </div>
-        </div>
+              </div>
+              <div>From</div>
+            </div>
 
-        <div style={flexcontainer}>
-          <div>
-            <ActionDateRange
-              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
-            />
-          </div>
-          <div>
-            <DatePicker
-              floatingLabelText="From Date"
-              hintText="Select date (from)"
-              value={this.state.from}
-              onChange={this.changeFromDate}
-            />
-          </div>
-        </div>
-
-        <div style={flexcontainer}>
-          <div>
-            <ActionDateRange
-              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
-            />
-          </div>
-          <div>
-            <DatePicker
-              floatingLabelText="To Date"
-              hintText="Select date (to)"
-              value={this.state.to}
-              errorStyle={{ color: "#f08f4c" }}
-              errorText={
-                this.state.from > this.state.to &&
-                "Should be greater than from date"
-              }
-              onChange={this.changeToDate}
-            />
-          </div>
-        </div>
-
-        <div style={flexcontainer}>
-          <div>
-            <ActionDateRange
-              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
-            />
-          </div>
-          <div>
-            <DatePicker
-              floatingLabelText="Due Date"
-              hintText="Select due date"
-              errorText={
-                this.state.dueDate > this.state.from &&
-                "Should be smaller than from date"
-              }
-              errorStyle={{ color: "#f08f4c" }}
-              value={this.state.dueDate}
-              onChange={this.changeDueDate}
-            />
-          </div>
-        </div>
-
-        <div style={flexcontainer}>
-          <div>
-            <CommunicationComment
-              style={{ margin: "35px 10px 0px 0px", fill: "#f08f4c" }}
-            />
-          </div>
-          <div>
-            <TextField
-              underlineFocusStyle={styles.underlineStyle}
-              floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-              floatingLabelText="Reason"
-              hintText="Type Reason"
-              multiLine={true}
-              rows={2}
-              rowsMax={4}
-              name="reason"
-              value={this.state.reason}
-              onChange={this.textChange}
-            />
-          </div>
-        </div>
-
-        <br />
-        <center>
-          {this.props.singleData === undefined ? (
-            <div className="flexAppItem">
-              <RaisedButton
-                label="SUBMIT"
-                backgroundColor="rgb(253, 145, 77)"
-                labelColor="white"
-                onClick={this.validateForm}
+            <div>
+              <DatePicker
+                textFieldStyle={{
+                  margin: "0% 7%",
+                  width: "86%",
+                  height: "35px",
+                  textAlign: "center"
+                }}
+                autoOk={true}
+                value={this.state.from}
+                onChange={this.changeFromDate}
               />
             </div>
-          ) : (
-            <div className="flexAppItem">
-              <RaisedButton
-                label="UPDATE"
-                backgroundColor="rgb(253, 145, 77)"
-                labelColor="white"
-                onClick={this.updateLeave}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              width: "50%",
+              alignItems: "center",
+              flexDirection: "column"
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div>
+                <ActionDateRange
+                  style={{
+                    fill: "#f08f4c",
+                    height: "25px",
+                    width: "25px"
+                  }}
+                />
+              </div>
+              <div>To</div>
+            </div>
+            <div>
+              <DatePicker
+                textFieldStyle={{
+                  margin: "0% 7%",
+                  width: "86%",
+                  height: "35px",
+                  textAlign: "center"
+                }}
+                autoOk={true}
+                value={this.state.to}
+                onChange={this.changeToDate}
+                errorStyle={{ color: "#f08f4c" }}
+                errorText={
+                  this.state.from > this.state.to &&
+                  "Should be greater than from date"
+                }
               />
             </div>
-          )}
-        </center>
+          </div>
+        </div>
+
+        {this.state.showDiv ? (
+          <div
+            style={{
+              marginTop: "7%",
+              textAlign: "center",
+              color: "midnightblue",
+              fontFamily: "monospace"
+            }}
+          >
+            {moment
+              .utc(
+                moment(moment(this.state.to), "DD/MM/YYYY HH:mm:ss").diff(
+                  moment(moment(this.state.from), "DD/MM/YYYY HH:mm:ss")
+                )
+              )
+              .format("D") +
+              " Day " +
+              "  " +
+              moment(this.state.from).format("ll") +
+              " - " +
+              moment(this.state.to).format("ll")}
+          </div>
+        ) : null}
+
+        <div
+          style={{
+            margin: "7% 4% 0% 4%",
+            backgroundColor: "#f3f5d1",
+            display: "flex",
+            alignItems: "center",
+            alignContent: "center",
+            justifyContent: "center",
+            border: "1px solid gray",
+            borderRadius: "5px"
+          }}
+        >
+          <DatePicker
+            hintText="Due date"
+            errorText={
+              this.state.dueDate > this.state.from &&
+              "Should be smaller than from date"
+            }
+            errorStyle={{ color: "#f08f4c" }}
+            value={this.state.dueDate}
+            onChange={this.changeDueDate}
+          />
+        </div>
+
+        <div
+          style={{
+            margin: "7% 4% 0% 4%",
+            backgroundColor: "#f3f5d1",
+            display: "flex",
+            alignItems: "center",
+            alignContent: "center",
+            justifyContent: "center",
+            border: "1px solid gray",
+            borderRadius: "5px"
+          }}
+        >
+          <TextField
+            underlineFocusStyle={styles.underlineStyle}
+            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+            hintText="Type Reason"
+            multiLine={true}
+            rows={2}
+            rowsMax={4}
+            name="reason"
+            value={this.state.reason}
+            onChange={this.textChange}
+          />
+        </div>
+
+        {this.props.singleData === undefined ? (
+          <div
+            style={{
+              display: "flex",
+              marginTop: "25%"
+            }}
+          >
+            <FlatButton
+              style={{
+                color: "white",
+                backgroundColor: "#f08f4c",
+                width: "100%",
+                margin: "0px 15px 0px 15px"
+              }}
+              label="SUBMIT"
+              onClick={this.validateForm}
+            />
+          </div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              marginTop: "25%"
+            }}
+          >
+            <FlatButton
+              style={{
+                color: "white",
+                backgroundColor: "#f08f4c",
+                width: "100%%",
+                margin: "0px 15px 0px 15px"
+              }}
+              label="UPDATE"
+              onClick={this.updateLeave}
+            />
+          </div>
+        )}
 
         <Snackbar
           open={this.state.snackOpen}
