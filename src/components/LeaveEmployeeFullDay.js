@@ -222,6 +222,7 @@ class LeaveEmployeeFulldayLeave extends Component {
         >
           <DatePicker
             hintText="Due date"
+            autoOk={true}
             errorText={
               this.state.dueDate > this.state.from &&
               "Should be smaller than from date"
