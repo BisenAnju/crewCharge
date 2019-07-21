@@ -27,7 +27,10 @@ class Configuration extends Component {
           />
 
           <CardText expandable={true}>
-            <LeavePurpose addPurpose={this.props.addPurpose} />
+            <LeavePurpose
+              addPurpose={this.props.addPurpose}
+              purposeData={this.props.purposeData}
+            />
           </CardText>
         </Card>
 

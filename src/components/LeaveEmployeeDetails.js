@@ -102,42 +102,55 @@ class LeaveEmployeeDetails extends Component {
                   style={{ marginTop: 10 }}
                 />
               }
-              rightAvatar={
+              rightIcon={
                 this.props.singleData.leaveStatus === "Pending" ? (
-                  <ActionHelp
-                    style={{
-                      height: 35,
-                      width: 35,
-                      color: yellow500,
-                      marginTop: 16
+                  <IconButton
+                    touch={true}
+                    style={{ margin: "10px 25px 0px 0px" }}
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push(
+                        `/leavedashboard/leaveapply/` +
+                          this.props.singleData.leaveId
+                      );
                     }}
-                  />
-                ) : this.props.singleData.leaveStatus === "Approved" ? (
-                  <ActionCheckCircle
-                    style={{
-                      height: 35,
-                      width: 35,
-                      color: green500,
-                      marginTop: 16
-                    }}
-                  />
-                ) : (
-                  <NavigationCancel
-                    style={{
-                      height: 35,
-                      width: 35,
-                      color: red400,
-                      marginTop: 16
-                    }}
-                  />
-                )
+                  >
+                    <ImageEdit />
+                  </IconButton>
+                ) : null
               }
               primaryText={
                 <p style={{ marginTop: 10, fontWeight: "bold" }}>
                   {this.props.user.displayName}
                 </p>
               }
-              secondaryText={this.props.singleData.leaveStatus}
+              secondaryText={
+                this.props.singleData.leaveStatus === "Pending" ? (
+                  <ActionHelp
+                    style={{
+                      height: 25,
+                      width: 25,
+                      color: yellow500
+                    }}
+                  />
+                ) : this.props.singleData.leaveStatus === "Approved" ? (
+                  <ActionCheckCircle
+                    style={{
+                      height: 25,
+                      width: 25,
+                      color: green500
+                    }}
+                  />
+                ) : (
+                  <NavigationCancel
+                    style={{
+                      height: 25,
+                      width: 25,
+                      color: red400
+                    }}
+                  />
+                )
+              }
             />
           </List>
           <Divider />
@@ -154,23 +167,6 @@ class LeaveEmployeeDetails extends Component {
                 leftIcon={this.getIconUrl(this.props.singleData.purpose)}
                 primaryText={this.props.singleData.purpose}
                 secondaryText={<p style={{ fontSize: 14 }}>Purpose</p>}
-                rightIcon={
-                  this.props.singleData.leaveStatus === "Pending" ? (
-                    <IconButton
-                      touch={true}
-                      style={{ margin: "0px 25px 0px 0px" }}
-                      onClick={e => {
-                        e.preventDefault();
-                        this.props.history.push(
-                          `/leavedashboard/leaveapply/` +
-                            this.props.singleData.leaveId
-                        );
-                      }}
-                    >
-                      <ImageEdit />
-                    </IconButton>
-                  ) : null
-                }
               />
               <ListItem
                 disabled

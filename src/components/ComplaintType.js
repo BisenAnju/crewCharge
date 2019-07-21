@@ -91,7 +91,6 @@ class ComplaintType extends Component {
   render() {
     return (
       <div>
-        <br />
         <center>
           <TextField
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
@@ -106,9 +105,9 @@ class ComplaintType extends Component {
         <div
           style={{
             border: "1px solid #d3d3d3",
-            height: "80px",
-            width: "256px",
-            marginLeft: 35
+            // height: "80px",
+            width: "100%"
+            // marginLeft: 35
           }}
         >
           <div

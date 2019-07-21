@@ -66,7 +66,6 @@ export class PriorityRadioButton extends React.Component {
 //Leave purpose radiobtn
 export class PurposeRadioButton extends React.Component {
   render() {
-    console.log(this.props.purpose);
     return (
       <RadioButtonGroup
         style={{
@@ -75,7 +74,8 @@ export class PurposeRadioButton extends React.Component {
           margin: "10% 7% 0% 7%"
         }}
         name="shipSpeed"
-        defaultSelected={this.props.purpose}
+        // defaultSelected={this.props.purpose}
+        defaultSelected="vacation"
       >
         {this.props.purposeData.map((purpose, id) => (
           <RadioButton
@@ -118,6 +118,11 @@ export class LeaveApplyRadioButton extends React.Component {
         <RadioButton
           value="Hour"
           label="Hour"
+          labelStyle={
+            this.props.leaveType === "Hour"
+              ? { color: "#f08f4c" }
+              : { color: "black" }
+          }
           id="leaveType"
           checkedIcon={<ImageTimer style={{ fill: "#f08f4c" }} />}
           uncheckedIcon={<ImageTimer />}
@@ -130,6 +135,11 @@ export class LeaveApplyRadioButton extends React.Component {
         <RadioButton
           value="Full"
           label="Full"
+          labelStyle={
+            this.props.leaveType === "Full"
+              ? { color: "#f08f4c" }
+              : { color: "black" }
+          }
           id="leaveType"
           checkedIcon={<ActionDateRange style={{ fill: "#f08f4c" }} />}
           uncheckedIcon={<ActionDateRange />}

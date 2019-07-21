@@ -6,9 +6,34 @@ import withFirebase from "../hoc/withFirebase";
 class ConfigurationContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isLoading: true,
+      purposeData: []
+    };
   }
 
+  componentWillMount() {
+    this.props.db
+      .collection("leavePurpose")
+      .get()
+      .then(
+        doc => {
+          const purposeData = [];
+          doc.forEach(docitem => {
+            if (docitem.exists) {
+              purposeData.push(docitem.data());
+            }
+          });
+          this.setState({
+            isLoading: false,
+            purposeData
+          });
+        },
+        err => {
+          console.log(`Encountered error: ${err}`);
+        }
+      );
+  }
   addPurpose = (field, collection, data, iconURL) => {
     this.props.db
       .collection(collection)
@@ -28,7 +53,12 @@ class ConfigurationContainer extends React.Component {
   };
 
   render() {
-    return <Configuration addPurpose={this.addPurpose} />;
+    return (
+      <Configuration
+        addPurpose={this.addPurpose}
+        purposeData={this.state.purposeData}
+      />
+    );
   }
 }
 export default withFirebase(withRouter(ConfigurationContainer));

@@ -23,7 +23,7 @@ class LeaveDashboardContainer extends Component {
     };
   }
   componentWillMount() {
-    // get purpose
+    //get user leaves
     this.props.db
       .collection("leaves")
       .where("userId", "==", this.props.user.uid)
@@ -59,6 +59,7 @@ class LeaveDashboardContainer extends Component {
         }
       );
 
+    //get user data
     this.props.db.collection("users").onSnapshot(
       snapshot => {
         const userData = [];
@@ -76,6 +77,8 @@ class LeaveDashboardContainer extends Component {
         console.log(`Encountered error: ${err}`);
       }
     );
+
+    //get leave purpose
     this.props.db
       .collection("leavePurpose")
       .get()

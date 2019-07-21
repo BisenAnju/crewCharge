@@ -5,7 +5,10 @@ import {
   TextField,
   Snackbar,
   CircularProgress,
-  FloatingActionButton
+  FloatingActionButton,
+  List,
+  ListItem,
+  Avatar
 } from "material-ui";
 import Dropzone from "react-dropzone";
 import ImageCompressor from "image-compressor.js";
@@ -91,8 +94,13 @@ class LeavePurpose extends Component {
   };
   render() {
     return (
-      <div>
-        <br />
+      <div
+        style={{
+          height: "50vh",
+          overflow: "auto",
+          display: "self"
+        }}
+      >
         <center>
           <TextField
             floatingLabelText="Leave Purpose"
@@ -106,9 +114,7 @@ class LeavePurpose extends Component {
         <div
           style={{
             border: "1px solid #d3d3d3",
-            height: "80px",
-            width: "256px",
-            marginLeft: 35
+            width: "100%"
           }}
         >
           <div
@@ -162,6 +168,27 @@ class LeavePurpose extends Component {
             onClick={this.handlePurpose}
           />
         </center>
+
+        <List>
+          {this.props.purposeData.map((purpose, index) => (
+            <ListItem
+              key={index}
+              primaryText={purpose.displayName}
+              leftIcon={
+                <Avatar
+                  src={purpose.iconUrl}
+                  style={{
+                    height: "22px",
+                    width: "22px",
+                    backgroundColor: "white",
+                    borderRadius: "0%"
+                  }}
+                />
+              }
+            />
+          ))}
+        </List>
+
         <Snackbar
           open={this.state.snackOpen}
           message="Add Purpose..."
