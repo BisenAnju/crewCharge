@@ -140,7 +140,8 @@ class LeaveAdminApprovalRejection extends Component {
               style={{
                 height: "52vh",
                 overflow: "auto",
-                display: "self"
+                display: "self",
+                marginBottom: "10%"
               }}
             >
               <List>
@@ -400,7 +401,7 @@ class LeaveAdminApprovalRejection extends Component {
                   display: "flex",
                   justifyContent: "space-around",
                   bottom: "0px",
-                  position: "absolute",
+                  // position: "absolute",
                   width: "100%",
                   height: "7vh"
                 }}

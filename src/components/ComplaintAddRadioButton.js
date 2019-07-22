@@ -4,8 +4,7 @@ import {
   MenuItem,
   RadioButton,
   RadioButtonGroup,
-  Avatar,
-  Divider
+  Avatar
 } from "material-ui";
 import { ActionDateRange, ImageTimer } from "material-ui/svg-icons";
 export class PriorityRadioButton extends React.Component {
@@ -74,8 +73,9 @@ export class PurposeRadioButton extends React.Component {
           margin: "10% 7% 0% 7%"
         }}
         name="shipSpeed"
-        // defaultSelected={this.props.purpose}
-        defaultSelected="vacation"
+        defaultSelected={
+          this.props.purpose !== "" ? this.props.purpose : "vacation"
+        }
       >
         {this.props.purposeData.map((purpose, id) => (
           <RadioButton
