@@ -231,7 +231,6 @@ class LeaveEmployeeHourLeave extends Component {
             <div
               style={{
                 display: "flex",
-                justifyContent: "space-around",
                 bottom: "0px",
                 position: "absolute",
                 width: "100%",
@@ -253,7 +252,6 @@ class LeaveEmployeeHourLeave extends Component {
             <div
               style={{
                 display: "flex",
-                justifyContent: "space-around",
                 bottom: "0px",
                 position: "absolute",
                 width: "100%",
