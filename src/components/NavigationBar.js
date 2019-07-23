@@ -171,10 +171,10 @@ class NavigationBar extends React.Component {
                     }
                   />
                   <ListItem
-                    // onClick={e => {
-                    //   e.preventDefault();
-                    //   this.props.history.push("");
-                    // }}
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/permission");
+                    }}
                     primaryText="User & Permission"
                     leftIcon={
                       <SocialGroup
