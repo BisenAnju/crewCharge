@@ -47,21 +47,27 @@ class LoginContainer extends Component {
           console.log("You are already registered");
           if (querySnapshot.data().access === undefined) {
             u.update({
-              access: { leave: false, complaint: false, teamAllocation: false }
+              access: {
+                leave: false,
+                complaint: false,
+                teamAllocation: false,
+                clientCommunication: false
+              }
             });
           }
-          if (
-            (querySnapshot.data().userNotificationPlayerId === null ||
+          if (window.cordova) {
+            if (
+              querySnapshot.data().userNotificationPlayerId === null ||
               querySnapshot.data().userNotificationPlayerId ===
-                JSON.parse(localStorage.getItem("playerId")).id) &&
-            window.cordova
-          ) {
-            u.update({
-              userNotificationPlayerId: JSON.parse(
-                localStorage.getItem("playerId")
-              ).id,
-              publicKey: publicKey
-            });
+                JSON.parse(localStorage.getItem("playerId")).id
+            ) {
+              u.update({
+                userNotificationPlayerId: JSON.parse(
+                  localStorage.getItem("playerId")
+                ).id,
+                publicKey: publicKey
+              });
+            }
           }
           if (
             querySnapshot.data().publicKey === undefined ||
@@ -84,7 +90,12 @@ class LoginContainer extends Component {
             userType: "Employee",
             userNotificationPlayerId: playerId,
             publicKey: publicKey,
-            access: { leave: false, complaint: false, teamAllocation: false }
+            access: {
+              leave: false,
+              complaint: false,
+              teamAllocation: false,
+              clientCommunication: false
+            }
           })
             .then(function() {
               console.log("You have been successfully registered");

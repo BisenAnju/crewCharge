@@ -10,15 +10,12 @@ import {
   Paper
 } from "material-ui";
 import Layout from "../layouts/Layout";
-// const access = {
-//   leave: false,
-//   complaint: false,
-//   teamAllocation: false
-// };
+
 const allKeys = [
   { name: "leave", label: "Leave Mgmnt" },
   { name: "complaint", label: "Complaint Mgmnt" },
-  { name: "teamAllocation", label: "Team Allocation" }
+  { name: "teamAllocation", label: "Team Allocation" },
+  { name: "clientCommunication", label: "Client Communication" }
 ];
 
 const style = {
