@@ -24,8 +24,6 @@ class LoginContainer extends Component {
         keys = QuickEncrypt.generate(2048),
         publicKey;
       console.time("time");
-      console.log(localStorage.getItem("publickey"));
-      console.log(localStorage.getItem("privatekey"));
       if (
         localStorage.getItem("publickey") === "" ||
         localStorage.getItem("publickey") === null ||
@@ -47,19 +45,29 @@ class LoginContainer extends Component {
       u.get().then(querySnapshot => {
         if (querySnapshot.exists) {
           console.log("You are already registered");
-          if (
-            (querySnapshot.data().userNotificationPlayerId === null ||
-              querySnapshot.data().userNotificationPlayerId ===
-                JSON.parse(localStorage.getItem("playerId")).id) &&
-            window.cordova
-          ) {
-            console.log(JSON.parse(localStorage.getItem("playerId")).id);
+          if (querySnapshot.data().access === undefined) {
             u.update({
-              userNotificationPlayerId: JSON.parse(
-                localStorage.getItem("playerId")
-              ).id,
-              publicKey: publicKey
+              access: {
+                leave: false,
+                complaint: false,
+                teamAllocation: false,
+                clientCommunication: false
+              }
             });
+          }
+          if (window.cordova) {
+            if (
+              querySnapshot.data().userNotificationPlayerId === null ||
+              querySnapshot.data().userNotificationPlayerId ===
+                JSON.parse(localStorage.getItem("playerId")).id
+            ) {
+              u.update({
+                userNotificationPlayerId: JSON.parse(
+                  localStorage.getItem("playerId")
+                ).id,
+                publicKey: publicKey
+              });
+            }
           }
           if (
             querySnapshot.data().publicKey === undefined ||
@@ -81,7 +89,13 @@ class LoginContainer extends Component {
             photoURL: user.userImage,
             userType: "Employee",
             userNotificationPlayerId: playerId,
-            publicKey: publicKey
+            publicKey: publicKey,
+            access: {
+              leave: false,
+              complaint: false,
+              teamAllocation: false,
+              clientCommunication: false
+            }
           })
             .then(function() {
               console.log("You have been successfully registered");

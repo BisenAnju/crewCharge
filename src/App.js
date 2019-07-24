@@ -13,6 +13,7 @@ import LeaveDashboardContainer from "./containers/LeaveDashboard";
 import ProjectsContainer from "./containers/Projects";
 import TeamAllocationPeoplesListContainer from "./containers/TeamAllocationPeoplesList";
 import ConfigurationContainer from "./containers/Configuration";
+import PermissionContainer from "./containers/Permission";
 import LinearProgress from "material-ui/LinearProgress";
 class App extends Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class App extends Component {
             if (doc.exists) {
               const users = doc.data();
               users.id = doc.id;
+              users.access = doc.data().access;
               userData.push(users);
             }
           });
@@ -98,6 +100,10 @@ class App extends Component {
                   render={props => <ConfigurationContainer {...props} />}
                 />
                 <Route
+                  path={"/permission"}
+                  render={props => <PermissionContainer {...props} />}
+                />
+                <Route
                   path={"/complaintlist"}
                   render={props => (
                     <ComplaintList
@@ -120,7 +126,12 @@ class App extends Component {
 
                 <Route
                   path={"/"}
-                  render={props => <DashboardContainer {...props} />}
+                  render={props => (
+                    <DashboardContainer
+                      {...props}
+                      userData={this.state.userData}
+                    />
+                  )}
                 />
               </Switch>
             </Router>

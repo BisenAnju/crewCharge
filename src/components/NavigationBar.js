@@ -171,10 +171,10 @@ class NavigationBar extends React.Component {
                     }
                   />
                   <ListItem
-                    // onClick={e => {
-                    //   e.preventDefault();
-                    //   this.props.history.push("");
-                    // }}
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/permission");
+                    }}
                     primaryText="User & Permission"
                     leftIcon={
                       <SocialGroup
@@ -227,67 +227,75 @@ class NavigationBar extends React.Component {
               ) : null
             )}
 
+            {this.props.userData
+              .filter(
+                user =>
+                  user.uid === this.props.user.uid &&
+                  user.userType === "Employee"
+              )
+              .map((item, id) =>
+                item.access["leave"] && item.access["complaint"] ? (
+                  <div key={id}>
+                    <Subheader inset={true}>Employee</Subheader>
+                    <ListItem
+                      onClick={e => {
+                        e.preventDefault();
+                        this.props.history.push("/leavedashboard");
+                      }}
+                      primaryText="My Leaves"
+                      leftIcon={
+                        <ActionDateRange
+                          style={{
+                            fill: "#fd914d",
+                            heigth: "22px",
+                            width: "22px",
+                            left: "12px"
+                          }}
+                        />
+                      }
+                    />
+                    <ListItem
+                      onClick={e => {
+                        e.preventDefault();
+                        this.props.history.push("/complaintlist");
+                      }}
+                      primaryText="My Complaints"
+                      leftIcon={
+                        <NotificationEventNote
+                          style={{
+                            fill: "#fd914d",
+                            heigth: "22px",
+                            width: "22px",
+                            left: "12px"
+                          }}
+                        />
+                      }
+                    />
+                  </div>
+                ) : null
+              )}
+            <Divider />
             {this.props.userData.map((user, index) =>
               user.uid === this.props.user.uid &&
               user.userType === "Employee" ? (
-                <div key={index}>
-                  <Subheader inset={true}>Employee</Subheader>
-
-                  <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/leavedashboard");
-                    }}
-                    primaryText="My Leaves"
-                    leftIcon={
-                      <ActionDateRange
-                        style={{
-                          fill: "#fd914d",
-                          heigth: "22px",
-                          width: "22px",
-                          left: "12px"
-                        }}
-                      />
-                    }
-                  />
-                  <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/complaintlist");
-                    }}
-                    primaryText="My Complaints"
-                    leftIcon={
-                      <NotificationEventNote
-                        style={{
-                          fill: "#fd914d",
-                          heigth: "22px",
-                          width: "22px",
-                          left: "12px"
-                        }}
-                      />
-                    }
-                  />
-                  <Divider />
-                  <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/privacypolicy");
-                    }}
-                    primaryText="Privacy Policy"
-                    leftIcon={
-                      <Avatar
-                        backgroundColor="white"
-                        src={privacy}
-                        style={{
-                          borderRadius: 0,
-                          marginLeft: "22px",
-                          marginTop: "10px"
-                        }}
-                      />
-                    }
-                  />
-                  <Divider />
-                </div>
+                <ListItem
+                  onClick={e => {
+                    e.preventDefault();
+                    this.props.history.push("/privacypolicy");
+                  }}
+                  primaryText="Privacy Policy"
+                  leftIcon={
+                    <Avatar
+                      backgroundColor="white"
+                      src={privacy}
+                      style={{
+                        borderRadius: 0,
+                        marginLeft: "22px",
+                        marginTop: "10px"
+                      }}
+                    />
+                  }
+                />
               ) : null
             )}
 

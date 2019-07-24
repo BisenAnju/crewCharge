@@ -26,7 +26,11 @@ class DashboardContainer extends Component {
     }
   }
   render() {
-    return <div>{this.props.user && <Dashboard />}</div>;
+    return (
+      <div>
+        {this.props.user && <Dashboard userData={this.props.userData} />}
+      </div>
+    );
   }
 }
 
