@@ -76,6 +76,3 @@ To use firebase db, use the `withFirebase` HOC which gives you two props:
 
 To get the user object, use the `withUser` HOC which gives you one prop:
 `user` - contains null if the user is logged out, else gives you the user object
-
-
-check
