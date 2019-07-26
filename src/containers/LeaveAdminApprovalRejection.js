@@ -152,6 +152,8 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
   }
 
   render() {
+    console.log("params");
+    console.log(this.props.match.params.leaveId);
     return (
       <div>
         <Router>

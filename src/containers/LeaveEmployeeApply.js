@@ -124,6 +124,8 @@ class LeaveEmployeeApplyContainer extends React.Component {
       })
       .then(() => {
         if (this.props.match.params.mode !== "undefined") {
+          let ths = this;
+
           var headers = {
             "Content-Type": "application/json; charset=utf-8",
             Authorization:
@@ -138,13 +140,13 @@ class LeaveEmployeeApplyContainer extends React.Component {
           };
           var data = {
             app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
-            contents: { en: leaveType },
-            include_player_ids: this.state.player_ids,
+            contents: { en: "Updated Leave" },
+            include_player_ids: ths.state.player_ids,
             priority: 10,
-            headings: { en: "New Leave" },
+            headings: { en: ths.props.user.displayName },
             data: {
-              Route: "/leavedashboard/admin/approvalrejection/",
-              Id: this.props.match.params.mode
+              route: "/leavedashboard/admin/approvalrejection/",
+              id: this.props.match.params.mode
             }
           };
 
