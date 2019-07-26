@@ -90,7 +90,7 @@ class Dashboard extends Component {
                     }}
                     onClick={e => {
                       e.preventDefault();
-                      this.props.history.push("/teamallocation");
+                      this.props.history.push("/teamallocation/" + 0);
                     }}
                   >
                     <div
@@ -302,7 +302,7 @@ class Dashboard extends Component {
                       }}
                       onClick={e => {
                         e.preventDefault();
-                        this.props.history.push("/teamallocation");
+                        this.props.history.push("/teamallocation/" + 0);
                       }}
                     >
                       <div
@@ -504,7 +504,7 @@ class Dashboard extends Component {
                       }}
                       onClick={e => {
                         e.preventDefault();
-                        this.props.history.push("/teamallocation");
+                        this.props.history.push("/teamallocation/" + 0);
                       }}
                     >
                       <div

@@ -28,9 +28,9 @@ class TeamAllocationMissionContainer extends Component {
         .then(
           this.setState({
             openSnackbar: true,
-            message: "Mission Add Success fully"
+            message: "Project Addd Successfully"
           }),
-          this.props.history.push("/teamallocation")
+          this.props.history.push("/teamallocation/" + 1)
         );
     }
   };
@@ -48,9 +48,9 @@ class TeamAllocationMissionContainer extends Component {
         .then(
           this.setState({
             openSnackbar: true,
-            message: "Mission Add Success fully"
+            message: "Project Added Successfully"
           }),
-          this.props.history.push("/teamallocation")
+          this.props.history.push("/teamallocation/" + 1)
         );
     }
   };

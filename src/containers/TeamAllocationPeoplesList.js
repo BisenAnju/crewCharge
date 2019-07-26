@@ -112,7 +112,6 @@ class TeamAllocationPeoplesListContainer extends Component {
   };
 
   render() {
-    console.log(this.props.match.params.index);
     return this.state.isLoadingMission ? (
       loader
     ) : (
@@ -128,7 +127,6 @@ class TeamAllocationPeoplesListContainer extends Component {
                   {...this.state}
                   handleArchiveMissionChange={this.handleArchiveMissionChange}
                   handleArchiveProjectChange={this.handleArchiveProjectChange}
-                  index={this.props.match.params.index}
                 />
               )}
             />
