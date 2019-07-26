@@ -7,18 +7,13 @@ import { withRouter } from "react-router-dom";
 class DashboardContainer extends Component {
   constructor(props) {
     super(props);
-    this.exec = this.exec.bind(this);
+    this.state = {};
   }
-  componentDidMount() {
-    // this.test();
-    setTimeout(this.exe, 2000);
-  }
-  // test=()=>window.cordova ? document.addEventListener('resume',this.exec,false):null;
-  exec() {
+  componentWillMount() {
     let navigationNotification = JSON.parse(
       localStorage.getItem("navigationNotification")
     );
-    console.log("data:- " + navigationNotification);
+    // console.log("data:- " + navigationNotification);
     if (navigationNotification !== null) {
       let path = navigationNotification.route + navigationNotification.id;
       localStorage.removeItem("navigationNotification");
@@ -26,6 +21,7 @@ class DashboardContainer extends Component {
     }
   }
   render() {
+    console.log("render");
     return (
       <div>
         {this.props.user && <Dashboard userData={this.props.userData} />}
