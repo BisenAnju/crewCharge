@@ -324,7 +324,7 @@ class NavigationBar extends React.Component {
                 textAlign: "center"
               }}
             >
-              v1.0.3
+              v1.0.4
             </div>
 
             {/* <ListItem

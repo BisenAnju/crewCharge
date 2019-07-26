@@ -14,6 +14,8 @@ const startApp = () => {
           "323e54fd-ee29-4bb2-bafc-e292b01c694f"
         )
           .handleNotificationOpened(jsonData => {
+            console.log("jsondata");
+            console.log(jsonData);
             const data = jsonData.notification.payload.additionalData;
             localStorage.setItem(
               "navigationNotification",

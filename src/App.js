@@ -15,6 +15,9 @@ import TeamAllocationPeoplesListContainer from "./containers/TeamAllocationPeopl
 import ConfigurationContainer from "./containers/Configuration";
 import PermissionContainer from "./containers/Permission";
 import LinearProgress from "material-ui/LinearProgress";
+import LeaveAdminApprovalRejectionContainer from "./containers/LeaveAdminApprovalRejection";
+import LeaveEmployeeDetailsContainer from "./containers/LeaveEmployeeDetails";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +25,8 @@ class App extends Component {
       isLoading: true,
       leaveData: [],
       complaintTypeData: [],
+      purposeData: [],
+      singleData: [],
       u: null
     };
   }
@@ -57,6 +62,43 @@ class App extends Component {
           });
           this.setState({ userData });
         });
+
+      //User Leave
+      this.props.db
+        .collection("leaves")
+        .where("userId", "==", nextProps.user.uid)
+        .orderBy("addedOn", "desc")
+        .onSnapshot(
+          snapshot => {
+            const singleData = [];
+            snapshot.forEach(doc => {
+              if (doc.exists) {
+                const leave = doc.data();
+                leave.leaveId = doc.id;
+                leave.from = new Date(leave.from.seconds * 1000);
+                leave.to = new Date(leave.to.seconds * 1000);
+                leave.addedOn = new Date(leave.addedOn.seconds * 1000);
+                if (leave.dueDate != null) {
+                  leave.dueDate = new Date(leave.dueDate.seconds * 1000);
+                }
+                if (leave.approvedRejectedOn != null) {
+                  leave.approvedRejectedOn = new Date(
+                    leave.approvedRejectedOn.seconds * 1000
+                  );
+                }
+                singleData.push(leave);
+              }
+            });
+            this.setState({
+              isLoading: false,
+              singleData
+            });
+          },
+          err => {
+            console.log(`Encountered error: ${err}`);
+          }
+        );
+      ///////////////////
     } else {
       this.state = {
         isLoading: true,
@@ -67,7 +109,66 @@ class App extends Component {
     }
   }
 
+  componentWillMount() {
+    this.props.db
+      .collection("leaves")
+      .orderBy("addedOn", "desc")
+      .onSnapshot(
+        snapshot => {
+          const leaveData = [];
+          snapshot.forEach(doc => {
+            if (doc.exists) {
+              const leave = doc.data();
+              leave.leaveId = doc.id;
+              leave.from = new Date(leave.from.seconds * 1000);
+              leave.to = new Date(leave.to.seconds * 1000);
+              leave.addedOn = new Date(leave.addedOn.seconds * 1000);
+              if (leave.dueDate != null) {
+                leave.dueDate = new Date(leave.dueDate.seconds * 1000);
+              }
+              if (leave.approvedRejectedOn != null) {
+                leave.approvedRejectedOn = new Date(
+                  leave.approvedRejectedOn.seconds * 1000
+                );
+              }
+              leaveData.push(leave);
+            }
+          });
+          this.setState({
+            isLoading: false,
+            leaveData
+          });
+        },
+        err => {
+          console.log(`Encountered error: ${err}`);
+        }
+      );
+
+    this.props.db
+      .collection("leavePurpose")
+      .get()
+      .then(
+        doc => {
+          const purposeData = [];
+          doc.forEach(docitem => {
+            if (docitem.exists) {
+              purposeData.push(docitem.data());
+            }
+          });
+          this.setState({
+            isLoading: false,
+            purposeData
+          });
+        },
+        err => {
+          console.log(`Encountered error: ${err}`);
+        }
+      );
+  }
+
   render() {
+    console.log(this.state.leaveData);
+    console.log(this.state.purposeData);
     return (
       <div>
         {this.state.userData ? (
@@ -111,6 +212,29 @@ class App extends Component {
                       loggedInUser={this.props.user}
                       userData={this.state.userData}
                       complaintType={this.state.complaintTypeData}
+                    />
+                  )}
+                />
+                <Route
+                  path={"/leavedashboard/admin/approvalrejection/:leaveId"}
+                  render={props => (
+                    <LeaveAdminApprovalRejectionContainer
+                      {...props}
+                      userData={this.state.userData}
+                      singleData={this.state.leaveData}
+                      purposeData={this.state.purposeData}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path={"/leavedashboard/leavedetails/:leaveId"}
+                  render={props => (
+                    <LeaveEmployeeDetailsContainer
+                      {...props}
+                      userData={this.state.userData}
+                      purposeData={this.state.purposeData}
+                      singleData={this.state.singleData}
                     />
                   )}
                 />
