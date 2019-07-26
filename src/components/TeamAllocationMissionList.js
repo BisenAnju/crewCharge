@@ -20,7 +20,9 @@ class TeamAllocationMissionList extends React.Component {
       slideIndex: value
     });
   };
-
+  componentWillMount() {
+    this.setState({ slideIndex: this.props.index });
+  }
   render() {
     return (
       <Layout navigationTitle="Projects Allocation" showBackNavigation={true}>

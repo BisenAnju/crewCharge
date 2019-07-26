@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  Route,
-  BrowserRouter as Router,
-  withRouter,
-  Switch
-} from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import TeanAllocationMissionContainer from "./TeamAllocationMission";
 import TeamAllocationProject from "../components/TeamAllocationProject";
 import withFirebase from "../hoc/withFirebase";

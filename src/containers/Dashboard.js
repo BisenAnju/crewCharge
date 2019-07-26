@@ -21,7 +21,6 @@ class DashboardContainer extends Component {
     }
   }
   render() {
-    console.log("render");
     return (
       <div>
         {this.props.user && <Dashboard userData={this.props.userData} />}

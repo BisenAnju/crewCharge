@@ -167,8 +167,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.leaveData);
-    console.log(this.state.purposeData);
     return (
       <div>
         {this.state.userData ? (
@@ -180,7 +178,7 @@ class App extends Component {
                   render={() => <PrivacyPolicy />}
                 />
                 <Route
-                  path={"/teamallocation"}
+                  path={"/teamallocation/:index"}
                   render={props => (
                     <TeamAllocationPeoplesListContainer {...props} />
                   )}

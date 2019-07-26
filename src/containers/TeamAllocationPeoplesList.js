@@ -112,6 +112,7 @@ class TeamAllocationPeoplesListContainer extends Component {
   };
 
   render() {
+    console.log(this.props.match.params.index);
     return this.state.isLoadingMission ? (
       loader
     ) : (
@@ -120,15 +121,14 @@ class TeamAllocationPeoplesListContainer extends Component {
           <Switch>
             <Route
               exact
-              path={"/teamallocation"}
+              path={"/teamallocation/:index"}
               render={props => (
                 <TeamAllocationMissionList
                   {...this.props}
                   {...this.state}
-                  handleAddproject={this.handleAddproject}
-                  handleAddMission={this.handleAddMission}
                   handleArchiveMissionChange={this.handleArchiveMissionChange}
                   handleArchiveProjectChange={this.handleArchiveProjectChange}
+                  index={this.props.match.params.index}
                 />
               )}
             />
