@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  Route,
-  BrowserRouter as Router,
-  withRouter,
-  Switch
-} from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import TeanAllocationMissionContainer from "./TeamAllocationMission";
 import TeamAllocationProject from "../components/TeamAllocationProject";
 import withFirebase from "../hoc/withFirebase";
@@ -33,9 +28,9 @@ class TeamAllocationMissionContainer extends Component {
         .then(
           this.setState({
             openSnackbar: true,
-            message: "Mission Add Success fully"
+            message: "Project Addd Successfully"
           }),
-          this.props.history.push("/teamallocation")
+          this.props.history.push("/teamallocation/" + 1)
         );
     }
   };
@@ -53,9 +48,9 @@ class TeamAllocationMissionContainer extends Component {
         .then(
           this.setState({
             openSnackbar: true,
-            message: "Mission Add Success fully"
+            message: "Project Added Successfully"
           }),
-          this.props.history.push("/teamallocation")
+          this.props.history.push("/teamallocation/" + 1)
         );
     }
   };

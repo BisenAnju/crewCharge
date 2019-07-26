@@ -120,13 +120,11 @@ class TeamAllocationPeoplesListContainer extends Component {
           <Switch>
             <Route
               exact
-              path={"/teamallocation"}
+              path={"/teamallocation/:index"}
               render={props => (
                 <TeamAllocationMissionList
                   {...this.props}
                   {...this.state}
-                  handleAddproject={this.handleAddproject}
-                  handleAddMission={this.handleAddMission}
                   handleArchiveMissionChange={this.handleArchiveMissionChange}
                   handleArchiveProjectChange={this.handleArchiveProjectChange}
                 />

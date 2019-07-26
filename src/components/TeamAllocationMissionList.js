@@ -20,6 +20,13 @@ class TeamAllocationMissionList extends React.Component {
       slideIndex: value
     });
   };
+  componentWillMount() {
+    if (this.props.match.params.index == 0) {
+      this.setState({ slideIndex: 0 });
+    } else {
+      this.setState({ slideIndex: 2 });
+    }
+  }
 
   render() {
     return (
@@ -30,7 +37,7 @@ class TeamAllocationMissionList extends React.Component {
           tabItemContainerStyle={{ backgroundColor: "transparent" }}
           inkBarStyle={{ backgroundColor: "#f08f4c" }}
         >
-          <Tab label="Peoples List" style={{ color: "#f08f4c" }} value={0} />
+          <Tab label="People List" style={{ color: "#f08f4c" }} value={0} />
           <Tab label="Project List" style={{ color: "#f08f4c" }} value={1} />
           <Tab label="Manage" style={{ color: "#f08f4c" }} value={2} />
         </Tabs>

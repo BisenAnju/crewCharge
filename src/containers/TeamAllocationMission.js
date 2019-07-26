@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  Route,
-  BrowserRouter as Router,
-  withRouter,
-  Switch
-} from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import TeamAllocationMission from "../components/TeamAllocationMission";
 import TeanAllocationProjectContainer from "./TeamAllocationProject";
 import { withFirebase } from "../firebase";
@@ -39,7 +34,10 @@ class TeamAllocationMissionContainer extends Component {
       endDate === null ||
       projectId === null
     ) {
-      this.setState({ openSnackbar: true, message: "Fill all Required field" });
+      this.setState({
+        openSnackbar: true,
+        message: "Fill all Required fields"
+      });
     } else {
       this.props.db
         .collection("missions")
@@ -59,9 +57,9 @@ class TeamAllocationMissionContainer extends Component {
         .then(
           this.setState({
             openSnackbar: true,
-            message: "Mission Add Success fully"
+            message: "Mission Added Successfully"
           }),
-          this.props.history.push("/teamallocation")
+          this.props.history.push("/teamallocation/" + 2)
         );
     }
   };
@@ -81,7 +79,10 @@ class TeamAllocationMissionContainer extends Component {
       endDate === null ||
       projectId === null
     ) {
-      this.setState({ openSnackbar: true, message: "Fill all Required field" });
+      this.setState({
+        openSnackbar: true,
+        message: "Fill all Required fields"
+      });
     } else {
       console.log(startDate);
       console.log(endDate);
@@ -102,9 +103,9 @@ class TeamAllocationMissionContainer extends Component {
         .then(
           this.setState({
             openSnackbar: true,
-            message: "Mission Add Success fully"
+            message: "Mission Added Successfully"
           }),
-          this.props.history.push("/teamallocation")
+          this.props.history.push("/teamallocation/" + 2)
         );
     }
   };
