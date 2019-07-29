@@ -156,7 +156,7 @@ class NavigationBar extends React.Component {
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
-                      this.props.history.push("/teamallocation");
+                      this.props.history.push("/teamallocation/" + 0);
                     }}
                     primaryText="Team Allocation"
                     leftIcon={
@@ -279,6 +279,7 @@ class NavigationBar extends React.Component {
               user.uid === this.props.user.uid &&
               user.userType === "Employee" ? (
                 <ListItem
+                  key={index}
                   onClick={e => {
                     e.preventDefault();
                     this.props.history.push("/privacypolicy");

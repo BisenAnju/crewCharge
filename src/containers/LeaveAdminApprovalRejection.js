@@ -15,14 +15,15 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
     super(props);
     this.state = {
       isLoading: true,
-      commentData: [],
-      playerId: []
+      commentData: []
     };
   }
 
   handleChange = data => {
+    console.log(data.playerId);
     let ths = this;
     let matchParams = this.props.match.params.leaveId;
+
     this.props.db
       .collection("leaves")
       .doc(matchParams)
@@ -31,55 +32,53 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
         approvedRejectedBy: this.props.user.displayName,
         approvedRejectedOn: new Date()
       })
-      .then(ref => {
-        if (ref.id !== "undefined") {
-          setTimeout(function() {
-            var sendNotification = function(data) {
-              var headers = {
-                "Content-Type": "application/json; charset=utf-8",
-                Authorization:
-                  "Basic NDkwNGU2ODYtNTgwYS00MDY4LThjN2MtYzNmMGZhMGJmNzNk"
-              };
-
-              var options = {
-                host: "onesignal.com",
-                port: 443,
-                path: "/api/v1/notifications",
-                method: "POST",
-                headers: headers
-              };
-
-              var https = require("https");
-              var req = https.request(options, function(res) {
-                res.on("data", function(data) {
-                  console.log("Response:");
-                  console.log(JSON.parse(data));
-                });
-              });
-
-              req.on("error", function(e) {
-                console.log("ERROR:");
-                console.log(e);
-              });
-
-              req.write(JSON.stringify(data));
-              req.end();
+      .then(matchParams => {
+        setTimeout(function() {
+          var sendNotification = function(data) {
+            var headers = {
+              "Content-Type": "application/json; charset=utf-8",
+              Authorization:
+                "Basic NDkwNGU2ODYtNTgwYS00MDY4LThjN2MtYzNmMGZhMGJmNzNk"
             };
 
-            var message = {
-              app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
-              contents: { en: data.remark },
-              include_player_ids: ths.state.playerId,
-              headings: { en: ths.props.user.displayName },
-              data: {
-                route: "/leavedashboard/leavedetails/",
-                id: ref.id
-              }
+            var options = {
+              host: "onesignal.com",
+              port: 443,
+              path: "/api/v1/notifications",
+              method: "POST",
+              headers: headers
             };
 
-            sendNotification(message);
-          }, 2000);
-        }
+            var https = require("https");
+            var req = https.request(options, function(res) {
+              res.on("data", function(data) {
+                console.log("Response:");
+                console.log(JSON.parse(data));
+              });
+            });
+
+            req.on("error", function(e) {
+              console.log("ERROR:");
+              console.log(e);
+            });
+
+            req.write(JSON.stringify(data));
+            req.end();
+          };
+
+          var message = {
+            app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
+            contents: { en: data.remark },
+            include_player_ids: data.playerId,
+            headings: { en: ths.props.user.displayName },
+            data: {
+              route: "/leavedashboard/leavedetails/",
+              id: matchParams
+            }
+          };
+
+          sendNotification(message);
+        }, 2000);
       })
       .catch(err => {
         console.log("Error getting documents", err);
@@ -101,31 +100,6 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
   };
 
   componentWillMount() {
-    //get playerId
-    let playerId = [];
-    this.props.db
-      .collection("users")
-      .where("userType", "==", "Admin")
-      .get()
-      .then(
-        snapshot => {
-          snapshot.forEach(doc => {
-            if (
-              doc.exists &&
-              doc.data().userNotificationPlayerId !== undefined
-            ) {
-              const details = doc.data();
-              details.id = doc.id;
-              playerId.push(details.userNotificationPlayerId);
-            }
-          });
-          this.setState({ playerId });
-        },
-        err => {
-          console.log(`Encountered error: ${err}`);
-        }
-      );
-
     //get comment data
     this.props.db
       .collection("leaves")
@@ -152,8 +126,6 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
   }
 
   render() {
-    console.log("params");
-    console.log(this.props.match.params.leaveId);
     return (
       <div>
         <Router>

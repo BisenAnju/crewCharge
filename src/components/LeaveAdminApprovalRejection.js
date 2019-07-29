@@ -33,12 +33,15 @@ class LeaveAdminApprovalRejection extends Component {
       snackOpen: false,
       remark: "",
       leaveStatus: null,
-      userName: null,
-      userComment: []
+      userComment: [],
+      playerId: []
     };
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({ userComment: nextProps.commentData, remark: "" });
+    this.setState({
+      userComment: nextProps.commentData,
+      remark: ""
+    });
   }
 
   handleApprove = () => {
@@ -58,9 +61,23 @@ class LeaveAdminApprovalRejection extends Component {
     );
   };
   handleDraft = () => {
+    {
+      this.props.userData
+        .filter(user => user.uid === this.props.singleData.userId)
+        .map(data => console.log(data.userNotificationPlayerId));
+    }
+
+    // this.props.userData.findIndex(
+    //   user => user.uid === this.props.singleData.userId
+    // ) >= 0 &&
+    // this.props.userData.find(
+    //   user => user.uid === this.props.singleData.userId
+    // ).userNotificationPlayerId;
+
     this.setState(
       {
         leaveStatus: "Pending"
+        // playerId: player
       },
       () => this.props.handleChange({ ...this.state })
     );
