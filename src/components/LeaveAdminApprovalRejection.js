@@ -45,39 +45,40 @@ class LeaveAdminApprovalRejection extends Component {
   }
 
   handleApprove = () => {
+    let playerId = this.props.userData.filter(
+      user => user.uid === this.props.singleData.userId
+    )[0].userNotificationPlayerId;
+
     this.setState(
       {
-        leaveStatus: "Approved"
+        leaveStatus: "Approved",
+        playerId: playerId
       },
       () => this.props.handleChange({ ...this.state })
     );
   };
   handleReject = () => {
+    let playerId = this.props.userData.filter(
+      user => user.uid === this.props.singleData.userId
+    )[0].userNotificationPlayerId;
+
     this.setState(
       {
-        leaveStatus: "Rejected"
+        leaveStatus: "Rejected",
+        playerId: playerId
       },
       () => this.props.handleChange({ ...this.state })
     );
   };
   handleDraft = () => {
-    {
-      this.props.userData
-        .filter(user => user.uid === this.props.singleData.userId)
-        .map(data => console.log(data.userNotificationPlayerId));
-    }
-
-    // this.props.userData.findIndex(
-    //   user => user.uid === this.props.singleData.userId
-    // ) >= 0 &&
-    // this.props.userData.find(
-    //   user => user.uid === this.props.singleData.userId
-    // ).userNotificationPlayerId;
+    let playerId = this.props.userData.filter(
+      user => user.uid === this.props.singleData.userId
+    )[0].userNotificationPlayerId;
 
     this.setState(
       {
-        leaveStatus: "Pending"
-        // playerId: player
+        leaveStatus: "Pending",
+        playerId: playerId
       },
       () => this.props.handleChange({ ...this.state })
     );

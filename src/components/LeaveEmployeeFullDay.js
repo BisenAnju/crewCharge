@@ -13,6 +13,7 @@ const styles = {
     color: "#fd914d"
   }
 };
+
 class LeaveEmployeeFulldayLeave extends Component {
   constructor() {
     super();
@@ -91,6 +92,7 @@ class LeaveEmployeeFulldayLeave extends Component {
   validatePurpose = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
+
   render() {
     return (
       <div>
@@ -138,7 +140,8 @@ class LeaveEmployeeFulldayLeave extends Component {
                     height: "35px",
                     textAlign: "center"
                   }}
-                  autoOk={true}
+                  autoOk
+                  formatDate={date => moment(date).format("DD/MM/YYYY")}
                   value={this.state.from}
                   onChange={this.changeFromDate}
                 />
@@ -172,7 +175,8 @@ class LeaveEmployeeFulldayLeave extends Component {
                     height: "35px",
                     textAlign: "center"
                   }}
-                  autoOk={true}
+                  autoOk
+                  formatDate={date => moment(date).format("DD/MM/YYYY")}
                   value={this.state.to}
                   onChange={this.changeToDate}
                   errorStyle={{ color: "#f08f4c" }}
@@ -223,7 +227,8 @@ class LeaveEmployeeFulldayLeave extends Component {
           >
             <DatePicker
               hintText="Due date"
-              autoOk={true}
+              autoOk
+              formatDate={date => moment(date).format("DD/MM/YYYY")}
               errorText={
                 this.state.dueDate > this.state.from &&
                 "Should be smaller than from date"

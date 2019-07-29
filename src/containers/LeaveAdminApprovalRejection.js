@@ -32,7 +32,7 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
         approvedRejectedBy: this.props.user.displayName,
         approvedRejectedOn: new Date()
       })
-      .then(matchParams => {
+      .then(() => {
         setTimeout(function() {
           var sendNotification = function(data) {
             var headers = {
@@ -69,7 +69,7 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
           var message = {
             app_id: "323e54fd-ee29-4bb2-bafc-e292b01c694f",
             contents: { en: data.remark },
-            include_player_ids: data.playerId,
+            include_player_ids: [data.playerId],
             headings: { en: ths.props.user.displayName },
             data: {
               route: "/leavedashboard/leavedetails/",
