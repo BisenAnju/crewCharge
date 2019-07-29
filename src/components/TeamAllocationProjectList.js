@@ -1,5 +1,12 @@
 import React from "react";
-import { Card, CardHeader, Paper, CardText, Divider } from "material-ui";
+import {
+  Card,
+  CardHeader,
+  Paper,
+  CardText,
+  Divider,
+  Avatar
+} from "material-ui";
 import { withRouter } from "react-router-dom";
 import * as moment from "moment";
 import ReactWeeklyDayPicker from "./WeeklyDayPicker";
@@ -153,24 +160,12 @@ class TeamAllocationProjectList extends React.Component {
                           ) {
                             return (
                               <div key={i}>
-                                <img
-                                  alt={"active"}
-                                  style={{
-                                    width: 40,
-                                    height: 40,
-                                    borderRadius: 5,
-                                    padding: 2,
-                                    float: "left"
-                                  }}
-                                  src={user.photoURL}
-                                />
+                                <Avatar src={user.photoURL} size={40} />
                               </div>
                             );
                           }
                         })}
                       </div>
-                      <br />
-                      <br />
                       <br />
                       <div>
                         <h3>{missionRow.name}</h3>
@@ -181,7 +176,7 @@ class TeamAllocationProjectList extends React.Component {
                         <h5>
                           {moment(missionRow.deadline.endDate).format("ll")}
                         </h5>
-                        <h5>Massege: {missionRow.deadline.remarks}</h5>
+                        <h5>Message: {missionRow.deadline.remarks}</h5>
                       </div>
                     </Paper>
                   </CardText>

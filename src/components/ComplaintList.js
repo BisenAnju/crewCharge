@@ -334,10 +334,9 @@ class ComplaintList extends React.Component {
           onClick={() => this.props.history.push("/complaint")}
           backgroundColor="rgb(253, 145, 77)"
           style={{
-            position: "absolute",
-            zIndex: "1",
-            right: "10%",
-            bottom: "13%"
+            position: "fixed",
+            right: 24,
+            bottom: 24
           }}
         >
           <ContentAdd />
