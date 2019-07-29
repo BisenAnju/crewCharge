@@ -7,7 +7,9 @@ import {
   TableRowColumn,
   Checkbox,
   RaisedButton,
-  Paper
+  Paper,
+  Avatar,
+  Divider
 } from "material-ui";
 import Layout from "../layouts/Layout";
 
@@ -28,14 +30,26 @@ class UserPermission extends Component {
     super(props);
     this.state = {
       allKeys,
-      access: []
+      access: [],
+      photoUrl: "",
+      displayName: ""
     };
   }
   componentWillMount() {
     const userAccess = this.props.userData.find(
       user => user.uid === this.props.match.params.id
     ).access;
-    this.setState({ access: userAccess });
+    const photoUrl = this.props.userData.find(
+      user => user.uid === this.props.match.params.id
+    ).photoURL;
+    const displayName = this.props.userData.find(
+      user => user.uid === this.props.match.params.id
+    ).displayName;
+    this.setState({
+      access: userAccess,
+      photoUrl,
+      displayName
+    });
   }
   handleReadCheck = name => {
     const access = this.state.access;
@@ -49,8 +63,23 @@ class UserPermission extends Component {
     this.props.updateRole(this.state.access, singleUser);
   };
   render() {
+    console.log(this.props.singleUser);
     return (
       <Layout navigationTitle="User Permission" showBackNavigation={true}>
+        <center>
+          <Avatar
+            src={this.state.photoUrl}
+            style={{ marginTop: 10 }}
+            size={50}
+          />
+        </center>
+        <br />
+        <center>
+          <span style={{ fontWeight: "bold" }}>{this.state.displayName}</span>
+        </center>
+        <br />
+        <Divider />
+
         <Paper zDepth={1} style={style} rounded={false}>
           <Table selectable="false">
             <TableBody displayRowCheckbox={false}>

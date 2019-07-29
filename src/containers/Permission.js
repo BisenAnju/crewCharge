@@ -72,7 +72,7 @@ class PermissionContainer extends React.Component {
                     updateRole={this.updateRole}
                     userData={this.state.userData}
                     // singleUser={this.state.userData.find(
-                    //   data => data.uid === this.props.match.params.uid
+                    //   data => data.uid === this.props.match.params.id
                     // )}
                   />
                 )}
