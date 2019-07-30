@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.smilebots.projects" version="1.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Project-S</name>
+<widget id="com.smilebots.projects" version="1.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Crew Charge</name>
     <description>
-        Project-S
+       Crew Charge
     </description>
     <author email="developers@smilebots.com" href="http://www.smilebots.com">
         Smilebots Team

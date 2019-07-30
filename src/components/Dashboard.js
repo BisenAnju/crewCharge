@@ -16,7 +16,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <Layout navigationTitle="Project S">
+      <Layout navigationTitle="Crew Charge">
         <div style={{ height: "calc(100vh - 64px)" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <img alt="icon" src={icon} />

@@ -63,7 +63,6 @@ class UserPermission extends Component {
     this.props.updateRole(this.state.access, singleUser);
   };
   render() {
-    console.log(this.props.singleUser);
     return (
       <Layout navigationTitle="User Permission" showBackNavigation={true}>
         <center>

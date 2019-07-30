@@ -25,7 +25,7 @@ class LeaveEmployeeDashboard extends React.Component {
   };
   render() {
     return (
-      <Layout navigationTitle="Employee Dashboard" showBackNavigation={true}>
+      <Layout navigationTitle="My Leaves" showBackNavigation={true}>
         <div>
           <Tabs
             onChange={this.handleChange}
