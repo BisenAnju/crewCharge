@@ -6,7 +6,8 @@ import {
   ImageTimer,
   ActionToday,
   ContentSend,
-  CommunicationComment
+  CommunicationComment,
+  ActionThumbUp
 } from "material-ui/svg-icons";
 import {
   Divider,
@@ -17,6 +18,7 @@ import {
   IconButton,
   FlatButton
 } from "material-ui";
+
 import { pink900, lime800, deepOrange900 } from "material-ui/styles/colors";
 import Layout from "../layouts/Layout";
 import withUser from "../hoc/withUser";
@@ -43,16 +45,15 @@ class LeaveAdminApprovalRejection extends Component {
       remark: ""
     });
   }
-
   handleApprove = () => {
     let playerId = this.props.userData.filter(
       user => user.uid === this.props.singleData.userId
     )[0].userNotificationPlayerId;
-
     this.setState(
       {
         leaveStatus: "Approved",
-        playerId: playerId
+        playerId: playerId,
+        remark: "Leave Approved"
       },
       () => this.props.handleChange({ ...this.state })
     );
@@ -61,11 +62,11 @@ class LeaveAdminApprovalRejection extends Component {
     let playerId = this.props.userData.filter(
       user => user.uid === this.props.singleData.userId
     )[0].userNotificationPlayerId;
-
     this.setState(
       {
         leaveStatus: "Rejected",
-        playerId: playerId
+        playerId: playerId,
+        remark: "Leave Rejected"
       },
       () => this.props.handleChange({ ...this.state })
     );
@@ -74,7 +75,6 @@ class LeaveAdminApprovalRejection extends Component {
     let playerId = this.props.userData.filter(
       user => user.uid === this.props.singleData.userId
     )[0].userNotificationPlayerId;
-
     this.setState(
       {
         leaveStatus: "Pending",
