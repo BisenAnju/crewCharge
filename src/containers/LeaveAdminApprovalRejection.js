@@ -20,10 +20,8 @@ class LeaveAdminApprovalRejectionContainer extends React.Component {
   }
 
   handleChange = data => {
-    console.log(data.playerId);
     let ths = this;
     let matchParams = this.props.match.params.leaveId;
-
     this.props.db
       .collection("leaves")
       .doc(matchParams)
