@@ -11,7 +11,6 @@ import {
 import { withRouter } from "react-router-dom";
 import Subheader from "material-ui/Subheader";
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
-import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import { orange100 } from "material-ui/styles/colors";
 import withFirebase from "../hoc/withFirebase";
@@ -211,21 +210,21 @@ class ProjectMissionList extends React.Component {
                             </div>
                         </div>
                 <div style={this.contentButton}>
-                    <div style={{marginBottom:10}}>
-                        <FloatingActionButton
-                            backgroundColor={"rgb(253, 145, 77)"}
-                            style={{maginBottom:2}}
-                        >
-                            <div>
+                    <div style={{ marginBottom: 10, backgroundColor:"rgb(253, 145, 77)",width:"50px",height:"50px",borderRadius:"50%"}}>
+                       
+                        <div>
                                 <IconMenu
+                              
                                     iconButtonElement={
-                                        <IconButton style={{ marginTop: 4 }}>
+                                        <IconButton  >
                                             <ContentAdd color={"white"} />
                                         </IconButton>
                                     }
                                     menuStyle={{
                                         backgroundColor: "rgba(242, 243, 242, 0.5)",
-                                        padding: 0
+                                        padding: 0,
+                                       
+                                      
                                     }}
                                     anchorOrigin={{
                                         horizontal: "right",
@@ -253,7 +252,7 @@ class ProjectMissionList extends React.Component {
                                         Add Project </MenuItem>
                                 </IconMenu>
                             </div>
-                        </FloatingActionButton>
+                      
                     </div>
                         </div>
                     </div>

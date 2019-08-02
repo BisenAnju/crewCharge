@@ -21,7 +21,7 @@ class TeamAllocationMissionList extends React.Component {
     });
   };
   componentWillMount() {
-    if (this.props.match.params.index == 0) {
+    if (this.props.match.params.index === "0") {
       this.setState({ slideIndex: 0 });
     } else {
       this.setState({ slideIndex: 2 });

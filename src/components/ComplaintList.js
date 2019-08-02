@@ -164,6 +164,7 @@ class ComplaintList extends React.Component {
                     );
                   } catch (e) {
                     console.log("Internet error" + e);
+                    return 1;
                   }
                 })
               ) : (
@@ -239,6 +240,7 @@ class ComplaintList extends React.Component {
                     );
                   } catch (e) {
                     console.log();
+                    return 1;
                   }
                 })
               ) : (

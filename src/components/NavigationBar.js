@@ -20,7 +20,8 @@ import {
   NotificationEventNote,
   SocialGroup,
   ActionDateRange,
-  ActionSettings
+  ActionSettings,
+  ActionDashboard
 } from "material-ui/svg-icons";
 import privacy from "../images/privacy.png";
 class NavigationBar extends React.Component {
@@ -118,6 +119,24 @@ class NavigationBar extends React.Component {
               user.uid === this.props.user.uid && user.userType === "Admin" ? (
                 <div key={index}>
                   <Subheader inset={true}>Admin</Subheader>
+
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/leaveReport/" + 0);
+                    }}
+                    primaryText="Leave Report"
+                    leftIcon={
+                      <ActionDashboard
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  />
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
