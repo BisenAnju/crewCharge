@@ -159,22 +159,23 @@ class TeamAllocationPeopleList extends React.Component {
                     projectId = this.state.projectsList.find(
                       data => data.projectId === missionRow.projectId
                     );
+                    return projectId;
                   }
-                  return projectId;
+                  return true;
                 });
                 let backcolor = null;
-                {
-                  this.props.leavesList.find(
-                    leaveDate =>
-                      moment(leaveDate.from.seconds * 1000).format("LL") <=
-                        moment(this.state.selectedDate).format("LL") &&
-                      (moment(leaveDate.to.seconds * 1000).format("LL") >=
-                        moment(this.state.selectedDate).format("LL") &&
-                        leaveDate.userId === row.uid)
-                  )
-                    ? (backcolor = "leavesAnimation")
-                    : (backcolor = "leavesAnima");
-                }
+
+                this.props.leavesList.find(
+                  leaveDate =>
+                    moment(leaveDate.from.seconds * 1000).format("LL") <=
+                      moment(this.state.selectedDate).format("LL") &&
+                    (moment(leaveDate.to.seconds * 1000).format("LL") >=
+                      moment(this.state.selectedDate).format("LL") &&
+                      leaveDate.userId === row.uid)
+                )
+                  ? (backcolor = "leavesAnimation")
+                  : (backcolor = "leavesAnima");
+
                 return (
                   <Card key={id}>
                     <CardHeader

@@ -13,6 +13,7 @@ import LeaveDashboardContainer from "./containers/LeaveDashboard";
 import ProjectsContainer from "./containers/Projects";
 import TeamAllocationPeoplesListContainer from "./containers/TeamAllocationPeoplesList";
 import ConfigurationContainer from "./containers/Configuration";
+import LeaveReportContainer from "./containers/LeaveReport";
 import PermissionContainer from "./containers/Permission";
 import LinearProgress from "material-ui/LinearProgress";
 import LeaveAdminApprovalRejectionContainer from "./containers/LeaveAdminApprovalRejection";
@@ -100,12 +101,14 @@ class App extends Component {
         );
       ///////////////////
     } else {
-      this.state = {
+      this.setState({
         isLoading: true,
         leaveData: [],
         complaintTypeData: [],
-        u: null
-      };
+        u: null,
+        purposeData: [],
+        singleData: []
+      });
     }
   }
 
@@ -197,6 +200,10 @@ class App extends Component {
                 <Route
                   path={"/configuration"}
                   render={props => <ConfigurationContainer {...props} />}
+                />
+                <Route
+                  path={"/leaveReport"}
+                  render={props => <LeaveReportContainer {...props} />}
                 />
                 <Route
                   path={"/permission"}

@@ -164,6 +164,7 @@ class TeamAllocationProjectList extends React.Component {
                               </div>
                             );
                           }
+                          return true;
                         })}
                       </div>
                       <br />

@@ -161,7 +161,6 @@ class TeamAllocationMission extends React.Component {
             {this.props.match.params.missionId !== undefined ? (
               <RaisedButton
                 label="Update"
-                onClick={this.handleClose}
                 backgroundColor={"rgb(253, 145, 77)"}
                 labelColor={white}
                 onClick={e => {

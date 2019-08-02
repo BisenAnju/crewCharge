@@ -106,44 +106,42 @@ class LeaveDashboardContainer extends Component {
       <div>
         <Router>
           <Switch>
-            <div>
-              <Route
-                exact
-                path={"/leavedashboard"}
-                render={props => (
-                  <LeaveEmployeeDashboardContainer {...props} {...this.state} />
-                )}
-              />
-              <Route
-                exact
-                path={"/leavedashboard/leaveapply/:mode"}
-                render={props => (
-                  <LeaveEmployeeApplyContainer
-                    {...props}
-                    {...this.state}
-                    singleData={this.state.leaveData}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path={"/leavedashboard/leavedetails/:leaveId"}
-                render={props => (
-                  <LeaveEmployeeDetailsContainer
-                    {...props}
-                    {...this.state}
-                    singleData={this.state.leaveData}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path={"/leavedashboard/admin"}
-                render={props => (
-                  <LeaveAdminDashboardContainer {...props} {...this.state} />
-                )}
-              />
-            </div>
+            <Route
+              exact
+              path={"/leavedashboard"}
+              render={props => (
+                <LeaveEmployeeDashboardContainer {...props} {...this.state} />
+              )}
+            />
+            <Route
+              exact
+              path={"/leavedashboard/leaveapply/:mode"}
+              render={props => (
+                <LeaveEmployeeApplyContainer
+                  {...props}
+                  {...this.state}
+                  singleData={this.state.leaveData}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={"/leavedashboard/leavedetails/:leaveId"}
+              render={props => (
+                <LeaveEmployeeDetailsContainer
+                  {...props}
+                  {...this.state}
+                  singleData={this.state.leaveData}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={"/leavedashboard/admin"}
+              render={props => (
+                <LeaveAdminDashboardContainer {...props} {...this.state} />
+              )}
+            />
           </Switch>
         </Router>
       </div>

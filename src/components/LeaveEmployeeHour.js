@@ -51,7 +51,7 @@ class LeaveEmployeeHourLeave extends Component {
   };
   validateForm = e => {
     e.preventDefault();
-    console.log(this.state.purpose);
+
     if (
       this.state.from === null ||
       this.state.to === null ||

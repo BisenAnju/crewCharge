@@ -6,8 +6,7 @@ import {
   ImageTimer,
   ActionToday,
   ContentSend,
-  CommunicationComment,
-  ActionThumbUp
+  CommunicationComment
 } from "material-ui/svg-icons";
 import {
   Divider,
