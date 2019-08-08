@@ -29,7 +29,7 @@ class LeaveEmployeeApplyContainer extends React.Component {
   }
   // Add leaves data
   addLeaves = (leaveData, leaveType) => {
-    let newDueDate = moment.utc(moment().subtract(1, "days"))._d;
+    let newDueDate = moment.utc(moment(leaveData.to).subtract(1, "days"))._d;
     let dueDate;
     if (leaveData.dueDate != null) {
       dueDate = leaveData.dueDate;

@@ -33,6 +33,8 @@ class LeaveReport extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // console.log(this.props.match.params.index);
+
     if (nextProps.leaveData !== undefined)
       this.setState({ leaveData: nextProps.leaveData }, () =>
         this.currentMonth(this.state.leaveData)

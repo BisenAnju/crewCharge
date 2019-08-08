@@ -81,6 +81,7 @@ class LeaveEmployeeFulldayLeave extends Component {
   changeToDate = (event, date) => {
     this.setState({
       to: date,
+      // to: date.setMinutes(date.getMinutes() - 1),
       showDiv: true
     });
   };

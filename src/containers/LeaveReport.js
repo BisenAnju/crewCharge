@@ -111,13 +111,13 @@ class LeaveReportContainer extends React.Component {
           <Switch>
             <Route
               exact
-              path={"/leaveReport/:index"}
+              path={"/leaveReport"}
               render={props => (
                 <LeaveReport
                   {...props}
                   userData={this.state.userData}
                   leaveData={this.state.leaveData}
-                  index={this.props.match.params.index}
+                  // index={this.props.match.params.index}
                 />
               )}
             />

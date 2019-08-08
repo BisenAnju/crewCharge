@@ -123,7 +123,7 @@ class NavigationBar extends React.Component {
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
-                      this.props.history.push("/leaveReport/" + 0);
+                      this.props.history.push("/leaveReport");
                     }}
                     primaryText="Leave Report"
                     leftIcon={
@@ -344,7 +344,7 @@ class NavigationBar extends React.Component {
                 textAlign: "center"
               }}
             >
-              v1.0.5
+              v1.0.7
             </div>
 
             {/* <ListItem
