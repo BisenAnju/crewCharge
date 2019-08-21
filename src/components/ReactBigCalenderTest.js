@@ -6,8 +6,8 @@ import { blueGrey500 } from "material-ui/styles/colors";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import Layout from "../layouts/Layout";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-// moment.locale("en-GB");
-// BigCalendar.momentLocalizer(moment);
+moment.locale("en-GB");
+BigCalendar.momentLocalizer(moment);
 moment.locale("ko", {
   week: {
     dow: 1,

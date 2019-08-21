@@ -55,9 +55,7 @@ class LeavePurpose extends Component {
         const ref = image.child(new Date().toString());
         ref.put(file).then(() => {
           ref.getDownloadURL().then(url => {
-            console.log(url);
             const updatedImageURL = url;
-            console.log(updatedImageURL);
             const pictures = this.state.pictures;
             pictures.push(url);
             this.setState({
@@ -67,7 +65,6 @@ class LeavePurpose extends Component {
               temporaryImageURL: updatedImageURL,
               isLoadingUploadImage: 3
             });
-            console.log(updatedImageURL);
           });
         });
       }

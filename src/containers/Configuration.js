@@ -2,7 +2,6 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import Configuration from "../components/Configuration";
 import withFirebase from "../hoc/withFirebase";
-
 class ConfigurationContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -34,6 +33,34 @@ class ConfigurationContainer extends React.Component {
         }
       );
   }
+
+  addHolidays = data => {
+    console.log(data.holidays);
+    const holidayRef = this.props.db.collection("holiday_master").doc("2019");
+
+    holidayRef
+      .get()
+      .then(querySnapshot => {
+        if (querySnapshot.exists) {
+          data.holidays.map(item =>
+            this.props.db
+              .collection("holiday_master")
+              .doc("2019")
+              .collection("events")
+              .add({
+                id: data.category,
+                title: data.reason,
+                start: item,
+                end: item
+              })
+          );
+        }
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
+  };
+
   addPurpose = (field, collection, data, iconURL) => {
     this.props.db
       .collection(collection)
@@ -56,6 +83,7 @@ class ConfigurationContainer extends React.Component {
     return (
       <Configuration
         addPurpose={this.addPurpose}
+        addHolidays={this.addHolidays}
         purposeData={this.state.purposeData}
       />
     );

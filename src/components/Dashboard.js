@@ -5,8 +5,8 @@ import Layout from "../layouts/Layout";
 import blur from "../images/blur1.png";
 import icon from "../images/icon1.png";
 import leave from "../images/leave.svg";
+import employee from "../images/employee.svg";
 import complaint from "../images/complaint.svg";
-import team from "../images/team.svg";
 import allocation from "../images/allocation.svg";
 class Dashboard extends Component {
   constructor(props) {
@@ -187,7 +187,7 @@ class Dashboard extends Component {
                     }}
                     onClick={e => {
                       e.preventDefault();
-                      this.props.history.push("/projects");
+                      this.props.history.push("/addemployee");
                     }}
                   >
                     <div
@@ -199,7 +199,11 @@ class Dashboard extends Component {
                         flex: "1"
                       }}
                     >
-                      <img src={team} alt="team" style={{ height: "11vh" }} />
+                      <img
+                        src={employee}
+                        alt="team"
+                        style={{ height: "11vh" }}
+                      />
                     </div>
                     <div
                       style={{
@@ -213,8 +217,8 @@ class Dashboard extends Component {
                         flexDirection: "column"
                       }}
                     >
-                      <div>Client</div>
-                      <div>Communication</div>
+                      <div>Add</div>
+                      <div>Employee</div>
                     </div>
                   </div>
                 </div>
@@ -411,7 +415,11 @@ class Dashboard extends Component {
                           flex: "1"
                         }}
                       >
-                        <img src={team} alt="team" style={{ height: "11vh" }} />
+                        <img
+                          src="/static/media/allocation.a3b40e91.svg"
+                          alt="team"
+                          style={{ height: "11vh" }}
+                        />
                       </div>
                       <div
                         style={{

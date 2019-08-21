@@ -123,6 +123,24 @@ class NavigationBar extends React.Component {
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
+                      this.props.history.push("/calender");
+                    }}
+                    primaryText="Calender View"
+                    leftIcon={
+                      <ActionDashboard
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  />
+
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
                       this.props.history.push("/leaveReport");
                     }}
                     primaryText="Leave Report"
@@ -137,6 +155,25 @@ class NavigationBar extends React.Component {
                       />
                     }
                   />
+
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/attendance");
+                    }}
+                    primaryText="User Attendance"
+                    leftIcon={
+                      <ActionDashboard
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  />
+
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
