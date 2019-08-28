@@ -125,7 +125,7 @@ class NavigationBar extends React.Component {
                       e.preventDefault();
                       this.props.history.push("/calender");
                     }}
-                    primaryText="Calender View"
+                    primaryText="Master Leaves"
                     leftIcon={
                       <ActionDashboard
                         style={{
@@ -137,31 +137,49 @@ class NavigationBar extends React.Component {
                       />
                     }
                   />
+
+                  {/* <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/attendance");
+                    }}
+                    primaryText="User Attendance"
+                    leftIcon={
+                      <ActionDashboard
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  /> */}
+
+                  {/* <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/userleaves");
+                    }}
+                    primaryText="User Leaves"
+                    leftIcon={
+                      <ActionDashboard
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  /> */}
 
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
                       this.props.history.push("/leaveReport");
                     }}
-                    primaryText="Leave Report"
-                    leftIcon={
-                      <ActionDashboard
-                        style={{
-                          fill: "#fd914d",
-                          heigth: "22px",
-                          width: "22px",
-                          left: "12px"
-                        }}
-                      />
-                    }
-                  />
-
-                  <ListItem
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/attendance");
-                    }}
-                    primaryText="User Attendance"
+                    primaryText="Users Report"
                     leftIcon={
                       <ActionDashboard
                         style={{
@@ -381,7 +399,7 @@ class NavigationBar extends React.Component {
                 textAlign: "center"
               }}
             >
-              v1.0.8
+              v1.0.9
             </div>
 
             {/* <ListItem

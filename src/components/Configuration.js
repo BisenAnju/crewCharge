@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout";
 import LeavePurpose from "./LeavePurpose";
 import AddHolidays from "./AddHolidays";
 import ComplaintType from "./ComplaintType";
+import AddAttendance from "./AddAttendance";
 import { Card, CardHeader, CardText } from "material-ui/Card";
 import { Avatar } from "material-ui";
 class Configuration extends Component {
@@ -55,7 +56,28 @@ class Configuration extends Component {
 
         <Card style={{ margin: "10px", borderRadius: "5px" }}>
           <CardHeader
-            title=" Complaint Type"
+            title="Add Attendance"
+            titleColor="#fd914d"
+            avatar={
+              <Avatar size={30} backgroundColor="#fd914d" color="white">
+                A
+              </Avatar>
+            }
+            actAsExpander={true}
+            showExpandableButton={true}
+          />
+
+          <CardText expandable={true}>
+            <AddAttendance
+              userData={this.props.userData}
+              addAttendance={this.props.addAttendance}
+            />
+          </CardText>
+        </Card>
+
+        <Card style={{ margin: "10px", borderRadius: "5px" }}>
+          <CardHeader
+            title="Complaint Type"
             titleColor="#fd914d"
             avatar={
               <Avatar size={30} backgroundColor="#fd914d" color="white">

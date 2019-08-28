@@ -24,6 +24,7 @@ class LeaveAdminDashboardContainer extends React.Component {
     // get Leave Data
     this.props.db
       .collection("leaves")
+      .where("status", "==", "personal")
       .orderBy("addedOn", "desc")
       .onSnapshot(
         snapshot => {

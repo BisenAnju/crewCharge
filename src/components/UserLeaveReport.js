@@ -1,27 +1,57 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../layouts/Layout";
-import { List, ListItem, Avatar, Divider, Subheader } from "material-ui";
+import {
+  List,
+  ListItem,
+  Avatar,
+  Divider,
+  Subheader,
+  Tab,
+  Tabs
+} from "material-ui";
 import * as moment from "moment";
+import SwipeableViews from "react-swipeable-views";
+import BigCalendar from "react-big-calendar";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+moment.locale("en-GB");
+BigCalendar.momentLocalizer(moment);
+moment.locale("ko", {
+  week: {
+    dow: 1,
+    doy: 1
+  }
+});
+const localizer = BigCalendar.momentLocalizer(moment);
 
 class UserLeaveReport extends Component {
   constructor(props) {
     super(props);
-    this.state = { currentMonthLeave: [] };
+    this.state = {
+      currentMonthLeave: [],
+      slideIndex: 0,
+      currentMonthAttendance: []
+    };
   }
   componentWillMount() {
     var date = new Date();
+    let currentMonthAttendance = this.props.attendanceData.filter(
+      att => att.userId === this.props.singleData.uid
+    );
+    this.setState({ currentMonthAttendance });
 
     if (this.props.match.params.index === "0") {
       var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
       let users = this.props.leaveData.filter(
         leave => leave.userId === this.props.singleData.uid
       );
+
       let currentMonthLeave = users.filter(
         leave =>
           moment(leave.from).format("L") >= moment(firstDay).format("L") &&
           moment(leave.from).format("L") <= moment(date).format("L")
       );
+
       this.setState({ currentMonthLeave });
     }
 
@@ -70,6 +100,11 @@ class UserLeaveReport extends Component {
         />
       );
   };
+  handleChange = value => {
+    this.setState({
+      slideIndex: value
+    });
+  };
 
   render() {
     return (
@@ -89,68 +124,118 @@ class UserLeaveReport extends Component {
         </center>
         <br />
         <Divider />
-        <div
-          style={{
-            height: "70vh",
-            overflow: "auto",
-            display: "self"
-          }}
-        >
-          <List>
-            {this.state.currentMonthLeave.map((leave, index) => (
-              <div key={index}>
-                <Subheader
-                  inset={true}
-                  style={{ color: "#338dc1", fontWeight: "bold" }}
-                >
-                  {leave.leaveType}
-                </Subheader>
-                <ListItem
-                  leftAvatar={this.getIconUrl(leave.purpose)}
-                  secondaryText={leave.reason}
-                  primaryText={
-                    <p style={{ fontSize: 15 }}>
-                      {leave.leaveType === "Hour"
-                        ? moment
-                            .utc(
-                              moment(
-                                moment(leave.to),
-                                "DD/MM/YYYY HH:mm:ss"
-                              ).diff(
-                                moment(
-                                  moment(leave.from),
-                                  "DD/MM/YYYY HH:mm:ss"
+
+        <div>
+          <Tabs
+            onChange={this.handleChange}
+            value={this.state.slideIndex}
+            tabItemContainerStyle={{ backgroundColor: "transparent" }}
+            inkBarStyle={{ backgroundColor: "#f08f4c" }}
+          >
+            <Tab
+              label="Leaves"
+              value={0}
+              style={{
+                color: "#f08f4c"
+              }}
+            />
+            <Tab
+              label="Attendance"
+              value={1}
+              style={{
+                color: "#f08f4c"
+              }}
+            />
+          </Tabs>
+          <SwipeableViews
+            index={this.state.slideIndex}
+            onChangeIndex={this.handleChange}
+          >
+            <div
+              style={{
+                height: "60vh",
+                overflow: "auto",
+                display: "self"
+              }}
+            >
+              <List>
+                {this.state.currentMonthLeave.map((leave, index) => (
+                  <div key={index}>
+                    <Subheader
+                      inset={true}
+                      style={{ color: "#338dc1", fontWeight: "bold" }}
+                    >
+                      {leave.leaveType}
+                    </Subheader>
+                    <ListItem
+                      leftAvatar={this.getIconUrl(leave.purpose)}
+                      secondaryText={leave.reason}
+                      primaryText={
+                        <p style={{ fontSize: 15 }}>
+                          {leave.leaveType === "Hour"
+                            ? moment
+                                .utc(
+                                  moment(
+                                    moment(leave.to),
+                                    "DD/MM/YYYY HH:mm:ss"
+                                  ).diff(
+                                    moment(
+                                      moment(leave.from),
+                                      "DD/MM/YYYY HH:mm:ss"
+                                    )
+                                  )
                                 )
-                              )
-                            )
-                            .format("HH:mm") +
-                          " Hours " +
-                          moment(leave.addedOn).format("ll")
-                        : moment
-                            .utc(
-                              moment(
-                                moment(leave.to),
-                                "DD/MM/YYYY HH:mm:ss"
-                              ).diff(
-                                moment(
-                                  moment(leave.from),
-                                  "DD/MM/YYYY HH:mm:ss"
+                                .format("HH:mm") +
+                              " Hours " +
+                              moment(leave.addedOn).format("ll")
+                            : moment
+                                .utc(
+                                  moment(
+                                    moment(leave.to),
+                                    "DD/MM/YYYY HH:mm:ss"
+                                  ).diff(
+                                    moment(
+                                      moment(leave.from),
+                                      "DD/MM/YYYY HH:mm:ss"
+                                    )
+                                  )
                                 )
-                              )
-                            )
-                            .format("D") +
-                          " Day " +
-                          "  " +
-                          moment(leave.from).format("ll") +
-                          " - " +
-                          moment(leave.to).format("ll")}
-                    </p>
+                                .format("D") +
+                              " Day " +
+                              "  " +
+                              moment(leave.from).format("ll") +
+                              " - " +
+                              moment(leave.to).format("ll")}
+                        </p>
+                      }
+                      secondaryTextLines={2}
+                    />
+                  </div>
+                ))}
+              </List>
+            </div>
+            <div
+              style={{
+                height: "60vh",
+                overflow: "auto",
+                display: "self"
+              }}
+            >
+              <BigCalendar
+                localizer={localizer}
+                defaultDate={new Date()}
+                defaultView="month"
+                events={this.state.currentMonthAttendance}
+                style={{ height: "100vh" }}
+                dayPropGetter={event => ({
+                  style: {
+                    // backgroundColor: "#7d8789"
+                    backgroundColor: event.getDay() === 0 ? "#7d8789" : null
                   }
-                  secondaryTextLines={2}
-                />
-              </div>
-            ))}
-          </List>
+                })}
+              />
+            </div>
+          </SwipeableViews>
         </div>
       </Layout>
     );

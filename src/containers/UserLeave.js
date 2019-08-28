@@ -5,21 +5,16 @@ import {
   withRouter,
   Switch
 } from "react-router-dom";
-import Attendance from "../components/Attendance";
-import SingleUserAttendance from "../components/SingleUserAttendance";
+import UserLeave from "../components/UserLeave";
+import SingleUserLeave from "../components/SingleUserLeave";
 import withFirebase from "../hoc/withFirebase";
-import moment from "moment";
+import withUser from "../hoc/withUser";
 
-class AttendanceContainer extends React.Component {
+class UserLeaveContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isLoading: true,
-      userData: [],
-      attendanceData: []
-    };
+    this.state = { isLoading: true, userData: [] };
   }
-
   componentWillMount() {
     this.props.db
       .collection("users")
@@ -42,29 +37,25 @@ class AttendanceContainer extends React.Component {
         }
       );
 
-    // get attendance data
     this.props.db
-      .collection("attendance")
-      .orderBy("date", "asc")
-      .onSnapshot(
+      .collection("leaves")
+      .where("leaveStatus", "==", "Approved")
+      .get()
+      .then(
         snapshot => {
-          const attendanceData = [];
+          const leaveData = [];
           snapshot.forEach(doc => {
             if (doc.exists) {
-              const attendance = doc.data();
-              attendance.date = new Date(attendance.date.seconds * 1000);
-              if (attendance.in !== "") {
-                attendance.in = moment(attendance.in.seconds * 1000).format(
-                  "HH.mm"
-                );
-              }
-
-              attendanceData.push(attendance);
+              const leave = doc.data();
+              leave.start = new Date(leave.from.seconds * 1000);
+              leave.end = new Date(leave.to.seconds * 1000);
+              leave.title = leave.reason;
+              leaveData.push(leave);
             }
           });
           this.setState({
             isLoading: false,
-            attendanceData
+            leaveData
           });
         },
         err => {
@@ -72,7 +63,6 @@ class AttendanceContainer extends React.Component {
         }
       );
   }
-
   render() {
     return (
       <div>
@@ -80,23 +70,19 @@ class AttendanceContainer extends React.Component {
           <Switch>
             <Route
               exact
-              path={"/attendance"}
+              path={"/userleaves"}
               render={props => (
-                <Attendance
-                  {...props}
-                  userData={this.state.userData}
-                  attendanceData={this.state.attendanceData}
-                />
+                <UserLeave {...props} userData={this.state.userData} />
               )}
             />
             <Route
               exact
-              path={"/attendance/:id"}
+              path={"/userleaves/:id"}
               render={props => (
-                <SingleUserAttendance
+                <SingleUserLeave
                   {...props}
                   userData={this.state.userData}
-                  attendanceData={this.state.attendanceData}
+                  leaveData={this.state.leaveData}
                 />
               )}
             />
@@ -106,4 +92,4 @@ class AttendanceContainer extends React.Component {
     );
   }
 }
-export default withFirebase(withRouter(AttendanceContainer));
+export default withUser(withFirebase(withRouter(UserLeaveContainer)));

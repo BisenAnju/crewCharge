@@ -20,47 +20,46 @@ class Calender extends React.Component {
       myEventsList: [
         {
           start: "2019-08-08",
-          groupId: "hii",
-          // allDay: false,
-          end: "2019-08-10",
+          // rendering: "background",
+          // color: "#ff9f89",
+          backgroundColor: "red",
+          // overlap: false,
+          end: "2019-08-08",
           title: "title1"
-        },
-        {
-          groupId: "hii",
-          start: "2019-08-15",
-          end: "2019-08-15",
-          title: "title2"
         }
       ]
     };
   }
 
   render() {
-    console.log(this.props.eventData);
     return (
-      // <Layout navigationTitle="Calender" showBackNavigation={true}>
-      <div>
-        <BigCalendar
-          localizer={localizer}
-          defaultDate={new Date()}
-          defaultView="month"
-          events={this.props.eventData}
-          style={{ height: "100vh" }}
-          // eventPropGetter={event => ({
-          //   style: {
-          //     // backgroundColor: event.color
-          //     backgroundColor: event.start.getDay() < 5 ? "#ad4ca4" : "#3174ad"
-          //   }
-          // })}
-          dayPropGetter={event => ({
-            style: {
-              // backgroundColor: "#FF0000"
-              backgroundColor: event.getDay() === 0 ? "#7d8789" : null
-            }
-          })}
-        />
-      </div>
-      // </Layout>
+      <Layout navigationTitle="Calender" showBackNavigation={true}>
+        <div>
+          <BigCalendar
+            localizer={localizer}
+            defaultDate={new Date()}
+            defaultView="month"
+            events={this.props.eventData}
+            style={{
+              height: "90vh",
+              overflow: "scroll",
+              display: "self"
+            }}
+            // eventPropGetter={event => ({
+            //   style: {
+            //     // backgroundColor: event.color
+            //     backgroundColor: event.start.getDay() < 5 ? "#ad4ca4" : "#3174ad"
+            //   }
+            // })}
+            dayPropGetter={event => ({
+              style: {
+                // backgroundColor: "#FF0000"
+                backgroundColor: event.getDay() === 0 ? "#7d8789" : null
+              }
+            })}
+          />
+        </div>
+      </Layout>
     );
   }
 }

@@ -9,7 +9,7 @@ import UserLeaveReportContainer from "./UserLeaveReport";
 import LeaveReport from "../components/LeaveReport";
 import withFirebase from "../hoc/withFirebase";
 import withUser from "../hoc/withUser";
-
+import moment from "moment";
 class LeaveReportContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +17,8 @@ class LeaveReportContainer extends React.Component {
       isLoading: true,
       userData: [],
       leaveData: [],
-      purposeData: []
+      purposeData: [],
+      attendanceData: []
     };
   }
 
@@ -50,6 +51,7 @@ class LeaveReportContainer extends React.Component {
       .collection("leaves")
       .orderBy("from", "desc")
       .where("leaveStatus", "==", "Approved")
+      .where("status", "==", "personal")
       .onSnapshot(
         snapshot => {
           const leaveData = [];
@@ -102,6 +104,43 @@ class LeaveReportContainer extends React.Component {
           console.log(`Encountered error: ${err}`);
         }
       );
+
+    // get attendance data
+    this.props.db
+      .collection("attendance")
+      .orderBy("date", "asc")
+      .onSnapshot(
+        snapshot => {
+          const attendanceData = [];
+          snapshot.forEach(doc => {
+            if (doc.exists) {
+              const attendance = doc.data();
+              attendance.start = new Date(attendance.date.seconds * 1000);
+              attendance.end = new Date(attendance.date.seconds * 1000);
+              if (attendance.in !== "") {
+                attendance.in = moment(attendance.in.seconds * 1000).format(
+                  "HH.mm"
+                );
+                attendance.title = attendance.in;
+              }
+              if (attendance.out !== "") {
+                attendance.out = moment(attendance.out.seconds * 1000).format(
+                  "HH.mm"
+                );
+              }
+
+              attendanceData.push(attendance);
+            }
+          });
+          this.setState({
+            isLoading: false,
+            attendanceData
+          });
+        },
+        err => {
+          console.log(`Encountered error: ${err}`);
+        }
+      );
   }
 
   render() {
@@ -117,6 +156,7 @@ class LeaveReportContainer extends React.Component {
                   {...props}
                   userData={this.state.userData}
                   leaveData={this.state.leaveData}
+                  attendanceData={this.state.attendanceData}
                   // index={this.props.match.params.index}
                 />
               )}
@@ -130,6 +170,7 @@ class LeaveReportContainer extends React.Component {
                   userData={this.state.userData}
                   leaveData={this.state.leaveData}
                   purposeData={this.state.purposeData}
+                  attendanceData={this.state.attendanceData}
                 />
               )}
             />

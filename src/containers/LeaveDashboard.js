@@ -27,6 +27,7 @@ class LeaveDashboardContainer extends Component {
     this.props.db
       .collection("leaves")
       .where("userId", "==", this.props.user.uid)
+      .where("status", "==", "personal")
       .orderBy("addedOn", "desc")
       .onSnapshot(
         snapshot => {

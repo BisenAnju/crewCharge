@@ -11,16 +11,21 @@ class AdminLeaveReport extends Component {
       leaveList: [],
       leaveCount: [],
       from: null,
-      to: null
+      to: null,
+      attendanceList: []
     };
   }
   componentWillMount() {
     if (this.props.currentMonthLeave !== undefined)
       this.setState({ leaveList: this.props.currentMonthLeave });
+    if (this.props.currentMonthAttendance !== undefined)
+      this.setState({ attendanceList: this.props.currentMonthAttendance });
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentMonthLeave !== undefined)
       this.setState({ leaveList: nextProps.currentMonthLeave });
+    if (this.props.currentMonthAttendance !== undefined)
+      this.setState({ attendanceList: nextProps.currentMonthAttendance });
   }
   changeFromDate = (event, date) => {
     this.setState(
@@ -109,6 +114,20 @@ class AdminLeaveReport extends Component {
         <List>
           {this.props.userData.map((user, index) => {
             let leaveCount = [];
+            let totalInTime = [];
+            let sum = 0;
+            let avg = 0;
+            if (this.state.attendanceList.length > 0) {
+              this.state.attendanceList
+                .filter(attendance => attendance.userId === user.uid)
+                .map(item =>
+                  item.in !== ""
+                    ? (totalInTime.push(parseFloat(item.in)),
+                      (sum += parseFloat(item.in)))
+                    : null
+                );
+              avg = sum / totalInTime.length;
+            }
             if (this.state.leaveList.length > 0) {
               leaveCount = this.state.leaveList.filter(
                 leave => leave.userId === user.uid
@@ -125,8 +144,16 @@ class AdminLeaveReport extends Component {
                   />
                 }
                 rightIcon={
-                  <span style={{ color: "maroon", fontWeight: "bold" }}>
-                    {leaveCount.length + " L "}
+                  <span
+                    style={{
+                      color: "maroon",
+                      fontWeight: "bold",
+                      width: "70px"
+                    }}
+                  >
+                    {leaveCount.length +
+                      " L ," +
+                      (!isNaN(avg) ? avg.toFixed(2) : 0)}
                   </span>
                 }
                 onClick={() => {

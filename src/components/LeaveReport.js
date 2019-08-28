@@ -12,40 +12,39 @@ class LeaveReport extends Component {
     this.state = {
       currentMonthLeave: [],
       slideIndex: 0,
-      leaveData: []
+      leaveData: [],
+      attendanceData: [],
+      currentMonthAttendance: []
     };
   }
 
   componentWillMount() {
-    // console.log(this.props.match.params.index);
-    // if (this.props.match.params.index === "1") {
-    //   this.setState({ slideIndex: 1 });
-    // } else if (this.props.match.params.index === "2") {
-    //   this.setState({ slideIndex: 2 });
-    // } else {
-    //   this.setState({ slideIndex: 0 });
-    // }
-
     if (this.props.leaveData !== undefined)
-      this.setState({ leaveData: this.props.leaveData }, () =>
-        this.currentMonth(this.state.leaveData)
+      this.setState(
+        {
+          leaveData: this.props.leaveData,
+          attendanceData: this.props.attendanceData
+        },
+        () => this.currentMonth(this.state.leaveData, this.state.attendanceData)
       );
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log(this.props.match.params.index);
-
     if (nextProps.leaveData !== undefined)
-      this.setState({ leaveData: nextProps.leaveData }, () =>
-        this.currentMonth(this.state.leaveData)
+      this.setState(
+        {
+          leaveData: nextProps.leaveData,
+          attendanceData: nextProps.attendanceData
+        },
+        () => this.currentMonth(this.state.leaveData, this.state.attendanceData)
       );
   }
 
   handleChange = value => {
     if (value === 0) {
-      this.currentMonth(this.state.leaveData);
+      this.currentMonth(this.state.leaveData, this.state.attendanceData);
     } else if (value === 1) {
-      this.lastMonth(this.state.leaveData);
+      this.lastMonth(this.state.leaveData, this.state.attendanceData);
     } else if (value === 2) {
       this.setState({ currentMonthLeave: [] });
     }
@@ -54,30 +53,46 @@ class LeaveReport extends Component {
     });
   };
 
-  currentMonth = nextProps => {
+  currentMonth = (leave, attendance) => {
     var date = new Date();
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-    if (nextProps.length > 0) {
-      let currentMonthLeave = nextProps.filter(
-        leave =>
-          moment(leave.from).format("L") >= moment(firstDay).format("L") &&
-          moment(leave.from).format("L") <= moment(date).format("L")
+    if (leave.length > 0) {
+      let currentMonthLeave = leave.filter(
+        leaveItem =>
+          moment(leaveItem.from).format("L") >= moment(firstDay).format("L") &&
+          moment(leaveItem.from).format("L") <= moment(date).format("L")
       );
-      this.setState({ currentMonthLeave });
+      let currentMonthAttendance = attendance.filter(
+        attendanceItem =>
+          moment(attendanceItem.start).format("L") >=
+            moment(firstDay).format("L") &&
+          moment(attendanceItem.start).format("L") <= moment(date).format("L")
+      );
+      this.setState({ currentMonthLeave, currentMonthAttendance });
     }
   };
 
-  lastMonth = nextProps => {
+  lastMonth = (leave, attendance) => {
     var date = new Date();
     var prevFirstDate = new Date(date.getFullYear(), date.getMonth() - 1, 1);
-    var prevLastDate = new Date(date.getYear(), date.getMonth(), 0);
-
-    let lastMonthLeave = nextProps.filter(
-      leave =>
-        moment(leave.from).format("L") >= moment(prevFirstDate).format("L") &&
-        moment(leave.from).format("L") <= moment(prevLastDate).format("L")
+    var prevLastDate = new Date(date.getFullYear(), date.getMonth(), 0);
+    let lastMonthLeave = leave.filter(
+      leaveItem =>
+        moment(leaveItem.from).format("L") >=
+          moment(prevFirstDate).format("L") &&
+        moment(leaveItem.from).format("L") <= moment(prevLastDate).format("L")
     );
-    this.setState({ currentMonthLeave: lastMonthLeave });
+    let lastMonthAttendance = attendance.filter(
+      attendanceItem =>
+        moment(attendanceItem.start).format("L") >=
+          moment(prevFirstDate).format("L") &&
+        moment(attendanceItem.start).format("L") <=
+          moment(prevLastDate).format("L")
+    );
+    this.setState({
+      currentMonthAttendance: lastMonthAttendance,
+      currentMonthLeave: lastMonthLeave
+    });
   };
   render() {
     return (
@@ -117,10 +132,12 @@ class LeaveReport extends Component {
           >
             <AdminLeaveReport
               userData={this.props.userData}
+              currentMonthAttendance={this.state.currentMonthAttendance}
               currentMonthLeave={this.state.currentMonthLeave}
               slideIndex={this.state.slideIndex}
             />
             <AdminLeaveReport
+              currentMonthAttendance={this.state.currentMonthAttendance}
               userData={this.props.userData}
               currentMonthLeave={this.state.currentMonthLeave}
               slideIndex={this.state.slideIndex}

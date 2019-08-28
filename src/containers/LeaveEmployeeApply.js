@@ -44,6 +44,7 @@ class LeaveEmployeeApplyContainer extends React.Component {
       dueDate,
       purpose: leaveData.purpose,
       addedOn: new Date(),
+      status: "personal",
       reason: leaveData.reason,
       approvedRejectedBy: null,
       approvedRejectedOn: null,

@@ -16,8 +16,9 @@ import ConfigurationContainer from "./containers/Configuration";
 import CalenderContainer from "./containers/Calender";
 import AddEmployeeContainer from "./containers/AddEmployee";
 import LeaveReportContainer from "./containers/LeaveReport";
-import PermissionContainer from "./containers/Permission";
 import AttendanceContainer from "./containers/Attendance";
+import PermissionContainer from "./containers/Permission";
+import UserLeaveContainer from "./containers/UserLeave";
 import LinearProgress from "material-ui/LinearProgress";
 import LeaveAdminApprovalRejectionContainer from "./containers/LeaveAdminApprovalRejection";
 import LeaveEmployeeDetailsContainer from "./containers/LeaveEmployeeDetails";
@@ -213,6 +214,10 @@ class App extends Component {
                   render={props => <LeaveReportContainer {...props} />}
                 />
                 <Route
+                  path={"/attendance"}
+                  render={props => <AttendanceContainer {...props} />}
+                />
+                <Route
                   path={"/calender"}
                   render={props => <CalenderContainer {...props} />}
                 />
@@ -221,8 +226,8 @@ class App extends Component {
                   render={props => <PermissionContainer {...props} />}
                 />
                 <Route
-                  path={"/attendance"}
-                  render={props => <AttendanceContainer {...props} />}
+                  path={"/userleaves"}
+                  render={props => <UserLeaveContainer {...props} />}
                 />
                 <Route
                   path={"/complaintlist"}

@@ -15,6 +15,7 @@ class UserLeaveReportContainer extends React.Component {
       <div>
         <UserLeaveReport
           leaveData={this.props.leaveData}
+          attendanceData={this.props.attendanceData}
           purposeData={this.props.purposeData}
           singleData={this.props.userData.find(
             data => data.uid === this.props.match.params.id

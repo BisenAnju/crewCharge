@@ -7,7 +7,8 @@ class ConfigurationContainer extends React.Component {
     super(props);
     this.state = {
       isLoading: true,
-      purposeData: []
+      purposeData: [],
+      userData: []
     };
   }
 
@@ -26,6 +27,27 @@ class ConfigurationContainer extends React.Component {
           this.setState({
             isLoading: false,
             purposeData
+          });
+        },
+        err => {
+          console.log(`Encountered error: ${err}`);
+        }
+      );
+
+    this.props.db
+      .collection("users")
+      .orderBy("displayName")
+      .onSnapshot(
+        snapshot => {
+          const userData = [];
+          snapshot.forEach(doc => {
+            if (doc.exists) {
+              userData.push(doc.data());
+            }
+          });
+          this.setState({
+            isLoading: false,
+            userData
           });
         },
         err => {
@@ -61,6 +83,25 @@ class ConfigurationContainer extends React.Component {
       });
   };
 
+  addAttendance = attendance => {
+    let date = attendance.attDate.getDate();
+    let month = attendance.attDate.getMonth();
+    let inTime = new Date(new Date(attendance.inTime).setMonth(month));
+    let outTime = new Date(new Date(attendance.outTime).setMonth(month));
+    this.props.db
+      .collection("attendance")
+      .add({
+        userId: attendance.userName,
+        in: new Date(new Date(inTime).setDate(date)),
+        out: new Date(new Date(outTime).setDate(date)),
+        date: attendance.attDate
+      })
+      .then(alert("done"))
+      .catch(err => {
+        console.log("Error getting documents", err);
+      });
+  };
+
   addPurpose = (field, collection, data, iconURL) => {
     this.props.db
       .collection(collection)
@@ -83,8 +124,10 @@ class ConfigurationContainer extends React.Component {
     return (
       <Configuration
         addPurpose={this.addPurpose}
+        addAttendance={this.addAttendance}
         addHolidays={this.addHolidays}
         purposeData={this.state.purposeData}
+        userData={this.state.userData}
       />
     );
   }
