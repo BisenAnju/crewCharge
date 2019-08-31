@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import LeaveEmployeeHour from "./LeaveEmployeeHour";
+import LeaveEmployeeWFH from "./LeaveEmployeeWFH";
 import LeaveEmployeeFullDay from "./LeaveEmployeeFullDay";
 import Layout from "../layouts/Layout";
 import { LeaveApplyRadioButton } from "./ComplaintAddRadioButton";
@@ -39,9 +40,14 @@ class LeaveEmployeeApply extends Component {
               {...this.props}
               leaveType={this.state.leaveType}
             />
+          ) : this.state.leaveType === "Full" ? (
+            <LeaveEmployeeFullDay
+              {...this.props}
+              leaveType={this.state.leaveType}
+            />
           ) : (
-            this.state.leaveType === "Full" && (
-              <LeaveEmployeeFullDay
+            this.state.leaveType === "wfh" && (
+              <LeaveEmployeeWFH
                 {...this.props}
                 leaveType={this.state.leaveType}
               />

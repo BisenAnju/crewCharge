@@ -6,7 +6,7 @@ import {
   RadioButtonGroup,
   Avatar
 } from "material-ui";
-import { ActionDateRange, ImageTimer } from "material-ui/svg-icons";
+import { ActionDateRange, ImageTimer, ActionHome } from "material-ui/svg-icons";
 export class PriorityRadioButton extends React.Component {
   render() {
     return (
@@ -143,6 +143,22 @@ export class LeaveApplyRadioButton extends React.Component {
           id="leaveType"
           checkedIcon={<ActionDateRange style={{ fill: "#f08f4c" }} />}
           uncheckedIcon={<ActionDateRange />}
+          style={{
+            width: "min-content"
+          }}
+          onClick={this.props.validateLeave}
+        />
+        <RadioButton
+          value="wfh"
+          label="WFH"
+          labelStyle={
+            this.props.leaveType === "wfh"
+              ? { color: "#f08f4c" }
+              : { color: "black" }
+          }
+          id="leaveType"
+          checkedIcon={<ActionHome style={{ fill: "#f08f4c" }} />}
+          uncheckedIcon={<ActionHome />}
           style={{
             width: "min-content"
           }}

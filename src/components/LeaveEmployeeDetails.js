@@ -9,7 +9,6 @@ import {
   TextField
 } from "material-ui";
 import Layout from "../layouts/Layout";
-
 import {
   ActionHelp,
   ActionDateRange,
@@ -20,7 +19,8 @@ import {
   NavigationCancel,
   CommunicationComment,
   ImageEdit,
-  ContentSend
+  ContentSend,
+  ActionHome
 } from "material-ui/svg-icons";
 import moment from "moment";
 import withUser from "../hoc/withUser";
@@ -103,20 +103,22 @@ class LeaveEmployeeDetails extends Component {
                 />
               }
               rightIcon={
-                this.props.singleData.leaveStatus === "Pending" ? (
-                  <IconButton
-                    touch={true}
-                    style={{ margin: "10px 25px 0px 0px" }}
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push(
-                        `/leavedashboard/leaveapply/` +
-                          this.props.singleData.leaveId
-                      );
-                    }}
-                  >
-                    <ImageEdit />
-                  </IconButton>
+                this.props.singleData.leaveType !== "wfh" ? (
+                  this.props.singleData.leaveStatus === "Pending" ? (
+                    <IconButton
+                      touch={true}
+                      style={{ margin: "10px 25px 0px 0px" }}
+                      onClick={e => {
+                        e.preventDefault();
+                        this.props.history.push(
+                          `/leavedashboard/leaveapply/` +
+                            this.props.singleData.leaveId
+                        );
+                      }}
+                    >
+                      <ImageEdit />
+                    </IconButton>
+                  ) : null
                 ) : null
               }
               primaryText={
@@ -164,7 +166,17 @@ class LeaveEmployeeDetails extends Component {
             <List>
               <ListItem
                 disabled
-                leftIcon={this.getIconUrl(this.props.singleData.purpose)}
+                leftIcon={
+                  this.props.singleData.leaveType === "wfh" ? (
+                    <ActionHome
+                      style={{
+                        fill: "#0c76c1"
+                      }}
+                    />
+                  ) : (
+                    this.getIconUrl(this.props.singleData.purpose)
+                  )
+                }
                 primaryText={this.props.singleData.purpose}
                 secondaryText={<p style={{ fontSize: 14 }}>Purpose</p>}
               />
@@ -227,6 +239,10 @@ class LeaveEmployeeDetails extends Component {
                 leftIcon={<ImageTimer style={{ fill: deepOrange900 }} />}
                 primaryText={
                   this.props.singleData.leaveType === "Full"
+                    ? moment(this.props.singleData.from).format("ll") +
+                      " - " +
+                      moment(this.props.singleData.to).format("ll")
+                    : this.props.singleData.leaveType === "wfh"
                     ? moment(this.props.singleData.from).format("ll") +
                       " - " +
                       moment(this.props.singleData.to).format("ll")

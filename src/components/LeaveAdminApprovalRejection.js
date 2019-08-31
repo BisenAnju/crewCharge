@@ -6,7 +6,8 @@ import {
   ImageTimer,
   ActionToday,
   ContentSend,
-  CommunicationComment
+  CommunicationComment,
+  ActionHome
 } from "material-ui/svg-icons";
 import {
   Divider,
@@ -164,21 +165,19 @@ class LeaveAdminApprovalRejection extends Component {
               <List>
                 <ListItem
                   disabled
-                  leftIcon={this.getIconUrl(this.props.singleData.purpose)}
+                  leftIcon={
+                    this.props.singleData.leaveType === "wfh" ? (
+                      <ActionHome
+                        style={{
+                          fill: "#0c76c1"
+                        }}
+                      />
+                    ) : (
+                      this.getIconUrl(this.props.singleData.purpose)
+                    )
+                  }
                   primaryText={this.props.singleData.purpose}
                   secondaryText={<p style={{ fontSize: 14 }}>Purpose</p>}
-                  // rightIcon={
-                  //   <IconButton
-                  //     touch={true}
-                  //     style={{ margin: "0px 25px 0px 0px" }}
-                  //     onClick={e => {
-                  //       e.preventDefault();
-                  //       this.props.history.push(`/leavedashboard/leaveapply`);
-                  //     }}
-                  //   >
-                  //     <ImageEdit />
-                  //   </IconButton>
-                  // }
                 />
                 <ListItem
                   disabled
@@ -205,6 +204,10 @@ class LeaveAdminApprovalRejection extends Component {
                   leftIcon={<ImageTimer style={{ fill: deepOrange900 }} />}
                   primaryText={
                     this.props.singleData.leaveType === "Full"
+                      ? moment(this.props.singleData.from).format("ll") +
+                        " - " +
+                        moment(this.props.singleData.to).format("ll")
+                      : this.props.singleData.leaveType === "wfh"
                       ? moment(this.props.singleData.from).format("ll") +
                         " - " +
                         moment(this.props.singleData.to).format("ll")

@@ -2,6 +2,8 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import withUser from "../hoc/withUser";
 import moment from "moment";
+import { ActionHome } from "material-ui/svg-icons";
+
 import { List, ListItem, CircularProgress, Avatar, Divider } from "material-ui";
 const tabStyles = {
   headline: {
@@ -73,7 +75,20 @@ class AdminPendingTab extends React.Component {
                             );
                       }}
                       leftAvatar={this.getAvatar(leave.userId)}
-                      rightIcon={this.getIconUrl(leave.purpose)}
+                      rightIcon={
+                        leave.leaveType === "wfh" ? (
+                          <ActionHome
+                            style={{
+                              height: "27px",
+                              width: "27px",
+                              borderRadius: "0%",
+                              fill: "#0c76c1"
+                            }}
+                          />
+                        ) : (
+                          this.getIconUrl(leave.purpose)
+                        )
+                      }
                       primaryText={
                         this.props.userData.findIndex(
                           user => user.uid === leave.userId

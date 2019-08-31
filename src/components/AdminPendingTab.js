@@ -4,6 +4,7 @@ import withUser from "../hoc/withUser";
 import moment from "moment";
 import "../styles/style.css";
 import { List, ListItem, CircularProgress, Avatar, Divider } from "material-ui";
+import { ActionHome } from "material-ui/svg-icons";
 const tabStyles = {
   headline: {
     fontSize: 24,
@@ -76,7 +77,20 @@ class AdminPendingTab extends React.Component {
                             );
                       }}
                       leftAvatar={this.getAvatar(leave.userId)}
-                      rightIcon={this.getIconUrl(leave.purpose)}
+                      rightIcon={
+                        leave.leaveType === "wfh" ? (
+                          <ActionHome
+                            style={{
+                              height: "27px",
+                              width: "27px",
+                              borderRadius: "0%",
+                              fill: "#0c76c1"
+                            }}
+                          />
+                        ) : (
+                          this.getIconUrl(leave.purpose)
+                        )
+                      }
                       primaryText={
                         this.props.userData.findIndex(
                           user => user.uid === leave.userId

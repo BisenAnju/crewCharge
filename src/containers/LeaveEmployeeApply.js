@@ -31,10 +31,16 @@ class LeaveEmployeeApplyContainer extends React.Component {
   addLeaves = (leaveData, leaveType) => {
     let newDueDate = moment.utc(moment(leaveData.to).subtract(1, "days"))._d;
     let dueDate;
+    let purpose;
     if (leaveData.dueDate != null) {
       dueDate = leaveData.dueDate;
     } else {
       dueDate = newDueDate;
+    }
+    if (leaveType === "wfh") {
+      purpose = "work from home";
+    } else {
+      purpose = leaveData.purpose;
     }
     const addData = {
       leaveType,
@@ -42,7 +48,7 @@ class LeaveEmployeeApplyContainer extends React.Component {
       from: leaveData.from,
       to: leaveData.to,
       dueDate,
-      purpose: leaveData.purpose,
+      purpose,
       addedOn: new Date(),
       status: "personal",
       reason: leaveData.reason,
@@ -118,6 +124,7 @@ class LeaveEmployeeApplyContainer extends React.Component {
         leaveType,
         leaveStatus: "Pending",
         from: leaveData.from,
+        status: "personal",
         to: leaveData.to,
         dueDate: leaveData.dueDate,
         purpose: leaveData.purpose,
