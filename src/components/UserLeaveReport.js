@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../layouts/Layout";
+import { ActionHome } from "material-ui/svg-icons";
 import {
   List,
   ListItem,
@@ -57,8 +58,7 @@ class UserLeaveReport extends Component {
 
     if (this.props.match.params.index === "1") {
       var prevFirstDate = new Date(date.getFullYear(), date.getMonth() - 1, 1);
-      var prevLastDate = new Date(date.getYear(), date.getMonth(), 0);
-
+      var prevLastDate = new Date(date.getFullYear(), date.getMonth(), 0);
       let users = this.props.leaveData.filter(
         leave => leave.userId === this.props.singleData.uid
       );
@@ -165,10 +165,25 @@ class UserLeaveReport extends Component {
                       inset={true}
                       style={{ color: "#338dc1", fontWeight: "bold" }}
                     >
-                      {leave.leaveType}
+                      {leave.leaveType === "wfh"
+                        ? leave.purpose
+                        : leave.leaveType}
                     </Subheader>
                     <ListItem
-                      leftAvatar={this.getIconUrl(leave.purpose)}
+                      leftAvatar={
+                        leave.leaveType === "wfh" ? (
+                          <ActionHome
+                            style={{
+                              height: "27px",
+                              width: "27px",
+                              borderRadius: "0%",
+                              fill: "#0c76c1"
+                            }}
+                          />
+                        ) : (
+                          this.getIconUrl(leave.purpose)
+                        )
+                      }
                       secondaryText={leave.reason}
                       primaryText={
                         <p style={{ fontSize: 15 }}>

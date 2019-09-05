@@ -40,19 +40,6 @@ class LeaveReport extends Component {
       );
   }
 
-  handleChange = value => {
-    if (value === 0) {
-      this.currentMonth(this.state.leaveData, this.state.attendanceData);
-    } else if (value === 1) {
-      this.lastMonth(this.state.leaveData, this.state.attendanceData);
-    } else if (value === 2) {
-      this.setState({ currentMonthLeave: [] });
-    }
-    this.setState({
-      slideIndex: value
-    });
-  };
-
   currentMonth = (leave, attendance) => {
     var date = new Date();
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -94,6 +81,20 @@ class LeaveReport extends Component {
       currentMonthLeave: lastMonthLeave
     });
   };
+
+  handleChange = value => {
+    if (value === 0) {
+      this.currentMonth(this.state.leaveData, this.state.attendanceData);
+    } else if (value === 1) {
+      this.lastMonth(this.state.leaveData, this.state.attendanceData);
+    } else if (value === 2) {
+      this.setState({ currentMonthLeave: [] });
+    }
+    this.setState({
+      slideIndex: value
+    });
+  };
+
   render() {
     return (
       <Layout navigationTitle="Leave Report" showBackNavigation={true}>

@@ -34,11 +34,7 @@ class LeaveEmployeeWFH extends Component {
   }
   validateForm = e => {
     e.preventDefault();
-    if (
-      this.state.from === null ||
-      this.state.to === null ||
-      this.state.reason === ""
-    ) {
+    if (this.state.from === null || this.state.to === null) {
       this.setState({ snackOpen: true });
       return false;
     }

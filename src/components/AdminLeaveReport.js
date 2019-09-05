@@ -114,6 +114,7 @@ class AdminLeaveReport extends Component {
         <List>
           {this.props.userData.map((user, index) => {
             let leaveCount = [];
+            let wfhCount = [];
             let totalInTime = [];
             let sum = 0;
             let avg = 0;
@@ -129,9 +130,16 @@ class AdminLeaveReport extends Component {
               avg = sum / totalInTime.length;
             }
             if (this.state.leaveList.length > 0) {
-              leaveCount = this.state.leaveList.filter(
-                leave => leave.userId === user.uid
+              let filterLeaves = this.state.leaveList.filter(
+                leave => leave.leaveType !== "wfh"
               );
+              leaveCount = filterLeaves.filter(
+                item => item.userId === user.uid
+              );
+              let wfhLeaves = this.state.leaveList.filter(
+                leave => leave.leaveType === "wfh"
+              );
+              wfhCount = wfhLeaves.filter(item => item.userId === user.uid);
             }
             return (
               <ListItem
@@ -148,12 +156,16 @@ class AdminLeaveReport extends Component {
                     style={{
                       color: "maroon",
                       fontWeight: "bold",
-                      width: "70px"
+                      width: "127px",
+                      right: "0px"
                     }}
                   >
                     {leaveCount.length +
-                      " L ," +
-                      (!isNaN(avg) ? avg.toFixed(2) : 0)}
+                      " L , " +
+                      (!isNaN(avg) ? avg.toFixed(2) : 0) +
+                      (wfhCount.length > 0
+                        ? ", " + wfhCount.length + " WFH"
+                        : "")}
                   </span>
                 }
                 onClick={() => {
