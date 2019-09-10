@@ -32,7 +32,6 @@
     "react-dropzone": "^9.0.0",
     "react-multiple-datepicker": "^0.1.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "2.1.8",
     "react-swipeable-views": "^0.12.15",
     "recharts": "^1.7.1",
     "typescript": "^3.6.2"
