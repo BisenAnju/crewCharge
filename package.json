@@ -39,7 +39,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "lint": "eslint src",
-    "build": "node scripts/build.js",
+    "build": "yarn build",
     "android": "yarn build && cordova run android",
     "browser": "yarn build && cordova run browser",
     "ios": "yarn build && cordova run ios",
