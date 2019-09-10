@@ -39,9 +39,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf www && mv build www",
-    "buildW": "react-scripts build && ren build www",
-    "buildB": "react-scripts build",
+    "build": "react-scripts build",
     "lint": "eslint src",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
