@@ -32,18 +32,20 @@
     "react-dropzone": "^9.0.0",
     "react-multiple-datepicker": "^0.1.0",
     "react-router-dom": "^5.0.1",
+    "react-scripts": "^2.1.8",
     "react-swipeable-views": "^0.12.15",
-    "recharts": "^1.7.1",
-    "typescript": "^3.6.2"
+    "recharts": "^1.7.1"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "react-scripts start",
+    "build": "react-scripts build && rm -rf www && mv build www",
     "lint": "eslint src",
-    "build": "yarn build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "deploy": "yarn build && rm ./www/static/js/*.map && firebase deploy",
+    "deployWindows": "yarn build && del www\\static\\js\\*.map && firebase deploy",
     "android": "yarn build && cordova run android",
-    "browser": "yarn build && cordova run browser",
-    "ios": "yarn build && cordova run ios",
-    "test": "node scripts/test.js --env=jsdom"
+    "ios": "yarn build && cordova run ios"
   },
   "browserslist": [
     ">0.2%",
