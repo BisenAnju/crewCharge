@@ -34,7 +34,8 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-swipeable-views": "^0.12.15",
-    "recharts": "^1.7.1"
+    "recharts": "^1.7.1",
+    "typescript": "^3.6.2"
   },
   "scripts": {
     "start": "react-scripts start",
