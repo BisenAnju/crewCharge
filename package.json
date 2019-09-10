@@ -38,13 +38,17 @@
     "typescript": "^3.6.2"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+     "start": "react-scripts start",
+    "build": "react-scripts build && rm -rf www && mv build www",
+    "buildW": "react-scripts build && ren build www",
+    "buildB": "react-scripts build",
     "lint": "eslint src",
-    "build": "node scripts/build.js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "deploy": "yarn build && rm ./www/static/js/*.map && firebase deploy",
+    "deployWindows": "yarn build && del www\\static\\js\\*.map && firebase deploy",
     "android": "yarn build && cordova run android",
-    "browser": "yarn build && cordova run browser",
-    "ios": "yarn build && cordova run ios",
-    "test": "node scripts/test.js --env=jsdom"
+    "ios": "yarn build && cordova run ios"
   },
   "browserslist": [
     ">0.2%",
