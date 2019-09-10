@@ -39,7 +39,7 @@
   },
   "scripts": {
      "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf www && mv build www",
+    "build": "react-scripts build",
     "buildW": "react-scripts build && ren build www",
     "buildB": "react-scripts build",
     "lint": "eslint src",
