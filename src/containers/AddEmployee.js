@@ -17,7 +17,11 @@ class AddEmployeeContainer extends React.Component {
       .collection("users")
       .doc(data.employeeName)
       .update({
-        joiningDate: data.joiningDate
+        employeeName: data.empName,
+        joiningDate: data.joiningDate,
+        designation: data.designation,
+        location: data.location,
+        basicSalary: data.basicSalary
       })
       .then(() => this.props.history.goBack())
       .catch(err => {
