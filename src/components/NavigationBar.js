@@ -191,7 +191,23 @@ class NavigationBar extends React.Component {
                       />
                     }
                   />
-
+                  <ListItem
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/payroll");
+                    }}
+                    primaryText="Payroll Details"
+                    leftIcon={
+                      <ActionDashboard
+                        style={{
+                          fill: "#fd914d",
+                          heigth: "22px",
+                          width: "22px",
+                          left: "12px"
+                        }}
+                      />
+                    }
+                  />
                   <ListItem
                     onClick={e => {
                       e.preventDefault();

@@ -15,6 +15,7 @@ import TeamAllocationPeoplesListContainer from "./containers/TeamAllocationPeopl
 import ConfigurationContainer from "./containers/Configuration";
 import CalenderContainer from "./containers/Calender";
 import AddEmployeeContainer from "./containers/AddEmployee";
+import PayrollContainer from "./containers/Payroll";
 import LeaveReportContainer from "./containers/LeaveReport";
 import AttendanceContainer from "./containers/Attendance";
 import PermissionContainer from "./containers/Permission";
@@ -216,6 +217,10 @@ class App extends Component {
                 <Route
                   path={"/attendance"}
                   render={props => <AttendanceContainer {...props} />}
+                />
+                <Route
+                  path={"/payroll"}
+                  render={props => <PayrollContainer {...props} />}
                 />
                 <Route
                   path={"/calender"}
