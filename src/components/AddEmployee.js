@@ -27,12 +27,12 @@ class AddEmployee extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      employeeName: null,
-      empName: null,
-      joiningDate: null,
-      designation: null,
-      location: null,
-      basicSalary: null
+      employeeName: "",
+      empName: "",
+      joiningDate: "",
+      designation: "",
+      location: "",
+      basicSalary: ""
     };
   }
   selectChange = (event, index, employeeName) => {
