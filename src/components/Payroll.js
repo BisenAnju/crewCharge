@@ -7,160 +7,132 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-
 import PdfFormat from "../components/PdfFormat"
 class Payroll extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-
-
   render() {
     return (
       <Layout navigationTitle="Payroll" showBackNavigation={true}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "90%",
-            margin: "0% 5%",
-            // backgroundColor: "#e6e6f3"
-          }}
-          id="generatePdf"
-        >
+        <div style={{ height: "calc(100vh - 80px)", overflow: "scroll", paddingBottom: "5px" }}>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "left",
-              margin: "0% 5%"
+              width: "90%",
+              margin: "0% 5% 0%5%",
+              // backgroundColor: "#e6e6f3"
+              paddingTop: "8%"
             }}
+            id="generatePdf"
           >
             <div
               style={{
-                backgroundColor: "blue",
-                height: "10px",
-                margin: "5% 0%"
-              }}
-            />
-            <div style={{ fontSize: "0.8em", color: "blue" }}>
-              WisdomTree Edutech LLP
-            </div>
-            <div style={{ fontSize: "0.5em" }}>LLPIN: AAE- 5211</div>
-            <div style={{ fontSize: "0.5em" }}>210B, National Corporate Park</div>
-            <div style={{ fontSize: "0.5em" }}>G E Road, Raipur 492001</div>
-            <div style={{ fontSize: "0.5em" }}>Mob: +91 9300508989</div>
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "left"
-            }}
-          >
-            <div
-              style={{
-                fontSize: "0.8em",
-                color: "blue",
-                fontWeight: "bold",
-                margin: "5% 0% 1% 5%"
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "left",
+                margin: "0% 5%"
               }}
             >
-              Salary Slip
+              <div
+                style={{
+                  backgroundColor: "#17179e",
+                  height: "13px",
+                  margin: "4% 0%"
+                }}
+              />
+              <div style={{ fontSize: "1.5em", color: "blue", fontFamily: "Roboto" }}>
+                WisdomTree Edutech LLP
             </div>
+              <div style={{ color: "gray", marginTop: "5%", fontSize: "1em", fontFamily: "Roboto" }}>
+                <div>LLPIN: AAE- 5211</div>
+                <div>210B, National Corporate Park</div>
+                <div>G E Road, Raipur 492001</div>
+                <div>Mob: +91 9300508989</div>
+              </div>
+            </div>
+
             <div
               style={{
-                fontSize: "0.6em",
-                color: "#c5147f",
-                fontWeight: "bold",
-                margin: "0% 0% 3% 5%"
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "left"
               }}
             >
-              31st October 2018
+              <div
+                style={{
+                  fontSize: "2em",
+                  color: "#17179e",
+                  fontWeight: "bold",
+                  margin: "5% 0% 1% 5%"
+                }}
+              >
+                Salary Slip
             </div>
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column", margin: "0% 5% 5% 5%" }} >
-            {/*  <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div>Name</div>
-              <div>Mr Harshit Agrawal</div>
+              <div
+                style={{
+                  fontSize: "1em",
+                  color: "#c5147f",
+                  fontWeight: "bold",
+                  margin: "0% 0% 3% 5%",
+                  fontFamily: "Roboto"
+                }}
+              >
+                31st October 2018
             </div>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div>Designation</div>
-              <div>Software Developer</div>
             </div>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div>Salary Period</div>
-              <div>1st October 2018 to 31st October 2018</div>
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div>Location</div>
-              <div>Sundar Nagar</div>
-            </div> */}
 
-            <div >
-              {/* <table border>
-              <th>
-                <td>Description</td>
-                <td>Amount (Rs)</td>
-              </th>
-              <tr>
-                <td>Basic Salary</td>
-                <td>0.00</td>
-              </tr>
-            </table> */}
+            <div style={{ display: "flex", flexDirection: "column", margin: "6% 0% 0% 5%" }} >
+              <div>
+                <Table style={{ backgroundColor: "" }}>
+                  <TableBody displayRowCheckbox={false}>
+                    <TableRow style={{ borderStyle: "none", height: "30px" }}>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", padding: "0px", fontFamily: "Roboto" }}>Name</TableRowColumn>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>Harshit Agrawal</TableRowColumn>
+                    </TableRow>
 
+                    <TableRow style={{ borderStyle: "none", height: "30px", }}>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", padding: "0px", fontWeight: "bold", fontFamily: "Roboto" }}>Designation</TableRowColumn>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>Software Developer</TableRowColumn>
+                    </TableRow>
+                    <TableRow style={{ borderStyle: "none", height: "30px", }}>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", padding: "0px", fontWeight: "bold", fontFamily: "Roboto" }}>Salary Period</TableRowColumn>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>1st October 2018 to 31st October 2018</TableRowColumn>
+                    </TableRow>
+                    <TableRow style={{ borderStyle: "none", height: "30px", }}>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", padding: "0px", fontWeight: "bold", fontFamily: "Roboto" }}>Location</TableRowColumn>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>Sundar Nagar</TableRowColumn>
+                    </TableRow>
+                    <TableRow style={{ borderStyle: "none" }}>
+                      <TableRowColumn style={{ fontSize: "1.2em", color: "#17179e", fontWeight: "bold", padding: "0px", fontFamily: "Roboto" }}>Description</TableRowColumn>
+                      <TableRowColumn style={{ fontSize: "1em", fontWeight: "bold", whiteSpace: "normal", textAlign: "right", fontFamily: "Roboto" }}>Amount (Rs)</TableRowColumn>
+                    </TableRow>
+                    <TableRow style={{ borderBottom: "2px solid rgb(224, 224, 224)", height: "30px" }}>
+                      <TableRowColumn style={{ fontSize: "1em", padding: "0px", height: "30px", fontFamily: "Roboto" }}>Basic Salary</TableRowColumn>
+                      <TableRowColumn style={{ textAlign: "right", fontSize: "1em", height: "30px", fontFamily: "Roboto" }}>0.00</TableRowColumn>
+                    </TableRow>
+                    <TableRow style={{ borderBottom: "2px solid rgb(224, 224, 224)", height: "30px" }}>
+                      <TableRowColumn style={{ fontSize: "1em", padding: "0px", height: "30px", fontFamily: "Roboto" }}>Deductions</TableRowColumn>
+                      <TableRowColumn style={{ textAlign: "right", fontSize: "1em", height: "30px", fontFamily: "Roboto" }}>0.00</TableRowColumn>
+                    </TableRow>
+                    <TableRow style={{ borderStyle: "none", height: "30px" }}>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", padding: "0px", textAlign: "right", fontFamily: "Roboto" }}>Subtotal</TableRowColumn>
+                      <TableRowColumn style={{ textAlign: "right", height: "30px", fontSize: "1em", fontFamily: "Roboto" }}>  0.00</TableRowColumn>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+                <div>
+                </div>
 
-              <Table style={{ backgroundColor: "" }}>
-                <TableBody displayRowCheckbox={false}>
-
-                  <TableRow style={{ borderStyle: "none", height: "0px", }}>
-                    <TableRowColumn style={{ fontSize: "0.5em", height: "0px", fontWeight: "bold", padding: "0px" }}>Name</TableRowColumn>
-                    <TableRowColumn style={{ fontSize: "0.5em", height: "0px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px" }}>Harshit Agrawal</TableRowColumn>
-                  </TableRow>
-
-                  <TableRow style={{ borderStyle: "none", height: "0px", }}>
-                    <TableRowColumn style={{ fontSize: "0.5em", height: "0px", padding: "0px", fontWeight: "bold", }}>Designation</TableRowColumn>
-                    <TableRowColumn style={{ fontSize: "0.5em", height: "0px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px" }}>Software Developer</TableRowColumn>
-                  </TableRow>
-                  <TableRow style={{ borderStyle: "none", height: "0px", }}>
-                    <TableRowColumn style={{ fontSize: "0.5em", height: "0px", padding: "0px", fontWeight: "bold", }}>Salary Period</TableRowColumn>
-                    <TableRowColumn style={{ fontSize: "0.5em", height: "0px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px" }}>1st October 2018 to 31st October 2018</TableRowColumn>
-                  </TableRow>
-                  <TableRow style={{ borderStyle: "none", height: "0px", }}>
-                    <TableRowColumn style={{ fontSize: "0.5em", height: "0px", padding: "0px", fontWeight: "bold", }}>Location</TableRowColumn>
-                    <TableRowColumn style={{ fontSize: "0.5em", height: "0px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px" }}>Sundar Nagar</TableRowColumn>
-                  </TableRow>
-
-                  <TableRow style={{ borderStyle: "none" }}>
-                    <TableRowColumn style={{ fontSize: "1em", color: "blue", fontWeight: "bold", padding: "0px" }}>Description</TableRowColumn>
-                    <TableRowColumn style={{ fontSize: "0.5em", fontWeight: "bold", whiteSpace: "normal", textAlign: "right", }}>Amount (Rs)</TableRowColumn>
-                  </TableRow>
-                  <TableRow style={{ borderBottom: "1px solid rgb(224, 224, 224)", height: "0px" }}>
-                    <TableRowColumn style={{ fontSize: "0.5em", padding: "0px", height: "0px" }}>Basic Salary</TableRowColumn>
-                    <TableRowColumn style={{ textAlign: "right", fontSize: "0.5em", height: "0px" }}>0.00</TableRowColumn>
-                  </TableRow>
-                  <TableRow style={{ borderBottom: "1px solid rgb(224, 224, 224)", height: "0px" }}>
-                    <TableRowColumn style={{ fontSize: "0.5em", padding: "0px", height: "0px" }}>Deductions</TableRowColumn>
-                    <TableRowColumn style={{ textAlign: "right", fontSize: "0.5em", height: "0px" }}>0.00</TableRowColumn>
-                  </TableRow>
-                  <TableRow style={{ borderStyle: "none" }}>
-                    <TableRowColumn style={{ fontSize: "0.5em", padding: "0px", textAlign: "right" }}>Subtotal</TableRowColumn>
-                    <TableRowColumn style={{ textAlign: "right", fontSize: "0.5em" }}>  0.00</TableRowColumn>
-                  </TableRow>
-                </TableBody>
-              </Table>
+              </div>
             </div>
 
           </div>
-          <div style={{ margin: "auto" }} >
+          <div style={{ float: "right", marginRight: "5%" }}>
             <PdfFormat payrollId="generatePdf"></PdfFormat>
-
-
           </div>
-
         </div>
       </Layout >
     );
