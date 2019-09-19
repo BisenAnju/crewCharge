@@ -109,17 +109,17 @@ class Payroll extends React.Component {
                       <TableRowColumn style={{ fontSize: "1.2em", color: "#17179e", fontWeight: "bold", padding: "0px", fontFamily: "Roboto" }}>Description</TableRowColumn>
                       <TableRowColumn style={{ fontSize: "1em", fontWeight: "bold", whiteSpace: "normal", textAlign: "right", fontFamily: "Roboto" }}>Amount (Rs)</TableRowColumn>
                     </TableRow>
-                    <TableRow style={{ borderBottom: "2px solid rgb(224, 224, 224)", height: "30px" }}>
-                      <TableRowColumn style={{ fontSize: "1em", padding: "0px", height: "30px", fontFamily: "Roboto" }}>Basic Salary</TableRowColumn>
-                      <TableRowColumn style={{ textAlign: "right", fontSize: "1em", height: "30px", fontFamily: "Roboto" }}>0.00</TableRowColumn>
+                    <TableRow style={{ borderBottom: "2px solid rgb(224, 224, 224)" }}>
+                      <TableRowColumn style={{ fontSize: "1em", padding: "0px", fontFamily: "Roboto" }}>Basic Salary</TableRowColumn>
+                      <TableRowColumn style={{ textAlign: "right", fontSize: "1em", fontFamily: "Roboto" }}>0.00</TableRowColumn>
                     </TableRow>
-                    <TableRow style={{ borderBottom: "2px solid rgb(224, 224, 224)", height: "30px" }}>
-                      <TableRowColumn style={{ fontSize: "1em", padding: "0px", height: "30px", fontFamily: "Roboto" }}>Deductions</TableRowColumn>
-                      <TableRowColumn style={{ textAlign: "right", fontSize: "1em", height: "30px", fontFamily: "Roboto" }}>0.00</TableRowColumn>
+                    <TableRow style={{ borderBottom: "2px solid rgb(224, 224, 224)", }}>
+                      <TableRowColumn style={{ fontSize: "1em", padding: "0px", fontFamily: "Roboto" }}>Deductions</TableRowColumn>
+                      <TableRowColumn style={{ textAlign: "right", fontSize: "1em", fontFamily: "Roboto" }}>0.00</TableRowColumn>
                     </TableRow>
-                    <TableRow style={{ borderStyle: "none", height: "30px" }}>
-                      <TableRowColumn style={{ fontSize: "1em", height: "30px", padding: "0px", textAlign: "right", fontFamily: "Roboto" }}>Subtotal</TableRowColumn>
-                      <TableRowColumn style={{ textAlign: "right", height: "30px", fontSize: "1em", fontFamily: "Roboto" }}>  0.00</TableRowColumn>
+                    <TableRow style={{ borderStyle: "none" }}>
+                      <TableRowColumn style={{ fontSize: "1em", padding: "0px", textAlign: "right", fontFamily: "Roboto" }}>Subtotal</TableRowColumn>
+                      <TableRowColumn style={{ textAlign: "right", fontSize: "1em", fontFamily: "Roboto" }}>  0.00</TableRowColumn>
                     </TableRow>
                   </TableBody>
                 </Table>
