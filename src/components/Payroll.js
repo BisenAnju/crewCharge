@@ -11,12 +11,25 @@ import PdfFormat from "../components/PdfFormat"
 class Payroll extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { currentUser: [] };
+  }
+  componentWillMount() {
+    const currentUser = this.props.userData.find(
+      user => user.uid === this.props.match.params.id
+    );
+    this.setState({
+      currentUser
+    }, () => { console.log(this.state.currentUser.employeeName) });
   }
   render() {
+
     return (
       <Layout navigationTitle="Payroll" showBackNavigation={true}>
+
         <div style={{ height: "calc(100vh - 80px)", overflow: "scroll", paddingBottom: "5px" }}>
+          <div style={{ marginLeft: "87%", position: 'fixed' }}>
+            <PdfFormat payrollId="generatePdf"></PdfFormat>
+          </div>
           <div
             style={{
               display: "flex",
@@ -84,18 +97,18 @@ class Payroll extends React.Component {
             </div>
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column", margin: "6% 0% 0% 5%" }} >
+            <div style={{ display: "flex", flexDirection: "column", margin: "6% 5% 0% 5%" }} >
               <div>
                 <Table style={{ backgroundColor: "" }}>
                   <TableBody displayRowCheckbox={false}>
                     <TableRow style={{ borderStyle: "none", height: "30px" }}>
                       <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", padding: "0px", fontFamily: "Roboto" }}>Name</TableRowColumn>
-                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>Harshit Agrawal</TableRowColumn>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>{this.state.currentUser.employeeName}</TableRowColumn>
                     </TableRow>
 
                     <TableRow style={{ borderStyle: "none", height: "30px", }}>
                       <TableRowColumn style={{ fontSize: "1em", height: "30px", padding: "0px", fontWeight: "bold", fontFamily: "Roboto" }}>Designation</TableRowColumn>
-                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>Software Developer</TableRowColumn>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>{this.state.currentUser.designation}</TableRowColumn>
                     </TableRow>
                     <TableRow style={{ borderStyle: "none", height: "30px", }}>
                       <TableRowColumn style={{ fontSize: "1em", height: "30px", padding: "0px", fontWeight: "bold", fontFamily: "Roboto" }}>Salary Period</TableRowColumn>
@@ -103,7 +116,7 @@ class Payroll extends React.Component {
                     </TableRow>
                     <TableRow style={{ borderStyle: "none", height: "30px", }}>
                       <TableRowColumn style={{ fontSize: "1em", height: "30px", padding: "0px", fontWeight: "bold", fontFamily: "Roboto" }}>Location</TableRowColumn>
-                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>Sundar Nagar</TableRowColumn>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>{this.state.currentUser.location}</TableRowColumn>
                     </TableRow>
                     <TableRow style={{ borderStyle: "none" }}>
                       <TableRowColumn style={{ fontSize: "1.2em", color: "#17179e", fontWeight: "bold", padding: "0px", fontFamily: "Roboto" }}>Description</TableRowColumn>
@@ -111,7 +124,7 @@ class Payroll extends React.Component {
                     </TableRow>
                     <TableRow style={{ borderBottom: "2px solid rgb(224, 224, 224)" }}>
                       <TableRowColumn style={{ fontSize: "1em", padding: "0px", fontFamily: "Roboto" }}>Basic Salary</TableRowColumn>
-                      <TableRowColumn style={{ textAlign: "right", fontSize: "1em", fontFamily: "Roboto" }}>0.00</TableRowColumn>
+                      <TableRowColumn style={{ textAlign: "right", fontSize: "1em", fontFamily: "Roboto" }}>{this.state.currentUser.basicSalary}</TableRowColumn>
                     </TableRow>
                     <TableRow style={{ borderBottom: "2px solid rgb(224, 224, 224)", }}>
                       <TableRowColumn style={{ fontSize: "1em", padding: "0px", fontFamily: "Roboto" }}>Deductions</TableRowColumn>
@@ -119,7 +132,7 @@ class Payroll extends React.Component {
                     </TableRow>
                     <TableRow style={{ borderStyle: "none" }}>
                       <TableRowColumn style={{ fontSize: "1em", padding: "0px", textAlign: "right", fontFamily: "Roboto" }}>Subtotal</TableRowColumn>
-                      <TableRowColumn style={{ textAlign: "right", fontSize: "1em", fontFamily: "Roboto" }}>  0.00</TableRowColumn>
+                      <TableRowColumn style={{ textAlign: "right", fontSize: "1em", fontFamily: "Roboto" }}>{this.state.currentUser.basicSalary}</TableRowColumn>
                     </TableRow>
                   </TableBody>
                 </Table>
@@ -130,9 +143,7 @@ class Payroll extends React.Component {
             </div>
 
           </div>
-          <div style={{ float: "right", marginRight: "5%" }}>
-            <PdfFormat payrollId="generatePdf"></PdfFormat>
-          </div>
+
         </div>
       </Layout >
     );
