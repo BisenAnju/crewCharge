@@ -28,7 +28,7 @@ class Payroll extends React.Component {
 
         <div style={{ height: "calc(100vh - 80px)", overflow: "scroll", paddingBottom: "5px" }}>
           <div style={{ marginLeft: "87%", position: 'fixed' }}>
-            <PdfFormat payrollId="generatePdf"></PdfFormat>
+            <PdfFormat payrollId={this.state.currentUser.employeeName}></PdfFormat>
           </div>
           <div
             style={{
@@ -39,7 +39,7 @@ class Payroll extends React.Component {
               // backgroundColor: "#e6e6f3"
               paddingTop: "8%"
             }}
-            id="generatePdf"
+            id={this.state.currentUser.employeeName}
           >
             <div
               style={{
@@ -116,7 +116,7 @@ class Payroll extends React.Component {
                     </TableRow>
                     <TableRow style={{ borderStyle: "none", height: "30px", }}>
                       <TableRowColumn style={{ fontSize: "1em", height: "30px", padding: "0px", fontWeight: "bold", fontFamily: "Roboto" }}>Location</TableRowColumn>
-                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>{this.state.currentUser.location}</TableRowColumn>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>301 Gore Parisar , near Shyamiyana Palace,Civil lines,Raipur (C.G.) </TableRowColumn>
                     </TableRow>
                     <TableRow style={{ borderStyle: "none" }}>
                       <TableRowColumn style={{ fontSize: "1.2em", color: "#17179e", fontWeight: "bold", padding: "0px", fontFamily: "Roboto" }}>Description</TableRowColumn>
