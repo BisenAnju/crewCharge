@@ -1,10 +1,7 @@
 import React from "react";
 import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-
-import { ImagePictureAsPdf } from "material-ui/svg-icons";
-//import { Download } from "material-ui/svg-icons";
-
+import { FileFileDownload } from "material-ui/svg-icons";
 
 const PdfFormat = ({ payrollId }) => (
     <div className="tc mb4 mt2">
@@ -65,7 +62,7 @@ const PdfFormat = ({ payrollId }) => (
 
 
         >
-            <ImagePictureAsPdf />
+            < FileFileDownload style={{ fill: "rgb(253, 145, 77)" }} />
         </div>
     </div>
 );
