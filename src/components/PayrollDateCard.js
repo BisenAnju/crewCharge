@@ -4,23 +4,10 @@ import { Avatar } from "material-ui";
 
 import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import Subheader from 'material-ui/Subheader';
-import { grey400, darkBlack, lightBlack } from 'material-ui/styles/colors';
-import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import IconMenu from 'material-ui/IconMenu';
-import { ImagePictureAsPdf } from "material-ui/svg-icons";
-import { cyan900 } from 'material-ui/styles/colors';
-import moment from 'moment'
-const rightIconMenu = (
-    <IconButton
-        touch={true}
-        tooltipPosition="bottom-center"
-    >
-        <ImagePictureAsPdf onClick={console.log("Anju")} />
-    </IconButton>
 
-);
+import { ImagePictureAsPdf } from "material-ui/svg-icons";
+
+import moment from 'moment'
 
 class PayrollDateCard extends React.Component {
     constructor(props) {
@@ -28,13 +15,45 @@ class PayrollDateCard extends React.Component {
         this.state = { currentUser: [], expanded: false, monthArray: [] };
     }
     componentWillMount() {
+        console.log(this.props.userData)
         const currentUser = this.props.userData.find(
             user => user.uid === this.props.match.params.id
         );
         this.setState({
             currentUser
         }, () => {
-            console.log(this.state.currentUser.joiningDate)
+            console.log(this.state.currentUser)
+            if (this.state.currentUser !== undefined) {
+                var firedate = this.state.currentUser.joiningDate
+                console.log("firedate " + firedate)
+                var datee = new Date(firedate.seconds * 1000)
+                var date1 = new Date()
+                var fomatDate1 = moment(datee).format("YYYY/MM/DD")
+                var fomatDate2 = moment(date1).format("YYYY/MM/DD")
+                var dateStart = moment(fomatDate1);
+                var dateEnd = moment(fomatDate2);
+                var timeValues = [];
+                while (dateEnd > dateStart || dateStart.format('M') === dateEnd.format('M')) {
+                    timeValues.push(dateStart.format('MMM'));
+                    dateStart.add(1, 'month');
+                }
+                console.log(timeValues)
+                this.setState({ monthArray: timeValues })
+            }
+        });
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        console.log(nextProps.userData)
+
+
+        const currentUser = nextProps.userData.find(
+            user => user.uid === this.props.match.params.id
+        );
+        this.setState({
+            currentUser
+        }, () => {
+            console.log(this.state.currentUser)
             var firedate = this.state.currentUser.joiningDate
             console.log("firedate " + firedate)
             var datee = new Date(firedate.seconds * 1000)
@@ -55,7 +74,6 @@ class PayrollDateCard extends React.Component {
             this.setState({ monthArray: timeValues })
         });
     }
-
     render() {
         console.log(this.props.match.params.id)
         return (
@@ -71,7 +89,8 @@ class PayrollDateCard extends React.Component {
                             {this.state.monthArray.map((months, index) => {
 
                                 return (
-                                    <div><ListItem
+                                    <div key={index}><ListItem
+
                                         disabled
                                         leftAvatar={<Avatar backgroundColor="rgb(253, 145, 77)" style={{ fontSize: "13px", fontWeight: 'bold' }} >{months}</Avatar>}
                                         primaryText={this.state.currentUser.designation}

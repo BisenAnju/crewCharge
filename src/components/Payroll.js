@@ -112,7 +112,7 @@ class Payroll extends React.Component {
                     </TableRow>
                     <TableRow style={{ borderStyle: "none", height: "30px", }}>
                       <TableRowColumn style={{ fontSize: "1em", height: "30px", padding: "0px", fontWeight: "bold", fontFamily: "Roboto" }}>Salary Period</TableRowColumn>
-                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>1st October 2018 to 31st October 2018</TableRowColumn>
+                      <TableRowColumn style={{ fontSize: "1em", height: "30px", fontWeight: "bold", whiteSpace: "normal", paddingRight: "0px", paddingLeft: "0px", fontFamily: "Roboto" }}>1st Apr 2019 to 30th Aprl 2019</TableRowColumn>
                     </TableRow>
                     <TableRow style={{ borderStyle: "none", height: "30px", }}>
                       <TableRowColumn style={{ fontSize: "1em", height: "30px", padding: "0px", fontWeight: "bold", fontFamily: "Roboto" }}>Location</TableRowColumn>

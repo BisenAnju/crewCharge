@@ -7,7 +7,6 @@ import {
   withRouter,
   Switch
 } from "react-router-dom";
-import moment from "moment"
 import PayrollList from "../components/PayrollList"
 import PayrollDateCard from "../components/PayrollDateCard";
 class PayrollContainer extends React.Component {
