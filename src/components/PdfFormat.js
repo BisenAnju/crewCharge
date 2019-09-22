@@ -35,6 +35,7 @@ const PdfFormat = ({ payrollId }) => (
                     doc.save(fileName);
                 });
                 if (window.cordova) {
+                    // let platform = window.device.platform;
                     let options = {
                         documentSize: "A4",
                         fileName: `${fileName}`,
