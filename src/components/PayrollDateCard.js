@@ -25,9 +25,11 @@ class PayrollDateCard extends React.Component {
             console.log(this.state.currentUser)
             if (this.state.currentUser !== undefined) {
                 var firedate = this.state.currentUser.joiningDate
-                console.log("firedate " + firedate)
+
                 var datee = new Date(firedate.seconds * 1000)
                 var date1 = new Date()
+                console.log("firedate " + datee)
+
                 var fomatDate1 = moment(datee).format("YYYY/MM/DD")
                 var fomatDate2 = moment(date1).format("YYYY/MM/DD")
                 var dateStart = moment(fomatDate1);
@@ -58,6 +60,7 @@ class PayrollDateCard extends React.Component {
             console.log("firedate " + firedate)
             var datee = new Date(firedate.seconds * 1000)
             var date1 = new Date()
+
             var fomatDate1 = moment(datee).format("YYYY/MM/DD")
             var fomatDate2 = moment(date1).format("YYYY/MM/DD")
             console.log(fomatDate1 + " hello " + fomatDate2)

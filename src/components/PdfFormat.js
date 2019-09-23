@@ -26,7 +26,6 @@ const PdfFormat = ({ payrollId }) => (
                     doc.addImage(imgData, "PNG", 3, 3, 595, 842);
                     heightLeft -= pageHeight;
                     while (heightLeft >= 0) {
-
                         doc.addPage();
                         doc.addImage(imgData, "PNG", 3, 3, 595, 842);
                         heightLeft -= pageHeight;
