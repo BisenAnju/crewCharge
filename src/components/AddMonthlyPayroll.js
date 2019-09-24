@@ -4,31 +4,30 @@ import {
   SelectField,
   MenuItem,
   DatePicker,
-  TimePicker
+  TextField
 } from "material-ui";
 import moment from "moment";
 
-class AddAttendance extends Component {
+class AddMonthlyPayroll extends Component {
   constructor(props) {
     super(props);
-    this.state = { userName: "", attDate: null, inTime: null, outTime: null };
+    this.state = { userName: "", month: null, designation: "", salary: 0 };
   }
   handleUserName = (event, index, userName) => this.setState({ userName });
+  handleDesignation = (event, index, designation) =>
+    this.setState({ designation });
   changeDate = (event, date) => {
     this.setState({
-      attDate: date
+      month: date
     });
   };
-  handleInTime = (event, date) => {
-    this.setState({ inTime: date });
+  salaryChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
-  handleOutTime = (event, date) => {
-    this.setState({ outTime: date });
-  };
-  handleAttendance = e => {
+  handlePayroll = e => {
     e.preventDefault();
-    this.props.addAttendance({ ...this.state });
-    this.setState({ userName: "", attDate: null, inTime: null, outTime: null });
+    this.props.addPayroll({ ...this.state });
+    this.setState({ userName: "", month: null, designation: "", salary: 0 });
   };
   render() {
     return (
@@ -59,31 +58,33 @@ class AddAttendance extends Component {
         </div>
 
         <div>
+          <SelectField
+            floatingLabelText="Designation"
+            value={this.state.designation}
+            onChange={this.handleDesignation}
+          >
+            <MenuItem value="trainee" primaryText="Trainee" />
+            <MenuItem value="developer" primaryText="Software Developer" />
+          </SelectField>
+        </div>
+
+        <div>
           <DatePicker
             autoOk
-            hintText="Attendance date"
+            hintText="Salary date"
             formatDate={date => moment(date).format("DD/MM/YYYY")}
-            value={this.state.attDate}
+            value={this.state.month}
             onChange={this.changeDate}
           />
         </div>
 
         <div>
-          <TimePicker
-            autoOk
-            format="24hr"
-            hintText="In time"
-            value={this.state.inTime}
-            onChange={this.handleInTime}
-          />
-        </div>
-        <div>
-          <TimePicker
-            autoOk
-            format="24hr"
-            hintText="Out time"
-            value={this.state.outTime}
-            onChange={this.handleOutTime}
+          <TextField
+            floatingLabelText="Salary"
+            onChange={this.salaryChange}
+            value={this.state.salary}
+            type="number"
+            name="salary"
           />
         </div>
 
@@ -92,11 +93,11 @@ class AddAttendance extends Component {
             label="SAVE"
             backgroundColor="#fd914d"
             labelColor="white"
-            onClick={this.handleAttendance}
+            onClick={this.handlePayroll}
           />
         </div>
       </div>
     );
   }
 }
-export default AddAttendance;
+export default AddMonthlyPayroll;

@@ -1,5 +1,4 @@
 import React from "react";
-import Payroll from "../components/Payroll";
 import withFirebase from "../hoc/withFirebase";
 import {
   Route,
@@ -7,7 +6,8 @@ import {
   withRouter,
   Switch
 } from "react-router-dom";
-import PayrollList from "../components/PayrollList"
+import Payroll from "../components/Payroll";
+import PayrollList from "../components/PayrollList";
 import PayrollDateCard from "../components/PayrollDateCard";
 class PayrollContainer extends React.Component {
   constructor(props) {
@@ -20,11 +20,12 @@ class PayrollContainer extends React.Component {
   componentWillMount() {
     this.props.db
       .collection("users")
-      // .orderBy("displayName")
-      .onSnapshot(
-        snapshot => {
+      .orderBy("displayName")
+      .get()
+      .then(
+        item => {
           const userData = [];
-          snapshot.forEach(doc => {
+          item.forEach(doc => {
             if (doc.exists) {
               userData.push(doc.data());
             }
@@ -32,7 +33,7 @@ class PayrollContainer extends React.Component {
           this.setState({
             isLoading: false,
             userData
-          }, () => { console.log(this.state.userData) });
+          });
         },
         err => {
           console.log(`Encountered error: ${err}`);
@@ -55,19 +56,13 @@ class PayrollContainer extends React.Component {
               <Route
                 exact
                 path={"/payroll/:id"}
-                render={props => (
-                  <PayrollDateCard  {...props} userData={this.state.userData} />
-                )}
+                render={props => <PayrollDateCard {...props} {...this.state} />}
               />
               <Route
                 exact
-                path={"/payroll/date/:id"}
+                path={"/payroll/:month/:id"}
                 render={props => (
-                  <Payroll
-                    {...props}
-                    userData={this.state.userData}
-                  />
-
+                  <Payroll {...props} userData={this.state.userData} />
                 )}
               />
             </div>

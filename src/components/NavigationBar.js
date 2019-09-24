@@ -35,7 +35,6 @@ class NavigationBar extends React.Component {
   handleClose = () => this.setState({ open: false });
 
   render() {
-
     return (
       <div>
         <AppBar
@@ -63,8 +62,8 @@ class NavigationBar extends React.Component {
               {this.props.showBackNavigation ? (
                 <NavigationArrowBack color="#fd914d" />
               ) : (
-                  <NavigationMenu color="#fd914d" />
-                )}
+                <NavigationMenu color="#fd914d" />
+              )}
             </IconButton>
           }
           iconElementRight={
@@ -107,8 +106,8 @@ class NavigationBar extends React.Component {
                       user => user.photoURL === this.props.user.photoURL
                     ) >= 0
                       ? this.props.userData.find(
-                        user => user.photoURL === this.props.user.photoURL
-                      ).photoURL
+                          user => user.photoURL === this.props.user.photoURL
+                        ).photoURL
                       : "null"
                   }
                 />
@@ -365,9 +364,9 @@ class NavigationBar extends React.Component {
                     <ListItem
                       onClick={e => {
                         e.preventDefault();
-                        this.props.history.push(`/payroll/${this.props.user.uid}`);
-                        // this.props.history.push("/payroll");
-
+                        this.props.history.push(
+                          `/payroll/${this.props.user.uid}`
+                        );
                       }}
                       primaryText="My Payslip"
                       leftIcon={
@@ -387,27 +386,27 @@ class NavigationBar extends React.Component {
             <Divider />
             {this.props.userData.map((user, index) =>
               user.uid === this.props.user.uid &&
-                user.userType === "Employee" ? (
-                  <ListItem
-                    key={index}
-                    onClick={e => {
-                      e.preventDefault();
-                      this.props.history.push("/privacypolicy");
-                    }}
-                    primaryText="Privacy Policy"
-                    leftIcon={
-                      <Avatar
-                        backgroundColor="white"
-                        src={privacy}
-                        style={{
-                          borderRadius: 0,
-                          marginLeft: "22px",
-                          marginTop: "10px"
-                        }}
-                      />
-                    }
-                  />
-                ) : null
+              user.userType === "Employee" ? (
+                <ListItem
+                  key={index}
+                  onClick={e => {
+                    e.preventDefault();
+                    this.props.history.push("/privacypolicy");
+                  }}
+                  primaryText="Privacy Policy"
+                  leftIcon={
+                    <Avatar
+                      backgroundColor="white"
+                      src={privacy}
+                      style={{
+                        borderRadius: 0,
+                        marginLeft: "22px",
+                        marginTop: "10px"
+                      }}
+                    />
+                  }
+                />
+              ) : null
             )}
 
             <Divider />

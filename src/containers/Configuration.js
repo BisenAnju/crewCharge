@@ -57,9 +57,7 @@ class ConfigurationContainer extends React.Component {
   }
 
   addHolidays = data => {
-    console.log(data.holidays);
     const holidayRef = this.props.db.collection("holiday_master").doc("2019");
-
     holidayRef
       .get()
       .then(querySnapshot => {
@@ -120,12 +118,40 @@ class ConfigurationContainer extends React.Component {
       });
   };
 
+  addPayroll = payrollData => {
+    const payrollObject = {
+      date: payrollData.month,
+      designation: payrollData.designation,
+      salary: payrollData.salary
+    };
+    this.props.db
+      .collection("users")
+      .doc(payrollData.userName)
+      .get()
+      .then(querySnapshot => {
+        var payroll = [];
+        if (querySnapshot.exists) {
+          payroll = querySnapshot.data().payroll;
+          payroll.push(payrollObject);
+        }
+        this.props.db
+          .collection("users")
+          .doc(payrollData.userName)
+          .update({
+            payroll
+          });
+      })
+      .catch(err => {
+        console.log("Error getting documents", err);
+      });
+  };
   render() {
     return (
       <Configuration
         addPurpose={this.addPurpose}
         addAttendance={this.addAttendance}
         addHolidays={this.addHolidays}
+        addPayroll={this.addPayroll}
         purposeData={this.state.purposeData}
         userData={this.state.userData}
       />
