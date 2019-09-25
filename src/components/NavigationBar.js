@@ -62,8 +62,8 @@ class NavigationBar extends React.Component {
               {this.props.showBackNavigation ? (
                 <NavigationArrowBack color="#fd914d" />
               ) : (
-                <NavigationMenu color="#fd914d" />
-              )}
+                  <NavigationMenu color="#fd914d" />
+                )}
             </IconButton>
           }
           iconElementRight={
@@ -106,8 +106,8 @@ class NavigationBar extends React.Component {
                       user => user.photoURL === this.props.user.photoURL
                     ) >= 0
                       ? this.props.userData.find(
-                          user => user.photoURL === this.props.user.photoURL
-                        ).photoURL
+                        user => user.photoURL === this.props.user.photoURL
+                      ).photoURL
                       : "null"
                   }
                 />
@@ -386,27 +386,27 @@ class NavigationBar extends React.Component {
             <Divider />
             {this.props.userData.map((user, index) =>
               user.uid === this.props.user.uid &&
-              user.userType === "Employee" ? (
-                <ListItem
-                  key={index}
-                  onClick={e => {
-                    e.preventDefault();
-                    this.props.history.push("/privacypolicy");
-                  }}
-                  primaryText="Privacy Policy"
-                  leftIcon={
-                    <Avatar
-                      backgroundColor="white"
-                      src={privacy}
-                      style={{
-                        borderRadius: 0,
-                        marginLeft: "22px",
-                        marginTop: "10px"
-                      }}
-                    />
-                  }
-                />
-              ) : null
+                user.userType === "Employee" ? (
+                  <ListItem
+                    key={index}
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/privacypolicy");
+                    }}
+                    primaryText="Privacy Policy"
+                    leftIcon={
+                      <Avatar
+                        backgroundColor="white"
+                        src={privacy}
+                        style={{
+                          borderRadius: 0,
+                          marginLeft: "22px",
+                          marginTop: "10px"
+                        }}
+                      />
+                    }
+                  />
+                ) : null
             )}
 
             <Divider />
@@ -434,7 +434,7 @@ class NavigationBar extends React.Component {
                 textAlign: "center"
               }}
             >
-              v1.0.11
+              v1.0.13
             </div>
 
             {/* <ListItem
