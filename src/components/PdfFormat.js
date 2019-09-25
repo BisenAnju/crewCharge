@@ -58,7 +58,7 @@ const PdfFormat = ({ payrollId }) => (
         backgroundColor="#a4c639"
         hoverColor="#8AA62F"
         icon={<FileFileDownload color="white" />}
-        style={{ minWidth: "60px" }}
+        style={{ minWidth: "60px", }}
       />
     </div>
   </div>

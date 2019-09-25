@@ -13,7 +13,7 @@ class Payroll extends React.Component {
     super(props);
     this.state = {
       currentUser: [],
-      monthData:[],
+      monthData: [],
       yr: 0, mon: "", days: 0
     };
   }
@@ -24,15 +24,15 @@ class Payroll extends React.Component {
     this.setState({
       currentUser
     }, () => {
-        const monthData = this.state.currentUser.payroll.find(
-          payroll => moment(payroll.date.seconds * 1000).format("ll") === this.props.match.params.month
-        );
+      const monthData = this.state.currentUser.payroll.find(
+        payroll => moment(payroll.date.seconds * 1000).format("ll") === this.props.match.params.month
+      );
       var datee = new Date(monthData.date.seconds * 1000)
       var month = datee.getMonth() + 1;
       var year = datee.getFullYear();
       var monthName = moment(datee).format("MMM")
-        var dayCounter = new Date(year, month, 0).getDate();
-        this.setState({ yr: year, mon: monthName, days: dayCounter,monthData})
+      var dayCounter = new Date(year, month, 0).getDate();
+      this.setState({ yr: year, mon: monthName, days: dayCounter, monthData })
     });
   }
   render() {
@@ -40,7 +40,7 @@ class Payroll extends React.Component {
       <Layout navigationTitle="Payroll" showBackNavigation={true}>
 
         <div style={{ height: "calc(100vh - 80px)", overflow: "scroll", paddingBottom: "5px" }}>
-          <div style={{ marginLeft: "82%", position: 'fixed' }}>
+          <div style={{ marginLeft: "81%", position: 'fixed' }}>
             <PdfFormat payrollId={this.state.currentUser.employeeName}></PdfFormat>
           </div>
           <div
@@ -48,7 +48,7 @@ class Payroll extends React.Component {
               display: "flex",
               flexDirection: "column",
               width: "90%",
-              margin: "0% 5% 0%5%",
+              margin: "2% 5% 0%5%",
               paddingTop: "8%"
             }}
             id={this.state.currentUser.employeeName}
@@ -105,8 +105,8 @@ class Payroll extends React.Component {
                   fontFamily: "Roboto"
                 }}
               >
-                {this.state.days +" " + this.state.mon + " " + this.state.yr}
-            </div>
+                {this.state.days + " " + this.state.mon + " " + this.state.yr}
+              </div>
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", margin: "6% 5% 0% 5%" }} >
