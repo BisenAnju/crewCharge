@@ -4,6 +4,7 @@ import { Avatar, CircularProgress, List, ListItem, Divider } from "material-ui";
 import { ImagePictureAsPdf } from "material-ui/svg-icons";
 import moment from "moment";
 
+
 class PayrollDateCard extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +33,7 @@ class PayrollDateCard extends React.Component {
     });
   }
   render() {
+
     return (
       <Layout navigationTitle="Payroll" showBackNavigation={true}>
         <div
@@ -47,8 +49,9 @@ class PayrollDateCard extends React.Component {
                 <center>
                   <CircularProgress />
                 </center>
-              ) : (
+              ) : this.state.currentUser.payroll === undefined ? <div style={{ margin: "33px 0px 0px 42px", fontSize: "1.2em", color: "#061e4a" }}> <p>No salary slip available yet...</p> </div> : (
                 this.state.currentUser.payroll.map((item, index) => {
+
                   return (
                     <div key={index}>
                       <ListItem
@@ -67,11 +70,11 @@ class PayrollDateCard extends React.Component {
                             onClick={() => {
                               this.props.history.push(
                                 "/payroll/" +
-                                  moment(item.date.seconds * 1000).format(
-                                    "ll"
-                                  ) +
-                                  "/" +
-                                  this.state.currentUser.uid
+                                moment(item.date.seconds * 1000).format(
+                                  "ll"
+                                ) +
+                                "/" +
+                                this.state.currentUser.uid
                               );
                             }}
                           />
