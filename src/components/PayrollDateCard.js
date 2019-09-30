@@ -51,7 +51,6 @@ class PayrollDateCard extends React.Component {
                 </center>
               ) : this.state.currentUser.payroll === undefined ? <div style={{ margin: "33px 0px 0px 42px", fontSize: "1.2em", color: "#061e4a" }}> <p>No salary slip available yet...</p> </div> : (
                 this.state.currentUser.payroll.map((item, index) => {
-
                   return (
                     <div key={index}>
                       <ListItem

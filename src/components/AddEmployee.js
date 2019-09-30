@@ -131,7 +131,7 @@ class AddEmployee extends Component {
                 onChange={this.handleDesignationChange}
               />
             </div>
-            <div>
+            {/* <div>
               <TextField
                 hintText="Location"
                 floatingLabelText="Location"
@@ -140,7 +140,7 @@ class AddEmployee extends Component {
                 value={this.state.location}
                 onChange={this.handleLocationChange}
               />
-            </div>
+            </div> */}
             <div>
               <TextField
                 hintText="Basic Salary"
@@ -159,7 +159,7 @@ class AddEmployee extends Component {
             >
               <List>
                 {this.props.employeeData.map((empData, index) =>
-                  empData.payroll !== undefined ? (
+                  empData.joiningDate !== undefined ? (
                     <ListItem
                       key={index}
                       leftAvatar={<Avatar src={empData.photoURL} size={30} />}

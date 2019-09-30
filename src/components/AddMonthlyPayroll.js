@@ -47,13 +47,15 @@ class AddMonthlyPayroll extends Component {
             value={this.state.userName}
             onChange={this.handleUserName}
           >
-            {this.props.userData.map((user, index) => (
-              <MenuItem
-                key={index}
-                value={user.uid}
-                primaryText={user.displayName}
-              />
-            ))}
+            {this.props.userData
+              .filter(data => data.joiningDate !== undefined)
+              .map((user, index) => (
+                <MenuItem
+                  key={index}
+                  value={user.uid}
+                  primaryText={user.displayName}
+                />
+              ))}
           </SelectField>
         </div>
 

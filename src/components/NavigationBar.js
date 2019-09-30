@@ -15,7 +15,6 @@ import {
 import {
   NavigationMenu,
   NavigationArrowBack,
-  ActionHome,
   ActionPowerSettingsNew,
   NotificationEventNote,
   SocialGroup,
@@ -57,8 +56,9 @@ class NavigationBar extends React.Component {
               ? this.props.history.goBack()
               : this.handleToggle()
           }
+
           iconElementLeft={
-            <IconButton>
+            <IconButton >
               {this.props.showBackNavigation ? (
                 <NavigationArrowBack color="#fd914d" />
               ) : (
@@ -66,11 +66,11 @@ class NavigationBar extends React.Component {
                 )}
             </IconButton>
           }
-          iconElementRight={
-            <IconButton>
-              <ActionHome color="#fd914d" />
-            </IconButton>
-          }
+        // iconElementRight={
+        //   <IconButton>
+        //     <ActionHome color="#fd914d" />
+        //   </IconButton>
+        // }
         />
         <Drawer
           disableSwipeToOpen={true}

@@ -104,7 +104,7 @@ class App extends Component {
             console.log(`Encountered error: ${err}`);
           }
         );
-      ///////////////////
+
     } else {
       this.setState({
         isLoading: true,
@@ -300,8 +300,8 @@ class App extends Component {
             </Router>
           </div>
         ) : (
-          <LinearProgress mode="indeterminate" color={"rgb(253, 145, 77)"} />
-        )}
+              <LinearProgress mode="indeterminate" color={"rgb(253, 145, 77)"} />
+            )}
       </div>
     );
   }
