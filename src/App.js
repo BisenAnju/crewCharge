@@ -20,6 +20,7 @@ import LeaveReportContainer from "./containers/LeaveReport";
 import AttendanceContainer from "./containers/Attendance";
 import PermissionContainer from "./containers/Permission";
 import UserLeaveContainer from "./containers/UserLeave";
+import ManagePayslipContainer from "./containers/ManagePayslip";
 import LinearProgress from "material-ui/LinearProgress";
 import LeaveAdminApprovalRejectionContainer from "./containers/LeaveAdminApprovalRejection";
 import LeaveEmployeeDetailsContainer from "./containers/LeaveEmployeeDetails";
@@ -221,6 +222,10 @@ class App extends Component {
                 <Route
                   path={"/payroll"}
                   render={props => <PayrollContainer {...props} />}
+                />
+                <Route
+                  path={"/managePayslip"}
+                  render={props => <ManagePayslipContainer {...props} />}
                 />
                 <Route
                   path={"/calender"}

@@ -211,9 +211,10 @@ class NavigationBar extends React.Component {
                   <ListItem
                     onClick={e => {
                       e.preventDefault();
-                      this.props.history.push("/leavedashboard/admin");
+                      // this.props.history.push("/leavedashboard/admin");
+                      this.props.history.push("/leavedashboard");
                     }}
-                    primaryText="Manage Leaves"
+                    primaryText="My Leaves"
                     leftIcon={
                       <ActionDateRange
                         style={{
@@ -230,7 +231,7 @@ class NavigationBar extends React.Component {
                       e.preventDefault();
                       this.props.history.push("/complaintlist");
                     }}
-                    primaryText="Manage Complaints"
+                    primaryText="My Complaints"
                     leftIcon={
                       <NotificationEventNote
                         style={{
@@ -434,7 +435,7 @@ class NavigationBar extends React.Component {
                 textAlign: "center"
               }}
             >
-              v1.0.15
+              v1.0.16
             </div>
 
             {/* <ListItem

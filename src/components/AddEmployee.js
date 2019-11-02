@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import Layout from "../layouts/Layout";
+// import Layout from "../layouts/Layout";
 import {
   SelectField,
   MenuItem,
   DatePicker,
-  FlatButton,
+  RaisedButton,
   Paper,
   List,
   ListItem,
@@ -34,7 +34,7 @@ class AddEmployee extends Component {
     };
   }
   selectChange = (event, index, employeeName) => {
-    let empdata = this.props.employeeData.find(
+    let empdata = this.props.userData.find(
       data => data.uid === employeeName
     );
     this.setState({
@@ -66,72 +66,72 @@ class AddEmployee extends Component {
   };
   render() {
     return (
-      <Layout navigationTitle="Add Employee" showBackNavigation={true}>
+      // <Layout navigationTitle="Add Employee" showBackNavigation={true}>
+      <div
+        style={{
+          height: "calc(100vh - 100px)",
+          overflow: "scroll",
+          paddingBottom: "20px"
+        }}
+      >
         <div
           style={{
-            height: "calc(100vh - 100px)",
-            overflow: "scroll",
-            paddingBottom: "20px"
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            alignContent: "center"
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              alignContent: "center"
-            }}
-          >
-            <div>
-              <SelectField
-                maxHeight={180}
-                floatingLabelText="Select Employee"
-                floatingLabelStyle={styles.floatingLabelStyle}
-                id="employee"
-                value={this.state.employeeName}
-                onChange={this.selectChange}
-              >
-                {this.props.employeeData.map((data, index) => data.payroll === undefined ? (
-                  <MenuItem
-                    key={index}
-                    value={data.uid}
-                    primaryText={data.displayName}
-                  />
-                ) : null)}
-              </SelectField>
-            </div>
-            <div>
-              <TextField
-                hintText="Enter Name"
-                floatingLabelText="Enter Name"
-                floatingLabelStyle={styles.floatingLabelStyle}
-                underlineFocusStyle={styles.underlineStyle}
-                value={this.state.empName}
-                onChange={this.handleNameChange}
-              />
-            </div>
-            <div style={{ marginTop: "10px" }}>
-              <DatePicker
-                floatingLabelText="Joining Date"
-                floatingLabelStyle={styles.floatingLabelStyle}
-                autoOk
-                formatDate={date => moment(date).format("DD/MM/YYYY")}
-                value={this.state.joiningDate}
-                onChange={this.changeJoiningDate}
-              />
-            </div>
-            <div>
-              <TextField
-                hintText="Designation"
-                floatingLabelText="Designation"
-                floatingLabelStyle={styles.floatingLabelStyle}
-                underlineFocusStyle={styles.underlineStyle}
-                value={this.state.designation}
-                onChange={this.handleDesignationChange}
-              />
-            </div>
-            {/* <div>
+          <div>
+            <SelectField
+              maxHeight={180}
+              floatingLabelText="Select Employee"
+              floatingLabelStyle={styles.floatingLabelStyle}
+              id="employee"
+              value={this.state.employeeName}
+              onChange={this.selectChange}
+            >
+              {this.props.userData.map((data, index) => data.payroll === undefined ? (
+                <MenuItem
+                  key={index}
+                  value={data.uid}
+                  primaryText={data.displayName}
+                />
+              ) : null)}
+            </SelectField>
+          </div>
+          <div>
+            <TextField
+              hintText="Enter Name"
+              floatingLabelText="Enter Name"
+              floatingLabelStyle={styles.floatingLabelStyle}
+              underlineFocusStyle={styles.underlineStyle}
+              value={this.state.empName}
+              onChange={this.handleNameChange}
+            />
+          </div>
+          <div style={{ marginTop: "10px" }}>
+            <DatePicker
+              floatingLabelText="Joining Date"
+              floatingLabelStyle={styles.floatingLabelStyle}
+              autoOk
+              formatDate={date => moment(date).format("DD/MM/YYYY")}
+              value={this.state.joiningDate}
+              onChange={this.changeJoiningDate}
+            />
+          </div>
+          <div>
+            <TextField
+              hintText="Designation"
+              floatingLabelText="Designation"
+              floatingLabelStyle={styles.floatingLabelStyle}
+              underlineFocusStyle={styles.underlineStyle}
+              value={this.state.designation}
+              onChange={this.handleDesignationChange}
+            />
+          </div>
+          {/* <div>
               <TextField
                 hintText="Location"
                 floatingLabelText="Location"
@@ -141,62 +141,50 @@ class AddEmployee extends Component {
                 onChange={this.handleLocationChange}
               />
             </div> */}
-            <div>
-              <TextField
-                hintText="Basic Salary"
-                floatingLabelText="Basic Salary"
-                floatingLabelStyle={styles.floatingLabelStyle}
-                underlineFocusStyle={styles.underlineStyle}
-                type="number"
-                value={this.state.basicSalary}
-                onChange={this.handleBasicSalaryChange}
-              />
-            </div>
-            <Paper
-              style={{ marginTop: "20px", width: "90%" }}
-              zDepth={1}
-              rounded={false}
-            >
-              <List>
-                {this.props.employeeData.map((empData, index) =>
-                  empData.joiningDate !== undefined ? (
-                    <ListItem
-                      key={index}
-                      leftAvatar={<Avatar src={empData.photoURL} size={30} />}
-                      primaryText={empData.displayName}
-                      secondaryText={moment(
-                        empData.joiningDate.seconds * 1000
-                      ).format("ll")}
-                    />
-                  ) : null
-                )}
-              </List>
-            </Paper>
-
-            <div
-              style={{
-                display: "flex",
-                bottom: "0px",
-                position: "absolute",
-                width: "100%",
-                height: "7vh"
-              }}
-            >
-              <FlatButton
-                style={{
-                  color: "white",
-                  backgroundColor: "#f08f4c",
-                  width: "100%",
-                  position: "fixed",
-                  bottom: 0
-                }}
-                label="SAVE"
-                onClick={this.saveData}
-              />
-            </div>
+          <div>
+            <TextField
+              hintText="Basic Salary"
+              floatingLabelText="Basic Salary"
+              floatingLabelStyle={styles.floatingLabelStyle}
+              underlineFocusStyle={styles.underlineStyle}
+              type="number"
+              value={this.state.basicSalary}
+              onChange={this.handleBasicSalaryChange}
+            />
           </div>
+          <Paper
+            style={{ marginTop: "20px", width: "90%" }}
+            zDepth={1}
+            rounded={false}
+          >
+            <List>
+              {this.props.userData.map((empData, index) =>
+                empData.joiningDate !== undefined ? (
+                  <ListItem
+                    key={index}
+                    leftAvatar={<Avatar src={empData.photoURL} size={30} />}
+                    primaryText={empData.displayName}
+                    secondaryText={moment(
+                      empData.joiningDate.seconds * 1000
+                    ).format("ll")}
+                  />
+                ) : null
+              )}
+            </List>
+          </Paper>
+
+          <div style={{ marginTop: "20px" }}>
+            <RaisedButton
+              label="SAVE"
+              backgroundColor="#fd914d"
+              labelColor="white"
+              onClick={this.saveData}
+            />
+          </div>
+
         </div>
-      </Layout>
+      </div>
+      // </Layout>
     );
   }
 }

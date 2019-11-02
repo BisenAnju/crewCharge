@@ -9,6 +9,7 @@ import {
 import Payroll from "../components/Payroll";
 import PayrollList from "../components/PayrollList";
 import PayrollDateCard from "../components/PayrollDateCard";
+import ManagePayslip from "../components/ManagePayslip";
 class PayrollContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -48,6 +49,13 @@ class PayrollContainer extends React.Component {
             <div>
               <Route
                 exact
+                path={"/managePayslip"}
+                render={props => (
+                  <ManagePayslip {...props} />
+                )}
+              />
+              <Route
+                exact
                 path={"/payroll"}
                 render={props => (
                   <PayrollList {...props} userData={this.state.userData} />
@@ -65,6 +73,7 @@ class PayrollContainer extends React.Component {
                   <Payroll {...props} userData={this.state.userData} />
                 )}
               />
+
             </div>
           </Switch>
         </Router>

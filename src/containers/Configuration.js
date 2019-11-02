@@ -76,7 +76,7 @@ class ConfigurationContainer extends React.Component {
           );
         }
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error("Error writing document: ", error);
       });
   };
@@ -145,6 +145,31 @@ class ConfigurationContainer extends React.Component {
         console.log("Error getting documents", err);
       });
   };
+
+  userJoiningDate = data => {
+    this.props.db
+      .collection("users")
+      .doc(data.employeeName)
+      .update({
+        employeeName: data.empName,
+        designation: data.designation,
+        joiningDate: data.joiningDate,
+        // payroll: [
+        //   {
+        //     date: data.joiningDate,
+        //     designation: data.designation,
+        //     salary: data.basicSalary
+        //   }
+        // ]
+      })
+      .then(() => this.props.history.goBack())
+      .catch(err => {
+        console.log("Error getting documents", err);
+      });
+  };
+
+
+
   render() {
     return (
       <Configuration
@@ -152,6 +177,7 @@ class ConfigurationContainer extends React.Component {
         addAttendance={this.addAttendance}
         addHolidays={this.addHolidays}
         addPayroll={this.addPayroll}
+        userJoiningDate={this.userJoiningDate}
         purposeData={this.state.purposeData}
         userData={this.state.userData}
       />

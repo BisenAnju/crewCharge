@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "project-s-41fe0"
+    "default": "project-s-41fe0",
+    "projects": "project-s-41fe0"
   },
   "targets": {
     "project-s-41fe0": {
