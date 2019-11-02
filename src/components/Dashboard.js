@@ -5,6 +5,8 @@ import Layout from "../layouts/Layout";
 import blur from "../images/blur1.png";
 import icon from "../images/icon1.png";
 import leave from "../images/leave.svg";
+import payslip from "../images/payslip.svg";
+
 // import employee from "../images/employee.svg";
 import complaint from "../images/complaint.svg";
 import allocation from "../images/allocation.svg";
@@ -147,8 +149,8 @@ class Dashboard extends Component {
                     }}
                   >
                     <img
-                      src={complaint}
-                      alt="complaint"
+                      src={payslip}
+                      alt="payslip"
                       style={{ height: "11vh" }}
                     />
                   </div>

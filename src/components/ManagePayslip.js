@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Layout from "../layouts/Layout";
 import moment from "moment";
-import { Chip, SelectField, MenuItem, TextField, Card, CardHeader, CardActions, List, CardText, ListItem } from "material-ui";
+import { Chip, SelectField, MenuItem, TextField, Card, CardHeader, List, CardText, ListItem } from "material-ui";
 const styles = {
     chip: { margin: 4 }
 };
