@@ -92,7 +92,7 @@ class AddEmployee extends Component {
               value={this.state.employeeName}
               onChange={this.selectChange}
             >
-              {this.props.userData.map((data, index) => data.payroll === undefined ? (
+              {this.props.userData.map((data, index) => data.joiningDate === undefined ? (
                 <MenuItem
                   key={index}
                   value={data.uid}
