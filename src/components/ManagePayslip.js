@@ -89,7 +89,11 @@ class ManagePayslip extends Component {
         if (index === 0) {
             finalArr[index].status = label;
         }
+        else if (finalArr.length === 1 && index !== 0) {
+            finalArr[index - index].status = label;
+        }
         else {
+            console.log(finalArr)
             finalArr[index - 1].status = label;
         }
         this.setState({ finalArr });

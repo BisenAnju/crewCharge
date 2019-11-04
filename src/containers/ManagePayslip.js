@@ -33,6 +33,8 @@ class ManagePayslipContainer extends React.Component {
     }
 
     userPayslip = data => {
+        // console.log(data)
+        // console.log(data[data.length - 1])
         const payrollObject = {
             date: data[data.length - 1].date,
             designation: data[data.length - 1].designation,
