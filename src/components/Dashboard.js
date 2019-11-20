@@ -19,7 +19,7 @@ class Dashboard extends Component {
   render() {
     return (
       <Layout navigationTitle="Crew Charge">
-        <div style={{ height: "calc(100vh - 64px)" }}>
+        <div style={{ height: "calc(100vh - 70px)" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <img alt="icon" src={icon} style={{ height: "120px" }} />
           </div>
@@ -31,7 +31,7 @@ class Dashboard extends Component {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  height: "calc(100vh - 245px)"
+                  height: "calc(100vh - 190px)"
                 }}
               >
 
@@ -70,7 +70,8 @@ class Dashboard extends Component {
                       display: "flex",
                       backgroundColor: "transparent",
                       color: "#ccc2bb",
-                      flex: "1"
+                      flex: "1",
+                      marginBottom: "3%"
                     }}
                   >
                     <div>Manage Leave</div>
@@ -117,6 +118,7 @@ class Dashboard extends Component {
                       flex: "1",
                       backgroundColor: "transparent",
                       color: "#ccc2bb",
+                      marginBottom: "3%"
                     }}
                   >
                     <div>Manage Complaint</div>
@@ -162,15 +164,12 @@ class Dashboard extends Component {
                       flex: "1",
                       backgroundColor: "transparent",
                       color: "#ccc2bb",
+                      marginBottom: "3%"
                     }}
                   >
                     <div>Manage Payslip</div>
                   </div>
                 </div>
-
-
-
-
               </div>
             ) : null
           )}

@@ -18,6 +18,7 @@ class LeaveEmployeeDashboard extends React.Component {
     super(props);
     this.state = { slideIndex: 0 };
   }
+
   handleChange = value => {
     this.setState({
       slideIndex: value

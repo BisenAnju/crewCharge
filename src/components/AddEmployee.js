@@ -152,6 +152,16 @@ class AddEmployee extends Component {
               onChange={this.handleBasicSalaryChange}
             />
           </div>
+
+          <div style={{ marginTop: "20px" }}>
+            <RaisedButton
+              label="SAVE"
+              backgroundColor="#fd914d"
+              labelColor="white"
+              onClick={this.saveData}
+            />
+          </div>
+
           <Paper
             style={{ marginTop: "20px", width: "90%" }}
             zDepth={1}
@@ -173,14 +183,7 @@ class AddEmployee extends Component {
             </List>
           </Paper>
 
-          <div style={{ marginTop: "20px" }}>
-            <RaisedButton
-              label="SAVE"
-              backgroundColor="#fd914d"
-              labelColor="white"
-              onClick={this.saveData}
-            />
-          </div>
+
 
         </div>
       </div>

@@ -86,6 +86,8 @@ class LeaveEmployeeDetails extends Component {
       );
   };
   render() {
+    console.log(this.props.singleData);
+
     return (
       <Layout
         navigationTitle={this.state.navigationTitle}
@@ -112,7 +114,7 @@ class LeaveEmployeeDetails extends Component {
                         e.preventDefault();
                         this.props.history.push(
                           `/leavedashboard/leaveapply/` +
-                            this.props.singleData.leaveId
+                          this.props.singleData.leaveId
                         );
                       }}
                     >
@@ -144,14 +146,14 @@ class LeaveEmployeeDetails extends Component {
                     }}
                   />
                 ) : (
-                  <NavigationCancel
-                    style={{
-                      height: 25,
-                      width: 25,
-                      color: red400
-                    }}
-                  />
-                )
+                      <NavigationCancel
+                        style={{
+                          height: 25,
+                          width: 25,
+                          color: red400
+                        }}
+                      />
+                    )
               }
             />
           </List>
@@ -174,8 +176,8 @@ class LeaveEmployeeDetails extends Component {
                       }}
                     />
                   ) : (
-                    this.getIconUrl(this.props.singleData.purpose)
-                  )
+                      this.getIconUrl(this.props.singleData.purpose)
+                    )
                 }
                 primaryText={this.props.singleData.purpose}
                 secondaryText={<p style={{ fontSize: 14 }}>Purpose</p>}
@@ -240,13 +242,13 @@ class LeaveEmployeeDetails extends Component {
                 primaryText={
                   this.props.singleData.leaveType === "Full"
                     ? moment(this.props.singleData.from).format("ll") +
-                      " - " +
-                      moment(this.props.singleData.to).format("ll")
+                    " - " +
+                    moment(this.props.singleData.to).format("ll")
                     : this.props.singleData.leaveType === "wfh"
-                    ? moment(this.props.singleData.from).format("ll") +
+                      ? moment(this.props.singleData.from).format("ll") +
                       " - " +
                       moment(this.props.singleData.to).format("ll")
-                    : moment
+                      : moment
                         .utc(
                           moment(
                             moment(this.props.singleData.to),
@@ -351,53 +353,53 @@ class LeaveEmployeeDetails extends Component {
                                 </div>
                               </div>
                             ) : (
-                              <div
-                                key={index}
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "flex-start"
-                                }}
-                              >
-                                <div>{this.getAvatar(comment.userId)}</div>
                                 <div
+                                  key={index}
                                   style={{
                                     display: "flex",
-                                    alignItems: "center",
-                                    height: "auto",
-                                    maxWidth: "80%",
-                                    marginLeft: "5px",
-                                    marginTop: "12px",
-                                    backgroundColor: "#c8d8c6",
-                                    padding: "4px 4px",
-                                    borderRadius: "0px 10px 10px 10px",
-                                    wordBreak: "break-all"
+                                    justifyContent: "flex-start"
                                   }}
                                 >
+                                  <div>{this.getAvatar(comment.userId)}</div>
                                   <div
                                     style={{
-                                      width: "auto",
                                       display: "flex",
-                                      flexDirection: "column"
+                                      alignItems: "center",
+                                      height: "auto",
+                                      maxWidth: "80%",
+                                      marginLeft: "5px",
+                                      marginTop: "12px",
+                                      backgroundColor: "#c8d8c6",
+                                      padding: "4px 4px",
+                                      borderRadius: "0px 10px 10px 10px",
+                                      wordBreak: "break-all"
                                     }}
                                   >
-                                    <span style={{ fontSize: "14px" }}>
-                                      {comment.comment}
-                                    </span>
-                                    <span
+                                    <div
                                       style={{
-                                        textAlign: "right",
-                                        color: "#9e9e9e",
-                                        fontSize: "13px"
+                                        width: "auto",
+                                        display: "flex",
+                                        flexDirection: "column"
                                       }}
                                     >
-                                      {moment(
-                                        comment.addedOn.seconds * 1000
-                                      ).format("lll")}
-                                    </span>
+                                      <span style={{ fontSize: "14px" }}>
+                                        {comment.comment}
+                                      </span>
+                                      <span
+                                        style={{
+                                          textAlign: "right",
+                                          color: "#9e9e9e",
+                                          fontSize: "13px"
+                                        }}
+                                      >
+                                        {moment(
+                                          comment.addedOn.seconds * 1000
+                                        ).format("lll")}
+                                      </span>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            )
+                              )
                           )}
 
                           <div

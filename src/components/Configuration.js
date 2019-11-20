@@ -4,9 +4,10 @@ import Layout from "../layouts/Layout";
 import LeavePurpose from "./LeavePurpose";
 import AddHolidays from "./AddHolidays";
 import ComplaintType from "./ComplaintType";
-import AddAttendance from "./AddAttendance";
-import AddMonthlyPayroll from "./AddMonthlyPayroll";
+// import AddAttendance from "./AddAttendance";
+// import AddMonthlyPayroll from "./AddMonthlyPayroll";
 import AddEmployee from "./AddEmployee";
+import AddYear from "./AddYear";
 import { Card, CardHeader, CardText } from "material-ui/Card";
 import { Avatar } from "material-ui";
 class Configuration extends Component {
@@ -81,6 +82,28 @@ class Configuration extends Component {
 
           <Card style={{ margin: "10px", borderRadius: "5px" }}>
             <CardHeader
+              title="Add Year"
+              titleColor="#fd914d"
+              avatar={
+                <Avatar size={30} backgroundColor="#fd914d" color="white">
+                  Y
+              </Avatar>
+              }
+              actAsExpander={true}
+              showExpandableButton={true}
+            />
+
+            <CardText expandable={true}>
+              <AddYear
+                addYear={this.props.addYear}
+              />
+            </CardText>
+          </Card>
+
+
+
+          {/* <Card style={{ margin: "10px", borderRadius: "5px" }}>
+            <CardHeader
               title="Add Attendance"
               titleColor="#fd914d"
               avatar={
@@ -98,9 +121,9 @@ class Configuration extends Component {
                 addAttendance={this.props.addAttendance}
               />
             </CardText>
-          </Card>
+          </Card> */}
 
-          <Card style={{ margin: "10px", borderRadius: "5px" }}>
+          {/* <Card style={{ margin: "10px", borderRadius: "5px" }}>
             <CardHeader
               title="Add Monthly Payroll"
               titleColor="#fd914d"
@@ -118,7 +141,7 @@ class Configuration extends Component {
                 addPayroll={this.props.addPayroll}
               />
             </CardText>
-          </Card>
+          </Card> */}
 
           <Card style={{ margin: "10px", borderRadius: "5px" }}>
             <CardHeader

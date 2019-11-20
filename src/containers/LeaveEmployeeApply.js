@@ -27,6 +27,7 @@ class LeaveEmployeeApplyContainer extends React.Component {
         this.setState({ player_ids });
       });
   }
+
   // Add leaves data
   addLeaves = (leaveData, leaveType) => {
     let newDueDate = moment.utc(moment(leaveData.to).subtract(1, "days"))._d;
@@ -63,8 +64,8 @@ class LeaveEmployeeApplyContainer extends React.Component {
         console.log(this.state.player_ids);
         if (ref.id !== "undefined") {
           let ths = this;
-          setTimeout(function() {
-            var sendNotification = function(data) {
+          setTimeout(function () {
+            var sendNotification = function (data) {
               var headers = {
                 "Content-Type": "application/json; charset=utf-8",
                 Authorization:
@@ -80,14 +81,14 @@ class LeaveEmployeeApplyContainer extends React.Component {
               };
 
               var https = require("https");
-              var req = https.request(options, function(res) {
-                res.on("data", function(data) {
+              var req = https.request(options, function (res) {
+                res.on("data", function (data) {
                   console.log("Response:");
                   console.log(JSON.parse(data));
                 });
               });
 
-              req.on("error", function(e) {
+              req.on("error", function (e) {
                 console.log("ERROR:");
                 console.log(e);
               });
@@ -160,7 +161,7 @@ class LeaveEmployeeApplyContainer extends React.Component {
 
           var https = require("https");
           var req = https.request(options, res => {
-            res.on("data", data => {});
+            res.on("data", data => { });
           });
 
           req.on("error", e => {
@@ -182,10 +183,10 @@ class LeaveEmployeeApplyContainer extends React.Component {
       <LeaveEmployeeApply
         addLeaves={this.addLeaves}
         updateLeaveData={this.updateLeaveData}
-        singleData={this.props.singleData.find(
+        singleData={this.props.leaveData.find(
           data => data.leaveId === this.props.match.params.mode
         )}
-        isLoading={this.state.isLoading}
+        isLoading={this.props.isLoading}
         purposeData={this.props.purposeData}
       />
     );

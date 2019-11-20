@@ -11,7 +11,7 @@ class LoginContainer extends Component {
   }
 
   async componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+
     if (nextProps.user !== null) {
       const user = {
         userName: this.props.firebase.auth.currentUser.displayName,
@@ -59,7 +59,7 @@ class LoginContainer extends Component {
             if (
               querySnapshot.data().userNotificationPlayerId === null ||
               querySnapshot.data().userNotificationPlayerId ===
-                JSON.parse(localStorage.getItem("playerId")).id
+              JSON.parse(localStorage.getItem("playerId")).id
             ) {
               u.update({
                 userNotificationPlayerId: JSON.parse(
@@ -97,10 +97,10 @@ class LoginContainer extends Component {
               clientCommunication: false
             }
           })
-            .then(function() {
+            .then(function () {
               console.log("You have been successfully registered");
             })
-            .catch(function(error) {
+            .catch(function (error) {
               console.error("Something went wrong ", error);
             });
         }

@@ -94,7 +94,7 @@ class ConfigurationContainer extends React.Component {
         out: new Date(new Date(outTime).setDate(date)),
         date: attendance.attDate
       })
-      .then(alert("done"))
+      .then()
       .catch(err => {
         console.log("Error getting documents", err);
       });
@@ -168,7 +168,20 @@ class ConfigurationContainer extends React.Component {
       });
   };
 
+  addYear = year => {
+    const displayYear = year + "-" + (parseInt(year) + 1)
 
+    this.props.db
+      .collection("yearMaster")
+      .add({
+        year,
+        displayYear
+      })
+      .then()
+      .catch(err => {
+        console.log("Error getting documents", err);
+      });
+  }
 
   render() {
     return (
@@ -177,6 +190,7 @@ class ConfigurationContainer extends React.Component {
         addAttendance={this.addAttendance}
         addHolidays={this.addHolidays}
         addPayroll={this.addPayroll}
+        addYear={this.addYear}
         userJoiningDate={this.userJoiningDate}
         purposeData={this.state.purposeData}
         userData={this.state.userData}

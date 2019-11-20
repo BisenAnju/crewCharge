@@ -23,7 +23,7 @@ class ManagePayslip extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            year: "2017-2018",
+            year: "2016-2017",
             month: "",
             filterUser: [],
             designation: "Trainee",
@@ -75,11 +75,11 @@ class ManagePayslip extends Component {
             let filterUser = this.props.userData.filter(user => user.joiningDate && (
                 this.state.month >= "04" ?
                     moment(user.joiningDate.seconds * 1000).format("MM") <= this.state.month &&
-                    moment(user.joiningDate.seconds * 1000).format("YYYY") === this.state.year.split("-")[0]
+                    moment(user.joiningDate.seconds * 1000).format("YYYY") <= this.state.year.split("-")[0]
                     :
                     moment(user.joiningDate.seconds * 1000).format("MM") > this.state.month &&
                     moment(user.joiningDate.seconds * 1000).format("YYYY") < this.state.year.split("-")[1]));
-            this.setState({ filterUser })
+            this.setState({ filterUser }, console.log(this.state.filterUser))
         }
         );
     }
@@ -120,9 +120,9 @@ class ManagePayslip extends Component {
                             onChange={this.handleYear}
                             style={{ width: "200px", marginLeft: "10%" }}
                         >
-                            <MenuItem value="2017-2018" primaryText="2017-18" />
-                            <MenuItem value="2018-2019" primaryText="2018-19" />
-                            <MenuItem value="2019-2020" primaryText="2019-20" />
+                            {this.props.yearData.map(singleYear =>
+                                <MenuItem value={singleYear.displayYear} primaryText={singleYear.displayYear} />
+                            )}
                         </SelectField>
                     </div>
                 </div>

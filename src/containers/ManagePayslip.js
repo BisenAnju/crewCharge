@@ -7,6 +7,7 @@ class ManagePayslipContainer extends React.Component {
         super(props);
         this.state = {
             userData: [],
+            yearData: [],
             isLoading: true
         };
     }
@@ -30,10 +31,32 @@ class ManagePayslipContainer extends React.Component {
                     console.log(`Encountered error: ${err}`);
                 }
             );
+
+        this.props.db
+            .collection("yearMaster")
+            .orderBy("displayYear", "asc")
+            .onSnapshot(
+                snapshot => {
+                    const yearData = [];
+                    snapshot.forEach(doc => {
+                        if (doc.exists) {
+                            yearData.push(doc.data());
+                        }
+                    });
+                    this.setState({
+                        yearData
+                    });
+                },
+                err => {
+                    console.log(`Encountered error: ${err}`);
+                }
+            );
+
+
+
     }
 
     userPayslip = data => {
-        // console.log(data)
         // console.log(data[data.length - 1])
         const payrollObject = {
             date: data[data.length - 1].date,
