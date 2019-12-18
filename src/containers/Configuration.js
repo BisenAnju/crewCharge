@@ -154,13 +154,7 @@ class ConfigurationContainer extends React.Component {
         employeeName: data.empName,
         designation: data.designation,
         joiningDate: data.joiningDate,
-        // payroll: [
-        //   {
-        //     date: data.joiningDate,
-        //     designation: data.designation,
-        //     salary: data.basicSalary
-        //   }
-        // ]
+
       })
       .then(() => this.props.history.goBack())
       .catch(err => {
@@ -182,6 +176,19 @@ class ConfigurationContainer extends React.Component {
         console.log("Error getting documents", err);
       });
   }
+  sendLink = linkData => {
+    this.props.db
+      .collection("invitedUsers")
+      .add({
+        name: linkData.name,
+        email: linkData.email,
+        status: "invited"
+      })
+      .then()
+      .catch(err => {
+        console.log("Error getting documents", err);
+      });
+  }
 
   render() {
     return (
@@ -190,6 +197,7 @@ class ConfigurationContainer extends React.Component {
         addAttendance={this.addAttendance}
         addHolidays={this.addHolidays}
         addPayroll={this.addPayroll}
+        sendLink={this.sendLink}
         addYear={this.addYear}
         userJoiningDate={this.userJoiningDate}
         purposeData={this.state.purposeData}

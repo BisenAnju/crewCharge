@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import withUser from "../hoc/withUser";
-import withAuthentication from "../hoc/withAuthentication";
+// import withAuthentication from "../hoc/withAuthentication";
 import {
   AppBar,
   Avatar,
@@ -449,4 +449,4 @@ class NavigationBar extends React.Component {
     );
   }
 }
-export default withRouter(withAuthentication(withUser(NavigationBar)));
+export default withRouter(withUser(NavigationBar));

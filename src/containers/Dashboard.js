@@ -7,9 +7,25 @@ import { withRouter } from "react-router-dom";
 class DashboardContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { userData: [] };
   }
   componentWillMount() {
+    let userData = [];
+    this.props.db
+      .collection("users")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          if (doc.exists) {
+            const users = doc.data();
+            users.id = doc.id;
+            users.access = doc.data().access;
+            userData.push(users);
+          }
+        });
+        this.setState({ userData });
+      });
+
     let navigationNotification = JSON.parse(
       localStorage.getItem("navigationNotification")
     );
@@ -23,7 +39,7 @@ class DashboardContainer extends Component {
   render() {
     return (
       <div>
-        {this.props.user && <Dashboard userData={this.props.userData} />}
+        {this.props.user && <Dashboard userData={this.state.userData} />}
       </div>
     );
   }

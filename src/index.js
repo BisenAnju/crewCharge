@@ -4,6 +4,9 @@ import "./styles/index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import Firebase, { FirebaseContext } from "./firebase";
+
+!localStorage.user && (localStorage.user = false);
+!localStorage.loader && (localStorage.loader = false);
 const startApp = () => {
   if (window.cordova) {
     document.addEventListener(
@@ -53,3 +56,5 @@ const startApp = () => {
   }
 };
 startApp();
+
+

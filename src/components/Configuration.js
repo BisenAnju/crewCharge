@@ -6,6 +6,7 @@ import AddHolidays from "./AddHolidays";
 import ComplaintType from "./ComplaintType";
 // import AddAttendance from "./AddAttendance";
 // import AddMonthlyPayroll from "./AddMonthlyPayroll";
+import InviteUsers from "./InviteUsers";
 import AddEmployee from "./AddEmployee";
 import AddYear from "./AddYear";
 import { Card, CardHeader, CardText } from "material-ui/Card";
@@ -100,7 +101,23 @@ class Configuration extends Component {
             </CardText>
           </Card>
 
+          <Card style={{ margin: "10px", borderRadius: "5px" }}>
+            <CardHeader
+              title="Invite Users"
+              titleColor="#fd914d"
+              avatar={
+                <Avatar size={30} backgroundColor="#fd914d" color="white">
+                  I
+              </Avatar>
+              }
+              actAsExpander={true}
+              showExpandableButton={true}
+            />
 
+            <CardText expandable={true}>
+              <InviteUsers sendLink={this.props.sendLink} />
+            </CardText>
+          </Card>
 
           {/* <Card style={{ margin: "10px", borderRadius: "5px" }}>
             <CardHeader

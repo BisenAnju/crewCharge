@@ -5,191 +5,89 @@ import Layout from "../layouts/Layout";
 import blur from "../images/blur1.png";
 import icon from "../images/icon1.png";
 import leave from "../images/leave.svg";
-import payslip from "../images/payslip.svg";
-
+// import payslip from "../images/payslip.svg";
 // import employee from "../images/employee.svg";
 import complaint from "../images/complaint.svg";
 import allocation from "../images/allocation.svg";
+
+import { BottomNavigation, BottomNavigationItem, Paper } from 'material-ui';
+import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
+
+
+const nearbyIcon = <IconLocationOn />;
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { selectedIndex: 0, };
   }
+  select = (index) => this.setState({ selectedIndex: index });
 
   render() {
+    console.log(this.props.userData);
+    console.log(this.props.user);
     return (
       <Layout navigationTitle="Crew Charge">
-        <div style={{ height: "calc(100vh - 70px)" }}>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <img alt="icon" src={icon} style={{ height: "120px" }} />
-          </div>
 
-          {this.props.userData.map((user, index) =>
-            user.uid === this.props.user.uid && user.userType === "Admin" ? (
-              <div
-                key={index}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "calc(100vh - 190px)"
-                }}
-              >
+        {this.props.userData.map((user, index) =>
+          user.uid === this.props.user.uid && user.userType === "Admin" ?
 
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
-                    backgroundImage: ' url("' + blur + '")',
-                    // width: "50%",
-                    margin: "2% 5%",
-                    borderRadius: "10px",
-                    // overflow: "hidden"
-                  }}
-                  onClick={e => {
-                    e.preventDefault();
-                    // this.props.history.push("/leavedashboard");
-                    this.props.history.push("/leavedashboard/admin");
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      padding: "5%",
-                      backgroundColor: "transparent",
-                      flex: "1"
-                    }}
-                  >
-                    <img style={{ height: "11vh" }} src={leave} alt="leave" />
-                  </div>
-                  <div
-                    style={{
-                      justifyContent: "center",
-                      fontSize: "17px",
-                      display: "flex",
-                      backgroundColor: "transparent",
-                      color: "#ccc2bb",
-                      flex: "1",
-                      marginBottom: "3%"
-                    }}
-                  >
-                    <div>Manage Leave</div>
-                  </div>
-                </div>
+            (<div style={{ position: "absolute", bottom: "0px" }}>
+              <Paper zDepth={1}>
+                <BottomNavigation selectedIndex={this.state.selectedIndex}>
+                  <BottomNavigationItem
+                    label="Tasks"
+                    icon={nearbyIcon}
+                    onClick={() => this.select(0)}
+                  />
+                  <BottomNavigationItem
+                    label="Leaves"
+                    icon={nearbyIcon}
+                    onClick={() => this.select(1)}
+                  />
+                  <BottomNavigationItem
+                    label="Payroll"
+                    icon={nearbyIcon}
+                    onClick={() => this.select(2)}
+                  />
+                  <BottomNavigationItem
+                    label="Complaint"
+                    icon={nearbyIcon}
+                    onClick={() => this.select(3)}
+                  />
+                  <BottomNavigationItem
+                    label="setting"
+                    icon={nearbyIcon}
+                    onClick={() => this.select(4)}
+                  />
+                </BottomNavigation>
+              </Paper>
+            </div>)
 
+            : null
+        )}
 
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
-                    backgroundImage: ' url("' + blur + '")',
-                    // width: "50%",
-                    margin: "2% 5%",
-                    borderRadius: "10px",
-                    // overflow: "hidden"
-                  }}
-                  onClick={e => {
-                    e.preventDefault();
-                    this.props.history.push("/complaintlist");
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      padding: "5%",
-                      backgroundColor: "transparent",
-                      flex: "1"
-                    }}
-                  >
-                    <img
-                      src={complaint}
-                      alt="complaint"
-                      style={{ height: "11vh" }}
-                    />
-                  </div>
-                  <div
-                    style={{
-                      justifyContent: "center",
-                      fontSize: "17px",
-                      display: "flex",
-                      flex: "1",
-                      backgroundColor: "transparent",
-                      color: "#ccc2bb",
-                      marginBottom: "3%"
-                    }}
-                  >
-                    <div>Manage Complaint</div>
-                  </div>
-                </div>
+        {this.props.userData
+          .filter(
+            user =>
+              user.uid === this.props.user.uid && user.userType === "Employee"
+          )
+          .map((item, id) =>
+            item.access["leave"] &&
+              item.access["complaint"] &&
+              item.access["teamAllocation"] &&
+              item.access["clientCommunication"] ? (
+                <div style={{ height: "calc(100vh - 70px)" }}>
 
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    boxShadow: "rgb(253, 145, 77) 0px 0px 10px -5px",
-                    backgroundImage: ' url("' + blur + '")',
-                    // width: "50%",
-                    margin: "2% 5%",
-                    borderRadius: "10px",
-                    // overflow: "hidden"
-                  }}
-                  onClick={e => {
-                    e.preventDefault();
-                    this.props.history.push("/managePayslip");
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      padding: "5%",
-                      backgroundColor: "transparent",
-                      flex: "1"
-                    }}
-                  >
-                    <img
-                      src={payslip}
-                      alt="payslip"
-                      style={{ height: "11vh" }}
-                    />
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <img alt="icon" src={icon} style={{ height: "120px" }} />
                   </div>
-                  <div
-                    style={{
-                      justifyContent: "center",
-                      fontSize: "17px",
-                      display: "flex",
-                      flex: "1",
-                      backgroundColor: "transparent",
-                      color: "#ccc2bb",
-                      marginBottom: "3%"
-                    }}
-                  >
-                    <div>Manage Payslip</div>
-                  </div>
-                </div>
-              </div>
-            ) : null
-          )}
-
-          {this.props.userData
-            .filter(
-              user =>
-                user.uid === this.props.user.uid && user.userType === "Employee"
-            )
-            .map((item, id) =>
-              item.access["leave"] &&
-                item.access["complaint"] &&
-                item.access["teamAllocation"] &&
-                item.access["clientCommunication"] ? (
                   <div
                     key={id}
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      height: "calc(100vh - 245px)"
+                      height: "calc(100vh - 190px)"
                     }}
                   >
                     <div style={{ display: "flex", flex: "1" }}>
@@ -387,9 +285,18 @@ class Dashboard extends Component {
                       </div>
                     </div>
                   </div>
-                ) : item.access["leave"] &&
-                  item.access["complaint"] &&
-                  item.access["teamAllocation"] ? (
+                </div>
+              ) : item.access["leave"] &&
+                item.access["complaint"] &&
+                item.access["teamAllocation"] ? (
+
+                  <div style={{ height: "calc(100vh - 70px)" }}>
+
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <img alt="icon" src={icon} style={{ height: "120px" }} />
+                    </div>
+
+
                     <div
                       key={id}
                       style={{
@@ -553,7 +460,14 @@ class Dashboard extends Component {
                         </div>
                       </div>
                     </div>
-                  ) : item.access["leave"] && item.access["complaint"] ? (
+                  </div>
+                ) : item.access["leave"] && item.access["complaint"] ? (
+                  <div style={{ height: "calc(100vh - 70px)" }}>
+
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <img alt="icon" src={icon} style={{ height: "120px" }} />
+                    </div>
+
                     <div
                       key={id}
                       style={{
@@ -653,15 +567,16 @@ class Dashboard extends Component {
                         </div>
                       </div>
                     </div>
-                  ) : (
-                      <div key={id} style={{ textAlign: "center", marginTop: "10%" }}>
-                        You dont have authorization to access any module...contact
-                        your admin
+                  </div>
+                ) : (
+                    <div key={id} style={{ textAlign: "center", marginTop: "10%" }}>
+                      You dont have authorization to access any module...contact
+                      your admin
                 </div>
-                    )
-            )}
-        </div>
-      </Layout>
+                  )
+          )}
+
+      </Layout >
     );
   }
 }

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import withUser from "../hoc/withUser";
 import { withRouter } from "react-router-dom";
 import { Snackbar } from "material-ui";
 import icon from "../images/icon1.png";
@@ -26,6 +25,7 @@ class Login extends Component {
     });
   }
   render() {
+    console.log(this.props);
     return (
       <div>
         <div style={{ height: "10vh" }} />
@@ -43,7 +43,7 @@ class Login extends Component {
                 return false;
               }
               this.props.login();
-              this.props.handleLoader();
+              // this.props.handleLoader();
             }}
             type="button"
             style={{
@@ -123,4 +123,4 @@ class Login extends Component {
   }
 }
 
-export default withRouter(withUser(Login));
+export default withRouter(Login);

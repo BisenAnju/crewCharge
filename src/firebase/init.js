@@ -28,13 +28,16 @@ class Firebase {
   }
 
   googleSignIn = () => {
+
+    localStorage.loader = "true";
+    // window.cordova && window.cordova.plugins.backgroundMode.enable();
     const provider = new firebase.auth.GoogleAuthProvider();
     this.auth
       .signInWithRedirect(provider)
       .then(() => firebase.auth().getRedirectResult())
       .then(result => {
-        // The signed-in user info.
         console.log(result.user);
+        // window.cordova && window.cordova.plugins.backgroundMode.disable();
       })
       .catch(error => {
         const errorCode = error.code;
@@ -46,6 +49,7 @@ class Firebase {
   logOut = () => {
     this.auth.signOut().then(
       () => {
+        localStorage.user = false;
         console.log("Signed Out");
       },
       error => {
