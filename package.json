@@ -26,7 +26,7 @@
     "cordova-plugin-buildinfo": "2.0.2",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-customurlscheme": "4.4.0",
-    "cordova-plugin-inappbrowser": "3.0.0",
+    "cordova-plugin-inappbrowser": "4.0.0",
     "cordova-universal-links-plugin": "git+https://github.com/walteram/cordova-universal-links-plugin.git",
     "cordova-universal-links-plugin-fix": "1.2.1",
     "firebase": "^6.1.1",
